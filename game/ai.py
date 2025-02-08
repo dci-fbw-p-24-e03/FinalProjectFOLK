@@ -2,19 +2,17 @@ import os
 from dotenv import load_dotenv
 from groq import Groq
 import json
+from random import shuffle
 
 load_dotenv()
 
+
 def main():
-    question = get_question("history", 
-                            ["Who was the first president of the United States?", 
-                             'The ancient city of Pompeii was destroyed by the eruption of which volcano in 79 AD?',
-                             'The Rosetta Stone, which helped decipher ancient Egyptian hieroglyphs, was discovered in which year?']
-                            )
+    question = get_question("python programming language")
     print(question)
 
 
-def get_question(topic: str, not_questions: list[str]) -> dict:
+def get_question(topic: str, not_questions: list[str] = []) -> dict[str, str]:
     """Get Trivial Pursuit Question and answers.
 
     Args:
@@ -22,30 +20,34 @@ def get_question(topic: str, not_questions: list[str]) -> dict:
         not_questions (list[str]): List of questions that should not be asked.
 
     Returns:
-        dict: Dictionary with the question and possible answers as well as the correct answer.
-        {'question': ..., 
-        'A': ..., 
-        'B': ..., 
-        'C': ..., 
-        'D': ..., 
-        'correct_answer': ...}
-        """
-        
+        dict: Dictionary with the question and possible answers as well as the correct answer.\n
+        {'question': ..., \n
+        'A': ...,\n
+        'B': ...,\n
+        'C': ...,\n
+        'D': ...,\n
+        'correct_answer': '...'}
+    """
+
     # Create a string with all the questions that should not be asked
-    dont_ask = ""
-    for not_question in not_questions:
-        dont_ask = dont_ask + f"\"{not_question}\", "
-    
+    dont_ask = ", ".join(not_questions)
+
+    # Create a string with the content of the message to the Groq API
+    content = f"Let's play Trivial Pursuit. Do not ask these questions: {dont_ask}.\n Ask a question about {topic}."
+    content += "Give me four possible answers. Give me the correct answer."
+    content += "Present your response in the form of a python dictionary:"
+    content += '{"question": "...", "A": "....", "B": "...", "C": "....", "D": "...", "correct_answer": "..."}'
+
     # Connect to the Groq API
     client = Groq(api_key=os.getenv("API_KEY"))
-    
+
     # Get the question and answers from the Groq API
     completion = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
         messages=[
             {
                 "role": "user",
-                "content": f"Let's play Trivial Pursuit. Do not ask: {dont_ask}. Ask a question about {topic}. Give me four possible answers. Give me the correct answer. Present your response in the form of a python dictionary: {{\"question\": \"...\", \"A\": \"....\", \"B\": \"...\", \"C\": \"....\", \"D\": \"...\", \"correct_answer\": \"...\"}} "
+                "content": f"{content}",
             },
         ],
         temperature=1,
@@ -55,20 +57,64 @@ def get_question(topic: str, not_questions: list[str]) -> dict:
         stop=None,
     )
 
-    # Get the answer from the completion as a string
+    # Turn the answer from the completion into a single string
     answer = ""
     for chunk in completion:
         if chunk.choices[0].delta.content != None:
-            answer = answer + chunk.choices[0].delta.content
+            answer += chunk.choices[0].delta.content
 
     # Convert the answer from a string to a dictionary
     answer_dictionary = json.loads(answer)
+    
+    # Shuffle the answers randomly
+    answer_dictionary = shuffle_answers(answer_dictionary)
 
-    # Check if the question is in the list of questions that should not be asked
+    # Check whether the question is in the list of questions that should not be asked
     if answer_dictionary["question"] in not_questions:
         return get_question(topic, not_questions)
     else:
         return answer_dictionary
+
+
+def shuffle_answers(question: dict[str, str]) -> dict[str, str]:
+    """Shuffle the answers of a question.
+
+    Args:
+        question (dict[str, str]): dict: Dictionary with the question and possible answers as well as the correct answer.\n
+        {'question': ..., \n
+        'A': ...,\n
+        'B': ...,\n
+        'C': ...,\n
+        'D': ...,\n
+        'correct_answer': '...'}
+
+    Returns:
+        dict[str, str]: The same dictionary as the input but with the answers A, B, C, D randomly shuffled.
+    """
+
+    # Shuffle the answers randomly. 
+    answers = ["A", "B", "C", "D"]
+    shuffle(answers)
+
+    # map the shuffled answers to the original answers
+    mapping_answers = dict(zip(["A", "B", "C", "D"], answers))
+    
+    # Get the correct answer and map it to the shuffled answers
+    correct_answer = question["correct_answer"]
+    correct_answer = mapping_answers[correct_answer]
+
+    # Create a new dictionary with the shuffled answers
+    shuffled_dict = {
+        "question": question["question"],
+        "A": question[mapping_answers["A"]],
+        "B": question[mapping_answers["B"]],
+        "C": question[mapping_answers["C"]],
+        "D": question[mapping_answers["D"]],
+        "correct_answer": correct_answer,
+    }
+
+    return shuffled_dict
+
 
 if __name__ == "__main__":
     main()
