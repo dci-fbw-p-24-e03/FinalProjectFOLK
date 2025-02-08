@@ -53,7 +53,11 @@ def get_question(
         messages=[
             {
                 "role": "user",
+<<<<<<< HEAD
                 "content": content,
+=======
+                "content": f"Let's play Trivial Pursuit. Do not ask: {dont_ask}. Ask a question about {topic}. Give me four possible answers. Give me the correct answer. Present your response in the form of a python dictionary: {{\"question\": \"...\", \"A\": \"....\", \"B\": \"...\", \"C\": \"....\", \"D\": \"...\", \"correct_answer\": \"...\"}} "
+>>>>>>> 934a383 (get_qustion function retrieves question and list of answers in ai.py)
             },
         ],
         temperature=1,
@@ -63,24 +67,37 @@ def get_question(
         stop=None,
     )
 
+<<<<<<< HEAD
     # Turn the answer from the completion into a single string
     answer = ""
     for chunk in completion:
         if chunk.choices[0].delta.content != None:
             answer += chunk.choices[0].delta.content
+=======
+    # Get the answer from the completion as a string
+    answer = ""
+    for chunk in completion:
+        if chunk.choices[0].delta.content != None:
+            answer = answer + chunk.choices[0].delta.content
+>>>>>>> 934a383 (get_qustion function retrieves question and list of answers in ai.py)
 
     # Convert the answer from a string to a dictionary
     answer_dictionary = json.loads(answer)
 
+<<<<<<< HEAD
     # Shuffle the answers randomly
     answer_dictionary = shuffle_answers(answer_dictionary)
 
     # Check whether the question is in the list of questions that should not be asked
+=======
+    # Check if the question is in the list of questions that should not be asked
+>>>>>>> 934a383 (get_qustion function retrieves question and list of answers in ai.py)
     if answer_dictionary["question"] in not_questions:
         return get_question(topic, not_questions)
     else:
         return answer_dictionary
 
+<<<<<<< HEAD
 
 def shuffle_answers(question: dict[str, str]) -> dict[str, str]:
     """Shuffle the answers of a question.
@@ -121,5 +138,7 @@ def shuffle_answers(question: dict[str, str]) -> dict[str, str]:
     return shuffled_dict
 
 
+=======
+>>>>>>> 934a383 (get_qustion function retrieves question and list of answers in ai.py)
 if __name__ == "__main__":
     main()
