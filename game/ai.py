@@ -8,16 +8,28 @@ load_dotenv()
 
 
 def main():
-    question = get_question("python programming language")
+    # Get a question about the the specified topic excluding the not_questions
+    # as well as four possible answers shuffled randomly and the correct answer in a single dictionary.
+    question = get_question(
+        topic="python programming language",
+        not_questions=[
+            "What is the print function in Python used for?",
+            "What is the purpose of the __new__ method in Python classes?",
+        ],
+        difficulty="normal",
+    )
     print(question)
 
 
-def get_question(topic: str, not_questions: list[str] = []) -> dict[str, str]:
+def get_question(
+    topic: str = "anything", not_questions: list[str] = [], difficulty: str = "normal"
+) -> dict[str, str]:
     """Get Trivial Pursuit Question and answers.
 
     Args:
         topic (str): Topic of the question.
         not_questions (list[str]): List of questions that should not be asked.
+        difficulty (str): Difficulty of the question. Options are "simple", "normal" and "difficult".
 
     Returns:
         dict: Dictionary with the question and possible answers as well as the correct answer.\n
@@ -29,12 +41,14 @@ def get_question(topic: str, not_questions: list[str] = []) -> dict[str, str]:
         'correct_answer': '...'}
     """
 
-    # Create a string with all the questions that should not be asked
+    # Create a string of all the questions that should not be asked
     dont_ask = ", ".join(not_questions)
 
     # Create a string with the content of the message to the Groq API
-    content = f"Let's play Trivial Pursuit. Do not ask these questions: {dont_ask}.\n Ask a question about {topic}."
-    content += "Give me four possible answers. Give me the correct answer."
+    content = "Let's play Trivial Pursuit. There are simple, normal and difficult questions.\n"
+    content += f"Ask a {difficulty} question about {topic}.\n"
+    content += f"Do not ask any of these questions: {dont_ask}.\n"
+    content += "Give me four possible answers A, B, C and D. Give me the correct answer."
     content += "Present your response in the form of a python dictionary:"
     content += '{"question": "...", "A": "....", "B": "...", "C": "....", "D": "...", "correct_answer": "..."}'
 
@@ -65,7 +79,7 @@ def get_question(topic: str, not_questions: list[str] = []) -> dict[str, str]:
 
     # Convert the answer from a string to a dictionary
     answer_dictionary = json.loads(answer)
-    
+
     # Shuffle the answers randomly
     answer_dictionary = shuffle_answers(answer_dictionary)
 
@@ -92,13 +106,13 @@ def shuffle_answers(question: dict[str, str]) -> dict[str, str]:
         dict[str, str]: The same dictionary as the input but with the answers A, B, C, D randomly shuffled.
     """
 
-    # Shuffle the answers randomly. 
+    # Shuffle the answers randomly. Shuffle directly modifies the answers list.
     answers = ["A", "B", "C", "D"]
     shuffle(answers)
 
-    # map the shuffled answers to the original answers
+    # map the shuffled answers to the original answers. Turn the zipped iterable into a dictionary.
     mapping_answers = dict(zip(["A", "B", "C", "D"], answers))
-    
+
     # Get the correct answer and map it to the shuffled answers
     correct_answer = question["correct_answer"]
     correct_answer = mapping_answers[correct_answer]
