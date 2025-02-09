@@ -8,18 +8,8 @@ load_dotenv()
 
 
 def main():
-    my_dict = {
-        "question": "What is the extension of a Python script file?",
-        "A": ".java",
-        "B": ".py",
-        "C": ".cpp",
-        "D": ".js",
-        "correct_answer": "B",
-    }
-    
-    new_dict = shuffle_answers(my_dict)
-    
-    print(new_dict)
+
+    print(get_question())
 
 
 def get_question(
@@ -49,9 +39,7 @@ def get_question(
     content = "Let's play Trivial Pursuit. There are simple, normal and difficult questions.\n"
     content += f"Ask a {difficulty} question about {topic}.\n"
     content += f"Do not ask any of these questions: {dont_ask}.\n"
-    content += (
-        "Give me four possible answers A, B, C and D. Give me the correct answer."
-    )
+    content += "Give me four possible answers A, B, C and D. Give me the correct answer."
     content += "Present your response in the form of a python dictionary:"
     content += '{"question": "...", "A": "....", "B": "...", "C": "....", "D": "...", "correct_answer": "..."}'
 
@@ -64,7 +52,7 @@ def get_question(
         messages=[
             {
                 "role": "user",
-                "content": f"{content}",
+                "content": content,
             },
         ],
         temperature=1,
@@ -84,7 +72,7 @@ def get_question(
     answer_dictionary = json.loads(answer)
 
     # Shuffle the answers randomly
-    # answer_dictionary = shuffle_answers(answer_dictionary)
+    answer_dictionary = shuffle_answers(answer_dictionary)
 
     # Check whether the question is in the list of questions that should not be asked
     if answer_dictionary["question"] in not_questions:
@@ -114,7 +102,7 @@ def shuffle_answers(question: dict[str, str]) -> dict[str, str]:
     shuffle(answers)
 
     # map the shuffled answers to the original answers. Turn the zipped iterable into a dictionary.
-    mapping_answers = dict(zip( answers,["A", "B", "C", "D"]))
+    mapping_answers = dict(zip(answers, ["A", "B", "C", "D"]))
 
     # Get the correct answer and map it to the shuffled answers
     correct_answer = question["correct_answer"]
