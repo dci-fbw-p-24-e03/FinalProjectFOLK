@@ -4,8 +4,6 @@ from groq import Groq
 import json
 from random import shuffle
 
-load_dotenv()
-
 
 def main():
 
@@ -39,11 +37,14 @@ def get_question(
     content = "Let's play Trivial Pursuit. There are simple, normal and difficult questions.\n"
     content += f"Ask a {difficulty} question about {topic}.\n"
     content += f"Do not ask any of these questions: {dont_ask}.\n"
-    content += "Give me four possible answers A, B, C and D. Give me the correct answer."
+    content += (
+        "Give me four possible answers A, B, C and D. Give me the correct answer."
+    )
     content += "Present your response in the form of a python dictionary:"
     content += '{"question": "...", "A": "....", "B": "...", "C": "....", "D": "...", "correct_answer": "..."}'
 
-    # Connect to the Groq API
+    # Get Api key from .env file  and connect to the Groq API
+    load_dotenv()
     client = Groq(api_key=os.getenv("API_KEY"))
 
     # Get the question and answers from the Groq API
