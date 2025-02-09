@@ -8,17 +8,18 @@ load_dotenv()
 
 
 def main():
-    # Get a question about the the specified topic excluding the not_questions
-    # as well as four possible answers shuffled randomly and the correct answer in a single dictionary.
-    question = get_question(
-        topic="python programming language",
-        not_questions=[
-            "What is the print function in Python used for?",
-            "What is the purpose of the __new__ method in Python classes?",
-        ],
-        difficulty="normal",
-    )
-    print(question)
+    my_dict = {
+        "question": "What is the extension of a Python script file?",
+        "A": ".java",
+        "B": ".py",
+        "C": ".cpp",
+        "D": ".js",
+        "correct_answer": "B",
+    }
+    
+    new_dict = shuffle_answers(my_dict)
+    
+    print(new_dict)
 
 
 def get_question(
@@ -83,7 +84,7 @@ def get_question(
     answer_dictionary = json.loads(answer)
 
     # Shuffle the answers randomly
-    answer_dictionary = shuffle_answers(answer_dictionary)
+    # answer_dictionary = shuffle_answers(answer_dictionary)
 
     # Check whether the question is in the list of questions that should not be asked
     if answer_dictionary["question"] in not_questions:
@@ -113,19 +114,18 @@ def shuffle_answers(question: dict[str, str]) -> dict[str, str]:
     shuffle(answers)
 
     # map the shuffled answers to the original answers. Turn the zipped iterable into a dictionary.
-    mapping_answers = dict(zip(["A", "B", "C", "D"], answers))
+    mapping_answers = dict(zip( answers,["A", "B", "C", "D"]))
 
     # Get the correct answer and map it to the shuffled answers
     correct_answer = question["correct_answer"]
     correct_answer = mapping_answers[correct_answer]
-
     # Create a new dictionary with the shuffled answers
     shuffled_dict = {
         "question": question["question"],
-        "A": question[mapping_answers["A"]],
-        "B": question[mapping_answers["B"]],
-        "C": question[mapping_answers["C"]],
-        "D": question[mapping_answers["D"]],
+        "A": question[answers[0]],
+        "B": question[answers[1]],
+        "C": question[answers[2]],
+        "D": question[answers[3]],
         "correct_answer": correct_answer,
     }
 
