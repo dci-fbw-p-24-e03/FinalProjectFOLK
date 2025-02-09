@@ -117,7 +117,7 @@ def get_question(
     answer_dictionary = json.loads(answer)
 
     # Shuffle the answers randomly
-    answer_dictionary = shuffle_answers(answer_dictionary)
+    # answer_dictionary = shuffle_answers(answer_dictionary)
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -164,6 +164,7 @@ def shuffle_answers(question: dict[str, str]) -> dict[str, str]:
     shuffle(answers)
 
     # map the shuffled answers to the original answers. Turn the zipped iterable into a dictionary.
+<<<<<<< HEAD
     mapping_answers = dict(zip(answers, ["A", "B", "C", "D"]))
 
     # Get the correct answer and map it to the shuffled answers
@@ -186,19 +187,28 @@ def shuffle_answers(question: dict[str, str]) -> dict[str, str]:
 
     # map the shuffled answers to the original answers. Turn the zipped iterable into a dictionary.
     mapping_answers = dict(zip(["A", "B", "C", "D"], answers))
+=======
+    mapping_answers = dict(zip( answers,["A", "B", "C", "D"]))
+>>>>>>> 8cc1f27 (logic bug corrected in shuffle_answers in ai.py)
 
     # Get the correct answer and map it to the shuffled answers
     correct_answer = question["correct_answer"]
     correct_answer = mapping_answers[correct_answer]
-
     # Create a new dictionary with the shuffled answers
     shuffled_dict = {
         "question": question["question"],
+<<<<<<< HEAD
         "A": question[mapping_answers["A"]],
         "B": question[mapping_answers["B"]],
         "C": question[mapping_answers["C"]],
         "D": question[mapping_answers["D"]],
 >>>>>>> d57b2db (shuffle_answers of trivial pursuit question in ai.py)
+=======
+        "A": question[answers[0]],
+        "B": question[answers[1]],
+        "C": question[answers[2]],
+        "D": question[answers[3]],
+>>>>>>> 8cc1f27 (logic bug corrected in shuffle_answers in ai.py)
         "correct_answer": correct_answer,
     }
 
