@@ -1,0 +1,49 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Install htmx -->
+    <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+    <title>AI-Quizz</title>
+</head>
+<body>
+    <div id="swap-container">
+
+        <form hx-post="/game-update" hx-target = "#swap-container">
+            {% csrf_token %}
+    
+            <div class="dropdown-container ">
+                <label for="topic">Choose Topic:</label>
+                <select name="topic">
+                    <option value="anything">Anything</option>
+                    <option value="sport">Sport</option>
+                    <option value="history">History</option>
+                    <option value="art">Art</option>
+                    <option value="geography">Geography</option>
+                </select>
+    
+                <label for="difficulty">Choose Difficulty:</label>
+                <select name="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+               
+                <button type="submit">Choose</button>
+            </div>
+        </form>
+
+
+    </div>
+   
+
+
+
+
+   
+</body>
+
+</html>

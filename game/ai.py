@@ -8,7 +8,7 @@ from random import shuffle
 
 def main():
 
-    print(get_question())
+    print(get_question(not_questions=["What is the largest planet in our solar system?", "Which artist painted the famous painting 'The Starry Night'?"]))
 
 
 def get_question(

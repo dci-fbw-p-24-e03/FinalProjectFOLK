@@ -26,5 +26,5 @@ urlpatterns = [
     path("",include("accounts.urls")),
     path("",include("main.urls")),
     #path("shop/",include("shop.urls")),
-    #path("game/",include("game.urls")),
+    path("",include("game.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

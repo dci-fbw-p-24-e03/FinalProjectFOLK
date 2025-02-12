@@ -1,0 +1,27 @@
+
+
+
+<form hx-post="/game-flow" hx-target = "#swap-container">
+    {% csrf_token %}
+    <p>{{question}}</p>
+    <label for="options">
+        <input name="options" type="radio" id="answers" value="A">{{A}}
+    </label>
+    <label for="option_2">
+        <input name="options" type="radio" id="answers" value="B">{{B}}
+    </label>
+    <label for="option_3">
+        <input name="options" type="radio" id="answers" value="C">{{C}}
+    </label>
+    <label for="option_4">
+        <input name="options" type="radio" id="answers" value="D">{{D}}
+    </label>
+    <p><button type="submit"> submit</button></p>
+  
+</form>
+
+
+
+
+
+
