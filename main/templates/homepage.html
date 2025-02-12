@@ -1,42 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-{% load static %}
-<body>
-    
-    <div  class= "homeimage">
-        <h3>Ai-Quiz under construction...</h3>
-        
-        
-        
-        </div >
-        
-        
-        {%if not user.is_authenticated %}
-        <div>
-            <img class="home-image" src="{% static 'assets/home_logged_out.webp'%}" alt="static item" width="400" height="400" >
-        </div>
-        <div class= "loginbutton">
-        
-            <a href="{% url 'login_view' %}"><button class="styled-button" type="submit">Login</button></a>
-        
-        </div>
-        {% endif %}
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+<div class="homeimage">
+  <h3>Ai-Quiz under construction...</h3>
+</div>
 
-        {%if user.is_authenticated %}
-        <div>
-            <img class="home-image" src="{% static 'assets/home.webp'%}" alt="static item" width="400" height="400" >
-        </div>
-        <div class= "logoutbutton">
-        
-            <a href="{% url 'logout_view' %}"><button class="styled-button" type="submit">Logout</button></a>
-        
-        </div>
-        {% endif %}
-
-</body>
-</html>
+{%if not user.is_authenticated %}
+<div>
+  <img
+    class="home-image"
+    src="{% static 'assets/home_logged_out.webp'%}"
+    alt="static item"
+    width="400"
+    height="400"
+  />
+</div>
+{% else %}
+<div>
+  <img
+    class="home-image"
+    src="{% static 'assets/home.webp'%}"
+    alt="static item"
+    width="400"
+    height="400"
+  />
+</div>
+{% endif %} 
+{% endblock %}
