@@ -50,3 +50,9 @@ class UserUpdateView(LoginRequiredMixin,UpdateView):
 
     def get_object(self):
         return self.request.user
+
+class LeaderboardListView(ListView):
+    model = CustomUser
+    template_name = 'leaderboard.html'
+    context_object_name = 'users'
+    queryset = CustomUser.objects.all().order_by('-stars')
