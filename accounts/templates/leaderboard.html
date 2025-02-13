@@ -1,88 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/leaderboard.css' %}" />
     <title>Leaderboard</title>
-    <style>
-        /* Grundlegendes Styling für die Seite */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        /* Styling für das Container-Element */
-        .leaderboard-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 900px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-        }
-
-        /* Styling für die Tabelle */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        td {
-            background-color: #f9f9f9;
-            font-size: 1.1em;
-        }
-
-        /* Styling für die Tabellenzeilen */
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #e2e2e2;
-        }
-
-        /* Styling für das User-Bild */
-        img {
-            border-radius: 50%;
-        }
-
-        /* Responsives Design: bei kleineren Bildschirmgrößen */
-        @media (max-width: 768px) {
-            table {
-                font-size: 0.9em;
-            }
-
-            th, td {
-                padding: 10px;
-            }
-        }
-    </style>
+    
 </head>
-<body>
+<div class="leaderboard">
     <div class="leaderboard-container">
         <h1>Leaderboard</h1>
 
@@ -113,5 +41,6 @@
             </tbody>
         </table>
     </div>
-</body>
+</div>
 </html>
+{% endblock %}

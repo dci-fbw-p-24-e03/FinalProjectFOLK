@@ -1,0 +1,31 @@
+
+.buy_confirmation {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+#confirmation-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 10px;
+}
+.btn:hover {
+    background-color: #45a049;
+}
+.cancel-btn {
+    background-color: #f44336;
+}
+.cancel-btn:hover {
+    background-color: #e53935;
+}

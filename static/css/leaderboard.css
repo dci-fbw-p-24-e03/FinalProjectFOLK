@@ -1,0 +1,65 @@
+.leaderboard {
+    font-family: Arial, sans-serif; 
+    color: #ddd; 
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    background-color: #292929; 
+}
+
+.leaderboard-container {
+    background-color: #23272a; 
+    padding: 40px;           
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    width: 110%;              
+    max-width: 1600px;       
+    margin: 0 auto;      
+}
+
+h1 {
+    text-align: center;
+    color: #fff; 
+    margin-bottom: 20px;
+    font-size: 3em;          
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 20px;          
+    text-align: center;
+}
+
+th {
+    background-color: #7289da;  
+    color: #fff;
+}
+
+td {
+    background-color: #2c2f33;  
+    font-size: 1.2em;           
+    color: #ddd;
+}
+
+/* Styling für die Tabellenzeilen */
+tr:nth-child(even) td {
+    background-color: #2e3137;  
+}
+
+tr:hover td {
+    background-color: #3a3f44;  
+}
+
+
+img {
+    border-radius: 50%;
+    width: 70px;  
+    height: 70px;
+    object-fit: cover;
+}
+
