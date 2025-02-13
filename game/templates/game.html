@@ -12,7 +12,7 @@
 <body>
     <div id="swap-container">
 
-        <form hx-post="/game-update" hx-target = "#swap-container">
+        <form hx-post="/game-start" hx-target = "#swap-container">
             {% csrf_token %}
     
             <div class="dropdown-container ">
@@ -38,9 +38,6 @@
 
 
     </div>
-   
-
-
 
 
    

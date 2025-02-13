@@ -7,7 +7,7 @@ from random import shuffle
 
 def main():
 
-    print(get_question(not_questions=["What is the largest planet in our solar system?", "Which artist painted the famous painting 'The Starry Night'?"]))
+    print(get_question(not_questions=["Which English author wrote the famous novel 'Pride and Prejudice'?",'What is the largest planet in our solar system?', 'Which Italian artist painted the famous ceiling of the Sistine Chapel?', 'Which of the following sports is played on ice?', 'Which of the following sports is played on ice?', 'What is the largest planet in our solar system?', 'What is the largest planet in our solar system?', 'What is the largest planet in our solar system?', 'What is the largest planet in our solar system?', 'What is the largest planet in our solar system?']))
 
 
 def get_question(
@@ -37,9 +37,7 @@ def get_question(
     content = "Let's play Trivial Pursuit. There are simple, normal and difficult questions.\n"
     content += f"Ask a {difficulty} question about {topic}.\n"
     content += f"Do not ask any of these questions: {dont_ask}.\n"
-    content += (
-        "Give me four possible answers A, B, C and D. Give me the correct answer."
-    )
+    content += "Give me four possible answers A, B, C and D. Give me the correct answer."
     content += "Present your response in the form of a python dictionary:"
     content += '{"question": "...", "A": "....", "B": "...", "C": "....", "D": "...", "correct_answer": "..."}'
 

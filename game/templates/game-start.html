@@ -20,6 +20,18 @@
   
 </form>
 
+<footer>
+    <p> {{user.username}}</p>
+
+    {% if user.image %}
+        <img src="{{ user.image.url }}" alt="User Image" width="150" height="150">
+    {% else %}
+        <img src="/static/assets/profile_placeholder.jpeg" alt="No Image" width="150" height="150">
+    {% endif %}
+    <p>{{score}}</p>
+   
+</footer>
+
 
 
 

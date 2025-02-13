@@ -1,23 +1,31 @@
 
-<div id="swap-update">
-    <form hx-post="/game-flow" hx-target = "#swap-update">
-        {% csrf_token %}
-        <p>{{question}}</p>
-        <label for="options">
-            <input name="options" type="radio" id="answers" value="A">{{A}}
-        </label>
-        <label for="option_2">
-            <input name="options" type="radio" id="answers" value="B">{{B}}
-        </label>
-        <label for="option_3">
-            <input name="options" type="radio" id="answers" value="C">{{C}}
-        </label>
-        <label for="option_4">
-            <input name="options" type="radio" id="answers" value="D">{{D}}
-        </label>
-        <p><button type="submit"> submit</button></p>
-      
-    </form>
-    
 
-</div>
+<form hx-post="/game-flow" hx-target = "#swap-container">
+    {% csrf_token %}
+    <p>{{question}}</p>
+    <label for="options">
+        <input name="options" type="radio" id="answers" value="A">{{A}}
+    </label>
+    <label for="option_2">
+        <input name="options" type="radio" id="answers" value="B">{{B}}
+    </label>
+    <label for="option_3">
+        <input name="options" type="radio" id="answers" value="C">{{C}}
+    </label>
+    <label for="option_4">
+        <input name="options" type="radio" id="answers" value="D">{{D}}
+    </label>
+    <p><button type="submit"> submit</button></p>
+    
+</form>
+
+<footer>
+    <p> {{user.username}}</p>
+    {% if user.image %}
+        <img src="{{ user.image.url }}" alt="User Image" width="150" height="150">
+    {% else %}
+        <img src="/static/assets/profile_placeholder.jpeg" alt="No Image" width="150" height="150">
+    {% endif %}
+    <p>{{score}}</p>
+   
+</footer>

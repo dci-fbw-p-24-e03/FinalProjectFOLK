@@ -8,30 +8,55 @@ def game_view(request):
     return render(request, "game.html")
 
 
-def game_update(request, *args, **kwargs):
-    not_questions = []
+def game_start(request, *args, **kwargs):
+    print("game start")
     
+    player = request.user.username
+    request.session["player"] = {player: 0}
     topic = request.POST.get("topic")
+    request.session["topic"] = topic
     difficulty = request.POST.get("difficulty")
-    questions = get_question(topic=topic, difficulty=difficulty)
-    request.session["questions"] = questions  # Store in session (must be serializable)
-    return render(request, "game-update.html", questions, not_questions)
+    request.session["difficulty"] = difficulty
+    question = get_question(topic=topic, difficulty=difficulty)
+    if request.session.get("questions") == None:
+        request.session["questions"] = [question]  # Store in session (must be serializable)
+    else:
+        questions = request.session["questions"]
+        questions.append(question)
+        request.session["questions"] = questions
+    
+    score = request.session["player"][f"{player}"]
+    context = question | {"score": score}
+    return render(request, "game-start.html", context)
 
 def game_flow(request, *args, **kwargs):
-    index = 0
-    while index < 10:
-        index +=1
-        previous_question = request.session.get("questions")["question"]
-        choice = request.POST.get("options")
-        questions = get_question(not_questions=[previous_question,])
-        print("previous question", previous_question)
-        print("choice", choice)
-        return render(request, "game-update.html", questions)
-        
-        
-    else:
-        index = 0
-        return render("game over")
+    print("game flow")
+   
+    previous_questions = request.session.get("questions")
+    difficulty = request.session.get("difficulty")
+    topic = request.session.get("topic")
+    correct_answer = previous_questions[-1]["correct_answer"]
+    submitted_answer = request.POST.get("options")
+    print("correct answer:", correct_answer)
+    print("submitted answer: ", submitted_answer)
+    if correct_answer == submitted_answer:
+        player = request.user.username
+        score = request.session["player"][f"{player}"]
+        score += 5
+        request.session["player"][f"{player}"] = score
+        print("points: ",score, request.session["player"][f"{player}"])
+        #print("previous questions", previous_questions)
+   
+    not_questions = [question["question"] for question in previous_questions]
+    print("not_questions: ", not_questions)
+    question = get_question(topic=topic, difficulty=difficulty, not_questions=not_questions)
+    questions = request.session["questions"]
+    questions.append(question)
+    request.session["questions"] = questions
+    score = request.session["player"][f"{player}"]
+    context = question | {"score": score}
+    return render(request, "game-flow.html", context)
+
         
         
        
