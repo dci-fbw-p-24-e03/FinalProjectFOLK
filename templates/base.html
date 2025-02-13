@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/base_style.css' %}" />
+    <title>{% block title %}The AI-Quiz{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="#"><span>HOME</span></a>
+        <a href="#"><span>QUIZ</span></a>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'profile' %}"><span>PROFILE</span></a>
+        <form method="post">
+          {% csrf_token %}
+          <button type="submit"><span>Logout</span></button>
+        </form>
+        {% else %}
+        <a href="{% url 'login_view' %}"><span>LOGIN / REGISTER</span></a>
+        {% endif %}
+        <div id="indicator"></div>
+      </nav>
+    </header>
+    <main>{% block content %}{% endblock %}</main>
+    <footer>
+      <p>&copy; 2025 The AI-Quiz. All rights reserved</p>
+    </footer>
+    <!-- Include the JavaScript file before the closing body tag -->
+    <script src="{% static 'js/base_navbar.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,158 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #292929;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Header Navigation */
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  margin: 30px;
+}
+
+header nav {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+  overflow: hidden;
+}
+
+header nav::after {
+  content: "";
+  position: absolute;
+  width: 2px;      /* size of the glint dot */
+  height: 2px;
+  background: rgba(255, 255, 255, 0.8); /* bright glint colour */
+  border-radius: 50%; /* make it circular */
+  pointer-events: none; /* ensure it does not block interactions */
+  /* Initially place it at the top-left corner */
+  top: 0;
+  left: 0;
+  opacity: 0;
+  animation: glint 30s infinite;
+}
+
+/* Keyframes for the glint effect */
+@keyframes glint {
+  0%, 90% {
+    /* For most of the cycle, the glint is hidden at the starting point */
+    opacity: 0;
+    top: 0;
+    left: 0;
+  }
+  92% {
+    /* Quickly fade in at the top-left */
+    opacity: 1;
+    top: 0;
+    left: 0;
+  }
+  94% {
+    /* Move from top-left to top-right */
+    opacity: 1;
+    top: 0;
+    left: calc(100% - 10px);
+  }
+  96% {
+    /* Move from top-right to bottom-right */
+    opacity: 1;
+    top: calc(100% - 10px);
+    left: calc(100% - 10px);
+  }
+  98% {
+    /* Move from bottom-right to bottom-left */
+    opacity: 1;
+    top: calc(100% - 10px);
+    left: 0;
+  }
+  100% {
+    /* Return to top-left and fade out */
+    opacity: 0;
+    top: 0;
+    left: 0;
+  }
+}
+
+
+nav a {
+  position: relative;
+  z-index: 1;
+  /* Flex items now size to their content */
+  text-align: center;
+  color: #949494;
+  text-decoration: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  padding: 10px 20px;
+  transition: color 0.2s ease;
+}
+
+nav a span {
+  position: relative;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+/* Adapt the pseudo-elements to attach to the inner span */
+nav a span:before,
+nav a span:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 0.2s ease transform;
+}
+
+nav a span::before {
+  top: -8px;
+  left: -10px;
+  width: 6px;
+  height: 6px;
+  background-color: var(--color1, rgb(5, 212, 195));
+  z-index: 2;
+}
+
+nav a span::after {
+  top: -4px;
+  left: -4px;
+  width: 4px;
+  height: 4px;
+  background-color: var(--color2, rgb(197, 99, 253));
+  z-index: 1;
+}
+
+/* Adjusted Indicator Style */
+#indicator {
+  position: absolute;
+  bottom: 0; /* or adjust as needed relative to the nav container */
+  height: 3px;
+  border-radius: 5px;
+  transition: left 0.3s ease, width 0.3s ease, background 0.3s ease;
+}
+
+nav a span:hover {
+  color: #fff;
+}
+
+nav a:hover span::before,
+nav a:hover span::after {
+  transform: scale(1);
+}
+

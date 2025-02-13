@@ -59,7 +59,9 @@ ROOT_URLCONF = "AI_quiz.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates")
+        ],  # Add the templates directory to the TEMPLATES setting
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
