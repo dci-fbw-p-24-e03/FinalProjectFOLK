@@ -53,10 +53,10 @@ def game_flow(request, *args, **kwargs):
     questions = request.session["questions"]
     questions.append(question)
     request.session["questions"] = questions
+    player = request.user.username
     score = request.session["player"][f"{player}"]
     context = question | {"score": score}
     return render(request, "game-flow.html", context)
 
         
         
-       
