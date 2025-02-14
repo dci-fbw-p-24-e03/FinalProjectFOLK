@@ -1,4 +1,4 @@
-
+{%load static%}
 
 <form hx-post="/game-flow" hx-target = "#swap-container">
     {% csrf_token %}
@@ -26,6 +26,6 @@
     {% else %}
         <img src="/static/assets/profile_placeholder.jpeg" alt="No Image" width="150" height="150">
     {% endif %}
-    <p>{{score}}</p>
+    <p>Score: {{score}}</p>
    
 </footer>

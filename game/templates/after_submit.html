@@ -1,0 +1,12 @@
+
+
+<p>after submit </p>
+
+
+<form hx-post="/game-flow" hx-target="#swap-container" method="post">
+    {% csrf_token %}
+    <p>After submit</p>
+    <button type="submit" >
+        Send Request
+    </button>
+</form>

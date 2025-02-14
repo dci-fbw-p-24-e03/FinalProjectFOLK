@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .ai import  get_question
+import time
 
 # Create your views here.
 
@@ -56,7 +57,14 @@ def game_flow(request, *args, **kwargs):
     player = request.user.username
     score = request.session["player"][f"{player}"]
     context = question | {"score": score}
-    return render(request, "game-flow.html", context)
+    return render(request, "after_submit.html", context)
+
+def after_submit_view(request,*args,**kwargs):
+    time.sleep(3)
+
+
+
+    return render(request, "game-flow.html" )
 
         
         

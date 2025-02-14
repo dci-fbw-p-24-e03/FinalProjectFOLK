@@ -1,36 +1,49 @@
+{%load static%}
+<link rel="stylesheet" href="{% static 'css/game_start.css' %}" />
 
 
-
-<form hx-post="/game-flow" hx-target = "#swap-container">
+<form hx-post="/game-flow" hx-target="#swap-container">
     {% csrf_token %}
-    <p>{{question}}</p>
-    <label for="options">
-        <input name="options" type="radio" id="answers" value="A">{{A}}
-    </label>
-    <label for="option_2">
-        <input name="options" type="radio" id="answers" value="B">{{B}}
-    </label>
-    <label for="option_3">
-        <input name="options" type="radio" id="answers" value="C">{{C}}
-    </label>
-    <label for="option_4">
-        <input name="options" type="radio" id="answers" value="D">{{D}}
-    </label>
-    <p><button type="submit"> submit</button></p>
-  
+
+    <p class="question">{{ question }}</p>
+
+    <div class="answers" hx-target = #swap_after_submit>
+        <div class="answer_pair">
+            <label class="radio-label">
+                <input name="options" type="radio" id="option_1" value="A"> {{ A }}
+            </label>
+            <label class="radio-label">
+                <input name="options" type="radio" id="option_2" value="B"> {{ B }}
+            </label>
+        </div>
+
+        <div class="answer_pair">
+            <label class="radio-label">
+                <input name="options" type="radio" id="option_3" value="C"> {{ C }}
+            </label>
+            <label class="radio-label">
+                <input name="options" type="radio" id="option_4" value="D"> {{ D }}
+            </label>
+        </div>
+
+        <div class="button_div">
+            <button class="answer_choice_button" type="submit">Submit</button>
+        </div>
+    </div>
 </form>
 
 <footer>
     <p> {{user.username}}</p>
 
-    {% if user.image %}
+    <!-- {% if user.image %}
         <img src="{{ user.image.url }}" alt="User Image" width="150" height="150">
-    {% else %}
-        <img src="/static/assets/profile_placeholder.jpeg" alt="No Image" width="150" height="150">
-    {% endif %}
-    <p>{{score}}</p>
+    {% else %} -->
+    <img src="{% static 'assets/profile_placeholder.jpeg' %}" alt="male" width="300" height="300">
+    <!-- {% endif %} -->
+    <p>Score :{{score}}</p>
    
 </footer>
+
 
 
 
