@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Product, Order
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+#from django.http import HttpResponse
 # Create your views here.
 
 def shop_view(request):
@@ -19,7 +19,6 @@ def buy_product(request, product_id):
 def confirm_purchase(request, product_id):
     product = Product.objects.get(id=product_id)
     user = request.user
-
     total_price = product.price
 
     if user.coins >= total_price:
@@ -31,11 +30,15 @@ def confirm_purchase(request, product_id):
             total=total_price
         )
 
-        # Deduct coins from user
         user.coins -= total_price
         user.save()
 
-        return HttpResponse(f"Order successfully placed for {product.name}! Total: ${total_price}")
+        return render(request, 'purchase_success.html', {
+            'product': product,
+            'total_price': total_price
+        })
     else:
-        return HttpResponse("Not enough coins to complete the purchase.", status=400)
+        return render(request, 'purchase_success.html', {
+            'error_message': "Not enough coins to complete the purchase."
+        })
 
