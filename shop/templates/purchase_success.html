@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/purchase_success.css' %}" />
+    <title>Purchase Status</title>
+</head>
+<div class="purchase-success">
+    <div id="confirmation-box">
+        {% if error_message %}
+            <h2 style="color: #f44336;">Purchase Failed</h2>
+            <p>{{ error_message }}</p>
+            <a href="{% url 'shop_view' %}" class="btn">Back to Shop</a>
+        {% else %}
+            <h2>Purchase Successful!</h2>
+            <p>Thank you for your purchase! Your order for <strong>{{ product.name }}</strong> has been successfully placed.</p>
+            <p>Total: ${{ total_price }}</p>
+            <a href="{% url 'shop_view' %}" class="btn">Back to Shop</a>
+        {% endif %}
+    </div>
+</div>
+</html>
+{% endblock %}
