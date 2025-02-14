@@ -1,3 +1,12 @@
+/* 
+  Font: "Neon Glow" by weknow 
+  (https://www.fontspace.com/neon-glow-font-f14014) 
+*/
+@font-face {
+  font-family: "Neon Glow";
+  src: url(https://assets.codepen.io/230569/NeonGlow-8VLz.ttf);
+}
+
 /* General Reset */
 * {
   margin: 0;
@@ -32,61 +41,76 @@ header nav {
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   padding: 10px;
-  overflow: hidden;
+  overflow: visible; /* allow the glint to be visible outside nav if needed */
 }
 
-header nav::after {
-  content: "";
+/* Container for glint effect – positioned over the nav border */
+#glint-container {
   position: absolute;
-  width: 2px;      /* size of the glint dot */
-  height: 2px;
-  background: rgba(255, 255, 255, 0.8); /* bright glint colour */
-  border-radius: 50%; /* make it circular */
-  pointer-events: none; /* ensure it does not block interactions */
-  /* Initially place it at the top-left corner */
   top: 0;
   left: 0;
-  opacity: 0;
-  animation: glint 30s infinite;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 20; /* ensure glint is above the nav border */
 }
 
-/* Keyframes for the glint effect */
+/* Base glint element style */
+.glint {
+  position: absolute;
+  width: 4px;    /* size of the glint dot */
+  height: 4px;
+  background: rgba(247, 247, 21, 0.986); /* bright glint colour */
+  border-radius: 50%;
+  animation: glint 40s infinite;
+}
+
+/* Tail copies: lower brightness */
+.glint.tail {
+  background: rgba(247, 247, 21, 0.5);
+}
+
+/* Keyframes for glint animation: moves along border and then extra quarter round */
 @keyframes glint {
-  0%, 90% {
-    /* For most of the cycle, the glint is hidden at the starting point */
+  0% {
     opacity: 0;
-    top: 0;
-    left: 0;
+    top: -2px;
+    left: -2px;
   }
-  92% {
-    /* Quickly fade in at the top-left */
+  5% {
     opacity: 1;
-    top: 0;
-    left: 0;
+    top: -2px;
+    left: -2px;
   }
-  94% {
-    /* Move from top-left to top-right */
-    opacity: 1;
-    top: 0;
-    left: calc(100% - 10px);
+  /* Bewegung entlang der oberen Kante */
+  25% {
+    top: -2px;
+    left: calc(100% - 2px);
   }
-  96% {
-    /* Move from top-right to bottom-right */
-    opacity: 1;
-    top: calc(100% - 10px);
-    left: calc(100% - 10px);
+  /* Rechtskante: von oben nach unten */
+  45% {
+    top: calc(100% - 2px);
+    left: calc(100% - 2px);
   }
-  98% {
-    /* Move from bottom-right to bottom-left */
-    opacity: 1;
-    top: calc(100% - 10px);
-    left: 0;
+  /* Untere Kante: von rechts nach links */
+  65% {
+    top: calc(100% - 2px);
+    left: -2px;
+  }
+  /* Linke Kante: von unten nach oben zurück */
+  85% {
+    top: -2px;
+    left: -2px;
+  }
+  /* Extra Viertelrunde (zur oberen rechten Ecke) */
+  95% {
+    top: -2px;
+    left: calc(100% - 2px);
   }
   100% {
-    /* Return to top-left and fade out */
     opacity: 0;
-    top: 0;
-    left: 0;
+    top: -2px;
+    left: calc(100% - 2px);
   }
 }
 
@@ -96,10 +120,10 @@ nav a {
   z-index: 1;
   /* Flex items now size to their content */
   text-align: center;
-  color: #949494;
   text-decoration: none;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "Neon Glow";
   font-weight: bold;
+  font-size: 30px;
   padding: 10px 20px;
   transition: color 0.2s ease;
 }
@@ -108,6 +132,14 @@ nav a span {
   position: relative;
   display: inline-block;
   margin: 0 auto;
+  /* Use the custom property --neon-text (fallback white) for the text colour */
+  color: var(--neon-text, #fff);
+  text-shadow:
+    0 0 5px var(--neon-text, #ffffff),
+    0 0 10px var(--neon-text, #fff),
+    0 0 20px var(--neon-text, #fff),
+    0 0 40px var(--neon-text, #fff);
+  transition: color 0.2s ease;
 }
 
 /* Adapt the pseudo-elements to attach to the inner span */
@@ -141,7 +173,7 @@ nav a span::after {
 /* Adjusted Indicator Style */
 #indicator {
   position: absolute;
-  bottom: 0; /* or adjust as needed relative to the nav container */
+  bottom: 10px; /* or adjust as needed relative to the nav container */
   height: 3px;
   border-radius: 5px;
   transition: left 0.3s ease, width 0.3s ease, background 0.3s ease;
@@ -155,4 +187,3 @@ nav a:hover span::before,
 nav a:hover span::after {
   transform: scale(1);
 }
-

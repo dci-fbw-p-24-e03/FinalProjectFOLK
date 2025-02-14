@@ -1,5 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Function to generate a random colour in hexadecimal notation
+  // Define an array of neon colours to choose from
+  const randomNeonColor = () => {
+    // Generate a random hue between 0 and 360.
+    const hue = Math.floor(Math.random() * 360);
+    // Saturation between 80% and 100% to ensure vivid colour.
+    const saturation = Math.floor(Math.random() * 21) + 80;
+    // Lightness between 60% and 80% to keep the colour bright.
+    const lightness = Math.floor(Math.random() * 21) + 60;
+    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+  };
+  // Function to generate a random colour in hexadecimal notation (for the pseudo-elements)
   const randomColor = () =>
     '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
 
@@ -11,6 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const color2 = randomColor();
       span.style.setProperty('--color1', color1);
       span.style.setProperty('--color2', color2);
+
+      // Assign a random neon colour for the text
+      const neonText = randomNeonColor();
+      span.style.setProperty('--neon-text', neonText);
     }
   });
 
@@ -29,8 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const spanRect = span.getBoundingClientRect();
       const navRect = nav.getBoundingClientRect();
 
-      // Calculate the left offset and width of the span relative to the nav container
-      const left = spanRect.left - navRect.left;
+      // Get computed styles for the nav container
+      const navStyles = getComputedStyle(nav);
+      const borderLeft = parseFloat(navStyles.borderLeftWidth) || 0;
+
+      // Calculate the left offset relative to the nav's content (excluding border)
+      const left = spanRect.left - navRect.left - borderLeft;
       const width = spanRect.width;
 
       // Update the indicator's position and size
