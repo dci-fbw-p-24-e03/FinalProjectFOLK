@@ -32,88 +32,128 @@ header {
   margin: 30px;
 }
 
+/* Wrapper: dient als Rahmen */
+.nav-wrapper {
+  position: relative;
+  background: conic-gradient(
+    from 45deg,
+    var(--neon-text1, #fff) 0deg,
+    var(--neon-text2, #fff) 90deg,
+    var(--neon-text3, #fff) 180deg,
+    var(--neon-text4, #fff) 270deg,
+    var(--neon-text1, #fff) 360deg
+  );
+  border-radius: 10px;
+  padding: 4px; /* entspricht der gewünschten Rahmenbreite */
+}
+
+/* Das eigentliche nav-Element */
 header nav {
   position: relative;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
+  background: #292929; /* Hintergrundfarbe passend zum Body */
+  border-radius: 6px;  /* Etwas weniger als der Wrapper, damit der Rahmen sichtbar wird */
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   padding: 10px;
-  overflow: visible; /* allow the glint to be visible outside nav if needed */
+  overflow: visible;
 }
 
-/* Container for glint effect – positioned over the nav border */
-#glint-container {
+/* Spark element – a small glowing circle that moves along the border */
+header nav::before {
+  content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 20; /* ensure glint is above the nav border */
-}
-
-/* Base glint element style */
-.glint {
-  position: absolute;
-  width: 4px;    /* size of the glint dot */
-  height: 4px;
-  background: rgba(247, 247, 21, 0.986); /* bright glint colour */
+  width: 6px;
+  height: 6px;
+  background: #fff;
   border-radius: 50%;
-  animation: glint 40s infinite;
+  /* Start with the center of the spark exactly on the border:
+     Since the stroke is 2px thick, an offset of -2px (assuming a 6px element)
+     roughly centers it on the outer edge */
+  top: 0px;
+  left: 0px;
+  filter: blur(2px);
+  z-index: 101;
+  animation: sparkMotion 20s linear infinite;
 }
 
-/* Tail copies: lower brightness */
-.glint.tail {
-  background: rgba(247, 247, 21, 0.5);
+/* Trailing glow: a blurred duplicate with a slight delay */
+header nav::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  top: 0px;
+  left: 0px;
+  filter: blur(4px);
+  z-index: 100;
+  animation: sparkMotion 20s linear infinite;
+  animation-delay: 0.01s; /* slight delay for a trailing effect */
 }
 
-/* Keyframes for glint animation: moves along border and then extra quarter round */
-@keyframes glint {
-  0% {
+/* Keyframes that animate the spark along the perimeter, then extra along the top */
+@keyframes sparkMotion {
+  /* Starting at top left (outer edge) */
+  0%,
+  50% {
+    left: -4px;
+    top: -4px;
     opacity: 0;
-    top: -2px;
-    left: -2px;
   }
-  5% {
+  /* Move along the top border to top right */
+  60% {
+    left: calc(100% - 2px);
+    top: -4px;
     opacity: 1;
-    top: -2px;
-    left: -2px;
+    transform: scale(0.8);
   }
-  /* Bewegung entlang der oberen Kante */
-  25% {
-    top: -2px;
-    left: calc(100% - 2px);
-  }
-  /* Rechtskante: von oben nach unten */
-  45% {
-    top: calc(100% - 2px);
-    left: calc(100% - 2px);
-  }
-  /* Untere Kante: von rechts nach links */
+  /* Move down the right border to bottom right */
   65% {
-    top: calc(100% - 2px);
-    left: -2px;
-  }
-  /* Linke Kante: von unten nach oben zurück */
-  85% {
-    top: -2px;
-    left: -2px;
-  }
-  /* Extra Viertelrunde (zur oberen rechten Ecke) */
-  95% {
-    top: -2px;
     left: calc(100% - 2px);
+    top: calc(100% - 2px);
+    opacity: 1;
+    transform: scale(0.8);
+  }
+  /* Move along the bottom border to bottom left */
+  75% {
+    left: -4px;
+    top: calc(100% - 2px);
+    opacity: 1;
+    transform: scale(0.8);
+  }
+  /* Move up the left border back to top left */
+  80% {
+    left: -4px;
+    top: -4px;
+    opacity: 1;
+    transform: scale(0.8);
+  }
+  /* Extra quarter: move along the top border again toward top right, with a flash */
+  90% {
+    left: calc(100% - 2px);
+    top: -4px;
+    opacity: 1;
+    transform: scale(0.8);
+  }
+  /* Short flashing of the spark*/
+  95% {
+    left: calc(100% - 2px);
+    top: -4px;
+    opacity: 1;
+    transform: scale(2);
   }
   100% {
-    opacity: 0;
-    top: -2px;
     left: calc(100% - 2px);
+    top: -2px;
+    opacity: 0; /* fade out at the final position */
   }
 }
-
 
 nav a {
   position: relative;
@@ -123,8 +163,8 @@ nav a {
   text-decoration: none;
   font-family: "Neon Glow";
   font-weight: bold;
-  font-size: 30px;
-  padding: 10px 20px;
+  font-size: 40px;
+  padding: 10px 40px;
   transition: color 0.2s ease;
 }
 
@@ -134,10 +174,8 @@ nav a span {
   margin: 0 auto;
   /* Use the custom property --neon-text (fallback white) for the text colour */
   color: var(--neon-text, #fff);
-  text-shadow:
-    0 0 5px var(--neon-text, #ffffff),
-    0 0 10px var(--neon-text, #fff),
-    0 0 20px var(--neon-text, #fff),
+  text-shadow: 0 0 5px var(--neon-text, #ffffff),
+    0 0 10px var(--neon-text, #fff), 0 0 20px var(--neon-text, #fff),
     0 0 40px var(--neon-text, #fff);
   transition: color 0.2s ease;
 }
@@ -148,6 +186,7 @@ nav a span:after {
   content: "";
   position: absolute;
   border-radius: 50%;
+  filter: blur(0.7px);
   transform: scale(0);
   transition: 0.2s ease transform;
 }
@@ -176,6 +215,7 @@ nav a span::after {
   bottom: 10px; /* or adjust as needed relative to the nav container */
   height: 3px;
   border-radius: 5px;
+  filter: blur(1px);
   transition: left 0.3s ease, width 0.3s ease, background 0.3s ease;
 }
 
