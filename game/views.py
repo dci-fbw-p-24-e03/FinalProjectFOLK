@@ -5,32 +5,93 @@ import time
 # Create your views here.
 
 def game_view(request):
+    """Render Opening Page of Game
+
+    Args:
+        request (get): /game
+
+    Returns:
+        _html_: html for displaying the opening page of the game
+    
+    Summary:
+        game.html comprises the swap target called "swap-container" (hx-target = "#swap-container"). 
+        The html code within the  <div id="swap-container"> is completely replaced with new html code 
+        once <button type="submit">Choose</button> is pressed. Pressing the choose button issues a 
+        post request (hx-post="/game-start" ) to the URL /game-start. This post request is processed
+        by the next view game_start, which replaces the html code in the div <div id="swap-container">.
+
+    """
     
     return render(request, "game.html")
 
 
-def game_start(request, *args, **kwargs):
-    print("game start")
+def game_start(request):
+    """Game start displays the first question of the game
+
+    Args:
+        request (post): /game-start
+                        The post request comprises the name of the user, the topic chosen for the game and
+                        the level of difficulty.
+
+    Returns:
+        _html_: html for displaying the question and possible answers within the <div id="swap-container"> 
+                in the game.html
     
+    Summary:
+        game.html is updated with the html code from game_start within <div id="swap-container">.
+    """
+    print("game-start")
+    
+    # Retrieve the player name, topic of the game as well as the game difficulty from
+    # the post request forwarded to the present view.
     player = request.user.username
-    request.session["player"] = {player: 0}
     topic = request.POST.get("topic")
-    request.session["topic"] = topic
     difficulty = request.POST.get("difficulty")
+    
+    # Add the posted information to the "session". 'request.session' is a dictionary for storing information
+    # used during the course of the game. The information is stored in a cooky in the front end.
+    # The player dictionary {player: 0} comprises the name of the player and the number of score 0 achieved
+    # by this player.
+    request.session["player"] = {player: 0}
+    request.session["topic"] = topic
     request.session["difficulty"] = difficulty
+    
+    # Retrieve the first question, possible answers and correct answers for playing Trivial Pursuit in a dictionary
+    # using the function get_question defined in ai.py.
     question = get_question(topic=topic, difficulty=difficulty)
+    
+    # Add the question dictionary to the session. The value corresponding to the key "questions" comprises 
+    # a list of all the questions that have been asked before.
     if request.session.get("questions") == None:
-        request.session["questions"] = [question]  # Store in session (must be serializable)
+        # Create the questions list if it does not exist yet and add the first question
+        request.session["questions"] = [question["question"]]
     else:
+        # Retrieve the list of asked questions
         questions = request.session["questions"]
-        questions.append(question)
+        # Append the current question to this list
+        questions.append(question["question"])
+        # Replace the list of questions in the sessions dictionary with the updated list.
         request.session["questions"] = questions
     
+    # Get the current score of the player from the sessions dictionary
     score = request.session["player"][f"{player}"]
+    
+    # Create a context dictionary by merging the dictionaries question and {"score": score}
+    # into a single dictionary
     context = question | {"score": score}
+    # Display the question and possible answers to the player in the game.html by replacing 
+    # the content within <div id="swap-container"> with the html of game-start.html
     return render(request, "game-start.html", context)
 
-def game_flow(request, *args, **kwargs):
+def game_flow(request):
+    """_summary_
+
+    Args:
+        request (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     print("game flow")
    
     previous_questions = request.session.get("questions")
