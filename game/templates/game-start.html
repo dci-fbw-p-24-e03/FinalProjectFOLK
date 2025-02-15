@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{% static 'css/game_start.css' %}" />
 
 
-<form hx-post="/game-flow" hx-target="#swap-container">
+<form hx-post="/start-result" hx-target="#swap-container">
     {% csrf_token %}
 
     <p class="question">{{ question }}</p>
