@@ -160,10 +160,6 @@ def game_flow(request):
     player = request.user.username
     score = request.session["player"][f"{player}"]
     context = question | {"score": score}
-    return render(request, "after_submit.html", context)
+    return render(request, "game-flow.html", context)
 
 
-def after_submit_view(request, *args, **kwargs):
-    time.sleep(3)
-
-    return render(request, "game-flow.html")
