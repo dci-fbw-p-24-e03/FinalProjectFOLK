@@ -2,12 +2,14 @@
 <link rel="stylesheet" href="{% static 'css/game_start.css' %}" />
 
 
-<form hx-post="/start-result" hx-target="#swap-container">
+<!-- hx-trigger = "click:from .answer_choice_button " -->
+
+<form hx-post="/start-result" hx-target="#swap-container" hx-trigger="click from:button, every 10s">
     {% csrf_token %}
 
     <p class="question">{{ question }}</p>
 
-    <div class="answers" hx-target = #swap_after_submit>
+    <div class="answers">
         <div class="answer_pair">
             <label class="radio-label">
                 <input name="options" type="radio" id="option_1" value="A"> {{ A }}
