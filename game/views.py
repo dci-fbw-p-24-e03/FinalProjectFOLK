@@ -22,6 +22,19 @@ def game_view(request):
         by the next view game_start, which replaces the html code in the div <div id="swap-container">.
 
     """
+    
+    # Delete questions and information from the session left over from an interrupted game
+    
+    previous_questions = request.session.get("questions")
+    
+    if previous_questions != None:
+        del request.session["questions"]
+        if request.session["player"] != None:
+            del request.session["player"]
+        if request.session.get("topic") != None:
+            del request.session["topic"]
+        if request.session.get("difficulty") != None:
+            del request.session["difficulty"]
 
     return render(request, "game.html")
 
@@ -44,6 +57,10 @@ def game_start(request):
         can chose one possible answer and submit his answer, whereby a post request hx-post="/game-flow"
         is transmitted to the start_result view. The target of this htmx request is again the swap-container.
     """
+    
+    print("game start incremented score", request.session.get("player"))
+    print("game start topic", request.session.get("topic"))
+    
     player = request.user.username
 
     previous_questions = request.session.get("questions")
@@ -129,20 +146,19 @@ def start_result(request):
         The container comprises the correct answer as well as the resulting score of the user.
 
     """
-
     previous_questions = request.session.get("questions")
     last_question = previous_questions[-1]
     correct_answer = last_question["correct_answer"]
     submitted_answer = request.POST.get("options")
 
     player = request.user.username
-    score = request.session["player"][f"{player}"]
+    score = request.session.get("player")
+    score = score.get(player)
     result = ""
     if correct_answer == submitted_answer:
         player = request.user.username
         score += 5
-        request.session["player"][f"{player}"] = score
-        print("incremented score", request.session["player"])
+        request.session["player"][player] = score
         result = "correct"
     else:
         result = "wrong"
@@ -156,5 +172,7 @@ def start_result(request):
         "result": result,
         "score": score,
     }
+    
+    print("start_result incremented score", request.session.get("player"))
 
     return render(request, "start-result.html", context)
