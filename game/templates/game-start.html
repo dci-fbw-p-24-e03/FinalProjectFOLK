@@ -3,6 +3,8 @@
 
 
 <!-- hx-trigger = "click:from .answer_choice_button " -->
+<div> Your time is running: </div>
+<div class="countdown"></div>
 
 <form hx-post="/start-result" hx-target="#swap-container" hx-trigger="click from:button, every 10s">
     {% csrf_token %}
