@@ -42,27 +42,54 @@ def game_start(request):
         game.html is updated with the html code from game_start within <div id="swap-container">.
         The first question and four possible answers are displayed to the user in a form. The user
         can chose one possible answer and submit his answer, whereby a post request hx-post="/game-flow"
-        is transmitted to the start_result view. The target of this htmx request is again the swap-container. 
+        is transmitted to the start_result view. The target of this htmx request is again the swap-container.
     """
-    print("game-start")
-
-    # Retrieve the player name, topic of the game as well as the game difficulty from
-    # the post request forwarded to the present view.
     player = request.user.username
-    topic = request.POST.get("topic")
-    difficulty = request.POST.get("difficulty")
 
-    # Add the posted information to the "session". 'request.session' is a dictionary for storing information
-    # used during the course of the game. The information is stored in a cooky in the front end.
-    # The player dictionary {player: 0} comprises the name of the player and the number of score 0 achieved
-    # by this player.
-    request.session["player"] = {player: 0}
-    request.session["topic"] = topic
-    request.session["difficulty"] = difficulty
+    previous_questions = request.session.get("questions")
 
-    # Retrieve the first question, possible answers and correct answers for playing Trivial Pursuit in a dictionary
-    # using the function get_question defined in ai.py.
-    question = get_question(topic=topic, difficulty=difficulty)
+    if previous_questions == None or len(previous_questions) == 0:
+        not_questions = []
+        topic = request.POST.get("topic")
+        difficulty = request.POST.get("difficulty")
+
+        # Add the posted information to the "session". 'request.session' is a dictionary for storing information
+        # used during the course of the game. The information is stored in a cooky in the front end.
+        # The player dictionary {player: 0} comprises the name of the player and the number of score 0 achieved
+        # by this player.
+        request.session["player"] = {player: 0}
+        request.session["topic"] = topic
+        request.session["difficulty"] = difficulty
+        
+    # If the game has been played for 3 rounds then set the sessions data back to nill
+    # and render the game-over.html last round!
+    elif len(previous_questions) >= 10:
+        not_questions = []
+        request.session["questions"] = []
+        request.session["player"] = {player: 0}
+        if request.session.get("topic") != None:
+            del request.session["topic"]
+        if request.session.get("difficulty") != None:
+            del request.session["difficulty"]
+
+        return render(request, "game-over.html")
+
+    # Retrieve the topic of the game as well as the game difficulty from
+    # the post request forwarded to the present view from game start first round
+
+    # If a question has been asked previously and the game is ongoing, then
+    # retrieve the difficulty, topic and previous questions from the session dictionary
+
+    else:
+        difficulty = request.session.get("difficulty")
+        topic = request.session.get("topic")
+        not_questions = [question["question"] for question in previous_questions]
+
+    # Get the question dictionary comprising the question, possible answers and correct answer using
+    # the get_question function defined in ai.py
+    question = get_question(
+        topic=topic, difficulty=difficulty, not_questions=not_questions
+    )
 
     # Add the question dictionary to the session. The value corresponding to the key "questions" comprises
     # a list of all the questions that have been asked before.
@@ -76,9 +103,12 @@ def game_start(request):
         questions.append(question)
         # Replace the list of questions in the sessions dictionary with the updated list.
         request.session["questions"] = questions
+        
 
     # Get the current score of the player from the sessions dictionary
+    print(request.session["player"][f"{player}"])
     score = request.session["player"][f"{player}"]
+    print("score: ", score)
 
     # Create a context dictionary by merging the dictionaries question and {"score": score}
     # into a single dictionary
@@ -86,6 +116,7 @@ def game_start(request):
     # Display the question and possible answers to the player in the game.html by replacing
     # the content within <div id="swap-container"> with the html of game-start.html
     return render(request, "game-start.html", context)
+
 
 def start_result(request):
     """Display whether the first question was answered correctly
@@ -96,14 +127,14 @@ def start_result(request):
     Summary:
         game.html is updated with the html code from start-result within <div id="swap-container">.
         The container comprises the correct answer as well as the resulting score of the user.
-        
+
     """
-    
+
     previous_questions = request.session.get("questions")
     last_question = previous_questions[-1]
     correct_answer = last_question["correct_answer"]
     submitted_answer = request.POST.get("options")
-    
+
     player = request.user.username
     score = request.session["player"][f"{player}"]
     result = ""
@@ -111,55 +142,19 @@ def start_result(request):
         player = request.user.username
         score += 5
         request.session["player"][f"{player}"] = score
+        print("incremented score", request.session["player"])
         result = "correct"
     else:
         result = "wrong"
-    
+
     correct_answer = last_question[correct_answer]
-    
-    context = {"correct_answer": correct_answer, "result": result, "score": score}
-    
+    question = last_question["question"]
+
+    context = {
+        "question": question,
+        "correct_answer": correct_answer,
+        "result": result,
+        "score": score,
+    }
+
     return render(request, "start-result.html", context)
-
-
-
-def game_flow(request):
-    """Display new question ans possible answers
-
-    Args:
-        request (post): /game-flow
-
-    Returns:
-        _type_: _description_
-    """
-    print("game flow")
-
-    previous_questions = request.session.get("questions")
-    difficulty = request.session.get("difficulty")
-    topic = request.session.get("topic")
-    correct_answer = previous_questions[-1]["correct_answer"]
-    submitted_answer = request.POST.get("options")
-    print("correct answer:", correct_answer)
-    print("submitted answer: ", submitted_answer)
-    if correct_answer == submitted_answer:
-        player = request.user.username
-        score = request.session["player"][f"{player}"]
-        score += 5
-        request.session["player"][f"{player}"] = score
-        print("points: ", score, request.session["player"][f"{player}"])
-        # print("previous questions", previous_questions)
-
-    not_questions = [question["question"] for question in previous_questions]
-    print("not_questions: ", not_questions)
-    question = get_question(
-        topic=topic, difficulty=difficulty, not_questions=not_questions
-    )
-    questions = request.session["questions"]
-    questions.append(question)
-    request.session["questions"] = questions
-    player = request.user.username
-    score = request.session["player"][f"{player}"]
-    context = question | {"score": score}
-    return render(request, "game-flow.html", context)
-
-

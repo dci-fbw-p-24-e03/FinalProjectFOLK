@@ -3,12 +3,19 @@
 
 
 
-<form hx-post="/game-flow" hx-trigger="every 5s" hx-target = "#swap-container">
+<form hx-post="/game-start" hx-trigger="every 3s" hx-target = "#swap-container">
     {% csrf_token %}
     
+    <p class="question">{{ question }}</p>
 
-    <p>Your answer was {{ result }}</p>
-    <p>Your new score is {{ score }}</p>
-    <p> The correct answer is: {{correct_answer}}</p>
+    <div class="answers">
+
+        <div class="answer_pair">
+            <p> The correct answer is: {{correct_answer}}</p>
+            <p>Your new score is {{ score }}</p>
+        </div>
+        
+        
+    </div>
 
 </form>
