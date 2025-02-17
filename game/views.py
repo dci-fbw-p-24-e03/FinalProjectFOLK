@@ -29,8 +29,8 @@ def game_view(request):
     
     if previous_questions != None:
         del request.session["questions"]
-        if request.session["player"] != None:
-            del request.session["player"]
+        if request.session.get("score") != None:
+            del request.session["score"]
         if request.session.get("topic") != None:
             del request.session["topic"]
         if request.session.get("difficulty") != None:
@@ -58,10 +58,8 @@ def game_start(request):
         is transmitted to the start_result view. The target of this htmx request is again the swap-container.
     """
     
-    print("game start incremented score", request.session.get("player"))
+    print("game start incremented score", request.session.get("score"))
     print("game start topic", request.session.get("topic"))
-    
-    player = request.user.username
 
     previous_questions = request.session.get("questions")
 
@@ -72,9 +70,8 @@ def game_start(request):
 
         # Add the posted information to the "session". 'request.session' is a dictionary for storing information
         # used during the course of the game. The information is stored in a cooky in the front end.
-        # The player dictionary {player: 0} comprises the name of the player and the number of score 0 achieved
-        # by this player.
-        request.session["player"] = {player: 0}
+        
+        request.session["score"] = 0
         request.session["topic"] = topic
         request.session["difficulty"] = difficulty
         
@@ -83,7 +80,7 @@ def game_start(request):
     elif len(previous_questions) >= 10:
         not_questions = []
         request.session["questions"] = []
-        request.session["player"] = {player: 0}
+        request.session["score"] = 0
         if request.session.get("topic") != None:
             del request.session["topic"]
         if request.session.get("difficulty") != None:
@@ -123,9 +120,8 @@ def game_start(request):
         
 
     # Get the current score of the player from the sessions dictionary
-    print(request.session["player"][f"{player}"])
-    score = request.session["player"][f"{player}"]
-    print("score: ", score)
+    score = request.session["score"]
+    print("score", score)
 
     # Create a context dictionary by merging the dictionaries question and {"score": score}
     # into a single dictionary
@@ -151,14 +147,11 @@ def start_result(request):
     correct_answer = last_question["correct_answer"]
     submitted_answer = request.POST.get("options")
 
-    player = request.user.username
-    score = request.session.get("player")
-    score = score.get(player)
+    score = request.session.get("score")
     result = ""
     if correct_answer == submitted_answer:
-        player = request.user.username
         score += 5
-        request.session["player"][player] = score
+        request.session["score"] = score
         result = "correct"
     else:
         result = "wrong"
@@ -173,6 +166,6 @@ def start_result(request):
         "score": score,
     }
     
-    print("start_result incremented score", request.session.get("player"))
+    print("start_result incremented score", request.session.get("score"))
 
     return render(request, "start-result.html", context)
