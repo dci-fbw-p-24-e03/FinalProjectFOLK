@@ -1,40 +1,96 @@
 /* 
   Font: "Neon Glow" by weknow 
-  (https://www.fontspace.com/neon-glow-font-f14014) 
+  (https://www.fontspace.com/neon-glow-font-f14014)
+  This @font-face makes the custom "Neon Glow" font available.
 */
 @font-face {
   font-family: "Neon Glow";
   src: url(https://assets.codepen.io/230569/NeonGlow-8VLz.ttf);
 }
 
-/* General Reset */
+/* 
+  :root - Global variables and preferences.
+  Restrict text selection and remove tap highlight on mobile for a cleaner UI.
+  Kept -webkit prefixes for better iOS compatibility. 
+*/
+:root {
+  -webkit-user-select: none;
+  user-select: none; 
+  -webkit-tap-highlight-color: transparent; 
+}
+
+/* 
+  General Reset 
+  Removes default padding/margin and uses border-box for predictable sizing.
+*/
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* 
+  HTML & Canvas 
+  Make canvas and HTML span full viewport. "contain: strict" helps performance 
+  by limiting the scope of layout/rendering, though it's not fully standardized.
+*/
+html,
+canvas {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  contain: strict; 
+  /* Overflow hidden ensures the body handles scrolling. */
+  overflow: hidden;
+}
+
+/* 
+  Body 
+  Use flex for centering content, force vertical scroll, 
+  hide horizontal scroll, and enable smooth scrolling on iOS devices. 
+*/
 body {
-  background-color: #292929;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
+
+  /* 
+    Force vertical scrolling (scrollbar always visible),
+    hide horizontal scrolling.
+  */
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+
+  min-height: 100vh;
 }
 
-/* Header Navigation */
+/* 
+  Header 
+  Centered horizontally, with a smaller width than full viewport.
+*/
 header {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 75%;
+  width: 100%;
   margin: 30px;
 }
 
-/* Wrapper: dient als Rahmen */
+/* 
+  .nav-wrapper 
+  Conic gradient border around the nav, acts as a border "frame."
+*/
 .nav-wrapper {
   position: relative;
+  z-index: 1000;
   background: conic-gradient(
     from 45deg,
     var(--neon-text1, #fff) 0deg,
@@ -44,44 +100,46 @@ header {
     var(--neon-text1, #fff) 360deg
   );
   border-radius: 10px;
-  padding: 4px; /* entspricht der gewünschten Rahmenbreite */
+  padding: 4px; /* Border thickness */
 }
 
-/* Das eigentliche nav-Element */
+/* 
+  Main 
+  Usually for page content, given a higher z-index if needed above other elements.
+*/
+main {
+  z-index: 1000; /* Use only if you have elements beneath it that need layering. */
+}
+
+/* 
+  header nav 
+  The actual navigation container. 
+  Dark background, slightly smaller border-radius to show the .nav-wrapper "frame."
+*/
 header nav {
   position: relative;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background: #292929; /* Hintergrundfarbe passend zum Body */
-  border-radius: 6px;  /* Etwas weniger als der Wrapper, damit der Rahmen sichtbar wird */
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  background: #292929;
+  border-radius: 6px;
+  box-shadow: 
+    rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
   padding: 10px;
-  overflow: visible;
+  overflow: visible; 
 }
 
-/* Spark element – a small glowing circle that moves along the border */
-header nav::before {
-  content: "";
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: #fff;
-  border-radius: 50%;
-  /* Start with the center of the spark exactly on the border:
-     Since the stroke is 2px thick, an offset of -2px (assuming a 6px element)
-     roughly centers it on the outer edge */
-  top: 0px;
-  left: 0px;
-  filter: blur(2px);
-  z-index: 101;
-  animation: sparkMotion 20s linear infinite;
-}
-
-/* Trailing glow: a blurred duplicate with a slight delay */
+/* 
+  Spark Element 
+  A small glowing circle that moves around the nav's border.
+  Two elements (::before and ::after) create a trailing glow effect.
+*/
+header nav::before,
 header nav::after {
   content: "";
   position: absolute;
@@ -89,76 +147,82 @@ header nav::after {
   height: 6px;
   background: #fff;
   border-radius: 50%;
-  top: 0px;
-  left: 0px;
+}
+
+/* 
+  The "leading" spark 
+  Slight blur, actual animation path along the perimeter.
+*/
+header nav::before {
+  top: 0;
+  left: 0;
+  filter: blur(2px);
+  z-index: 101;
+  animation: sparkMotion 20s linear infinite;
+}
+
+/* 
+  The "trailing" spark 
+  More intense blur, a tiny delay, same path for a trailing effect.
+*/
+header nav::after {
+  top: 0;
+  left: 0;
   filter: blur(4px);
   z-index: 100;
   animation: sparkMotion 20s linear infinite;
-  animation-delay: 0.01s; /* slight delay for a trailing effect */
+  animation-delay: 0.01s;
 }
 
-/* Keyframes that animate the spark along the perimeter, then extra along the top */
+/* 
+  Keyframes for the spark 
+  Moves around the nav edges, with a short extra run along the top for a flash.
+*/
 @keyframes sparkMotion {
-  /* Starting at top left (outer edge) */
-  0%,
-  50% {
+  0%, 50% {
     left: -4px;
     top: -4px;
     opacity: 0;
   }
-  /* Move along the top border to top right */
   60% {
     left: calc(100% - 2px);
     top: -4px;
     opacity: 1;
     transform: scale(0.8);
   }
-  /* Move down the right border to bottom right */
   65% {
     left: calc(100% - 2px);
     top: calc(100% - 2px);
-    opacity: 1;
-    transform: scale(0.8);
   }
-  /* Move along the bottom border to bottom left */
   75% {
     left: -4px;
     top: calc(100% - 2px);
-    opacity: 1;
-    transform: scale(0.8);
   }
-  /* Move up the left border back to top left */
   80% {
     left: -4px;
     top: -4px;
-    opacity: 1;
-    transform: scale(0.8);
   }
-  /* Extra quarter: move along the top border again toward top right, with a flash */
   90% {
     left: calc(100% - 2px);
     top: -4px;
-    opacity: 1;
-    transform: scale(0.8);
   }
-  /* Short flashing of the spark*/
   95% {
-    left: calc(100% - 2px);
-    top: -4px;
-    opacity: 1;
     transform: scale(2);
   }
   100% {
     left: calc(100% - 2px);
     top: -2px;
-    opacity: 0; /* fade out at the final position */
+    opacity: 0;
   }
 }
 
+/* 
+  Navigation links 
+  Custom "Neon Glow" font, bold, large size, transitions for hover.
+*/
 nav a {
   position: relative;
-  z-index: 1;
-  /* Flex items now size to their content */
+  z-index: 1; /* Ensure it appears above the spark border. */
   text-align: center;
   text-decoration: none;
   font-family: "Neon Glow";
@@ -168,21 +232,28 @@ nav a {
   transition: color 0.2s ease;
 }
 
+/* 
+  Inner <span> in nav links 
+  Neon text using the --neon-text variable (default white).
+*/
 nav a span {
   position: relative;
   display: inline-block;
   margin: 0 auto;
-  /* Use the custom property --neon-text (fallback white) for the text colour */
   color: var(--neon-text, #fff);
-  text-shadow: 0 0 5px var(--neon-text, #ffffff),
-    0 0 10px var(--neon-text, #fff), 0 0 20px var(--neon-text, #fff),
+  text-shadow:
+    0 0 5px var(--neon-text, #fff),
+    0 0 10px var(--neon-text, #fff),
+    0 0 20px var(--neon-text, #fff),
     0 0 40px var(--neon-text, #fff);
   transition: color 0.2s ease;
 }
 
-/* Adapt the pseudo-elements to attach to the inner span */
-nav a span:before,
-nav a span:after {
+/* 
+  Pseudo-elements (spark "dots") that scale on hover for a mini "pop."
+*/
+nav a span::before,
+nav a span::after {
   content: "";
   position: absolute;
   border-radius: 50%;
@@ -209,16 +280,26 @@ nav a span::after {
   z-index: 1;
 }
 
-/* Adjusted Indicator Style */
+/* 
+  The sliding indicator bar under links 
+  (positioned absolutely inside the nav).
+*/
 #indicator {
   position: absolute;
-  bottom: 10px; /* or adjust as needed relative to the nav container */
+  bottom: 10px;
   height: 3px;
   border-radius: 5px;
   filter: blur(1px);
-  transition: left 0.3s ease, width 0.3s ease, background 0.3s ease;
+  transition: 
+    left 0.3s ease,
+    width 0.3s ease,
+    background 0.3s ease;
 }
 
+/* 
+  Hover states 
+  Make text color pure white and animate the tiny dots.
+*/
 nav a span:hover {
   color: #fff;
 }

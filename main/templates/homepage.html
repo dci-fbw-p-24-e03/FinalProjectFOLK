@@ -1,10 +1,10 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/homepage_style.css' %}" />
 <div class="homeimage">
-  <h3>Ai-Quiz under construction...</h3>
+  <h3 style="color:aliceblue">Ai-Quiz under construction...</h3>
 </div>
-
 {%if not user.is_authenticated %}
 <div>
   <img

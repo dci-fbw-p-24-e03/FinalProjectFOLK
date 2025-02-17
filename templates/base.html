@@ -5,30 +5,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/base_style.css' %}" />
+    {% block extra_css %}{% endblock %}
     <title>{% block title %}The AI-Quiz{% endblock %}</title>
   </head>
   <body>
+    <!-- Circuit Board Background Canvas (positioned behind all content) -->
+    <canvas id="circuit-bg"></canvas>
+
     <header>
       <div class="nav-wrapper">
         <nav>
           <a href="#"><span>HOME</span></a>
           <a href="#"><span>QUIZ</span></a>
           {% if request.user.is_authenticated %}
-          <a href="{% url 'user_details' user.username %}"
-            ><span>PROFILE</span></a>
-          <a href="{% url 'logout_view' %}"><span>LOGOUT</span></a>
+            <a href="{% url 'user_details' user.username %}"><span>PROFILE</span></a>
+            <a href="{% url 'logout_view' %}"><span>LOGOUT</span></a>
           {% else %}
-          <a href="{% url 'login_view' %}"><span>LOGIN / REGISTER</span></a>
+            <a href="{% url 'login_view' %}"><span>LOGIN / REGISTER</span></a>
           {% endif %}
           <div id="indicator"></div>
         </nav>
       </div>
     </header>
+
     <main>{% block content %}{% endblock %}</main>
     <footer>
       <p>&copy; 2025 The AI-Quiz. All rights reserved</p>
     </footer>
-    <!-- Include the JavaScript file before the closing body tag -->
+    
+    <!-- Include Navbar and Circuit Board scripts -->
     <script src="{% static 'js/base_navbar.js' %}"></script>
+    <script src="{% static 'js/base_circuitboard.js' %}"></script>
+    {% block extra_js %}{% endblock %}
   </body>
 </html>
