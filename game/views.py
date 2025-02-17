@@ -73,6 +73,7 @@ def game_start(request):
     # If the game has been played for 3 rounds then set the sessions data back to nill
     # and render the game-over.html last round!
     elif len(previous_questions) >= 10:
+        score = request.session.get("score")
         not_questions = []
         request.session["questions"] = []
         request.session["score"] = 0
@@ -80,8 +81,10 @@ def game_start(request):
             del request.session["topic"]
         if request.session.get("difficulty") != None:
             del request.session["difficulty"]
+        
+        context = {"score": score, }
 
-        return render(request, "game-over.html")
+        return render(request, "game-over.html", context)
 
     # Retrieve the topic of the game as well as the game difficulty from
     # the post request forwarded to the present view from game start first round
