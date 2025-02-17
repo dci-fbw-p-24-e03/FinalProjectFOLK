@@ -25,16 +25,14 @@ def game_view(request):
     
     # Delete questions and information from the session left over from an interrupted game
     
-    previous_questions = request.session.get("questions")
-    
-    if previous_questions != None:
+    if request.session.get("questions") != None:
         del request.session["questions"]
-        if request.session.get("score") != None:
-            del request.session["score"]
-        if request.session.get("topic") != None:
-            del request.session["topic"]
-        if request.session.get("difficulty") != None:
-            del request.session["difficulty"]
+    if request.session.get("score") != None:
+        del request.session["score"]
+    if request.session.get("topic") != None:
+        del request.session["topic"]
+    if request.session.get("difficulty") != None:
+        del request.session["difficulty"]
 
     return render(request, "game.html")
 
@@ -57,9 +55,6 @@ def game_start(request):
         can chose one possible answer and submit his answer, whereby a post request hx-post="/game-flow"
         is transmitted to the start_result view. The target of this htmx request is again the swap-container.
     """
-    
-    print("game start incremented score", request.session.get("score"))
-    print("game start topic", request.session.get("topic"))
 
     previous_questions = request.session.get("questions")
 
@@ -121,7 +116,6 @@ def game_start(request):
 
     # Get the current score of the player from the sessions dictionary
     score = request.session["score"]
-    print("score", score)
 
     # Create a context dictionary by merging the dictionaries question and {"score": score}
     # into a single dictionary
@@ -165,7 +159,5 @@ def start_result(request):
         "result": result,
         "score": score,
     }
-    
-    print("start_result incremented score", request.session.get("score"))
 
     return render(request, "start-result.html", context)
