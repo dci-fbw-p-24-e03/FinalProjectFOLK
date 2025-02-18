@@ -62,7 +62,8 @@ def game_start(request):
     
     # Retrieving the questions already asked by the user and stored in the Questions database
     user_pk = request.user.pk
-    old_questions = list(Questions.objects.filter(pk=user_pk).values_list("question", flat=True))
+    old_questions_iterator = Questions.objects.filter(player=user_pk)
+    old_questions = [question.question for question in old_questions_iterator]
 
     if previous_questions == None or len(previous_questions) == 0:
         not_questions = []
