@@ -8,25 +8,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/buy_confirmation.css' %}" />
     <title>Buy Confirmation</title>
-
 </head>
+<body>
 <div class="buy_confirmation">
-
     <div id="confirmation-box">
-        <h2>Buy Item?</h2>
-        <p>You are about to purchase: <strong>{{ product.name }}</strong></p>
-        <p>Price: ${{ product.price }}</p>
+        <h2>Buy Item?</h2><br>
 
-        <!-- Bestätigungsformular -->
-        <form action="{% url 'confirm_purchase' product.id %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" class="btn">Yes, Buy Now</button>
-        </form>
+        <div class="product-box">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image" />
+            <div class="product-details">
+                <h3>{{ product.name }}</h3>
+                <p><em>{{ product.description }}</em></p>
+                <p class="price">Price: ${{ product.price|floatformat:2 }}</p>
+            </div>
+        </div>
 
-        <!-- Abbrechen -->
-        <a href="{% url 'shop_view' %}" class="cancel-btn btn">Cancel</a>
+        <div class="buttons">
+            <form action="{% url 'confirm_purchase' product.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn">Yes, Buy Now</button>
+            </form>
+
+            <a href="{% url 'shop_view' %}" class="cancel-btn btn">Cancel</a>
+        </div>
     </div>
-
 </div>
+</body>
 </html>
 {% endblock %}

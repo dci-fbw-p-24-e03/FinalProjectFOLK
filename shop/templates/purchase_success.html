@@ -17,7 +17,7 @@
             <a href="{% url 'shop_view' %}" class="btn">Back to Shop</a>
         {% else %}
             <h2>Purchase Successful!</h2>
-            <p>Thank you for your purchase! Your order for <strong>{{ product.name }}</strong> has been successfully placed.</p>
+            <p><strong>{{ product.name }}</strong></p>
             <p>Total: ${{ total_price }}</p>
             <a href="{% url 'shop_view' %}" class="btn">Back to Shop</a>
         {% endif %}
