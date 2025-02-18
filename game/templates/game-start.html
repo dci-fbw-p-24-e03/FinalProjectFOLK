@@ -6,7 +6,7 @@
 <script src="https://unpkg.com/htmx.org@1.8.4"></script>
 
 
-<form hx-post="/start-result" hx-target="#swap-container" hx-trigger="click from:button, every 12s">
+<form hx-post="/start-result" hx-target="#swap-container" hx-trigger="click from:button, every 20s">
     {% csrf_token %}
     <p class="question">{{ question }}</p>
     <div class="answers">

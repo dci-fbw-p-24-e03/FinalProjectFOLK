@@ -12,8 +12,9 @@ class Questions(models.Model):
         question_count = Questions.objects.filter(player=self.player).count()
         if question_count >= max_questions:
             # Get the 10 oldest questions for this player and delete them
-            oldest_questions = Questions.objects.filter(player=self.player).order_by('created_at')[:10]
-            oldest_questions.delete()
+            oldest_questions = Questions.objects.filter(player=self.player).order_by("id")[:10]
+            for question in oldest_questions:
+                question.delete()
 
         super().save(*args, **kwargs)  # Save the new question
 
