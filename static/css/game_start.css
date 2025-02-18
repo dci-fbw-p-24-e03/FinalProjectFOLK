@@ -18,6 +18,7 @@
     flex-direction: column;
     padding: 5px;
     
+    
 }
 
 .answer_pair {
@@ -43,6 +44,7 @@ input[type="radio"] {
     cursor: pointer;
     margin: 5px;
     transition: all 0.3s ease-in-out;
+    
 }
 
 /* Apply styles when a radio button is selected */
@@ -58,9 +60,17 @@ text-align: center;
 
 }
 
+.timer_div {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    
+    }
+
 .answer_choice_button {
 
-   margin: 5px;
+   margin: 20px;
 
 }
 
@@ -71,56 +81,83 @@ label {
     
 }
 
-
-.countdown {
-    font-size: 2em;
-    position:absolute;
-    width: 100px;
-    text-align: center;
+.countdown_div {
+    display: flex;
+    justify-content: center; /* Horizontally center the countdown */
+    align-items: center; /* Vertically center the countdown if needed */
+    text-align: center; /* Ensures the text inside .countdown is also centered */
+    margin-top: 20px; /* Optional: Adds some space above the countdown */
 }
 
-.countdown::after {
-    content: "10";
-    display: block;
-    position: absolute;
-    top: 0;
+.timer {
+    margin-top: 10px;
+}
+  
+.timer > svg {
+    width: 200px;
+    height: 200px;
+}
+
+.timer > svg > circle {
+    fill: none;
+    stroke-opacity: 0.3;
+    stroke: #0d6efd;
+    stroke-width: 10;
+    transform-origin: center center;
+    transform: rotate(-90deg);
+}
+
+.timer > svg > circle + circle {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    stroke-linecap: round;
+    stroke-opacity: 1;
+}
+
+.timer.animatable > svg > circle + circle {
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+.timer > svg > text {
+    font-size: 2rem;
+}
+
+.timer > svg > text + text {
+    font-size: 1rem;
+}
+
+
+.correct_answer{
+
+    border: 2px solid #0bb14b ;
+    background-color: #45ce65;
+}
+
+.wrong_answer{
+
+    border: 2px solid #e20000;
+    background-color: #df0f0f !important;  
+}
+
+
+footer {
+    position: fixed;
+    bottom: 0;
     left: 0;
     width: 100%;
-    animation: countdown 10s linear forwards;
-}
+    margin: 50px;
+  }
 
-@keyframes countdown {
-    0% {
-        content: "10";
-    }
-    10% {
-        content: "9";
-    }
-    20% {
-        content: "8";
-    }
-    30% {
-        content: "7";
-    }
-    40% {
-        content: "6";
-    }
-    50% {
-        content: "5";
-    }
-    60% {
-        content: "4";
-    }
-    70% {
-        content: "3";
-    }
-    80% {
-        content: "2";
-    }
-    90% {
-        content: "1";
-    }
-    100% {
-        content: "0";
-    }
+
+.footer_div {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Horizontally center the countdown */
+    align-items: center; /* Vertically center the countdown if needed */
+    text-align: center; /* Ensures the text inside .countdown is also centered */
+    margin-top: 20px; /* Optional: Adds some space above the countdown */ 
+       
+
+
 }

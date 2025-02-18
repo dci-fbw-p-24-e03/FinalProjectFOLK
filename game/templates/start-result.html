@@ -8,14 +8,48 @@
     
     <p class="question">{{ question }}</p>
 
-    <div class="answers">
+ 
 
+    <div class="answers">
         <div class="answer_pair">
-            <p> The correct answer is: {{correct_answer}}</p>
-            <p>Your new score is {{ score }}</p>
+            <label class="radio-label 
+                {% if correct_answer == 'A' %}correct_answer{% endif %}
+                {% if submitted_answer == 'A' and submitted_answer != correct_answer %}wrong_answer{% endif %}
+            ">
+                <input name="options" type="radio" id="option_1" value="A"> {{ A }}
+            </label>
+            <label class="radio-label 
+                {% if correct_answer == 'B' %}correct_answer{% endif %}
+                {% if submitted_answer == 'B' and submitted_answer != correct_answer %}wrong_answer{% endif %}
+            ">
+                <input name="options" type="radio" id="option_2" value="B"> {{ B }}
+            </label>
         </div>
-        
-        
+    
+        <div class="answer_pair">
+            <label class="radio-label 
+                {% if correct_answer == 'C' %}correct_answer{% endif %}
+                {% if submitted_answer == 'C' and submitted_answer != correct_answer %}wrong_answer{% endif %}
+            ">
+                <input name="options" type="radio" id="option_3" value="C"> {{ C }}
+            </label>
+            <label class="radio-label 
+                {% if correct_answer == 'D' %}correct_answer{% endif %}
+                {% if submitted_answer == 'D' and submitted_answer != correct_answer %}wrong_answer{% endif %}
+            ">
+                <input name="options" type="radio" id="option_4" value="D"> {{ D }}
+            </label>
+        </div>
     </div>
+    
+
 
 </form>
+
+<footer>
+    <div class = "footer_div">
+    <p>{{ user.username }}</p>
+    <img src="{% static 'assets/profile_placeholder.jpeg' %}" alt="male" width="300" height="300">
+    <p>Score: {{ score }}</p>
+</div>
+</footer>

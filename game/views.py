@@ -154,13 +154,13 @@ def start_result(request):
         result = "wrong"
 
     correct_answer = last_question[correct_answer]
-    question = last_question["question"]
+    correct_option = last_question["correct_answer"]
+    
 
-    context = {
-        "question": question,
-        "correct_answer": correct_answer,
-        "result": result,
-        "score": score,
-    }
+    context = last_question | {"score": score,
+                               "submitted_answer" : submitted_answer,
+                               "correct_option" : correct_option}  
+    print(correct_answer)
+    print(submitted_answer)
 
     return render(request, "start-result.html", context)
