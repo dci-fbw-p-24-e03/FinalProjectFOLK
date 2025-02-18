@@ -6,12 +6,13 @@ from random import shuffle
 
 
 def main():
-
-    print(get_question(not_questions=["Which English author wrote the famous novel 'Pride and Prejudice'?",'What is the largest planet in our solar system?', 'Which Italian artist painted the famous ceiling of the Sistine Chapel?', 'Which of the following sports is played on ice?', 'Which of the following sports is played on ice?', 'What is the largest planet in our solar system?', 'What is the largest planet in our solar system?', 'What is the largest planet in our solar system?', 'What is the largest planet in our solar system?', 'What is the largest planet in our solar system?']))
+    pass
 
 
 def get_question(
-    topic: str = "anything", not_questions: list[str] = [], difficulty: str = "normal"
+    topic: str = "anything",
+    not_questions: list[str] = [],
+    difficulty: str = "normal",
 ) -> dict[str, str]:
     """Get Trivial Pursuit Question and answers.
 
@@ -56,7 +57,7 @@ def get_question(
         ],
         temperature=2,
         max_completion_tokens=1024,
-        top_p=1,
+        top_p=0.1,
         stream=True,
         stop=None,
     )

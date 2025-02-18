@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .ai import get_question
-import time
-
+from .models import Questions
+from accounts.models import CustomUser
 # Create your views here.
 
 
@@ -22,9 +22,9 @@ def game_view(request):
         by the next view game_start, which replaces the html code in the div <div id="swap-container">.
 
     """
-    
+
     # Delete questions and information from the session left over from an interrupted game
-    
+
     if request.session.get("questions") != None:
         del request.session["questions"]
     if request.session.get("score") != None:
@@ -56,7 +56,13 @@ def game_start(request):
         is transmitted to the start_result view. The target of this htmx request is again the swap-container.
     """
 
+    # Previous questions is a list of dictionaries, each dictionary comprising a previous question,
+    # the possible answers and the correct answer.
     previous_questions = request.session.get("questions")
+    
+    # Retrieving the questions already asked by the user and stored in the Questions database
+    user_pk = request.user.pk
+    old_questions = list(Questions.objects.filter(pk=user_pk).values_list("question", flat=True))
 
     if previous_questions == None or len(previous_questions) == 0:
         not_questions = []
@@ -75,14 +81,21 @@ def game_start(request):
     
         # Add the posted information to the "session". 'request.session' is a dictionary for storing information
         # used during the course of the game. The information is stored in a cooky in the front end.
-        
+
         request.session["score"] = 0
         request.session["topic"] = topic
         request.session["difficulty"] = difficulty
-        
-    # If the game has been played for 3 rounds then set the sessions data back to nill
+
+    # If the game has been played for 10 rounds then set the sessions data back to nill
     # and render the game-over.html last round!
     elif len(previous_questions) >= 10:
+        
+        # store the questions asked during this game in the database
+        for question in previous_questions:
+            player = CustomUser(pk=user_pk)
+            database_objet = Questions(question=question["question"], player=player)
+            database_objet.save()
+
         score = request.session.get("score")
         not_questions = []
         request.session["questions"] = []
@@ -91,8 +104,10 @@ def game_start(request):
             del request.session["topic"]
         if request.session.get("difficulty") != None:
             del request.session["difficulty"]
-        
-        context = {"score": score, }
+
+        context = {
+            "score": score,
+        }
 
         return render(request, "game-over.html", context)
 
@@ -105,12 +120,18 @@ def game_start(request):
     else:
         difficulty = request.session.get("difficulty")
         topic = request.session.get("topic")
+        # Creating a list of questions not to be asked by ai.py
         not_questions = [question["question"] for question in previous_questions]
+        # adding the old questions to the list of not questions
+        not_questions.extend(old_questions)
+        
 
     # Get the question dictionary comprising the question, possible answers and correct answer using
     # the get_question function defined in ai.py
     question = get_question(
-        topic=topic, difficulty=difficulty, not_questions=not_questions
+        topic=topic,
+        difficulty=difficulty,
+        not_questions=not_questions,
     )
     
     # Add the question dictionary to the session. The value corresponding to the key "questions" comprises
@@ -125,7 +146,6 @@ def game_start(request):
         questions.append(question)
         # Replace the list of questions in the sessions dictionary with the updated list.
         request.session["questions"] = questions
-        
 
     # Get the current score of the player from the sessions dictionary
     score = request.session["score"]
