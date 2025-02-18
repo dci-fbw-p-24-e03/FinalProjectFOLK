@@ -18,14 +18,7 @@
     max-width: 1600px;       
     margin: 0 auto;      
 }
-/*
-h1 {
-    text-align: center;
-    color: #fff; 
-    margin-bottom: 20px;
-    font-size: 3em;          
-}
-*/ 
+
 h1 {
     text-align: center;
     font-family: 'Pixelify Sans', sans-serif;
@@ -64,7 +57,7 @@ td {
     color: #ddd;
 }
 
-/* Styling für die Tabellenzeilen */
+/*styling for table rows*/
 tr:nth-child(even) td {
     background-color: #2e3137;  
 }
@@ -73,11 +66,13 @@ tr:hover td {
     background-color: #3a3f44;  
 }
 
-
-img {
-    border-radius: 50%;
-    width: 70px;  
-    height: 70px;
-    object-fit: cover;
+.profile-link {
+    color: #ddd; 
+    text-decoration: none; 
+    font-weight: bold; 
 }
 
+.profile-link:hover {
+    color: #ffcc00; 
+    text-decoration: underline; 
+}

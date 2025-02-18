@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{% static 'css/leaderboard.css' %}" />
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
     <title>Leaderboard</title>
-    
 </head>
 <div class="leaderboard">
     <div class="leaderboard-container">
@@ -20,7 +19,6 @@
                 <tr>
                     <th>Rank</th>
                     <th>Username</th>
-                    <th>Image</th>
                     <th>Stars</th>
                 </tr>
             </thead>
@@ -28,14 +26,7 @@
                 {% for user in users %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>{{ user.username }}</td>
-                        <td>
-                            {% if user.image %}
-                                <img src="{{ user.image.url }}" alt="User Image" width="50" height="50">
-                            {% else %}
-                                <img src="/static/assets/profile_placeholder.jpeg" alt="No Image" width="50" height="50">
-                            {% endif %}
-                        </td>
+                        <td><a href="{% url 'user_details' username=user.username %}" class="profile-link">{{ user.username }}</a></td>
                         <td>{{ user.stars }}</td>
                     </tr>
                 {% endfor %}
