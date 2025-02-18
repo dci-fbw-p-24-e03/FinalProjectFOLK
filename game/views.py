@@ -60,9 +60,19 @@ def game_start(request):
 
     if previous_questions == None or len(previous_questions) == 0:
         not_questions = []
-        topic = request.POST.get("topic")
+        selected_topic = request.POST.get("topic") # Value from dropdown
+        custom_topic = request.POST.get("custom-topic") # Value from custom input field
+        topic=""
+        if selected_topic == None:
+            # The user did NOT choose anything from the dropdown
+            # => use whatever was typed in the custom input field
+            topic = custom_topic
+        else:
+            # The user did NOT type a custom topic (they left the placeholder?)
+            # => use the dropdown topic
+            topic = selected_topic
         difficulty = request.POST.get("difficulty")
-
+    
         # Add the posted information to the "session". 'request.session' is a dictionary for storing information
         # used during the course of the game. The information is stored in a cooky in the front end.
         
@@ -102,7 +112,7 @@ def game_start(request):
     question = get_question(
         topic=topic, difficulty=difficulty, not_questions=not_questions
     )
-
+    
     # Add the question dictionary to the session. The value corresponding to the key "questions" comprises
     # a list of all the questions that have been asked before.
     if request.session.get("questions") == None:

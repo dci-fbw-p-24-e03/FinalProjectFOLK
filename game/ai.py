@@ -36,7 +36,7 @@ def get_question(
     # Create a string with the content of the message to the Groq API
     content = "Let's play Trivial Pursuit. There are simple, normal and difficult questions.\n"
     content += f"Ask a {difficulty} question about {topic}.\n"
-    content += f"Do not ask any of these questions: {dont_ask}.\n"
+    content += f"Do not ask any of these questions or similar questions: {dont_ask}.\n"
     content += "Give me four possible answers A, B, C and D. Give me the correct answer."
     content += "Present your response in the form of a python dictionary:"
     content += '{"question": "...", "A": "....", "B": "...", "C": "....", "D": "...", "correct_answer": "..."}'
@@ -54,7 +54,7 @@ def get_question(
                 "content": content,
             },
         ],
-        temperature=1,
+        temperature=2,
         max_completion_tokens=1024,
         top_p=1,
         stream=True,
