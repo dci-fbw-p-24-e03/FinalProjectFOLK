@@ -589,7 +589,7 @@ class Things {
         // Draw small bright circles at the center of each Thing
         ctx.save();
         ctx.globalCompositeOperation = 'source-over';
-        ctx.fillStyle = '#afe3e9';
+        ctx.fillStyle = '#1bfff8';
 
         activeThings.slice(0, 10).forEach(thing => {
             ctx.beginPath();
@@ -626,7 +626,7 @@ class Things {
             lightRadius, lightRadius, 0
         );
         gradient.addColorStop(0, "rgba(24, 129, 141, 0)");
-        gradient.addColorStop(1, "rgba(24, 129, 141, 0.6)");
+        gradient.addColorStop(1, "rgba(28, 222, 243, 1)");
 
         radialCtx.fillStyle = gradient;
         radialCtx.fillRect(0, 0, lightRadius * 2, lightRadius * 2);
@@ -642,7 +642,7 @@ class Things {
             radWidth / 2, radHeight / 2, 0
         );
         gradient.addColorStop(0, "rgba(37, 203, 223, 0)");
-        gradient.addColorStop(1, "rgba(37, 203, 223, 0.4)");
+        gradient.addColorStop(1, "rgba(28, 222, 243, 1)");
 
         superRadialCtx.fillStyle = gradient;
         superRadialCtx.beginPath();
