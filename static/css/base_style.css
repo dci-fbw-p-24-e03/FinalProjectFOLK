@@ -58,17 +58,7 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-
-  /* 
-    Force vertical scrolling (scrollbar always visible),
-    hide horizontal scrolling.
-  */
-  overflow-x: hidden;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-
   min-height: 100vh;
 }
 
@@ -76,21 +66,18 @@ body {
   Header 
   Centered horizontally, with a smaller width than full viewport.
 */
-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 30px;
-}
 
 /* 
   .nav-wrapper 
   Conic gradient border around the nav, acts as a border "frame."
 */
-.nav-wrapper {
-  position: relative;
-  z-index: 1000;
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position:sticky;
+  top: 5%;
+  margin: 30px;
   background: conic-gradient(
     from 45deg,
     var(--neon-text1, #fff) 0deg,
@@ -101,14 +88,13 @@ header {
   );
   border-radius: 10px;
   padding: 4px; /* Border thickness */
-}
-
-/* 
-  Main 
-  Usually for page content, given a higher z-index if needed above other elements.
-*/
-main {
-  z-index: 1000; /* Use only if you have elements beneath it that need layering. */
+  box-shadow: 
+  rgba(0, 0, 0, 0.25) 0px 54px 55px,
+  rgba(0, 0, 0, 0.12) 0px -12px 30px,
+  rgba(0, 0, 0, 0.12) 0px 4px 6px,
+  rgba(0, 0, 0, 0.17) 0px 12px 13px,
+  rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  z-index: 100; /* Ensure it appears above the canvas. */
 }
 
 /* 
@@ -117,19 +103,11 @@ main {
   Dark background, slightly smaller border-radius to show the .nav-wrapper "frame."
 */
 header nav {
-  position: relative;
-  width: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background: #292929;
+  background: #000000;
   border-radius: 6px;
-  box-shadow: 
-    rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px,
-    rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px,
-    rgba(0, 0, 0, 0.09) 0px -3px 5px;
   padding: 10px;
   overflow: visible; 
 }
@@ -307,4 +285,12 @@ nav a span:hover {
 nav a:hover span::before,
 nav a:hover span::after {
   transform: scale(1);
+}
+
+/* 
+  Main 
+  Usually for page content, given a higher z-index if needed above other elements.
+*/
+main {
+  z-index: 1000; /* Use only if you have elements beneath it that need layering. */
 }

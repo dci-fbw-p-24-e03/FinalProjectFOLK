@@ -5,7 +5,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/base_style.css' %}" />
-    {% block extra_css %}{% endblock %}
     <title>{% block title %}The AI-Quiz{% endblock %}</title>
   </head>
   <body>
@@ -13,10 +12,10 @@
     <canvas id="circuit-bg"></canvas>
 
     <header>
-      <div class="nav-wrapper">
         <nav>
-          <a href="#"><span>HOME</span></a>
-          <a href="#"><span>QUIZ</span></a>
+          <a href="{% url 'game_view' %}"><span>QUIZ</span></a>
+          <a href="{% url 'leaderboard' %}"><span>LEADERBOARD</span></a>
+          <a href="{% url 'shop_view' %}"><span>SHOP</span></a>
           {% if request.user.is_authenticated %}
             <a href="{% url 'user_details' user.username %}"><span>PROFILE</span></a>
             <a href="{% url 'logout_view' %}"><span>LOGOUT</span></a>
@@ -25,7 +24,6 @@
           {% endif %}
           <div id="indicator"></div>
         </nav>
-      </div>
     </header>
 
     <main>{% block content %}{% endblock %}</main>

@@ -11,7 +11,7 @@ function runTimer(timerElement) {
     let countdownTimer = setInterval(function() {
       if (timeLeft >= 0) {
         timerDisplay.innerHTML = timeLeft;
-        const normalizedTime = (18 - timeLeft) / 18;
+        const normalizedTime = (10 - timeLeft) / 10;
         timerCircle.style.strokeDashoffset = normalizedTime;
         timeLeft--;
       } else {

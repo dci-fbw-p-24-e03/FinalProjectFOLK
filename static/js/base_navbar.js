@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('nav a');
   const indicator = document.getElementById('indicator');
   const nav = document.querySelector('nav');
-  const nav_wrapper = document.querySelector('.nav-wrapper');
+  const header = document.querySelector('header');
 
   // For each nav link, update the indicator's position, width, and background on mouseenter
   navLinks.forEach(link => {
@@ -73,9 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Set the custom property --neon-text on the nav element,
   // which your CSS uses for the border color
-  nav_wrapper.style.setProperty('--neon-text1', borderColor1);
-  nav_wrapper.style.setProperty('--neon-text2', borderColor2);
-  nav_wrapper.style.setProperty('--neon-text3', borderColor3);
-  nav_wrapper.style.setProperty('--neon-text4', borderColor4);
+  header.style.setProperty('--neon-text1', borderColor1);
+  header.style.setProperty('--neon-text2', borderColor2);
+  header.style.setProperty('--neon-text3', borderColor3);
+  header.style.setProperty('--neon-text4', borderColor4);
 });
 
