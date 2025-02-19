@@ -182,13 +182,18 @@ def start_result(request):
 
     """
     previous_questions = request.session.get("questions")
-    last_question = previous_questions[-1]
-    correct_answer = last_question["correct_answer"]
+    if previous_questions:
+        last_question = previous_questions[-1]
+    else:
+        last_question = []
+        
+    if last_question:
+        correct_answer = last_question["correct_answer"]
+    
     submitted_answer = request.POST.get("options")
 
     score = request.session.get("score")
-    result = ""
-    if correct_answer == submitted_answer:
+    if submitted_answer == correct_answer:
         score += 5
         request.session["score"] = score
         result = "+5"
