@@ -3,14 +3,14 @@
 
 
 
-<form hx-post="/game-start" hx-trigger="every 3s" hx-target = "#start-swap">
+<form hx-post="/game-start" hx-trigger="every 3s" hx-target = "#swap-container">
     {% csrf_token %}
     
     <h1 class="question">{{ question }}</h1>
 
  
 
-    <div class="answers">
+    
         <div class="answer_pair">
             <label class="radio-label 
                 {% if correct_answer == 'A' %}correct_answer{% endif %}
@@ -52,7 +52,7 @@
                 </svg>
             </div>
         </div>
-    </div>
+    
     
 
 
