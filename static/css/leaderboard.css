@@ -1,22 +1,11 @@
-.leaderboard {
-    font-family: Arial, sans-serif; 
-    color: #ddd; 
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60vh;
-    background-color: #292929; 
-}
-
 .leaderboard-container {
     background-color: #23272a; 
     padding: 40px;           
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    width: 110%;              
-    max-width: 1600px;       
-    margin: 0 auto;      
+    border-radius: 16px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.7);
+    width: 75vw;  
+    max-width: none;
+    margin: 0;  
 }
 
 h1 {
@@ -39,7 +28,14 @@ h1 {
 
 table {
     border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
 }
+
+th:nth-child(1) { width: 5%; }
+th:nth-child(2) { width: 15%; }
+th:nth-child(3) { width: 15%; }
+th:nth-child(4) { width: 65%; }
 
 th, td {
     padding: 20px;          
@@ -48,6 +44,18 @@ th, td {
 
 th {
     background-color: #7289da;  
+    color: #fff;
+    font-size: 1.5em;
+}
+
+#stars-header {
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+}
+
+#stars-header:hover {
+    background-color: #5b6eae;
     color: #fff;
 }
 
@@ -75,4 +83,36 @@ tr:hover td {
 .profile-link:hover {
     color: #ffcc00; 
     text-decoration: underline; 
+}
+
+/* Flags */
+.nation-container {
+    position: relative;
+    display: inline-flex; 
+    align-items: center; 
+    width: auto;  
+    height: 35px;
+}
+
+.flag-icon {
+    width: 40px;  
+    height: auto;
+    border-radius: 5px;
+    margin-right: 8px;  
+}
+
+.nation-name {
+    display: none;  
+    position: absolute;
+    left: 100%; 
+    margin-left: 8px;  
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.nation-container:hover .nation-name {
+    display: block;
 }
