@@ -5,11 +5,20 @@
 <!-- Include HTMX (adjust version if needed) -->
 <script src="https://unpkg.com/htmx.org@1.8.4"></script>
 
-
+<style>
+    body {
+        background: url("{% static 'assets/futuristic_arena.webp' %}") no-repeat center center fixed !important;
+        background-size: cover;
+    }
+</style>
+    
+   
 <form hx-post="/start-result" hx-target="#swap-container" hx-trigger="click from:button, every 20s">
     {% csrf_token %}
-    <p class="question">{{ question }}</p>
+    
     <div class="answers">
+        <div><h1 class="question">{{ question }}</h1></div>
+
         <div class="answer_pair">
             <label class="radio-label">
                 <input name="options" type="radio" id="option_1" value="A"> {{ A }}
@@ -26,33 +35,33 @@
                 <input name="options" type="radio" id="option_4" value="D"> {{ D }}
             </label>
         </div>
-        <div class="button_div"> 
-            <div>
-                <button class="answer_choice_button" type="submit">Submit</button>
+        <div class="countdown_div">
+            <div class="timer animatable">
+                <svg>
+                    <circle cx="50%" cy="50%" r="90"/>
+                    <circle cx="50%" cy="50%" r="90" pathLength="1"/>
+                    <text x="100" y="100" text-anchor="middle">
+                        <tspan id="timeLeft"></tspan>
+                    </text>
+                    <text x="100" y="120" text-anchor="middle">seconds</text>
+                </svg>
             </div>
         </div>
     </div>
 </form>
+            <div>
+                <button class="answer_choice_button" type="submit">Submit</button>
+            </div>
 
-<div class="countdown_div">
-    <div class="timer animatable">
-        <svg>
-            <circle cx="50%" cy="50%" r="90"/>
-            <circle cx="50%" cy="50%" r="90" pathLength="1"/>
-            <text x="100" y="100" text-anchor="middle">
-                <tspan id="timeLeft"></tspan>
-            </text>
-            <text x="100" y="120" text-anchor="middle">seconds</text>
-        </svg>
-    </div>
-</div>
+</body>
 
 <footer>
+    
     <div class = "footer_div">
-    <p>{{ user.username }}</p>
-    <img src="{% static 'assets/profile_placeholder.jpeg' %}" alt="male" width="300" height="300">
-    <p>Score: {{ score }}</p>
-</div>
+    <h2>{{ user.username }}</h2>
+    <img src="{% static 'assets/profile_placeholder.jpeg' %}" alt="male" >
+    <h2>Score: {{ score }}</ph2>
+
 </footer>
 <script src="{% static 'js/timer.js' %}"></script>
 
