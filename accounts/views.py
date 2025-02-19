@@ -56,3 +56,5 @@ class LeaderboardListView(ListView):
     template_name = 'leaderboard.html'
     context_object_name = 'users'
     queryset = CustomUser.objects.all().order_by('-stars')
+    
+    

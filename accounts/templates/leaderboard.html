@@ -10,16 +10,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
     <title>Leaderboard</title>
 </head>
+<body>
 <div class="leaderboard">
+    <h1>Leaderboard</h1>
     <div class="leaderboard-container">
-        <h1>Leaderboard</h1>
-
         <table>
             <thead>
                 <tr>
-                    <th>Rank</th>
-                    <th>Username</th>
-                    <th>Stars</th>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Nation</th>
+                    <th id="stars-header" style="cursor: pointer;" title="Click to switch">Stars</th>
+ 
                 </tr>
             </thead>
             <tbody>
@@ -27,12 +29,62 @@
                     <tr>
                         <td>{{ forloop.counter }}</td>
                         <td><a href="{% url 'user_details' username=user.username %}" class="profile-link">{{ user.username }}</a></td>
-                        <td>{{ user.stars }}</td>
+                        <td>
+                            <div class="nation-container">
+                                <img src="https://flagicons.lipis.dev/flags/4x3/{{ user.nation|lower }}.svg" alt="{{ user.nation }}" class="flag-icon">
+                                <span class="nation-name">{{ user.nation|upper }}</span> 
+                            </div>
+                        </td>
+                        <td data-original-stars="{{ user.stars }}" data-average-stars="{{ user.average_stars_per_game }}"style="font-weight: bold;">
+                            {{ user.stars }}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let starsHeader = document.getElementById("stars-header");
+    let isAverageMode = false;
+
+    starsHeader.addEventListener("click", function () {
+        let tbody = document.querySelector("table tbody");
+        let rows = Array.from(tbody.querySelectorAll("tr"));
+
+        // switch between "Stars" and "Average Stars per Game"
+        isAverageMode = !isAverageMode;
+        starsHeader.textContent = isAverageMode ? "Average Stars per Game" : "Stars";
+
+        // refresh value (stars)
+        rows.forEach(row => {
+            let starsCell = row.cells[3];
+            let originalStars = parseFloat(starsCell.dataset.originalStars);
+            let averageStars = parseFloat(starsCell.dataset.averageStars);
+            starsCell.textContent = isAverageMode ? averageStars.toFixed(2) : originalStars;
+        });
+
+        // Sort rows by value
+        let sortedRows = rows.slice().sort((a, b) => {
+            let aValue = parseFloat(a.cells[3].textContent);
+            let bValue = parseFloat(b.cells[3].textContent);
+            return bValue - aValue; // Absteigend sortieren
+        });
+
+        // refresh ranking 
+        sortedRows.forEach((row, index) => {
+            row.cells[0].textContent = index + 1;
+        });
+
+        // Add rows in new order
+        sortedRows.forEach(row => tbody.appendChild(row));
+    });
+});
+</script>
+
+</body>
 </html>
 {% endblock %}
+
