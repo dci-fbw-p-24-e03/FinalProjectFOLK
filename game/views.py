@@ -89,7 +89,19 @@ def game_start(request):
 
     # If the game has been played for 10 rounds then set the sessions data back to nill
     # and render the game-over.html last round!
-    elif len(previous_questions) >= 10:
+    elif len(previous_questions) >= 2:
+
+        score = request.session.get("score")
+
+        context = {
+            "score": score,
+            "username" : CustomUser(pk=user_pk).username,
+            "selected_topic" : request.session.get("topic"),
+            "wrong_answers" : request.session.get("wrong_answers"),
+            "correct_answers" : 10 - len(request.session.get("wrong_answers")),
+            "difficulty" : request.session.get("difficulty")
+
+            }
         
         # store the questions asked during this game in the database
         for question in previous_questions:
@@ -97,7 +109,7 @@ def game_start(request):
             database_objet = Questions(question=question["question"], player=player)
             database_objet.save()
 
-        score = request.session.get("score")
+        
         not_questions = []
         request.session["questions"] = []
         request.session["score"] = 0
@@ -106,9 +118,8 @@ def game_start(request):
         if request.session.get("difficulty") != None:
             del request.session["difficulty"]
 
-        context = {
-            "score": score,
-        }
+
+
 
         return render(request, "game-over.html", context)
 
@@ -180,9 +191,18 @@ def start_result(request):
     if correct_answer == submitted_answer:
         score += 5
         request.session["score"] = score
-        result = "correct"
+        result = "+5"
     else:
-        result = "wrong"
+        result = "0"
+        wrong_answers = []
+        wrong_answers.append(last_question)
+        if request.session.get("wrong_answers") == None:
+            request.session["wrong_answers"] = [last_question]
+        else:
+            request.session["wrong_answers"].append(last_question)
+        print(request.session.get("wrong_answers"))
+        
+        
 
     correct_answer = last_question[correct_answer]
     correct_option = last_question["correct_answer"]
@@ -191,7 +211,6 @@ def start_result(request):
     context = last_question | {"score": score,
                                "submitted_answer" : submitted_answer,
                                "correct_option" : correct_option}  
-    print(correct_answer)
-    print(submitted_answer)
+
 
     return render(request, "start-result.html", context)
