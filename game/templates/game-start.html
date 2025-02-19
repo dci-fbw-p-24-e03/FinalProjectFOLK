@@ -12,12 +12,16 @@
     }
 </style>
     
-   
-<form hx-post="/start-result" hx-target="#swap-container" hx-trigger="click from:button, every 12s">
+
+
+
+<form hx-post="/start-result" hx-target="#start-swap" hx-trigger="click from:input, every 20s">
     {% csrf_token %}
     
     <div class="answers">
+    <div id="start-swap" >
         <div><h1 class="question">{{ question }}</h1></div>
+
 
         <div class="answer_pair">
             <label class="radio-label">
@@ -48,10 +52,9 @@
             </div>
         </div>
     </div>
+    </div>
 </form>
-            <div>
-                <button class="answer_choice_button" type="submit">Submit</button>
-            </div>
+
 
 </body>
 
