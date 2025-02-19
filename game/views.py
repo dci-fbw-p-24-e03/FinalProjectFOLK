@@ -212,5 +212,4 @@ def start_result(request):
                                "submitted_answer" : submitted_answer,
                                "correct_option" : correct_option}  
 
-
     return render(request, "start-result.html", context)

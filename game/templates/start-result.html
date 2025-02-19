@@ -3,7 +3,7 @@
 
 
 
-<form hx-post="/game-start" hx-trigger="every 3s" hx-target = "##start-swap">
+<form hx-post="/game-start" hx-trigger="every 3s" hx-target = "#start-swap">
     {% csrf_token %}
     
     <p class="question">{{ question }}</p>
