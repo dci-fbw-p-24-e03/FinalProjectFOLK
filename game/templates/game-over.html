@@ -2,6 +2,18 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/game_start.css' %}" />
 
+<style>
+    body {
+        background: url("{% static 'assets/futuristic_arena.webp' %}");
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+
 
 <h1>Your final score is {{score}} Points</h1>
 <p>Correct Answers:  {{ correct_answers_number }} / 10</p>

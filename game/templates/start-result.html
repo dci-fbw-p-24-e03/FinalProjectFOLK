@@ -1,14 +1,10 @@
 {%load static%}
 <link rel="stylesheet" href="{% static 'css/game_start.css' %}" />
 
-<form hx-post="/game-over" hx-target="#start-swap"></form>
-
 <form hx-post="/game-start" hx-trigger="every 3s" hx-target = "#swap-container">
     {% csrf_token %}
     
     <h1 class="question">{{ question }}</h1>
-
- 
 
     
         <div class="answer_pair">
