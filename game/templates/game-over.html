@@ -1,6 +1,6 @@
 
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/game_start.css' %}" />
+
 
 <style>
     body {
@@ -34,6 +34,18 @@
 {% endif %}
 
 <h2>Coins earned : {{ score }}</h2>
+
+<div class = "game_over_buttons">
+<!-- Play Again Form -->
+<form action="/game-start" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="topic" value="{{ selected_topic }}">
+    <input type="hidden" name="difficulty" value="{{ difficulty }}">
+    <button class = "futuristic-button" type="submit">Play again</button>
+</form>
+</div>
+<!-- Back Button -->
+<button class = "futuristic-button" type="button" onclick="window.location.href='/'">Back</button>
 
 </div>
 

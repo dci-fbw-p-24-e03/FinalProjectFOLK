@@ -1,0 +1,52 @@
+body { 
+
+    color : white
+}
+
+.game_over_buttons{
+
+    display: flex;
+    padding-bottom: 5% ;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.futuristic-button {
+    background: linear-gradient(90deg, #007bff, #0056b3); /* Blue gradient */
+    color: white; /* White text */
+    font-size: 1.2em;
+    font-family: 'Arial', sans-serif;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px; /* Rounded corners */
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.7); /* Blue glow effect */
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover effect */
+.futuristic-button:hover {
+    background: linear-gradient(90deg, #0056b3, #003f7f);
+    box-shadow: 0 0 20px rgba(0, 123, 255, 1);
+    transform: scale(1.05);
+}
+
+/* Active (click) effect */
+.futuristic-button:active {
+    transform: scale(0.95);
+}
+
+/* Optional: Add a subtle glow animation */
+@keyframes glow {
+    0% { box-shadow: 0 0 10px rgba(0, 123, 255, 0.7); }
+    50% { box-shadow: 0 0 20px rgba(0, 123, 255, 1); }
+    100% { box-shadow: 0 0 10px rgba(0, 123, 255, 0.7); }
+}
+
+.futuristic-button.glow {
+    animation: glow 1.5s infinite alternate;
+}

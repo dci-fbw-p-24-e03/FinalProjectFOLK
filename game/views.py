@@ -60,16 +60,18 @@ def game_start(request):
     # the possible answers and the correct answer.
     previous_questions = request.session.get("questions")
     
+    
     # Retrieving the questions already asked by the user and stored in the Questions database
     user_pk = request.user.pk
     old_questions_iterator = Questions.objects.filter(player=user_pk)
     old_questions = [question.question for question in old_questions_iterator]
-
+    
     if previous_questions == None or len(previous_questions) == 0:
         not_questions = []
         selected_topic = request.POST.get("topic") # Value from dropdown
         custom_topic = request.POST.get("custom-topic") # Value from custom input field
         topic=""
+        
         if selected_topic == None:
             # The user did NOT choose anything from the dropdown
             # => use whatever was typed in the custom input field
@@ -79,6 +81,7 @@ def game_start(request):
             # => use the dropdown topic
             topic = selected_topic
         difficulty = request.POST.get("difficulty")
+        theme = request.POST.get("theme")
     
         # Add the posted information to the "session". 'request.session' is a dictionary for storing information
         # used during the course of the game. The information is stored in a cooky in the front end.
@@ -110,6 +113,7 @@ def game_start(request):
             "wrong_answers": wrong_answers,  # Now each entry includes an explanation
             "correct_answers_number": 10 - len(wrong_answers),
             "difficulty": request.session.get("difficulty"),
+            
         }
         
         # store the questions asked during this game in the database
@@ -173,7 +177,8 @@ def game_start(request):
 
     # Create a context dictionary by merging the dictionaries question and {"score": score}
     # into a single dictionary
-    context = question | {"score": score}
+    context = question | {"score": score,
+                          "theme": theme}
     # Display the question and possible answers to the player in the game.html by replacing
     # the content within <div id="swap-container"> with the html of game-start.html
     return render(request, "game-start.html", context)

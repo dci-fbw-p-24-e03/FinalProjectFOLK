@@ -6,6 +6,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/game_start.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/game_over.css' %}" />
+    
 
     <!-- Install htmx -->
     <script
@@ -23,10 +25,24 @@
         hx-trigger="click from:input, every 20s"
       >
         {% csrf_token %}
-<link rel="stylesheet" href="{% static 'css/game_start.css' %}" />
+
 <!-- Include HTMX (adjust version if needed) -->
 <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+{% if theme == "space" %}
 
+<style>
+    body {
+        background: url("{% static 'assets/space_arena.webp' %}");
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+
+{% else %}
 <style>
     body {
         background: url("{% static 'assets/futuristic_arena.webp' %}");
@@ -37,6 +53,7 @@
         height: 100%;
     }
 </style>
+{% endif %}
     
 
         <div class="answers">
