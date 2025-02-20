@@ -1,110 +1,118 @@
 
-
-/* body {
+/* 
+body {
     background: url("/static/assets/futuristic_arena.webp") no-repeat center center fixed;
     background-size: cover;
     margin: 0;
     padding: 0;
-} */
+    font-family: 'Pixelify Sans', sans-serif;
+}
+*/
 
+body {
+    font-family: 'Pixelify Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Question text styling */
 .question {
-
     text-align: center;
+    color: #fff;
+    font-size: 2em;
+    margin-bottom: 20px;
 }
 
+/* Answers container styled with modern, transparent overlay */
 .answers {
-
-
     display: flex;
-    background-color: rgb(100, 99, 92);
-    border-radius: 10px;
-    border: 10px solid black;
-    width: 50%;
-    height: 50%;
-    align-content: center;
-    justify-content: center;
-    margin-left: 25%;
-    margin-right: 25%;
     flex-direction: column;
-    padding: 5px;
-    
-    
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 16px;
+    padding: 40px;
+    margin: 20px auto;
+    width: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
+/* Arrange answer pairs evenly */
 .answer_pair {
     display: flex;
     justify-content: space-evenly;
-    
-    
-
-
+    width: 100%;
+    margin-bottom: 10px;
 }
 
+/* Hide default radio buttons */
 input[type="radio"] {
     position: absolute;
     opacity: 0;
 }
 
-/* Style labels to look like buttons */
+/* Style labels as modern buttons */
 .radio-label {
-    /* display: inline-block; */
-    /* padding: 10px 20px; */
-    border: 2px solid #e9dddd; /* Default red border */
-    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #7289da;
+    border-radius: 8px;
     cursor: pointer;
     margin: 5px;
     transition: all 0.3s ease-in-out;
     height: 40px;
     width: 100px;
-    
+    color: #fff;
+    background-color: transparent;
 }
 
-/* Apply styles when a radio button is selected */
+/* Highlight style when a radio is selected */
 .radio-label:has(input:checked) {
-    border: 2px solid #0b29b1; /* Highlight the border */
-    background-color: #007bff; /* Change background */
-    color: rgba(234, 240, 236, 0.979); /* Change text color */
+    border: 2px solid #0b29b1;
+    background-color: #007bff;
+    color: #eaf0ec;
 }
 
+/* Center buttons container */
 .button_div {
-
-text-align: center;
-
+    text-align: center;
+    margin-top: 20px;
 }
 
+/* Timer container styling */
 .timer_div {
     display: flex;
-    text-align: center;
-    justify-content: center;
     flex-direction: column;
-    
-    }
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
 
+/* Additional answer choice button spacing */
 .answer_choice_button {
-
-   margin: 20px;
-
+    margin: 20px;
 }
 
+/* General label margin */
 label {
-
-
     margin: 5px;
-    
 }
 
+/* Countdown container centering */
 .countdown_div {
     display: flex;
-    justify-content: center; /* Horizontally center the countdown */
-    align-items: center; /* Vertically center the countdown if needed */
-    text-align: center; /* Ensures the text inside .countdown is also centered */
-    margin-top: 20px; /* Optional: Adds some space above the countdown */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
 }
 
+/* Timer SVG styling */
 .timer {
     margin-top: 10px;
 }
-  
+
 .timer > svg {
     width: 200px;
     height: 200px;
@@ -132,58 +140,53 @@ label {
 
 .timer > svg > text {
     font-size: 2rem;
+    fill: #fff;
 }
 
 .timer > svg > text + text {
     font-size: 1rem;
 }
 
-
-.correct_answer{
-
-    border: 2px solid #0bb14b ;
+/* Correct and wrong answer indicators */
+.correct_answer {
+    border: 2px solid #0bb14b;
     background-color: #45ce65;
 }
 
-.wrong_answer{
-
+.wrong_answer {
     border: 2px solid #e20000;
-    background-color: #df0f0f !important;  
+    background-color: #df0f0f;
 }
 
-
+/* Footer positioning with modern container styling */
 footer {
     display: flex;
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    margin: 50px;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     justify-content: center;
     text-align: center;
     align-items: center;
-  }
-
-
-.footer_div {
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Horizontally center the countdown */
-    align-items: center; /* Vertically center the countdown if needed */
-    text-align: center; /* Ensures the text inside .countdown is also centered */
-    margin-top: 20px; /* Optional: Adds some space above the countdown */ 
-    border: 8px solid rgb(245, 31, 198);
-    background-color: #33353f;
-    width: 20%;
-      
-
-
 }
 
-img {
+.footer_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    width: 100%;
+}
 
+/* Image styling with subtle rounding */
+img {
     width: 150px;
     height: 150px;
-
+    border-radius: 8px;
 }
