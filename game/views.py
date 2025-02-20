@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .ai import get_question
+from .ai import get_question, get_explanations
 from .models import Questions
 from accounts.models import CustomUser
 # Create your views here.
@@ -89,7 +89,28 @@ def game_start(request):
 
     # If the game has been played for 10 rounds then set the sessions data back to nill
     # and render the game-over.html last round!
-    elif len(previous_questions) >= 10:
+    elif len(previous_questions) >= 2:
+
+        score = request.session.get("score")
+
+        wrong_answers = request.session.get("wrong_answers", [])
+
+        # Get explanations
+        explanations = get_explanations(wrong_answers)  # Returns a dictionary {question_text: explanation}
+
+        # Attach explanations to each wrong answer
+        for wrong_answer in wrong_answers:
+            question_text = wrong_answer["question"]
+            wrong_answer["explanation"] = explanations.get(question_text, "No explanation available.")
+
+        context = {
+            "score": score,
+            "username": CustomUser(pk=user_pk).username,
+            "selected_topic": request.session.get("topic"),
+            "wrong_answers": wrong_answers,  # Now each entry includes an explanation
+            "correct_answers_number": 10 - len(wrong_answers),
+            "difficulty": request.session.get("difficulty"),
+        }
         
         # store the questions asked during this game in the database
         for question in previous_questions:
@@ -97,7 +118,7 @@ def game_start(request):
             database_objet = Questions(question=question["question"], player=player)
             database_objet.save()
 
-        score = request.session.get("score")
+        request.session["wrong_answers"] = []
         not_questions = []
         request.session["questions"] = []
         request.session["score"] = 0
@@ -106,9 +127,8 @@ def game_start(request):
         if request.session.get("difficulty") != None:
             del request.session["difficulty"]
 
-        context = {
-            "score": score,
-        }
+
+
 
         return render(request, "game-over.html", context)
 
@@ -171,18 +191,39 @@ def start_result(request):
 
     """
     previous_questions = request.session.get("questions")
-    last_question = previous_questions[-1]
-    correct_answer = last_question["correct_answer"]
+    if previous_questions:
+        last_question = previous_questions[-1]
+    else:
+        last_question = []
+        
+    if last_question:
+        correct_answer = last_question["correct_answer"]
+    
     submitted_answer = request.POST.get("options")
 
     score = request.session.get("score")
-    result = ""
-    if correct_answer == submitted_answer:
+    if submitted_answer == correct_answer:
         score += 5
         request.session["score"] = score
-        result = "correct"
+        result = "+5"
     else:
-        result = "wrong"
+        result = "0"
+        wrong_question = {
+            "question": last_question["question"],
+            "correct_answer": last_question[last_question["correct_answer"]]
+        }
+        # Initialize the list if it doesn't exist
+        if request.session.get("wrong_answers") is None:
+            request.session["wrong_answers"] = []
+        # Append and mark session as modified
+        request.session["wrong_answers"].append(wrong_question)
+        request.session.modified = True
+
+        # Optionally, if you also have a local list:
+        wrong_answers = request.session["wrong_answers"]
+        print(wrong_answers)
+        
+        
 
     correct_answer = last_question[correct_answer]
     correct_option = last_question["correct_answer"]
@@ -191,7 +232,5 @@ def start_result(request):
     context = last_question | {"score": score,
                                "submitted_answer" : submitted_answer,
                                "correct_option" : correct_option}  
-    print(correct_answer)
-    print(submitted_answer)
 
     return render(request, "start-result.html", context)

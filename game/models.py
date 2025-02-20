@@ -8,7 +8,7 @@ class Questions(models.Model):
     question = models.CharField(max_length=1000)
     player = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     def save(self, *args, **kwargs):
-        max_questions = 50  # Set your desired limit
+        max_questions = 20  # Set your desired limit
         question_count = Questions.objects.filter(player=self.player).count()
         if question_count >= max_questions:
             # Get the 10 oldest questions for this player and delete them

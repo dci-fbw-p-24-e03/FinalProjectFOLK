@@ -18,8 +18,11 @@
     display: flex;
     background-color: rgb(100, 99, 92);
     border-radius: 10px;
+    border: 10px solid black;
+    width: 50%;
+    height: 50%;
     align-content: center;
-    justify-content: space-around;
+    justify-content: center;
     margin-left: 25%;
     margin-right: 25%;
     flex-direction: column;
@@ -44,13 +47,15 @@ input[type="radio"] {
 
 /* Style labels to look like buttons */
 .radio-label {
-    display: inline-block;
-    padding: 10px 20px;
+    /* display: inline-block; */
+    /* padding: 10px 20px; */
     border: 2px solid #e9dddd; /* Default red border */
     border-radius: 5px;
     cursor: pointer;
     margin: 5px;
     transition: all 0.3s ease-in-out;
+    height: 40px;
+    width: 100px;
     
 }
 
