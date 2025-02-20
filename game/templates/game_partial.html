@@ -1,9 +1,5 @@
 <div>
-  <form
-    hx-post="{% url 'game_settings_partial' %}"
-    hx-target="#content-area"
-    hx-swap="innerHTML"
-  >
+  <form form method="post" action="{% url 'game_start' %}">
     {% csrf_token %}
     <!--dropdown container for pre-defined quiz topics-->
     <div class="dropdown-container">
