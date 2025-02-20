@@ -121,6 +121,85 @@ def shuffle_answers(question: dict[str, str]) -> dict[str, str]:
 
     return shuffled_dict
 
+def get_explanations(wrong_questions: list[dict[str, str]]) -> dict[str, str]:
+    """
+    Given a list of dictionaries with keys "question" and "correct_answer",
+    queries the Groq API to return a JSON dictionary mapping each question to a short explanation.
+    If the API returns an empty response or decoding fails, returns an empty dictionary.
+    """
+    # Safety: If there are no wrong questions, return empty dict immediately.
+    if not wrong_questions:
+        print("No wrong questions provided; returning empty explanations.")
+        return {}
+
+    # Build the prompt for the API
+    prompt = (
+        "For the following questions and their correct answers, provide a short explanation "
+        "of why the correct answer is correct.\n\n"
+    )
+    for item in wrong_questions:
+        prompt += f"Question: {item['question']}\nCorrect Answer: {item['correct_answer']}\n\n"
+    prompt += "Return your response as a JSON dictionary where the keys are the questions and the values are the explanations."
+
+    # Load the API key and initialize the Groq client
+    load_dotenv()
+    client = Groq(api_key=os.getenv("API_KEY"))
+
+    try:
+        completion = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=2,
+            max_completion_tokens=1024,
+            top_p=0.1,
+            stream=True,
+            stop=None,
+        )
+    except Exception as e:
+        print("Error during API call:", e)
+        return {}
+
+    # Assemble the streamed output into a single string
+    answer = ""
+    try:
+        for chunk in completion:
+            if chunk.choices[0].delta.content is not None:
+                answer += chunk.choices[0].delta.content
+    except Exception as e:
+        print("Error during streaming the response:", e)
+        return {}
+
+    # Check if the answer is empty or only whitespace
+    # Check if the answer is empty or only whitespace
+    if not answer.strip():
+        print("Empty answer received from API.")
+        return {item["question"]: "No explanation available." for item in wrong_questions}
+
+    # Remove markdown code fences if present
+    if answer.strip().startswith("```json"):
+        lines = answer.strip().splitlines()
+        answer = "\n".join(lines[1:-1])  # Remove the first and last lines
+
+    # Attempt to decode the JSON response.
+    try:
+        result = json.loads(answer)
+        if not isinstance(result, dict):
+            raise ValueError("Result is not a dictionary")
+        return result
+    except Exception as e:
+        print("Error decoding JSON:", e, "Raw answer:", answer)
+        return {item["question"]: "No explanation available." for item in wrong_questions}
+
+    # Attempt to decode the JSON response
+    try:
+        result = json.loads(answer)
+        return result
+    except json.JSONDecodeError as e:
+        print("JSON decode error:", e, "Raw answer:", answer)
+        return {}
+
+
+
 
 if __name__ == "__main__":
     main()

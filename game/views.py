@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .ai import get_question
+from .ai import get_question, get_explanations
 from .models import Questions
 from accounts.models import CustomUser
 # Create your views here.
@@ -93,15 +93,24 @@ def game_start(request):
 
         score = request.session.get("score")
 
+        wrong_answers = request.session.get("wrong_answers", [])
+
+        # Get explanations
+        explanations = get_explanations(wrong_answers)  # Returns a dictionary {question_text: explanation}
+
+        # Attach explanations to each wrong answer
+        for wrong_answer in wrong_answers:
+            question_text = wrong_answer["question"]
+            wrong_answer["explanation"] = explanations.get(question_text, "No explanation available.")
+
         context = {
             "score": score,
-            "username" : CustomUser(pk=user_pk).username,
-            "selected_topic" : request.session.get("topic"),
-            "wrong_answers" : request.session.get("wrong_answers"),
-            "correct_answers" : 10 - len(request.session.get("wrong_answers")),
-            "difficulty" : request.session.get("difficulty")
-
-            }
+            "username": CustomUser(pk=user_pk).username,
+            "selected_topic": request.session.get("topic"),
+            "wrong_answers": wrong_answers,  # Now each entry includes an explanation
+            "correct_answers_number": 10 - len(wrong_answers),
+            "difficulty": request.session.get("difficulty"),
+        }
         
         # store the questions asked during this game in the database
         for question in previous_questions:
@@ -109,7 +118,7 @@ def game_start(request):
             database_objet = Questions(question=question["question"], player=player)
             database_objet.save()
 
-        
+        request.session["wrong_answers"] = []
         not_questions = []
         request.session["questions"] = []
         request.session["score"] = 0
@@ -199,13 +208,20 @@ def start_result(request):
         result = "+5"
     else:
         result = "0"
-        wrong_answers = []
-        wrong_answers.append(last_question)
-        if request.session.get("wrong_answers") == None:
-            request.session["wrong_answers"] = [last_question]
-        else:
-            request.session["wrong_answers"].append(last_question)
-        print(request.session.get("wrong_answers"))
+        wrong_question = {
+            "question": last_question["question"],
+            "correct_answer": last_question[last_question["correct_answer"]]
+        }
+        # Initialize the list if it doesn't exist
+        if request.session.get("wrong_answers") is None:
+            request.session["wrong_answers"] = []
+        # Append and mark session as modified
+        request.session["wrong_answers"].append(wrong_question)
+        request.session.modified = True
+
+        # Optionally, if you also have a local list:
+        wrong_answers = request.session["wrong_answers"]
+        print(wrong_answers)
         
         
 

@@ -1,11 +1,20 @@
-<p>Your final score is {{score}} Points</p>
-<p>Correct Answers:  {{ correct_answers }} / 10</p>
+<h1>Your final score is {{score}} Points</h1>
+<p>Correct Answers:  {{ correct_answers_number }} / 10</p>
 
-<div>
-<h2>Wrong Answers:</h2>
-<p>{{ wrong_answers }} </p>
-</div>
+{% if wrong_answers %}
+    <h2>Wrong Answers:</h2>
+    <ul>
+        {% for wrong_answer in wrong_answers %}
+            <li><h3>{{ wrong_answer.question }} </h3>
+                <p>Explanation: {{ wrong_answer.explanation }}</p>
+            </li>
+            
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Perfect Round Congratz!!</p>
+{% endif %}
 
-
+<h2>Coins earned : {{ score }}</h2>
 
 
