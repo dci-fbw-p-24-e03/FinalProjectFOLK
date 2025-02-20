@@ -1,27 +1,27 @@
 <div class="profile">
-    {% load static %}
+  {% load static %}
   <div>
-    <h1>Welcome to {{user.username}}'s Profile</h1>
+    <h1>Welcome to {{ user.username }}'s Profile</h1>
     {% if user.first_name %}
-    <h3><span>name : </span> {{user.first_name}}</h3>
-    {%endif%}
-    <h3><span>Email : </span> {{user.email}}</h3>
-
-    <h4><span>Stars : </span> {{user.Stars}}</h4>
+      <h3><span>Name: </span> {{ user.first_name }}</h3>
+    {% endif %}
+    <h4><span>Stars: </span> {{ user.stars }}</h4> <!-- Always show Stars -->
+    <h4><span>Average Stars Per Game: </span> {{ user.average_stars_per_game }}</h4> <!-- Always show Average Stars per Game -->
+    <h4><span>Nation: </span> {{ user.get_nation_display }}</h4> <!-- Always show Nation -->
+    
+    {% if user.is_authenticated %}
+      {% if user == request.user %}
+        <h3><span>Email: </span> {{ user.email }}</h3> <!-- Show Email only if logged in and it's their own profile -->
+        <h4><span>Coins: </span> {{ user.coins }}</h4> <!-- Show Coins only if logged in and it's their own profile -->
+        <a class="details" href="{% url 'user_update' user.username %}">Update profile</a> <!-- Show Update Profile button only for own profile -->
+      {% endif %}
+    {% endif %}
   </div>
-
-  {%if user == request.user %}
-
-  <a class="details" href="{%url 'user_update' user.username%}"
-    >Update profile</a
-  >
-
-  {%endif%}
 
   <div>
     <img
-      src="{% static 'assets/profile_placeholder.jpeg' %}"
-      alt="male"
+      src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'assets/profile_placeholder.jpeg' %}{% endif %}"
+      alt="Profile image"
       width="300"
       height="300"
     />
