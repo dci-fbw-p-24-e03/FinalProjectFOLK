@@ -5,7 +5,8 @@ body {
     font-family: 'Pixelify Sans', sans-serif;
     margin: 0;
     padding: 0;
-}
+    
+} */
 
 /* Question text styling */
 .question {
@@ -23,7 +24,7 @@ body {
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.9);
     border-radius: 16px;
-    padding: 40px;
+    
     margin: 20px auto;
     width: 50%;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
