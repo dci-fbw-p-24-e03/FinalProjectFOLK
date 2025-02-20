@@ -1,17 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="leaderboard">
     <link rel="stylesheet" href="{% static 'css/leaderboard.css' %}" />
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
-    <title>Leaderboard</title>
-</head>
-<body>
-<div class="leaderboard">
     <h1>Leaderboard</h1>
     <div class="leaderboard-container">
         <table>
@@ -83,8 +75,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
-
-</body>
-</html>
 {% endblock %}
 

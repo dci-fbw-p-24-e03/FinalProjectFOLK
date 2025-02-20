@@ -3,9 +3,20 @@ from .models import CustomUser
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse_lazy
 from django.contrib.auth import login, logout
-from .form import CustomUserCreationForm,UserUpdateForm
-from django.views.generic import ListView, CreateView, FormView, RedirectView, View,DetailView, UpdateView
+from .form import CustomUserCreationForm, UserUpdateForm
+from django.views.generic import (
+    ListView,
+    CreateView,
+    FormView,
+    RedirectView,
+    View,
+    DetailView,
+    UpdateView,
+)
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.template.loader import render_to_string
+from django.http import HttpResponse
+
 
 class UserLoginView(FormView):
     form_class = AuthenticationForm
@@ -33,6 +44,7 @@ class UserRegisterView(CreateView):
     template_name = "register.html"
     success_url = reverse_lazy("home_view")
 
+
 class UserDetailView(DetailView):
     model = CustomUser
     template_name = "profile.html"
@@ -40,7 +52,8 @@ class UserDetailView(DetailView):
     slug_field = "username"
     slug_url_kwarg = "username"
 
-class UserUpdateView(LoginRequiredMixin,UpdateView):
+
+class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = CustomUser
     form_class = UserUpdateForm
     template_name = "profile_update.html"
@@ -51,10 +64,45 @@ class UserUpdateView(LoginRequiredMixin,UpdateView):
     def get_object(self):
         return self.request.user
 
+
 class LeaderboardListView(ListView):
     model = CustomUser
-    template_name = 'leaderboard.html'
-    context_object_name = 'users'
-    queryset = CustomUser.objects.all().order_by('-stars')
-    
-    
+    template_name = "leaderboard.html"
+    context_object_name = "users"
+    queryset = CustomUser.objects.all().order_by("-stars")
+
+
+# Views for partials (fetched and swapped into <main> in basic.html
+# to not reload the entire page)
+
+
+def leaderboard_partial(request):
+    users = CustomUser.objects.all().order_by("-stars")
+    return render(
+        request,
+        template_name="leaderboard_partial.html",
+        context={"users": users},
+    )
+
+def login_partial(request):
+    if request.method == "GET":
+        # Just render the partial with an empty form
+        form = AuthenticationForm()
+        return render(request, 'login_partial.html', {'form': form})
+
+    elif request.method == "POST":
+        # Attempt to authenticate & login
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            # Return the 'profile' partial directly
+            context = {'user': user}
+            html_snippet = render_to_string('profile_partial.html', context, request=request)
+            return HttpResponse(html_snippet)
+        # If form is not valid, re-render partial with errors:
+        return render(request, 'login_partial.html', {'form': form})
+
+def userdetail_partial(request):
+    user = request.user
+    return render(request, 'profile_partial.html', {'user': user})
