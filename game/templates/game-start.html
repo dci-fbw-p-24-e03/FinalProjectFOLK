@@ -6,13 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/game_start.css' %}" />
-    <style>
-      body {
-        background: url("{% static 'assets/futuristic_arena.webp' %}") no-repeat
-          center center fixed !important;
-        background-size: cover;
-      }
-    </style>
+
     <!-- Install htmx -->
     <script
       src="https://unpkg.com/htmx.org@2.0.4"
@@ -51,22 +45,18 @@
 
             <div class="answer_pair">
               <label class="radio-label">
-                <input name="options" type="radio" id="option_1" value="A" /> {{
-                A }}
+                <input name="options" type="radio" id="option_1" value="A" /> {{ A }}
               </label>
               <label class="radio-label">
-                <input name="options" type="radio" id="option_2" value="B" /> {{
-                B }}
+                <input name="options" type="radio" id="option_2" value="B" /> {{ B }}
               </label>
             </div>
             <div class="answer_pair">
               <label class="radio-label">
-                <input name="options" type="radio" id="option_3" value="C" /> {{
-                C }}
+                <input name="options" type="radio" id="option_3" value="C" /> {{ C }}
               </label>
               <label class="radio-label">
-                <input name="options" type="radio" id="option_4" value="D" /> {{
-                D }}
+                <input name="options" type="radio" id="option_4" value="D" /> {{ D }}
               </label>
             </div>
             <div class="countdown_div">

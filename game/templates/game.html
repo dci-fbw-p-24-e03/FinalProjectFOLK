@@ -3,7 +3,7 @@
 {%block content %} 
 {%load static%}
 
-<form hx-post="/game-start" hx-target="#swap-container">
+<form method =post action="/game-start" >
   {% csrf_token %}
   <!--dropdown container for pre-defined quiz topics-->
   <div class="dropdown-container">

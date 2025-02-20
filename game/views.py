@@ -231,7 +231,10 @@ def start_result(request):
 
     context = last_question | {"score": score,
                                "submitted_answer" : submitted_answer,
-                               "correct_option" : correct_option}  
+                               "correct_option" : correct_option,
+                               "result" : result
+                               }
+
 
     return render(request, "start-result.html", context)
 
