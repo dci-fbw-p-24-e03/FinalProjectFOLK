@@ -1,94 +1,96 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %} 
+The AI-Quiz - Shop
+{% endblock %} 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/shop.css' %}" />
-    <title>Shop</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div class="shop-container">
-      <h1>Explore some epic items in our shop!</h1>
+<div class="shop-container">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="{% static 'css/shop.css' %}" />
+  <h1>Explore some epic items in our shop!</h1>
 
-      <h2>Skins:</h2>
-      <div class="product-category">
-        {% for product in products %}
-          {% if product.category == "skins" %}
-            <div class="product-box">
-              <img src="{{ product.image.url }}" alt="{{ product.name }}">
-              <p class="product-name">{{ product.name }}</p>
-              <div class="hover-details">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="hover-img">
-                <div class="info">
-                  <h3>{{ product.name }}</h3>
-                  <p class="price">Price: {{ product.price }}</p>
-                  <p class="description">{{ product.description }}</p>
-                </div>
-                <div class="action">
-                  {% if user.is_authenticated %}
-                    <a href="{% url 'buy_product' product.id %}" class="btn">Buy</a>
-                  {% endif %}
-                </div>
-              </div>
-            </div>
+  <h2>Skins:</h2>
+  <div class="product-category">
+    {% for product in products %} {% if product.category == "skins" %}
+    <div class="product-box">
+      <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+      <p class="product-name">{{ product.name }}</p>
+      <div class="hover-details">
+        <img
+          src="{{ product.image.url }}"
+          alt="{{ product.name }}"
+          class="hover-img"
+        />
+        <div class="info">
+          <h3>{{ product.name }}</h3>
+          <p class="price">Price: {{ product.price }}</p>
+          <p class="description">{{ product.description }}</p>
+        </div>
+        <div class="action">
+          {% if user.is_authenticated %}
+          <a href="{% url 'buy_product' product.id %}" class="btn">Buy</a>
           {% endif %}
-        {% endfor %}
-      </div>
-
-      <h2>Joker:</h2>
-      <div class="product-category">
-        {% for product in products %}
-          {% if product.category == "joker" %}
-            <div class="product-box">
-              <img src="{{ product.image.url }}" alt="{{ product.name }}">
-              <p class="product-name">{{ product.name }}</p>
-              <div class="hover-details">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="hover-img">
-                <div class="info">
-                  <h3>{{ product.name }}</h3>
-                  <p class="price">Price: {{ product.price }}</p>
-                  <p class="description">{{ product.description }}</p>
-                </div>
-                <div class="action">
-                  {% if user.is_authenticated %}
-                    <a href="{% url 'buy_product' product.id %}" class="btn">Buy</a>
-                  {% endif %}
-                </div>
-              </div>
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-
-      <h2>AI Opponents:</h2>
-      <div class="product-category">
-        {% for product in products %}
-          {% if product.category == "opponents" %}
-            <div class="product-box">
-              <img src="{{ product.image.url }}" alt="{{ product.name }}">
-              <p class="product-name">{{ product.name }}</p>
-              <div class="hover-details">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="hover-img">
-                <div class="info">
-                  <h3>{{ product.name }}</h3>
-                  <p class="price">Price: {{ product.price }}</p>
-                  <p class="description">{{ product.description }}</p>
-                </div>
-                <div class="action">
-                  {% if user.is_authenticated %}
-                    <a href="{% url 'buy_product' product.id %}" class="btn">Buy</a>
-                  {% endif %}
-                </div>
-              </div>
-            </div>
-          {% endif %}
-        {% endfor %}
+        </div>
       </div>
     </div>
-  </body>
-</html>
+    {% endif %} {% endfor %}
+  </div>
+
+  <h2>Joker:</h2>
+  <div class="product-category">
+    {% for product in products %} {% if product.category == "joker" %}
+    <div class="product-box">
+      <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+      <p class="product-name">{{ product.name }}</p>
+      <div class="hover-details">
+        <img
+          src="{{ product.image.url }}"
+          alt="{{ product.name }}"
+          class="hover-img"
+        />
+        <div class="info">
+          <h3>{{ product.name }}</h3>
+          <p class="price">Price: {{ product.price }}</p>
+          <p class="description">{{ product.description }}</p>
+        </div>
+        <div class="action">
+          {% if user.is_authenticated %}
+          <a href="{% url 'buy_product' product.id %}" class="btn">Buy</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endif %} {% endfor %}
+  </div>
+
+  <h2>AI Opponents:</h2>
+  <div class="product-category">
+    {% for product in products %} {% if product.category == "opponents" %}
+    <div class="product-box">
+      <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+      <p class="product-name">{{ product.name }}</p>
+      <div class="hover-details">
+        <img
+          src="{{ product.image.url }}"
+          alt="{{ product.name }}"
+          class="hover-img"
+        />
+        <div class="info">
+          <h3>{{ product.name }}</h3>
+          <p class="price">Price: {{ product.price }}</p>
+          <p class="description">{{ product.description }}</p>
+        </div>
+        <div class="action">
+          {% if user.is_authenticated %}
+          <a href="{% url 'buy_product' product.id %}" class="btn">Buy</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endif %} {% endfor %}
+  </div>
+</div>
 {% endblock %}
