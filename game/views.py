@@ -234,3 +234,37 @@ def start_result(request):
                                "correct_option" : correct_option}  
 
     return render(request, "start-result.html", context)
+
+# Views for partials (fetched and swapped into <main> in basic.html
+# to not reload the entire page)
+
+def game_settings_partial(request):
+    """Render Opening Page of Game
+
+    Args:
+        request (get): /game
+
+    Returns:
+        _html_: html for displaying the opening page of the game
+
+    Summary:
+        game.html comprises the swap target called "swap-container" (hx-target = "#swap-container").
+        The html code within the  <div id="swap-container"> is completely replaced with new html code
+        once <button type="submit">Choose</button> is pressed. Pressing the choose button issues a
+        post request (hx-post="/game-start" ) to the URL /game-start. This post request is processed
+        by the next view game_start, which replaces the html code in the div <div id="swap-container">.
+
+    """
+
+    # Delete questions and information from the session left over from an interrupted game
+
+    if request.session.get("questions") != None:
+        del request.session["questions"]
+    if request.session.get("score") != None:
+        del request.session["score"]
+    if request.session.get("topic") != None:
+        del request.session["topic"]
+    if request.session.get("difficulty") != None:
+        del request.session["difficulty"]
+
+    return render(request, "game_partial.html")

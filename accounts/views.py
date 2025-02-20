@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import CustomUser
 from django.contrib.auth.forms import AuthenticationForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth import login, logout
 from .form import CustomUserCreationForm, UserUpdateForm
 from django.views.generic import (
@@ -14,7 +14,6 @@ from django.views.generic import (
     UpdateView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.template.loader import render_to_string
 from django.http import HttpResponse
 
 
@@ -96,10 +95,10 @@ def login_partial(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            # Return the 'profile' partial directly
-            context = {'user': user}
-            html_snippet = render_to_string('profile_partial.html', context, request=request)
-            return HttpResponse(html_snippet)
+            # Instruct the browser to do a full redirect:
+            response = HttpResponse(status=200)
+            response['HX-Redirect'] = reverse('user_details', args=[user.username])
+            return response
         # If form is not valid, re-render partial with errors:
         return render(request, 'login_partial.html', {'form': form})
 

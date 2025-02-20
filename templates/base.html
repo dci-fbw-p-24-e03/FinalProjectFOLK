@@ -35,12 +35,21 @@
         Only 'QUIZ' redirects to a new page, the rest are AJAX requests meaning,
         the content is fetched and swapped into <main> without refreshing the page.
         -->
-        <a href="{% url 'game_view' %}"><span>QUIZ</span></a>
+        <a
+          href="{% url 'game_view' %}"
+          hx-get="{% url 'game_settings_partial' %}"
+          hx-target="#content-area"
+          hx-swap="innerHTML"
+          hx-push-url="{% url 'game_view' %}"
+        >
+          <span>QUIZ</span></a
+        >
         <a
           href="{% url 'leaderboard' %}"
           hx-get="{% url 'leaderboard_partial' %}"
           hx-target="#content-area"
           hx-swap="innerHTML"
+          hx-push-url="{% url 'leaderboard' %}"
         >
           <span>LEADERBOARD</span></a
         >
@@ -49,6 +58,7 @@
           hx-get="{% url 'shop_partial' %}"
           hx-target="#content-area"
           hx-swap="innerHTML"
+          hx-push-url="{% url 'shop_view' %}"
           ><span>SHOP</span></a
         >
         {% if request.user.is_authenticated %}
@@ -57,7 +67,8 @@
           hx-get="{% url 'profile_partial' %}"
           hx-target="#content-area"
           hx-swap="innerHTML"
-          ><span>PROFILE</span></a
+          hx-push-url="{% url 'user_details' request.user.username %}"
+          ><span>{{ request.user.username }}'s PROFILE</span></a
         >
         <a href="{% url 'logout_view' %}"><span>LOGOUT</span></a>
         {% else %}
@@ -66,6 +77,7 @@
           hx-get="{% url 'login_partial' %}"
           hx-target="#content-area"
           hx-swap="innerHTML"
+          hx-push-url="{% url 'login_view' %}"
           ><span>LOGIN / REGISTER</span></a
         >
         {% endif %}
@@ -82,6 +94,7 @@
     <script src="{% static 'js/base_navbar.js' %}"></script>
     <script src="{% static 'js/base_circuitboard.js' %}"></script>
     <script src="{% static 'js/leaderboard.js' %}"></script>
+    <script src="{% static 'js/game_topic_selection.js' %}"></script>
     <script>
       document.body.addEventListener("htmx:configRequest", (event) => {
         event.detail.headers["X-CSRFToken"] = document.querySelector(

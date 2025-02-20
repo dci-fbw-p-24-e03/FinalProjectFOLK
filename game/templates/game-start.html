@@ -1,78 +1,82 @@
-
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'css/game_start.css' %}" />
-<!-- Include HTMX (adjust version if needed) -->
-<script src="https://unpkg.com/htmx.org@1.8.4"></script>
-
-<style>
-    body {
-        background: url("{% static 'assets/futuristic_arena.webp' %}") no-repeat center center fixed !important;
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/game_start.css' %}" />
+    <style>
+      body {
+        background: url("{% static 'assets/futuristic_arena.webp' %}") no-repeat
+          center center fixed !important;
         background-size: cover;
-    }
-</style>
-    
+      }
+    </style>
+    <!-- Install htmx -->
+    <script
+      src="https://unpkg.com/htmx.org@2.0.4"
+      integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
+      crossorigin="anonymous"
+    ></script>
+    <title>AI-Quizz</title>
+  </head>
+  <body>
+    <div id="swap-container">
+      <form
+        hx-post="/start-result"
+        hx-target="#start-swap"
+        hx-trigger="click from:input, every 20s"
+      >
+        {% csrf_token %}
 
+        <div class="answers">
+          <div id="start-swap">
+            <div><h1 class="question">{{ question }}</h1></div>
 
-
-<form hx-post="/start-result" hx-target="#start-swap" hx-trigger="click from:input, every 20s">
-    {% csrf_token %}
-    
-    <div class="answers">
-    <div id="start-swap" >
-        <div><h1 class="question">{{ question }}</h1></div>
-
-
-        <div class="answer_pair">
-            <label class="radio-label">
-                <input name="options" type="radio" id="option_1" value="A"> {{ A }}
-            </label>
-            <label class="radio-label">
-                <input name="options" type="radio" id="option_2" value="B"> {{ B }}
-            </label>
-        </div>
-        <div class="answer_pair">
-            <label class="radio-label">
-                <input name="options" type="radio" id="option_3" value="C"> {{ C }}
-            </label>
-            <label class="radio-label">
-                <input name="options" type="radio" id="option_4" value="D"> {{ D }}
-            </label>
-        </div>
-        <div class="countdown_div">
-            <div class="timer animatable">
-                <svg>
-                    <circle cx="50%" cy="50%" r="45"/>
-                    <circle cx="50%" cy="50%" r="45" pathLength="1"/>
-                    <text x="100" y="100" text-anchor="middle">
-                        <tspan id="timeLeft"></tspan>
-                    </text>
-                    <text x="100" y="120" text-anchor="middle">seconds</text>
-                </svg>
+            <div class="answer_pair">
+              <label class="radio-label">
+                <input name="options" type="radio" id="option_1" value="A" /> {{
+                A }}
+              </label>
+              <label class="radio-label">
+                <input name="options" type="radio" id="option_2" value="B" /> {{
+                B }}
+              </label>
             </div>
+            <div class="answer_pair">
+              <label class="radio-label">
+                <input name="options" type="radio" id="option_3" value="C" /> {{
+                C }}
+              </label>
+              <label class="radio-label">
+                <input name="options" type="radio" id="option_4" value="D" /> {{
+                D }}
+              </label>
+            </div>
+            <div class="countdown_div">
+              <div class="timer animatable">
+                <svg>
+                  <circle cx="50%" cy="50%" r="45" />
+                  <circle cx="50%" cy="50%" r="45" pathLength="1" />
+                  <text x="100" y="100" text-anchor="middle">
+                    <tspan id="timeLeft"></tspan>
+                  </text>
+                  <text x="100" y="120" text-anchor="middle">seconds</text>
+                </svg>
+              </div>
+            </div>
+          </div>
         </div>
+      </form>
     </div>
-    </div>
-</form>
-
-
-</body>
-
-<footer>
-    
-    <div class = "footer_div">
-    <h2>{{ user.username }}</h2>
-    <img src="{% static 'assets/profile_placeholder.jpeg' %}" alt="male" >
-    <h2>Score: {{ score }}</ph2>
-
-</footer>
-<script src="{% static 'js/timer.js' %}"></script>
-
-
-
-
-
-
-
-
-
+    <footer>
+      <div class="footer_div">
+        <h2>{{ user.username }}</h2>
+        <img src="{% static 'assets/profile_placeholder.jpeg' %}" alt="male" />
+        <h2>Score: {{ score }}</h2>
+      </div>
+    </footer>
+    <script src="{% static 'js/timer.js' %}"></script>
+  </body>
+</html>

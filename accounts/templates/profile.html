@@ -1,6 +1,9 @@
-{%load static%}
+{% extends 'base.html' %} 
+{%load static%} 
+{% block title %} The AI-Quiz - Profile {% endblock %} 
+{% block content %}
 
-<div id="profile">
+<div class="profile">
   <div>
     <h1>Welcome to {{user.username}}'s Profile</h1>
     {% if user.first_name %}
@@ -28,3 +31,5 @@
     />
   </div>
 </div>
+
+{% endblock %}
