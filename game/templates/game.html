@@ -3,7 +3,7 @@
 {%block content %} 
 {%load static%}
 
-<form method =post action="/game-start" >
+<form method="post" action="{% url 'game_start' %}">
   {% csrf_token %}
   <!--dropdown container for pre-defined quiz topics-->
   <div class="dropdown-container">
