@@ -1,4 +1,4 @@
-<div>
+<div class="topic-chosing">
   <form form method="post" action="{% url 'game_start' %}">
     {% csrf_token %}
     <!--dropdown container for pre-defined quiz topics-->
@@ -12,6 +12,17 @@
         <option value="art">Art</option>
         <option value="geography">Geography</option>
       </select>
+       <!--input field for custom quiz topic-->
+      <div class="input-field">
+        <label for="custom-topic">Or type a new Topic!</label>
+        <input
+          type="text"
+          name="custom-topic"
+          id="custom-topic"
+          placeholder="--type Topic here--"
+          oninput="toggleFields()"
+        />
+      </div>
 
       <label for="difficulty">Choose Difficulty:</label>
       <select name="difficulty">
@@ -31,16 +42,7 @@
 
       <button type="submit">Choose</button>
     </div>
-    <!--input field for custom quiz topic-->
-    <div class="input-field">
-      <label for="custom-topic">Or type a new Topic!</label>
-      <input
-        type="text"
-        name="custom-topic"
-        id="custom-topic"
-        placeholder="--type Topic here--"
-        oninput="toggleFields()"
-      />
-    </div>
+  
+
   </form>
 </div>
