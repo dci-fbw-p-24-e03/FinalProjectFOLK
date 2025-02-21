@@ -71,6 +71,7 @@ def game_start(request):
         selected_topic = request.POST.get("topic") # Value from dropdown
         custom_topic = request.POST.get("custom-topic") # Value from custom input field
         topic=""
+        request.session["theme"] = request.POST.get("theme")
         
         if selected_topic == None:
             # The user did NOT choose anything from the dropdown
@@ -81,7 +82,9 @@ def game_start(request):
             # => use the dropdown topic
             topic = selected_topic
         difficulty = request.POST.get("difficulty")
-        theme = request.POST.get("theme")
+        
+        
+        
     
         # Add the posted information to the "session". 'request.session' is a dictionary for storing information
         # used during the course of the game. The information is stored in a cooky in the front end.
@@ -89,6 +92,7 @@ def game_start(request):
         request.session["score"] = 0
         request.session["topic"] = topic
         request.session["difficulty"] = difficulty
+        
 
     # If the game has been played for 10 rounds then set the sessions data back to nill
     # and render the game-over.html last round!
@@ -174,7 +178,7 @@ def game_start(request):
 
     # Get the current score of the player from the sessions dictionary
     score = request.session["score"]
-
+    theme = request.POST.get("theme")
     # Create a context dictionary by merging the dictionaries question and {"score": score}
     # into a single dictionary
     context = question | {"score": score,
@@ -237,7 +241,8 @@ def start_result(request):
     context = last_question | {"score": score,
                                "submitted_answer" : submitted_answer,
                                "correct_option" : correct_option,
-                               "result" : result
+                               "result" : result,
+                               
                                }
 
 
@@ -274,5 +279,6 @@ def game_settings_partial(request):
         del request.session["topic"]
     if request.session.get("difficulty") != None:
         del request.session["difficulty"]
+
 
     return render(request, "game_partial.html")
