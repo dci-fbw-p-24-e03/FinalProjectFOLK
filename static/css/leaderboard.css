@@ -1,125 +1,149 @@
-.leaderboard {
-    padding: 20px; 
-    background-color: transparent;         
-}
+/* .leaderboard {
+  padding: 20px;
+  background-color: transparent;
+} */
 
 .leaderboard-container {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 40px;           
-    border-radius: 16px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    width: 75vw;  
-    max-width: none;
-    margin: 0;  
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  /* width: 80vw; */
+  /* max-width: none; */
+  /* margin: 0; */
 }
 
-h1 {
-    text-align: center;
-    font-family: 'Pixelify Sans', sans-serif;
-    color: #fff; 
-    margin-bottom: 40px;
-    font-size: 3em;
-    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #00ffff, 0 0 40px #00ffff, 0 0 50px #ffff00, 0 0 60px #ffff00;
-    animation: rainbow-glow 3s ease-in-out infinite;
-}
+/* .base-container h1 {
+  text-align: center;
+  font-family: "Pixelify Sans", sans-serif;
+  color: #fff;
+  margin-bottom: 40px;
+  font-size: 3em;
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #00ffff,
+    0 0 40px #00ffff, 0 0 50px #ffff00, 0 0 60px #ffff00;
+  animation: rainbow-glow 3s ease-in-out infinite;
+} */
 
-@keyframes rainbow-glow {
-  0% { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #00ffff, 0 0 40px #00ffff, 0 0 50px #ffff00, 0 0 60px #ffff00; }
-  25% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ffff00, 0 0 40px #ffff00, 0 0 50px #00ff00, 0 0 60px #00ff00; }
-  50% { text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #0000ff, 0 0 40px #0000ff, 0 0 50px #ff00ff, 0 0 60px #ff00ff; }
-  75% { text-shadow: 0 0 10px #0000ff, 0 0 20px #0000ff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ffff00, 0 0 60px #ffff00; }
-  100% { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #00ffff, 0 0 40px #00ffff, 0 0 50px #ffff00, 0 0 60px #ffff00; }
-}
+/* @keyframes rainbow-glow {
+  0% {
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #00ffff,
+      0 0 40px #00ffff, 0 0 50px #ffff00, 0 0 60px #ffff00;
+  }
+  25% {
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ffff00,
+      0 0 40px #ffff00, 0 0 50px #00ff00, 0 0 60px #00ff00;
+  }
+  50% {
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #0000ff,
+      0 0 40px #0000ff, 0 0 50px #ff00ff, 0 0 60px #ff00ff;
+  }
+  75% {
+    text-shadow: 0 0 10px #0000ff, 0 0 20px #0000ff, 0 0 30px #ff0000,
+      0 0 40px #ff0000, 0 0 50px #ffff00, 0 0 60px #ffff00;
+  }
+  100% {
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #00ffff,
+      0 0 40px #00ffff, 0 0 50px #ffff00, 0 0 60px #ffff00;
+  }
+} */
 
 table {
-    border-collapse: collapse;
-    width: 100%;
-    table-layout: fixed;
-    border-radius: 16px;
-    overflow: hidden;
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
-th:nth-child(1) { width: 5%; }
-th:nth-child(2) { width: 15%; }
-th:nth-child(3) { width: 15%; }
-th:nth-child(4) { width: 65%; }
+th:nth-child(1) {
+  width: 5%;
+}
+th:nth-child(2) {
+  width: 15%;
+}
+th:nth-child(3) {
+  width: 15%;
+}
+th:nth-child(4) {
+  width: 65%;
+}
 
-th, td {
-    padding: 20px;          
-    text-align: center;
+th,
+td {
+  padding: 20px;
+  text-align: center;
 }
 
 th {
-    background-color: #7289da;  
-    color: #fff;
-    font-size: 1.5em;
+  background-color: #7289da;
+  color: #fff;
+  font-size: 1.5em;
 }
 
 #stars-header {
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #stars-header:hover {
-    background-color: #5b6eae;
-    color: #fff;
+  background-color: #5b6eae;
+  color: #fff;
 }
 
 td {
-    background-color: #2c2f33;  
-    font-size: 1.2em;           
-    color: #ddd;
+  background-color: #2c2f33;
+  font-size: 1.2em;
+  color: #ddd;
 }
 
 /*styling for table rows*/
 tr:nth-child(even) td {
-    background-color: #2e3137;  
+  background-color: #2e3137;
 }
 
 tr:hover td {
-    background-color: #3a3f44;  
+  background-color: #3a3f44;
 }
 
 .profile-link {
-    color: #ddd; 
-    text-decoration: none; 
-    font-weight: bold; 
+  color: #ddd;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .profile-link:hover {
-    color: #ffcc00; 
-    text-decoration: underline; 
+  color: #ffcc00;
+  text-decoration: underline;
 }
 
 /* Flags */
 .nation-container {
-    position: relative;
-    display: inline-flex; 
-    align-items: center; 
-    width: auto;  
-    height: 35px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  height: 35px;
 }
 
 .flag-icon {
-    width: 40px;  
-    height: auto;
-    border-radius: 5px;
-    margin-right: 8px;  
+  width: 40px;
+  height: auto;
+  border-radius: 5px;
+  margin-right: 8px;
 }
 
 .nation-name {
-    display: none;  
-    position: absolute;
-    left: 100%; 
-    margin-left: 8px;  
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 5px;
-    border-radius: 4px;
-    font-size: 0.9em;
+  display: none;
+  position: absolute;
+  left: 100%;
+  margin-left: 8px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 0.9em;
 }
 
 .nation-container:hover .nation-name {
-    display: block;
+  display: block;
 }

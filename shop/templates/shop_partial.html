@@ -1,6 +1,6 @@
-<div class="shop-container">
-    <h1>Explore some epic items in our shop!</h1>
-  
+<div class="base-container shop">
+  <h1>Explore some epic items in our shop!</h1>
+  <div class="content-container transparent">
     <h2>Skins:</h2>
     <div class="product-category">
       {% for product in products %} {% if product.category == "skins" %}
@@ -27,7 +27,7 @@
       </div>
       {% endif %} {% endfor %}
     </div>
-  
+
     <h2>Joker:</h2>
     <div class="product-category">
       {% for product in products %} {% if product.category == "joker" %}
@@ -54,7 +54,7 @@
       </div>
       {% endif %} {% endfor %}
     </div>
-  
+
     <h2>AI Opponents:</h2>
     <div class="product-category">
       {% for product in products %} {% if product.category == "opponents" %}
@@ -82,3 +82,4 @@
       {% endif %} {% endfor %}
     </div>
   </div>
+</div>
