@@ -29,19 +29,14 @@
       <form
         hx-post="/start-result"
         hx-target="#start-swap"
-        hx-trigger="click from:input, every 20s"
+        hx-trigger="click from:input"
       >
         {% csrf_token %}
 
-<!-- Include HTMX (adjust version if needed) -->
-<script src="https://unpkg.com/htmx.org@1.8.4"></script>
+        <div class="play_box">
 
-    
-
-    
-
-        <div class="answers">
           <div id="start-swap">
+            
             <div><h1 class="question">{{ question }}</h1></div>
 
             <div class="answer_pair">
@@ -78,6 +73,7 @@
             </div>
           </div>
         </div>
+
       </form>
     </div>
     <footer>
