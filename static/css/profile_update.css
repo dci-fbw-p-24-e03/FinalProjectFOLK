@@ -1,0 +1,89 @@
+
+.update-form {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    text-align: center;
+    width: 70vw;
+    max-width: 600px;
+    color: white;
+    margin: 0 auto;
+}
+
+.update-form h2 {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 2.5em;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+    animation: rainbow-glow 3s ease-in-out infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes rainbow-glow {
+    0%   { text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff; }
+    50%  { text-shadow: 0 0 10px #00ff00, 0 0 20px #ffff00; }
+    100% { text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff; }
+}
+
+.update-form .form-group {
+    margin-bottom: 20px;
+}
+
+.update-form label {
+    font-size: 1.2em;
+    color: white;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.update-form input,
+.update-form select,
+.update-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #333;
+    color: white;
+    font-size: 1em;
+}
+
+.update-form input:focus,
+.update-form select:focus,
+.update-form textarea:focus {
+    outline: none;
+    border: 1px solid #00ffff;
+    background-color: #444;
+}
+
+.update-form .error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.update-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.update-form button:hover {
+    background-color: #45a049;
+}
+
+.update-form .cancel-button {
+    background-color: #f44336;
+    margin-left: 10px;
+}
+
+.update-form .cancel-button:hover {
+    background-color: #e53935;
+}

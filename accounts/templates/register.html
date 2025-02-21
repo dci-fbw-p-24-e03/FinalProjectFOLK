@@ -1,49 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-    <div class="register">
-        <form method="post">
-            {% csrf_token %}
-            <div>
-                <label for="id_username">Username:</label>
-                {{ form.username }}
-                {% for error in form.username.errors %}
-                <span class="error">{{ error }}</span>
-            {% endfor %}
-            </div>
-            <div>
-                <label for="id_password">Password:</label>
-                {{ form.password1 }}
-                {% for error in form.password1.errors %}
-                <span class="error">{{ error }}</span>
-            {% endfor %}
-            </div>
-            <div>
-    
-                <label for="id_password">Repeat Password:</label>
-                {{ form.password2 }}
-                {% for error in form.password2.errors %}
-                <span class="error">{{ error }}</span>
-            {% endfor %}
-            </div>
-            <div>
-    
-                <label for="id_email">Enter email:</label>
-                {{ form.email }}
-                {% for error in form.email.errors %}
-                <span class="error">{{ error }}</span>
-            {% endfor %}
-            </div>
-           
-            <button type="submit">Register</button>
-        </form>
-    </div>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} The AI-Quiz - Register{% endblock %}
+{% block content %}
 
-</body>
-</html>
+<div class="update-container">
+    <div class="update-form">
+      <h2>Register</h2>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+          <label for="id_username">Username:</label>
+          {{ form.username }}
+          {% for error in form.username.errors %}
+            <div class="error">{{ error }}</div>
+          {% endfor %}
+        </div>
+        
+        <div class="form-group">
+          <label for="id_email">Email:</label>
+          {{ form.email }}
+          {% for error in form.email.errors %}
+            <div class="error">{{ error }}</div>
+          {% endfor %}
+        </div>
+        
+        <div class="form-group">
+          <label for="id_nation">Nation:</label>
+          {{ form.nation }}
+          {% for error in form.nation.errors %}
+            <div class="error">{{ error }}</div>
+          {% endfor %}
+        </div>
+        
+        <div class="form-group">
+          <label for="id_image">Profile Image:</label>
+          {{ form.image }}
+          {% for error in form.image.errors %}
+            <div class="error">{{ error }}</div>
+          {% endfor %}
+        </div>
+        
+        <div class="form-group">
+          <label for="id_password1">Password:</label>
+          {{ form.password1 }}
+          {% for error in form.password1.errors %}
+            <div class="error">{{ error }}</div>
+          {% endfor %}
+        </div>
+        
+        <div class="form-group">
+          <label for="id_password2">Repeat Password:</label>
+          {{ form.password2 }}
+          {% for error in form.password2.errors %}
+            <div class="error">{{ error }}</div>
+          {% endfor %}
+        </div>
+        
+        <button type="submit">Register</button>
+        <a href="{% url 'login_view' %}">
+          <button type="button" class="cancel-button">Cancel</button>
+        </a>
+      </form>
+    </div>
+</div>
+{% endblock %}
