@@ -9,7 +9,10 @@ body {
     padding-bottom: 2% ;
     align-items: center;
     justify-content: space-between;
+    flex-direction: row !important;
 }
+
+
 
 .futuristic-button {
     background: linear-gradient(90deg, #007bff, #0056b3); /* Blue gradient */
@@ -49,4 +52,31 @@ body {
 
 .futuristic-button.glow {
     animation: glow 1.5s infinite alternate;
+}
+
+.explanations {
+
+    display : none
+}
+
+/* copying initial styling to just give it another color */
+
+.futuristic-button.explanations-button {
+    background: linear-gradient(90deg, #ff7d26, #fd5912);
+    box-shadow: 0 0 10px rgb(255, 193, 5);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Default hover effect */
+.futuristic-button.explanations-button:hover {
+    background: linear-gradient(90deg, #ffb143, #ff8b2c);
+    box-shadow: 0 0 20px rgb(255, 208, 202);
+    transform: scale(1.05);
+}
+
+/* Keep hover style when toggled */
+.futuristic-button.explanations-button.toggled {
+    background: linear-gradient(90deg, #ffb143, #ff8b2c);
+    box-shadow: 0 0 20px rgb(255, 208, 202);
+    transform: scale(1.05);
 }

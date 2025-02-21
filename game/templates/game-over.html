@@ -2,7 +2,7 @@
 {% load static %}
 
 
-<style>
+<!-- <style>
     body {
         background: url("{% static 'assets/futuristic_arena.webp' %}");
         background-size: cover;
@@ -11,14 +11,20 @@
         width: 100%;
         height: 100%;
     }
-</style>
+</style> -->
 
 
 <div class="answers">
 
 <h1>Your final score is {{score}} Points</h1>
-<p>Correct Answers:  {{ correct_answers_number }} / 10</p>
+<div>
+    <p>Correct Answers:  {{ correct_answers_number }} / 10</p>
+    <button id = toggleButton class = "futuristic-button explanations-button" onclick="toggleExplanations()">Explain Wrong Answers</button>
+</div>
 
+
+
+<div id = "explanations" class = "explanations">
 {% if wrong_answers %}
     <h2>Wrong Answers:</h2>
     <ul>
@@ -32,6 +38,7 @@
 {% else %}
     <p>Perfect Round Congratz!!</p>
 {% endif %}
+</div>
 
 <h2>Coins earned : {{ score }}</h2>
 
@@ -43,9 +50,12 @@
     <input type="hidden" name="difficulty" value="{{ difficulty }}">
     <button class = "futuristic-button" type="submit">Play again</button>
 </form>
+<button class = "futuristic-button" type="button" onclick="window.location.href='/'">Back</button>
 </div>
 <!-- Back Button -->
-<button class = "futuristic-button" type="button" onclick="window.location.href='/'">Back</button>
+
 
 </div>
+
+
 

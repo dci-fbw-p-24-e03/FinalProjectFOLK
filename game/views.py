@@ -96,7 +96,7 @@ def game_start(request):
 
     # If the game has been played for 10 rounds then set the sessions data back to nill
     # and render the game-over.html last round!
-    elif len(previous_questions) >= 2:
+    elif len(previous_questions) >= 0:
 
         score = request.session.get("score")
 
