@@ -72,9 +72,10 @@ def get_question(
 
     # Convert the answer from a string to a dictionary
     answer_dictionary = json.loads(answer)
+    print("answer_dictionary: ", answer_dictionary)
 
-    # Shuffle the answers randomly
-    answer_dictionary = shuffle_answers(answer_dictionary)
+    if answer_dictionary["question"] != 'None':
+        answer_dictionary = shuffle_answers(answer_dictionary)
 
     # Check whether the question is in the list of questions that should not be asked
     if answer_dictionary["question"] in not_questions:
