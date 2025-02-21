@@ -5,7 +5,7 @@
     <div class="dropdown-container">
       <label for="topic">Choose Topic:</label>
       <select name="topic" id="topic" onchange="toggleFields()">
-        <option value="">--Choose a Topic--</option>
+        <option value="">Topic</option>
         <option value="anything">Anything</option>
         <option value="sport">Sport</option>
         <option value="history">History</option>
@@ -19,13 +19,13 @@
           type="text"
           name="custom-topic"
           id="custom-topic"
-          placeholder="--type Topic here--"
+          placeholder="Type Topic here"
           oninput="toggleFields()"
         />
       </div>
-
       <label for="difficulty">Choose Difficulty:</label>
-      <select name="difficulty">
+      <select name="difficulty" onchange="toggleFields()">
+        <option value="">Difficulty</option>
         <option value="easy">Easy</option>
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
@@ -35,12 +35,13 @@
 
     <label for="theme">Choose Theme:</label>
     <select name="theme">
+      <option value="">Theme</option>
       <option value="AI-Quiz">AI-Quiz</option>
       <option value="space">Space</option>
       
     </select>
 
-      <button type="submit">Choose</button>
+      <button type="submit">Play</button>
     </div>
   
 
