@@ -20,7 +20,7 @@ from django.http import HttpResponse
 class UserLoginView(FormView):
     form_class = AuthenticationForm
     template_name = "login.html"
-    success_url = reverse_lazy("user_details")
+    success_url = reverse_lazy("home_view")
 
     def form_valid(self, form):
         user = form.get_user()
