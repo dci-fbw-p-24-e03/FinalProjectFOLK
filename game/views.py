@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .ai import get_question, get_explanations
 from .models import Questions
 from accounts.models import CustomUser
+
 # Create your views here.
 
 
@@ -59,7 +60,7 @@ def game_start(request):
     # Previous questions is a list of dictionaries, each dictionary comprising a previous question,
     # the possible answers and the correct answer.
     previous_questions = request.session.get("questions")
-    
+
     # Retrieving the questions already asked by the user and stored in the Questions database
     user_pk = request.user.pk
     old_questions_iterator = Questions.objects.filter(player=user_pk)
@@ -67,9 +68,9 @@ def game_start(request):
 
     if previous_questions == None or len(previous_questions) == 0:
         not_questions = []
-        selected_topic = request.POST.get("topic") # Value from dropdown
-        custom_topic = request.POST.get("custom-topic") # Value from custom input field
-        topic=""
+        selected_topic = request.POST.get("topic")  # Value from dropdown
+        custom_topic = request.POST.get("custom-topic")  # Value from custom input field
+        topic = ""
         if selected_topic == None:
             # The user did NOT choose anything from the dropdown
             # => use whatever was typed in the custom input field
@@ -79,7 +80,7 @@ def game_start(request):
             # => use the dropdown topic
             topic = selected_topic
         difficulty = request.POST.get("difficulty")
-    
+
         # Add the posted information to the "session". 'request.session' is a dictionary for storing information
         # used during the course of the game. The information is stored in a cooky in the front end.
 
@@ -89,19 +90,23 @@ def game_start(request):
 
     # If the game has been played for 10 rounds then set the sessions data back to nill
     # and render the game-over.html last round!
-    elif len(previous_questions) >= 2:
+    elif len(previous_questions) >= 10:
 
         score = request.session.get("score")
 
         wrong_answers = request.session.get("wrong_answers", [])
 
         # Get explanations
-        explanations = get_explanations(wrong_answers)  # Returns a dictionary {question_text: explanation}
+        explanations = get_explanations(
+            wrong_answers
+        )  # Returns a dictionary {question_text: explanation}
 
         # Attach explanations to each wrong answer
         for wrong_answer in wrong_answers:
             question_text = wrong_answer["question"]
-            wrong_answer["explanation"] = explanations.get(question_text, "No explanation available.")
+            wrong_answer["explanation"] = explanations.get(
+                question_text, "No explanation available."
+            )
 
         context = {
             "score": score,
@@ -111,12 +116,14 @@ def game_start(request):
             "correct_answers_number": 10 - len(wrong_answers),
             "difficulty": request.session.get("difficulty"),
         }
-        
+
         # store the questions asked during this game in the database
         for question in previous_questions:
-            player = CustomUser(pk=user_pk)
-            database_objet = Questions(question=question["question"], player=player)
-            database_objet.save()
+            if user_pk:
+                player = CustomUser(pk=user_pk)
+                database_objet = Questions(question=question["question"], player=player)
+                if database_objet:
+                    database_objet.save()
 
         request.session["wrong_answers"] = []
         not_questions = []
@@ -126,9 +133,6 @@ def game_start(request):
             del request.session["topic"]
         if request.session.get("difficulty") != None:
             del request.session["difficulty"]
-
-
-
 
         return render(request, "game-over.html", context)
 
@@ -145,7 +149,6 @@ def game_start(request):
         not_questions = [question["question"] for question in previous_questions]
         # adding the old questions to the list of not questions
         not_questions.extend(old_questions)
-        
 
     # Get the question dictionary comprising the question, possible answers and correct answer using
     # the get_question function defined in ai.py
@@ -154,7 +157,7 @@ def game_start(request):
         difficulty=difficulty,
         not_questions=not_questions,
     )
-    
+
     # Add the question dictionary to the session. The value corresponding to the key "questions" comprises
     # a list of all the questions that have been asked before.
     if request.session.get("questions") == None:
@@ -195,10 +198,10 @@ def start_result(request):
         last_question = previous_questions[-1]
     else:
         last_question = []
-        
+
     if last_question:
         correct_answer = last_question["correct_answer"]
-    
+
     submitted_answer = request.POST.get("options")
 
     score = request.session.get("score")
@@ -210,7 +213,7 @@ def start_result(request):
         result = "0"
         wrong_question = {
             "question": last_question["question"],
-            "correct_answer": last_question[last_question["correct_answer"]]
+            "correct_answer": last_question[last_question["correct_answer"]],
         }
         # Initialize the list if it doesn't exist
         if request.session.get("wrong_answers") is None:
@@ -221,22 +224,22 @@ def start_result(request):
 
         # Optionally, if you also have a local list:
         wrong_answers = request.session["wrong_answers"]
-        print(wrong_answers)
-        
-        
 
     correct_answer = last_question[correct_answer]
     correct_option = last_question["correct_answer"]
-    
 
-    context = last_question | {"score": score,
-                               "submitted_answer" : submitted_answer,
-                               "correct_option" : correct_option}  
+    context = last_question | {
+        "score": score,
+        "submitted_answer": submitted_answer,
+        "correct_option": correct_option,
+    }
 
     return render(request, "start-result.html", context)
 
+
 # Views for partials (fetched and swapped into <main> in basic.html
 # to not reload the entire page)
+
 
 def game_settings_partial(request):
     """Render Opening Page of Game
