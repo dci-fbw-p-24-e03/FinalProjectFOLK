@@ -1,6 +1,88 @@
+{% load static %}
+
 <form hx-post="/game-start" hx-trigger="every 3s" hx-target = "#swap-container">
     {% csrf_token %}
-    
+
+    <div class="play_box">
+
+        <div id="start-swap">
+          
+          <div><h1 class="question">{{ question }}</h1></div>
+
+          <div class="answer_box">
+            <div class="answer_pair">
+
+                <label class="radio-label 
+                {% if correct_answer == 'A' %}correct_answer{% endif %}
+                {% if submitted_answer == 'A' and submitted_answer != correct_answer %}wrong_answer{% endif %}">
+              <input name="options" type="radio" id="option_1" value="A" /> {{ A }} 
+              </label>
+
+              <label class="radio-label 
+              {% if correct_answer == 'B' %}correct_answer{% endif %}
+              {% if submitted_answer == 'B' and submitted_answer != correct_answer %}wrong_answer{% endif %}">
+              <input name="options" type="radio" id="option_2" value="B" /> {{ B }}
+              </label>
+
+            </div>
+            
+            <div class="center-screen">
+              <div class="countdown_div">
+                <div class="timer animatable">
+                  <svg>
+                    <circle cx="50%" cy="50%" r="45" />
+                    <circle cx="50%" cy="50%" r="45" pathLength="1" />
+                    <text x="100" y="100" text-anchor="middle">
+                      <tspan id="timeLeft"></tspan>
+                    </text>
+                    <text x="100" y="120" text-anchor="middle">seconds</text>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="footer_div">
+                <h2>{{ user.username }}</h2>
+                <img src="{% static 'assets/profile_placeholder.jpeg' %}" alt="male" />
+                <h2>Score: {{ score }}</h2>
+              </div>
+
+            </div>
+            
+            <div class="answer_pair">
+
+            <label class="radio-label 
+            {% if correct_answer == 'C' %}correct_answer{% endif %}
+            {% if submitted_answer == 'C' and submitted_answer != correct_answer %}wrong_answer{% endif %}">
+              <input name="options" type="radio" id="option_1" value="A" /> {{ C }} 
+              </label>
+               
+              <label class="radio-label 
+              {% if correct_answer == 'D' %}correct_answer{% endif %}
+              {% if submitted_answer == 'D' and submitted_answer != correct_answer %}wrong_answer{% endif %}">
+              <input name="options" type="radio" id="option_2" value="B" /> {{ D }}
+            </label>
+
+            </div>
+
+        </div>
+
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- _____________ Old Code ____________________________________ -->
+
+<!-- 
     <h1 class="question">{{ question }}</h1>
 
     
@@ -45,3 +127,6 @@
                 </svg>
             </div>
         </div>
+ -->
+
+  <!-- _____________ Old Code ____________________________________ -->
