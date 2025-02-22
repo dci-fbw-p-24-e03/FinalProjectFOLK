@@ -4,10 +4,11 @@
 body {
     display: flex;
     justify-content: center; /* Centers horizontally */
-    align-items: flex-start; /* Centers vertically */
+    align-items: flex-start; /* Vertical start at top */
     height: 100vh; /* Full height of the viewport */
     width: 100vw; /* Full width of the viewport */
     font-family: Arial, Helvetica, sans-serif;
+    color: white;
 }
 
 /* body styling depending on theme choice */
@@ -23,57 +24,79 @@ body {
 
 
 /* Answers container styled with modern, transparent overlay */
+.answers{
+    padding: 5%;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 16px;
+    margin: 2%;
+    width: 100vh;
+    min-height: 70vh;
+}
+
 .play_box{
     padding: 5%;
     background-color: rgba(0, 0, 0, 0.9);
     border-radius: 16px;
     margin: 2%;
-    width: 120vh;
-    height: 70vh;
+    width: 100vh;
+    min-height: 70vh;
 
 }
+
+
 
 /* Question text styling */
 .question {
-    text-align: center;
+    text-align: block;
     color: #fff;
-    font-size: 2em;
+    font-size: xx-large;
     margin-bottom: 5%;
 }
 
-/* Arrange answer pairs evenly */
-.answer_pair {
+.answer_box {
     display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    margin-bottom: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; /* Distributes space evenly */
+    height: 50vh; /* Full height of the viewport */
+}
+
+
+.answer_pair, .center-screen {
+    flex: 1; /* Ensures all divs take equal height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content inside */
+    align-items: center;
+    height: 80%;
 }
 
 
 /* Hide default radio buttons */
 input[type="radio"] {
-    position: absolute;
     opacity: 0;
+    color:white;
 }
 
 /* Style labels as modern buttons */
-.radio-label {
+.radio-button {
     display: flex;
     align-items: center;
     justify-content: center;
     border: 2px solid #7289da;
     border-radius: 8px;
     cursor: pointer;
-    margin: 5px;
+    margin: 20px;
     transition: all 0.3s ease-in-out;
-    height: 40px;
-    width: 100px;
+    height: 100%;
+    width: 80%;
     color: #fff;
     background-color: transparent;
+    font-size: xx-large;
 }
 
 /* Highlight style when a radio is selected */
-.radio-label:has(input:checked) {
+input:has(input:checked) {
     border: 2px solid #0b29b1;
     background-color: #007bff;
     color: #eaf0ec;
@@ -99,10 +122,6 @@ input[type="radio"] {
     margin: 20px;
 }
 
-/* General label margin */
-label {
-    margin: 5px;
-}
 
 /* Countdown container centering */
 .countdown_div {
@@ -144,7 +163,7 @@ label {
 }
 
 .timer > svg > text {
-    font-size: 2rem;
+    font-size: xx-large;
     fill: #fff;
 }
 

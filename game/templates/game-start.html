@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="{% static 'js/timer.js' %}"></script>
+    <script src="{% static 'js/explanations_button.js' %}"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/game_start.css' %}" />
@@ -39,51 +41,61 @@
             
             <div><h1 class="question">{{ question }}</h1></div>
 
-            <div class="answer_pair">
-              <label class="radio-label">
-                <input name="options" type="radio" id="option_1" value="A" /> {{ A }}
-                
-              </label>
-              <label class="radio-label">
+            <div class="answer_box">
+              <div class="answer_pair">
+
+                <label class="radio-button">
+                <input name="options" type="radio" id="option_1" value="A" /> {{ A }} 
+                </label>
+
+                <label class="radio-button">
                 <input name="options" type="radio" id="option_2" value="B" /> {{ B }}
-                
-              </label>
-            </div>
-            <div class="answer_pair">
-              <label class="radio-label">
-                <input name="options" type="radio" id="option_3" value="C" /> {{ C }}
-                
-              </label>
-              <label class="radio-label">
-                <input name="options" type="radio" id="option_4" value="D" /> {{ D }}
-                
-              </label>
-            </div>
-            <div class="countdown_div">
-              <div class="timer animatable">
-                <svg>
-                  <circle cx="50%" cy="50%" r="45" />
-                  <circle cx="50%" cy="50%" r="45" pathLength="1" />
-                  <text x="100" y="100" text-anchor="middle">
-                    <tspan id="timeLeft"></tspan>
-                  </text>
-                  <text x="100" y="120" text-anchor="middle">seconds</text>
-                </svg>
+                </label>
+
               </div>
-            </div>
+              
+              <div class="center-screen">
+                <div class="countdown_div">
+                  <div class="timer animatable">
+                    <svg>
+                      <circle cx="50%" cy="50%" r="45" />
+                      <circle cx="50%" cy="50%" r="45" pathLength="1" />
+                      <text x="100" y="100" text-anchor="middle">
+                        <tspan id="timeLeft"></tspan>
+                      </text>
+                      <text x="100" y="120" text-anchor="middle">seconds</text>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="footer_div">
+                  <h2>{{ user.username }}</h2>
+                  <img src="{% static 'assets/profile_placeholder.jpeg' %}" alt="male" />
+                  <h2>Score: {{ score }}</h2>
+                </div>
+
+              </div>
+              
+              <div class="answer_pair">
+
+                <label class="radio-button">
+                <input name="options" type="radio" id="option_1" value="A" /> {{ C }} 
+                </label>
+                 
+                <label class="radio-button">
+                <input name="options" type="radio" id="option_2" value="B" /> {{ D }}
+                </label>
+
+              </div>
+
+          </div>
+
           </div>
         </div>
 
       </form>
     </div>
-    <footer>
-      <div class="footer_div">
-        <h2>{{ user.username }}</h2>
-        <img src="{% static 'assets/profile_placeholder.jpeg' %}" alt="male" />
-        <h2>Score: {{ score }}</h2>
-      </div>
-    </footer>
-    <script src="{% static 'js/timer.js' %}"></script>
-    <script src="{% static 'js/explanations_button.js' %}"></script>
+
+
   </body>
 </html>
