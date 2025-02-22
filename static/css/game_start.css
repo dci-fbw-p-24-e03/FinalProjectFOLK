@@ -79,7 +79,7 @@ input[type="radio"] {
 }
 
 /* Style labels as modern buttons */
-.radio-button {
+.radio-button, .radio-label {
     display: flex;
     align-items: center;
     justify-content: center;
