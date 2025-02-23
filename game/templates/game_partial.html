@@ -1,8 +1,10 @@
 <div class="topic-chosing">
-  <form form method="post" action="{% url 'game_start' %}">
+  <form method="post" action="{% url 'game_start' %}">
     {% csrf_token %}
     <!--dropdown container for pre-defined quiz topics-->
+    <h2>AI QUIZ</h2> 
     <div class="dropdown-container">
+     
       <label for="topic">Choose Topic:</label>
       <select name="topic" id="topic" onchange="toggleFields()">
         <option value="">Topic</option>

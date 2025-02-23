@@ -72,7 +72,6 @@ def get_question(
 
     # Convert the answer from a string to a dictionary
     answer_dictionary = json.loads(answer)
-    print("answer_dictionary: ", answer_dictionary)
 
     if answer_dictionary["question"] != 'None':
         answer_dictionary = shuffle_answers(answer_dictionary)
