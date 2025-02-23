@@ -49,21 +49,32 @@ def get_question(
     client = Groq(api_key=os.getenv("API_KEY"))
 
     # Get the question and answers from the Groq API
-    completion = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[
-            {
-                "role": "user",
-                "content": content,
-            },
-        ],
-        temperature=2,
-        max_completion_tokens=1024,
-        top_p=0.1,
-        stream=True,
-        stop=None,
-    )
+    try:
+        completion = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {
+                    "role": "user",
+                    "content": content,
+                },
+            ],
+            temperature=2,
+            max_completion_tokens=800,
+            top_p=0.1,
+            stream=True,
+            stop=None,
+        )
 
+    except Exception as e:
+        print(f"AI not responding exception: {e}")
+        answer_dictionary =  {'question': "AI is down. Game cannot be played at the moment",
+        'A': "None",
+        'B': "None",
+        'C': "None",
+        'D': "None",
+        'correct_answer': "None"}
+        return answer_dictionary
+              
     # Turn the answer from the completion into a single string
     answer = ""
     for chunk in completion:
@@ -73,7 +84,7 @@ def get_question(
     # Convert the answer from a string to a dictionary
     try:
         answer_dictionary = json.loads(answer)
-    except:
+    except Exception as e:
         answer_dictionary =  {'question': "AI is down. Game cannot be played at the moment",
         'A': "None",
         'B': "None",
@@ -81,12 +92,13 @@ def get_question(
         'D': "None",
         'correct_answer': "None"}
         
-        print("AI is not responding with the correct dictionary.")
+        print(f"AI not responding exception: {e}")
+        return answer_dictionary
 
     try:
         answer_dictionary = shuffle_answers(answer_dictionary)
-    except:
-        print("Answer could not be shuffled")
+    except Exception as e:
+        print(f"AI answers could not be shuffled: {e}")
 
     # Check whether the question is in the list of questions that should not be asked
     if answer_dictionary["question"] in not_questions:
@@ -209,7 +221,6 @@ def get_explanations(wrong_questions: list[dict[str, str]]) -> dict[str, str]:
     except json.JSONDecodeError as e:
         print("JSON decode error:", e, "Raw answer:", answer)
         return {}
-
 
 
 
