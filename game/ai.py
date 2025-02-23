@@ -71,10 +71,22 @@ def get_question(
             answer += chunk.choices[0].delta.content
 
     # Convert the answer from a string to a dictionary
-    answer_dictionary = json.loads(answer)
+    try:
+        answer_dictionary = json.loads(answer)
+    except:
+        answer_dictionary =  {'question': "AI is down. Game cannot be played at the moment",
+        'A': "None",
+        'B': "None",
+        'C': "None",
+        'D': "None",
+        'correct_answer': "None"}
+        
+        print("AI is not responding with the correct dictionary.")
 
-    if answer_dictionary["question"] != 'None':
+    try:
         answer_dictionary = shuffle_answers(answer_dictionary)
+    except:
+        print("Answer could not be shuffled")
 
     # Check whether the question is in the list of questions that should not be asked
     if answer_dictionary["question"] in not_questions:
