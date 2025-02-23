@@ -9,17 +9,6 @@
 }
 
 /* 
-  :root - Global variables and preferences.
-  Restrict text selection and remove tap highlight on mobile for a cleaner UI.
-  Kept -webkit prefixes for better iOS compatibility. 
-*/
-:root {
-  -webkit-user-select: none;
-  user-select: none; 
-  -webkit-tap-highlight-color: transparent; 
-}
-
-/* 
   General Reset 
   Removes default padding/margin and uses border-box for predictable sizing.
 */
@@ -31,53 +20,45 @@
 
 /* 
   HTML & Canvas 
-  Make canvas and HTML span full viewport. "contain: strict" helps performance 
-  by limiting the scope of layout/rendering, though it's not fully standardized.
+  Make canvas and HTML span full viewport.
 */
-html,
-canvas {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  contain: strict; 
-  /* Overflow hidden ensures the body handles scrolling. */
+
+html {
   overflow: hidden;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Ensure it remains behind other elements */
+  pointer-events: none; /* Optional: prevent canvas from capturing mouse events */
 }
 
 /* 
   Body 
-  Use flex for centering content, force vertical scroll, 
-  hide horizontal scroll, and enable smooth scrolling on iOS devices. 
+  Use flex for centering content
 */
 body {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 /* 
   Header 
-  Centered horizontally, with a smaller width than full viewport.
-*/
-
-/* 
-  .nav-wrapper 
-  Conic gradient border around the nav, acts as a border "frame."
+  Centered horizontally
 */
 header {
   display: flex;
   justify-content: center;
   align-items: center;
-  position:sticky;
-  top: 5%;
-  margin: 30px;
+  position: sticky;
+  margin: 3vmin;
   background: conic-gradient(
     from 45deg,
     var(--neon-text1, #fff) 0deg,
@@ -86,14 +67,11 @@ header {
     var(--neon-text4, #fff) 270deg,
     var(--neon-text1, #fff) 360deg
   );
-  border-radius: 10px;
-  padding: 4px; /* Border thickness */
-  box-shadow: 
-  rgba(0, 0, 0, 0.25) 0px 54px 55px,
-  rgba(0, 0, 0, 0.12) 0px -12px 30px,
-  rgba(0, 0, 0, 0.12) 0px 4px 6px,
-  rgba(0, 0, 0, 0.17) 0px 12px 13px,
-  rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  border-radius: 1vmin;
+  padding: 0.5vmin; /* Border thickness */
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   z-index: 100; /* Ensure it appears above the canvas. */
 }
 
@@ -102,14 +80,15 @@ header {
   The actual navigation container. 
   Dark background, slightly smaller border-radius to show the .nav-wrapper "frame."
 */
-header nav {
+nav {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  width: 90vmax;
+  gap: 3vmin;
   background: #000000;
-  border-radius: 6px;
-  padding: 10px;
-  overflow: visible; 
+  border-radius: 0.5vmin;
+  padding: 1vmin;
 }
 
 /* 
@@ -117,12 +96,12 @@ header nav {
   A small glowing circle that moves around the nav's border.
   Two elements (::before and ::after) create a trailing glow effect.
 */
-header nav::before,
-header nav::after {
+nav::before,
+nav::after {
   content: "";
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 0.5vmin;
+  height: 0.5vmin;
   background: #fff;
   border-radius: 50%;
 }
@@ -131,11 +110,11 @@ header nav::after {
   The "leading" spark 
   Slight blur, actual animation path along the perimeter.
 */
-header nav::before {
+nav::before {
   top: 0;
   left: 0;
-  filter: blur(2px);
-  z-index: 101;
+  filter: blur(0.1vmin);
+  z-index: 100;
   animation: sparkMotion 20s linear infinite;
 }
 
@@ -143,10 +122,10 @@ header nav::before {
   The "trailing" spark 
   More intense blur, a tiny delay, same path for a trailing effect.
 */
-header nav::after {
+nav::after {
   top: 0;
   left: 0;
-  filter: blur(4px);
+  filter: blur(0.5vmin);
   z-index: 100;
   animation: sparkMotion 20s linear infinite;
   animation-delay: 0.01s;
@@ -157,7 +136,8 @@ header nav::after {
   Moves around the nav edges, with a short extra run along the top for a flash.
 */
 @keyframes sparkMotion {
-  0%, 50% {
+  0%,
+  50% {
     left: -4px;
     top: -4px;
     opacity: 0;
@@ -184,8 +164,12 @@ header nav::after {
     left: calc(100% - 2px);
     top: -4px;
   }
-  95% {
+  91% {
     transform: scale(2);
+  }
+  98% {
+    left: calc(100% - 2px);
+    top: -2px;
   }
   100% {
     left: calc(100% - 2px);
@@ -198,15 +182,15 @@ header nav::after {
   Navigation links 
   Custom "Neon Glow" font, bold, large size, transitions for hover.
 */
-nav a {
+a {
   position: relative;
   z-index: 1; /* Ensure it appears above the spark border. */
   text-align: center;
   text-decoration: none;
   font-family: "Neon Glow";
   font-weight: bold;
-  font-size: 40px;
-  padding: 10px 40px;
+  font-size: 3vw;
+  margin: 1vmin 1vmin 0.5vmin 1vmin;
   transition: color 0.2s ease;
 }
 
@@ -214,33 +198,30 @@ nav a {
   Inner <span> in nav links 
   Neon text using the --neon-text variable (default white).
 */
-nav a span {
+span {
   position: relative;
   display: inline-block;
   margin: 0 auto;
   color: var(--neon-text, #fff);
-  text-shadow:
-    0 0 5px var(--neon-text, #fff),
-    0 0 10px var(--neon-text, #fff),
-    0 0 20px var(--neon-text, #fff),
-    0 0 40px var(--neon-text, #fff);
+  text-shadow: 0 0 5px var(--neon-text, #fff), 0 0 10px var(--neon-text, #fff),
+    0 0 20px var(--neon-text, #fff), 0 0 40px var(--neon-text, #fff);
   transition: color 0.2s ease;
 }
 
 /* 
   Pseudo-elements (spark "dots") that scale on hover for a mini "pop."
 */
-nav a span::before,
-nav a span::after {
+span::before,
+span::after {
   content: "";
   position: absolute;
   border-radius: 50%;
-  filter: blur(0.7px);
+  filter: blur(0.1vmin);
   transform: scale(0);
   transition: 0.2s ease transform;
 }
 
-nav a span::before {
+span::before {
   top: -8px;
   left: -10px;
   width: 6px;
@@ -249,7 +230,7 @@ nav a span::before {
   z-index: 2;
 }
 
-nav a span::after {
+span::after {
   top: -4px;
   left: -4px;
   width: 4px;
@@ -268,10 +249,7 @@ nav a span::after {
   height: 3px;
   border-radius: 5px;
   filter: blur(1px);
-  transition: 
-    left 0.3s ease,
-    width 0.3s ease,
-    background 0.3s ease;
+  transition: left 0.3s ease, width 0.3s ease, background 0.3s ease;
 }
 
 /* 
@@ -292,5 +270,41 @@ nav a:hover span::after {
   Usually for page content, given a higher z-index if needed above other elements.
 */
 main {
-  z-index: 1000; /* Use only if you have elements beneath it that need layering. */
+  position: absolute;
+  z-index: 100; /* Ensure it is above the background canvas */
+  height: 80vmin;
+  width: 80vmax;
+  margin: 2vmin;
+  bottom: 0;
+  overflow-y: auto; /* Enables vertical scrolling within <main> */
+}
+
+/* WebKit scrollbar styling (for Chrome, Edge, Safari, Opera) */
+main::-webkit-scrollbar {
+  width: 12px; /* Adjust as needed */
+}
+
+main::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+main::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+}
+
+/* Firefox-specific scrollbar styling 
+(moz = Mozilla) */
+@-moz-document url-prefix() {
+  main {
+    scrollbar-color: rgba(0, 0, 0, 0.8) rgba(255, 255, 255, 0.2);
+    scrollbar-width: thin;
+  }
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
 }

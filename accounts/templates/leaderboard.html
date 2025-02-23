@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block title %}The AI-Quiz - Leaderboard{% endblock %}
 {% block content %}
 <div class="base-container leaderboard">
@@ -35,44 +34,5 @@
         </table>
     </div>
 </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    let starsHeader = document.getElementById("stars-header");
-    let isAverageMode = false;
-
-    starsHeader.addEventListener("click", function () {
-        let tbody = document.querySelector("table tbody");
-        let rows = Array.from(tbody.querySelectorAll("tr"));
-
-        // switch between "Stars" and "Average Stars per Game"
-        isAverageMode = !isAverageMode;
-        starsHeader.textContent = isAverageMode ? "Average Stars per Game" : "Stars";
-
-        // refresh value (stars)
-        rows.forEach(row => {
-            let starsCell = row.cells[3];
-            let originalStars = parseFloat(starsCell.dataset.originalStars);
-            let averageStars = parseFloat(starsCell.dataset.averageStars);
-            starsCell.textContent = isAverageMode ? averageStars.toFixed(2) : originalStars;
-        });
-
-        // Sort rows by value
-        let sortedRows = rows.slice().sort((a, b) => {
-            let aValue = parseFloat(a.cells[3].textContent);
-            let bValue = parseFloat(b.cells[3].textContent);
-            return bValue - aValue; // Absteigend sortieren
-        });
-
-        // refresh ranking 
-        sortedRows.forEach((row, index) => {
-            row.cells[0].textContent = index + 1;
-        });
-
-        // Add rows in new order
-        sortedRows.forEach(row => tbody.appendChild(row));
-    });
-});
-</script>
 {% endblock %}
 
