@@ -31,7 +31,7 @@
       <form
         hx-post="/start-result"
         hx-target="#swap-container"
-        hx-trigger="click from:input"
+        hx-trigger="click from:input, every 12s"
       >
         {% csrf_token %}
 

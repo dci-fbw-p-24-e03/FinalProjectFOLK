@@ -128,7 +128,8 @@ def game_start(request):
                 database_objet = Questions(question=question["question"], player=player)
                 if database_objet:
                     database_objet.save()
-
+                    
+        # Delete the session information at the end of the game.
         request.session["wrong_answers"] = []
         not_questions = []
         request.session["questions"] = []
