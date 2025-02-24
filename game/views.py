@@ -93,7 +93,7 @@ def game_start(request):
 
     # If the game has been played for 10 rounds then set the sessions data back to nill
     # and render the game-over.html last round!
-    elif len(previous_questions) >= 10:
+    elif len(previous_questions) >= 3:
 
         score = request.session.get("score")
 
@@ -121,11 +121,14 @@ def game_start(request):
             
         }
 
-        # store the questions asked during this game in the database
+        # store the questions asked during this game in the database and answered correctly
         for question in previous_questions:
             if user_pk:
                 player = CustomUser(pk=user_pk)
-                database_objet = Questions(question=question["question"], player=player)
+                print("wrong answers: ", wrong_answers)
+                wrong_questions = [answer_dict["question"] for answer_dict in wrong_answers]
+                if question not in wrong_questions:
+                    database_objet = Questions(question=question["question"], player=player)
                 if database_objet:
                     database_objet.save()
                     

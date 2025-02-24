@@ -59,7 +59,7 @@ def get_question(
                 },
             ],
             temperature=2,
-            max_completion_tokens=800,
+            max_completion_tokens=100,
             top_p=0.1,
             stream=True,
             stop=None,
