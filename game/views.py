@@ -125,7 +125,6 @@ def game_start(request):
         for question in previous_questions:
             if user_pk:
                 player = CustomUser(pk=user_pk)
-                print("wrong answers: ", wrong_answers)
                 wrong_questions = [answer_dict["question"] for answer_dict in wrong_answers]
                 if question not in wrong_questions:
                     database_objet = Questions(question=question["question"], player=player)
