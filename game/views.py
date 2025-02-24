@@ -60,20 +60,19 @@ def game_start(request):
     # Previous questions is a list of dictionaries, each dictionary comprising a previous question,
     # the possible answers and the correct answer.
     previous_questions = request.session.get("questions")
-    
-    
+
     # Retrieving the questions already asked by the user and stored in the Questions database
     user_pk = request.user.pk
     old_questions_iterator = Questions.objects.filter(player=user_pk)
     old_questions = [question.question for question in old_questions_iterator]
-    
+
     if previous_questions == None or len(previous_questions) == 0:
         not_questions = []
-        selected_topic = request.POST.get("topic") # Value from dropdown
-        custom_topic = request.POST.get("custom-topic") # Value from custom input field
-        topic=""
+        selected_topic = request.POST.get("topic")  # Value from dropdown
+        custom_topic = request.POST.get("custom-topic")  # Value from custom input field
+        topic = ""
         request.session["theme"] = request.POST.get("theme")
-        
+
         if selected_topic == None:
             # The user did NOT choose anything from the dropdown
             # => use whatever was typed in the custom input field
@@ -89,7 +88,6 @@ def game_start(request):
         request.session["score"] = 0
         request.session["topic"] = topic
         request.session["difficulty"] = difficulty
-        
 
     # If the game has been played for 10 rounds then set the sessions data back to nill
     # and render the game-over.html last round!
@@ -118,19 +116,22 @@ def game_start(request):
             "wrong_answers": wrong_answers,  # Now each entry includes an explanation
             "correct_answers_number": 10 - len(wrong_answers),
             "difficulty": request.session.get("difficulty"),
-            
         }
 
         # store the questions asked during this game in the database and answered correctly
         for question in previous_questions:
             if user_pk:
                 player = CustomUser(pk=user_pk)
-                wrong_questions = [answer_dict["question"] for answer_dict in wrong_answers]
+                wrong_questions = [
+                    answer_dict["question"] for answer_dict in wrong_answers
+                ]
                 if question not in wrong_questions:
-                    database_objet = Questions(question=question["question"], player=player)
+                    database_objet = Questions(
+                        question=question["question"], player=player
+                    )
                 if database_objet:
                     database_objet.save()
-                    
+
         # Delete the session information at the end of the game.
         request.session["wrong_answers"] = []
         not_questions = []
@@ -183,8 +184,7 @@ def game_start(request):
     theme = request.POST.get("theme")
     # Create a context dictionary by merging the dictionaries question and {"score": score}
     # into a single dictionary
-    context = question | {"score": score,
-                          "theme": theme}
+    context = question | {"score": score, "theme": theme}
     # Display the question and possible answers to the player in the game.html by replacing
     # the content within <div id="swap-container"> with the html of game-start.html
     return render(request, "game-start.html", context)
@@ -236,13 +236,12 @@ def start_result(request):
     correct_answer = last_question[correct_answer]
     correct_option = last_question["correct_answer"]
 
-    context = last_question | {"score": score,
-                               "submitted_answer" : submitted_answer,
-                               "correct_option" : correct_option,
-                               "result" : result,
-                               
-                               }
-
+    context = last_question | {
+        "score": score,
+        "submitted_answer": submitted_answer,
+        "correct_option": correct_option,
+        "result": result,
+    }
 
     return render(request, "start-result.html", context)
 
