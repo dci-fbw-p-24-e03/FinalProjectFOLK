@@ -1,71 +1,17 @@
-.base-container {
-  font-family: Arial, sans-serif;
-  /* padding: 40px; */
-  color: white;
-  width: fit-content;
-  /* align-self: stretch; */
-  /* margin: 0; */
-}
-
-.base-container h1 {
-  text-align: center;
-  font-family: "Pixelify Sans", sans-serif;
-  /* color: #fff; */
-  margin-bottom: 20px;
-  font-size: 3em;
-  text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #00ffff,
-    0 0 40px #00ffff, 0 0 50px #ffff00, 0 0 60px #ffff00;
-  animation: rainbow-glow 3s ease-in-out infinite;
-}
-
-@keyframes rainbow-glow {
-  0% {
-    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #00ffff,
-      0 0 40px #00ffff, 0 0 50px #ffff00, 0 0 60px #ffff00;
-  }
-  25% {
-    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ffff00,
-      0 0 40px #ffff00, 0 0 50px #00ff00, 0 0 60px #00ff00;
-  }
-  50% {
-    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #0000ff,
-      0 0 40px #0000ff, 0 0 50px #ff00ff, 0 0 60px #ff00ff;
-  }
-  75% {
-    text-shadow: 0 0 10px #0000ff, 0 0 20px #0000ff, 0 0 30px #ff0000,
-      0 0 40px #ff0000, 0 0 50px #ffff00, 0 0 60px #ffff00;
-  }
-  100% {
-    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #00ffff,
-      0 0 40px #00ffff, 0 0 50px #ffff00, 0 0 60px #ffff00;
-  }
-}
-
-/* .content-container {
+.content-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  overflow: auto;
-} */
-
-.content-container.transparent{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  gap: 1vmin;
 }
 
 .content-container h2 {
   font-size: 2em;
   text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
-  margin-bottom: 10px;
 }
 
 .product-category {
   display: flex;
   flex-wrap: wrap;
-  /* gap: 30px; */
-  /* margin-bottom: 20px; */
 }
 
 .product-box {
