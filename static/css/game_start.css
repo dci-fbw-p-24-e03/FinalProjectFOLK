@@ -73,6 +73,18 @@ body {
     opacity: 0%;
 }
 
+#player_2{
+    opacity: 0%;
+}
+
+#player_3{
+    opacity: 0%;
+}
+
+#player_4{
+    opacity: 0%;
+}
+
 .form{
     height: 100%;
 }
