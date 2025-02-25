@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from PIL import Image
 
 class CustomUser(AbstractUser):
     NATION_CHOICES = [
@@ -234,11 +235,19 @@ class CustomUser(AbstractUser):
         ('VU', 'Vanuatu'),
     ]
 
-    image = models.ImageField(upload_to="user_profile_images/", default="/static/assets/profile_placeholder.jpeg")
+    image = models.ImageField(upload_to="user_profile_images/", default="user_profile_images/profile_placeholder.jpeg")
     stars = models.IntegerField(null=True)
     coins = models.IntegerField(null=True)
     nation = models.CharField(max_length=2, choices=NATION_CHOICES, default='DE')
     average_stars_per_game = models.FloatField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.image:
+            img = Image.open(self.image.path)
+            if img.height > 300 or img.width > 300:
+                img = img.resize((300, 300))
+                img.save(self.image.path)
 
     def __str__(self):
         return self.username

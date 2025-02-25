@@ -135,5 +135,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 #media directory 
 
-MEDIA_URL = '/media/'  # This is the URL prefix for accessing media files
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # This is where uploaded files will be stored on the server
+MEDIA_URL = 'media/'  # This is the URL prefix for accessing media files
+MEDIA_ROOT = BASE_DIR / 'media'  # This is where uploaded files will be stored on the server
