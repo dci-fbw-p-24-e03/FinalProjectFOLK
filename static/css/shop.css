@@ -14,7 +14,7 @@
   flex-wrap: wrap;
 }
 
-.product-box {
+.product-category .product-box {
   width: 150px;
   height: 150px;
   background-color: rgba(0, 0, 0, 0.7);
@@ -27,6 +27,7 @@
   position: relative;
   overflow: visible;
   margin-bottom: 20px;
+  margin-right: 5%;
 }
 
 .product-box img {
@@ -45,8 +46,8 @@
 .hover-details {
   position: absolute;
   left: 50%;
-  top: -5%;
-  transform: translate(-50%, -50%);
+  top: -10px; 
+  transform: translateX(-50%); 
   width: 250px;
   min-height: 250px;
   background-color: rgba(0, 0, 0, 0.95);
