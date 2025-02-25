@@ -15,13 +15,13 @@
                 <label class="radio-label 
                 {% if correct_answer == 'A' %}correct_answer{% endif %}
                 {% if submitted_answer == 'A' and submitted_answer != correct_answer %}wrong_answer{% endif %}">
-              <input name="options" type="radio" id="option_1" value="A" /> {{ A }} 
+              <input class="answer-button" name="options" type="radio" id="option_1" value="A" /> {{ A }} 
               </label>
 
               <label class="radio-label 
               {% if correct_answer == 'B' %}correct_answer{% endif %}
               {% if submitted_answer == 'B' and submitted_answer != correct_answer %}wrong_answer{% endif %}">
-              <input name="options" type="radio" id="option_2" value="B" /> {{ B }}
+              <input class="answer-button" name="options" type="radio" id="option_2" value="B" /> {{ B }}
               </label>
 
             </div>
@@ -43,7 +43,11 @@
               <div class="footer_div">
                 <h2>{{ user.username }}</h2>
                 <img src="{% static 'assets/profile_placeholder.jpeg' %}" alt="male" />
-                <h2>Score: {{ score }}</h2>
+                <h2 id="result"
+                class="{% if result == '+5' %}score-positive{% elif result == '+0' %}score-negative{% endif %}"
+                data-base="{{ result|cut:'+' }}">
+              Score: {{ result }}
+            </h2>
               </div>
 
             </div>
@@ -53,13 +57,13 @@
             <label class="radio-label 
             {% if correct_answer == 'C' %}correct_answer{% endif %}
             {% if submitted_answer == 'C' and submitted_answer != correct_answer %}wrong_answer{% endif %}">
-              <input name="options" type="radio" id="option_1" value="C" /> {{ C }} 
+              <input class="answer-button" name="options" type="radio" id="option_1" value="C" /> {{ C }} 
               </label>
                
               <label class="radio-label 
               {% if correct_answer == 'D' %}correct_answer{% endif %}
               {% if submitted_answer == 'D' and submitted_answer != correct_answer %}wrong_answer{% endif %}">
-              <input name="options" type="radio" id="option_2" value="D" /> {{ D }}
+              <input class="answer-button" name="options" type="radio" id="option_2" value="D" /> {{ D }}
             </label>
 
             </div>

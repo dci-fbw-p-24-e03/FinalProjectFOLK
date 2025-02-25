@@ -218,7 +218,7 @@ def start_result(request):
         request.session["score"] = score
         result = "+5"
     else:
-        result = "0"
+        result = "+0"
         wrong_question = {
             "question": last_question["question"],
             "correct_answer": last_question[last_question["correct_answer"]],

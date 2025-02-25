@@ -1,17 +1,13 @@
-
-
-
 body {
     display: flex;
     justify-content: center; /* Centers horizontally */
-    align-items: flex-start; /* Vertical start at top */
-    height: 100vh; /* Full height of the viewport */
-    width: 100vw; /* Full width of the viewport */
+    align-items: center;     /* Centers vertically */
+    height: 100vh;           /* Full viewport height */
+    width: 100vw;            /* Full viewport width */
     font-family: Arial, Helvetica, sans-serif;
     color: white;
 }
 
-/* body styling depending on theme choice */
 .standard_arena {
     background: url("../assets/futuristic_arena.webp");
     background-size: cover;
@@ -22,25 +18,20 @@ body {
     background-size: cover;
 }
 
+.answers, .play_box {
+    /* This makes it 80% of the viewport width */
+    width: 80vw; 
 
-/* Answers container styled with modern, transparent overlay */
-.answers{
+    /* Optional: constrain the width so it doesn't get too small or too big */
+    min-width: 300px;  
+    max-width: 1000px; 
+
+    min-height: 70vh;
     padding: 5%;
+    margin: 2% auto;  /* 'auto' centers it horizontally */
+    box-sizing: border-box;  /* Includes padding in the width */
     background-color: rgba(0, 0, 0, 0.9);
     border-radius: 16px;
-    margin: 2%;
-    width: 100vh;
-    min-height: 70vh;
-}
-
-.play_box{
-    padding: 5%;
-    background-color: rgba(0, 0, 0, 0.9);
-    border-radius: 16px;
-    margin: 2%;
-    width: 100vh;
-    min-height: 70vh;
-
 }
 
 
@@ -94,6 +85,11 @@ input[type="radio"] {
     color: #fff;
     background-color: transparent;
     font-size: xx-large;
+}
+
+.radio-button:hover {
+
+background-color: #007bff;
 }
 
 /* Highlight style when a radio is selected */
@@ -213,3 +209,11 @@ img {
     height: 150px;
     border-radius: 8px;
 }
+
+.score-positive {
+    color: #45ce65;
+  }
+  
+  .score-negative {
+    color: #df0f0f;
+  }
