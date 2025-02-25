@@ -58,15 +58,6 @@
                 </div>
               </div>
 
-              <div class="footer_div">
-                <h2>{{ user.username }}</h2>
-                <img src="{% static 'assets/profile_placeholder.jpeg' %}" alt="male" />
-                <h2 id="result"
-                class="{% if result == '+5' %}score-positive{% elif result == '+0' %}score-negative{% endif %}"
-                data-base="{{ result|cut:'+' }}">
-              Score: {{ result }}
-            </h2>
-              </div>
 
             </div>
             
