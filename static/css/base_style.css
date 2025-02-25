@@ -14,19 +14,16 @@
   font-weight: 400;
   font-style: normal;
 }
-
 .space-mono-bold {
   font-family: "Space Mono", serif;
   font-weight: 700;
   font-style: normal;
 }
-
 .space-mono-regular-italic {
   font-family: "Space Mono", serif;
   font-weight: 400;
   font-style: italic;
 }
-
 .space-mono-bold-italic {
   font-family: "Space Mono", serif;
   font-weight: 700;
@@ -207,7 +204,7 @@ nav::after {
   Navigation links 
   Custom "Neon Glow" font, bold, large size, transitions for hover.
 */
-a {
+.base-nav a {
   position: relative;
   z-index: 1; /* Ensure it appears above the spark border. */
   text-align: center;
@@ -223,7 +220,7 @@ a {
   Inner <span> in nav links 
   Neon text using the --neon-text variable (default white).
 */
-span {
+.base-nav span {
   position: relative;
   display: inline-block;
   margin: 0 auto;
@@ -236,8 +233,8 @@ span {
 /* 
   Pseudo-elements (spark "dots") that scale on hover for a mini "pop."
 */
-span::before,
-span::after {
+.base-nav span::before,
+.base-nav span::after {
   content: "";
   position: absolute;
   border-radius: 50%;
@@ -246,7 +243,7 @@ span::after {
   transition: 0.2s ease transform;
 }
 
-span::before {
+.base-nav span::before {
   top: -8px;
   left: -10px;
   width: 6px;
@@ -255,7 +252,7 @@ span::before {
   z-index: 2;
 }
 
-span::after {
+.base-nav span::after {
   top: -4px;
   left: -4px;
   width: 4px;
@@ -297,12 +294,12 @@ nav a:hover span::after {
 main {
   position: absolute;
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   z-index: 100; /* Ensure it is above the background canvas */
   height: 80vmin;
   width: 80vmax;
-  padding: 2vmin;
+  margin: 2vmin;
   bottom: 0;
   overflow-y: auto; /* Enables vertical scrolling within <main> */
 }

@@ -1,6 +1,6 @@
 
 .buy_confirmation {
-    font-family: Arial, sans-serif;
+    font-family: "Space Mono", serif;
     background-color: black;
     padding: 20px;
     text-align: center;
@@ -21,7 +21,7 @@ h2 {
     color: white;
 }
 
-.product-box {
+#confirmation-box .product-box {
     width: 100%;  
     max-width: 500px;  
     margin: 0 auto 20px auto;
@@ -35,7 +35,7 @@ h2 {
     color: white;
 }
 
-.product-image {
+#confirmation-box .product-image {
     width: 100%;  
     height: auto;
     max-height: 350px;  
@@ -44,34 +44,34 @@ h2 {
     margin-bottom: 15px;
 }
 
-.product-details {
+#confirmation-box .product-details {
     text-align: center;
 }
 
-.product-details h3 {
+#confirmation-box .product-details h3 {
     font-size: 1.4em;
     margin: 10px 0;
 }
 
-.product-details p {
+#confirmation-box .product-details p {
     font-size: 1em;
     margin: 5px 0;
 }
 
-.product-details .price {
+#confirmation-box .product-details .price {
     font-weight: bold;
     font-size: 1.2em;
     color: #ff0;
 }
 
-.buttons {
+#confirmation-box .buttons {
     display: flex;
     flex-direction: column;  
     align-items: center;
     margin-top: 20px;
 }
 
-.btn {
+#confirmation-box .btn {
     background-color: #4CAF50;
     color: white;
     padding: 12px 20px;
@@ -85,14 +85,14 @@ h2 {
     transition: background-color 0.3s;
 }
 
-.btn:hover {
+#confirmation-box .btn:hover {
     background-color: #45a049;
 }
 
-.cancel-btn {
+#confirmation-box .cancel-btn {
     background-color: #f44336;
 }
 
-.cancel-btn:hover {
+#confirmation-box .cancel-btn:hover {
     background-color: #e53935;
 }
