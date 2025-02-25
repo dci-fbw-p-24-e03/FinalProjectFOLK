@@ -28,7 +28,19 @@
 
   <body class="{% if theme|lower == 'space' %}space_arena{% else %}standard_arena{% endif %}"></body>
 
-    <div id="swap-container">
+  <div id="swap-container">
+    <div class="player-div">
+
+      <div class="footer_div">
+        <h2>{{ user.username }}</h2>
+        <img src="{{ user.image }}" alt="male" />
+        <h2 id="result" class="score-positive" data-base="{{ score|cut:'+' }}">Score: {{ score }}</h2>
+      </div>
+              
+
+    </div>
+
+    <div >
       <form
         hx-post="/start-result"
         hx-target="#swap-container"
@@ -38,7 +50,7 @@
 
         <div class="play_box">
 
-          <div id="start-swap">
+          
             
             <div class="question_box"><h1 class="question">{{ question }}</h1></div>
 
@@ -68,13 +80,6 @@
                     </svg>
                   </div>
                 </div>
-
-                <div class="footer_div">
-                  <h2>{{ user.username }}</h2>
-                  <img src="{% static 'assets/profile_placeholder.jpeg' %}" alt="male" />
-                  <h2>Score: {{ score }}</h2>
-                </div>
-
               </div>
               
               <div class="answer_pair">
@@ -90,11 +95,20 @@
               </div>
 
           </div>
-
-          </div>
         </div>
 
       </form>
     </div>
+
+    <div class="player-div">
+
+      <div class="footer_div">
+        <h2>{{ user.username }}</h2>
+        <img src="{% static 'assets/profile_placeholder.jpeg' %}" alt="male" />
+        <h2 id="result" class="score-positive" data-base="{{ score|cut:'+' }}">Score: {{ score }}</h2>
+      </div>
+    </div>
+
+  </div>
   </body>
 </html>

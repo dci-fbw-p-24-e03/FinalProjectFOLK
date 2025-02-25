@@ -1,11 +1,24 @@
 {% load static %}
 
+<div class="player-div">
+
+  <div class="footer_div">
+    <h2>{{ user.username }}</h2>
+    <img src="{{ user.image }}" alt="male" />
+    <h2 id="result" class="score-positive" data-base="{{ score|cut:'+' }}">Score: {{ score }}</h2>
+  </div>
+          
+
+</div>
+
+<div>
+
+
 <form hx-post="/game-start" hx-trigger="every 4s" hx-target = "#swap-container">
     {% csrf_token %}
 
     <div class="play_box">
 
-        <div id="start-swap">
           
           <div class="question_box"><h1 class="question">{{ question }}</h1></div>
 
@@ -40,15 +53,6 @@
                 </div>
               </div>
 
-              <div class="footer_div">
-                <h2>{{ user.username }}</h2>
-                <img src="{% static 'assets/profile_placeholder.jpeg' %}" alt="male" />
-                <h2 id="result"
-                class="{% if result == '+5' %}score-positive{% elif result == '+0' %}score-negative{% endif %}"
-                data-base="{{ result|cut:'+' }}">
-              Score: {{ result }}
-            </h2>
-              </div>
 
             </div>
             
@@ -70,11 +74,17 @@
 
         </div>
 
-        </div>
       </div>
+      </div>
+  
+    </div>
+<div class="player-div">
 
-
-
+  <div class="footer_div">
+    <h2>{{ user.username }}</h2>
+    <img src="{{ user.image }}" alt="male" />
+    <h2 id="result" class="score-positive" data-base="{{ score|cut:'+' }}">Score: {{ score }}</h2>
+  </div>
 
 
 

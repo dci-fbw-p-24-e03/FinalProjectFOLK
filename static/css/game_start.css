@@ -4,7 +4,7 @@ html {
 
 body {
     display: flex;
-    justify-content: center; /* Centers horizontally */
+    justify-content: space-around;
     align-items: center;     /* Centers vertically */
     height: 100vh;           /* Full viewport height */
     width: 100vw;            /* Full viewport width */
@@ -20,6 +20,20 @@ body {
 .space_arena {
     background: url("../assets/space_arena.webp");
     background-size: cover;
+}
+
+#swap-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.player-div{
+    height: 90%;
+    width: 80%;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .answers, .play_box {
