@@ -26,14 +26,25 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
     width: 100%;
+    height: 100%;
 }
 
 .player-div{
-    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     width: 80%;
     padding-left: 5%;
     padding-right: 5%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.form{
+    height: 100%;
 }
 
 .answers, .play_box {
