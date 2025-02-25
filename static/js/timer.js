@@ -1,5 +1,5 @@
 // Global variable to alternate between 10 and 3 seconds.
-let currentDuration = 10;
+let currentDuration = 15;
 // Global bonus variable, starts at 12 when a new question appears
 let bonusPoints = 12;
 
@@ -36,7 +36,7 @@ function initializeTimer() {
   if (timerElement) {
     runTimer(timerElement, currentDuration);
     // Toggle the duration for the next run.
-    currentDuration = currentDuration === 10 ? 3 : 10;
+    currentDuration = currentDuration === 15 ? 3 : 15;
   }
 }
 
@@ -52,7 +52,7 @@ document.addEventListener('htmx:afterSwap', function(event) {
   const timerElement = document.querySelector('.timer');
   if (timerElement) {
     runTimer(timerElement, currentDuration);
-    currentDuration = currentDuration === 10 ? 3 : 10;
+    currentDuration = currentDuration === 15 ? 3 : 15;
   }
 });
 
@@ -66,10 +66,10 @@ document.querySelectorAll('.answer-button').forEach(button => {
 
       const timeLeftElement = document.getElementById('timeLeft');
       if (timeLeftElement) {
-        const timeLeft = parseInt(timeLeftElement.textContent, 10);
+        const timeLeft = parseInt(timeLeftElement.textContent, 15);
         console.log("Time left:", timeLeft); // ✅ Check time value
 
-        let baseScore = parseInt(resultElement.getAttribute('data-base'), 10);
+        let baseScore = parseInt(resultElement.getAttribute('data-base'), 15);
         console.log("Base score:", baseScore); // ✅ Check base score
 
         let newScore = baseScore + timeLeft;
