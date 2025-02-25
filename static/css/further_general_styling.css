@@ -1,7 +1,8 @@
-.base-container {
+.base-container,
+.base-container a {
   display: flex;
   flex-direction: column;
-  font-family: Arial, sans-serif;
+  font-family: "Space Mono", serif;
   color: white;
 }
 
@@ -13,6 +14,10 @@
   text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #00ffff,
     0 0 40px #00ffff, 0 0 50px #ffff00, 0 0 60px #ffff00;
   animation: rainbow-glow 3s ease-in-out infinite;
+}
+
+.base-container a {
+  font-size: 2vmin;
 }
 
 @keyframes rainbow-glow {
@@ -38,27 +43,11 @@
   }
 }
 
-.space-mono-regular {
-  font-family: "Space Mono", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.space-mono-bold {
-  font-family: "Space Mono", serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.space-mono-regular-italic {
-  font-family: "Space Mono", serif;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.space-mono-bold-italic {
-  font-family: "Space Mono", serif;
-  font-weight: 700;
-  font-style: italic;
+.content-container-shadow {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 4%;
+  padding-top: 1.5%;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 

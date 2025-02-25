@@ -8,6 +8,31 @@
   src: url(https://assets.codepen.io/230569/NeonGlow-8VLz.ttf);
 }
 
+/* Font setting "Space Mono" */
+.space-mono-regular {
+  font-family: "Space Mono", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.space-mono-bold {
+  font-family: "Space Mono", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.space-mono-regular-italic {
+  font-family: "Space Mono", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.space-mono-bold-italic {
+  font-family: "Space Mono", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
 /* 
   General Reset 
   Removes default padding/margin and uses border-box for predictable sizing.
@@ -271,10 +296,13 @@ nav a:hover span::after {
 */
 main {
   position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   z-index: 100; /* Ensure it is above the background canvas */
   height: 80vmin;
   width: 80vmax;
-  margin: 2vmin;
+  padding: 2vmin;
   bottom: 0;
   overflow-y: auto; /* Enables vertical scrolling within <main> */
 }
