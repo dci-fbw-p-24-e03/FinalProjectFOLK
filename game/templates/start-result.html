@@ -2,13 +2,13 @@
 
 <div class="player-div">
 
-  <div class="footer_div">
+  <div class="footer_div" id="player_1">
     <h2>{{ user.username }}</h2>
     <img src="{{ user.image }}" alt="male" />
     <h2 id="result" class="score-positive" data-base="{{ score|cut:'+' }}">Score: {{ score }}</h2>
   </div>
     
-  <div class="footer_div">
+  <div class="footer_div" id="player_2">
     <h2>{{ user.username }}</h2>
     <img src="{{ user.image }}" alt="male" />
     <h2 id="result" class="score-positive" data-base="{{ score|cut:'+' }}">Score: {{ score }}</h2>
@@ -85,14 +85,14 @@
     </div>
 <div class="player-div">
 
-  <div class="footer_div">
+  <div class="footer_div" id="player_3">
     <h2>{{ user.username }}</h2>
     <img src="{{ user.image }}" alt="male" />
     <h2 id="result" class="score-positive" data-base="{{ score|cut:'+' }}">Score: {{ score }}</h2>
   </div>
 
 
-  <div class="footer_div">
+  <div class="footer_div" id="player_4">
     <h2>{{ user.username }}</h2>
     <img src="{{ user.image }}" alt="male" />
     <h2 id="result" class="score-positive" data-base="{{ score|cut:'+' }}">Score: {{ score }}</h2>
