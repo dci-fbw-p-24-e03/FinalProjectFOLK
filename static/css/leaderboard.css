@@ -42,12 +42,13 @@
   }
 } */
 
-table {
+table{
   border-collapse: collapse;
   width: 70vw;
   table-layout: fixed;
   border-radius: 16px;
   overflow: hidden;
+  font-family: "Space Mono", serif;
 }
 
 th:nth-child(1) {
