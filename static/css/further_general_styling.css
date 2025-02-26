@@ -1,10 +1,12 @@
 .base-container,
 .base-container a,
-.base-container input {
+.base-container input,
+.base-container button {
   display: flex;
   flex-direction: column;
   font-family: "Space Mono", serif;
   color: white;
+  text-decoration: none;
 }
 
 .base-container h1 {
@@ -85,14 +87,18 @@ h4 {
   margin: 10px 0;
 }
 
-.update-form {
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 30px;
+form {
   border-radius: 10px;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  width: 70vw;
-  max-width: 600px;
-  color: white;
-  margin: 0 auto;
+  gap: 10px; /* Evenly spaces form elements */
+  width: 500px;
+}
+
+select, input {
+  font-family: "Space Mono", serif;
+  text-align: center;
+  border-radius: 1%;
 }

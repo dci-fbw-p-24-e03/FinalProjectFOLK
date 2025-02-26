@@ -2,7 +2,7 @@
     display: inline-block;
     margin-top: 15px;
     padding: 10px 15px;
-    background-color: #4CAF50;
+    background-color: rgb(175, 16, 16);
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -10,7 +10,7 @@
 }
 
 .update-button:hover {
-    background-color: #4595a0;
+    background-color: green;
 }
 
 .profile img {

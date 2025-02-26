@@ -1,12 +1,7 @@
-{% extends 'base.html' %}
-{% block title %} The AI-Quiz - Update Profile {% endblock %}
-{% block content %}
-
 <div class="base-container">
     <div class="content-container-shadow profile-update">
         <h1>Update Your Profile</h1>
         <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
 
             <!-- Username -->
             <label for="id_username">Username:</label>
@@ -94,5 +89,3 @@
         </form>
     </div>
 </div>
-
-{% endblock %}

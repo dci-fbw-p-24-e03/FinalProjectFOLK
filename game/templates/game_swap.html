@@ -1,12 +1,13 @@
-<div class="topic-chosing">
-  <form method="post" action="{% url 'game_start' %}">
-    {% csrf_token %}
-    <!--dropdown container for pre-defined quiz topics-->
-    <h2>AI QUIZ</h2>
-    <div class="dropdown-container">
+<div class="base-container quiz-settings">
+  <div class="content-container-shadow quiz-settings">
+    <h1>AI QUIZ</h1>
+    <form method="post" action="{% url 'game_start' %}">
+      {% csrf_token %}
+
+      <!--dropdown container for pre-defined quiz topics-->
       <label for="topic">Choose Topic:</label>
       <select name="topic" id="topic" onchange="toggleFields()">
-        <option value="">Topic</option>
+        <option value="">--Choose a Topic--</option>
         <option value="anything">Anything</option>
         <option value="sport">Sport</option>
         <option value="history">History</option>
@@ -14,30 +15,30 @@
         <option value="geography">Geography</option>
       </select>
       <!--input field for custom quiz topic-->
-      <div class="input-field">
-        <label for="custom-topic">Or type a new Topic!</label>
-        <input
-          type="text"
-          name="custom-topic"
-          id="custom-topic"
-          placeholder="Type Topic here"
-          oninput="toggleFields()"
-        />
-      </div>
+      <label for="custom-topic">Or type a new Topic:</label>
+      <input
+        type="text"
+        name="custom-topic"
+        id="custom-topic"
+        placeholder="--Type Topic here--"
+        oninput="toggleFields()"
+      />
       <label for="difficulty">Choose Difficulty:</label>
-      <select name="difficulty" onchange="toggleFields()">
-        <option value="">Difficulty</option>
+      <select name="difficulty">
+        <option value="">--Choose Difficulty--</option>
         <option value="easy">Easy</option>
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
       </select>
+
       <label for="theme">Choose Theme:</label>
       <select name="theme">
-        <option value="">Theme</option>
+        <option value="">--Choose Background Theme--</option>
         <option value="AI-Quiz">AI-Quiz</option>
         <option value="space">Space</option>
       </select>
-      <button type="submit">Play</button>
-    </div>
-  </form>
+
+      <button type="submit">Let's Play!</button>
+    </form>
+  </div>
 </div>

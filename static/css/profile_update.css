@@ -1,42 +1,32 @@
-.form-group {
-    margin-bottom: 20px;
+.profile-update label {
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
-.form-group label {
-    font-size: 1.2em;
-    color: white;
-    display: block;
-    margin-bottom: 8px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
+.profile-update select{
     border-radius: 5px;
-    border: 1px solid #ddd;
-    background-color: #333;
-    color: white;
-    font-size: 1em;
+    font-size: 18px;
+    height: 45px;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+.profile-update select:focus{
     outline: none;
     border: 1px solid #00ffff;
     background-color: #444;
 }
-
-.form-group .error {
+#img-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.profile-update .error {
     color: red;
     font-size: 0.9em;
     margin-top: 5px;
 }
 
-.form-group button {
+.profile-update button,
+.cancel-button {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -48,15 +38,15 @@
     margin-top: 20px;
 }
 
-.form-group button:hover {
+.profile-update button:hover {
     background-color: #45a049;
 }
 
-.form-group .cancel-button {
+.profile-update .cancel-button {
     background-color: #f44336;
-    margin-left: 10px;
+    text-decoration: none;
 }
 
-.form-group .cancel-button:hover {
+.profile-update .cancel-button:hover {
     background-color: #e53935;
 }
