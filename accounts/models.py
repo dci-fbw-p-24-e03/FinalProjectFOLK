@@ -240,6 +240,7 @@ class CustomUser(AbstractUser):
     coins = models.IntegerField(null=True)
     nation = models.CharField(max_length=2, choices=NATION_CHOICES, default='DE')
     average_stars_per_game = models.FloatField(null=True, blank=True)
+    games_played = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
