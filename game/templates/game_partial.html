@@ -2,9 +2,8 @@
   <form method="post" action="{% url 'game_start' %}">
     {% csrf_token %}
     <!--dropdown container for pre-defined quiz topics-->
-    <h2>AI QUIZ</h2> 
+    <h2>AI QUIZ</h2>
     <div class="dropdown-container">
-     
       <label for="topic">Choose Topic:</label>
       <select name="topic" id="topic" onchange="toggleFields()">
         <option value="">Topic</option>
@@ -14,7 +13,7 @@
         <option value="art">Art</option>
         <option value="geography">Geography</option>
       </select>
-       <!--input field for custom quiz topic-->
+      <!--input field for custom quiz topic-->
       <div class="input-field">
         <label for="custom-topic">Or type a new Topic!</label>
         <input
@@ -32,20 +31,13 @@
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
       </select>
-
-    </select>
-
-    <label for="theme">Choose Theme:</label>
-    <select name="theme">
-      <option value="">Theme</option>
-      <option value="AI-Quiz">AI-Quiz</option>
-      <option value="space">Space</option>
-      
-    </select>
-
+      <label for="theme">Choose Theme:</label>
+      <select name="theme">
+        <option value="">Theme</option>
+        <option value="AI-Quiz">AI-Quiz</option>
+        <option value="space">Space</option>
+      </select>
       <button type="submit">Play</button>
     </div>
-  
-
   </form>
 </div>

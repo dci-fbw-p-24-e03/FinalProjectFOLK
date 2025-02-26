@@ -299,7 +299,7 @@ main {
   z-index: 100; /* Ensure it is above the background canvas */
   height: 80vmin;
   width: 80vmax;
-  margin: 2vmin;
+  padding: 2vmin;
   bottom: 0;
   overflow-y: auto; /* Enables vertical scrolling within <main> */
 }
