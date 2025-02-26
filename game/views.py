@@ -120,6 +120,24 @@ def game_start(request):
                 question_text, "No explanation available."
             )
 
+        # Update the logged-in user's coins and stars
+        if request.user.is_authenticated:
+            user = request.user
+            # If stars or coins are None, start from 0
+            user.stars = (user.stars or 0) + score  # add stars
+            user.coins = (user.coins or 0) + score  # add coins 
+            
+            # Update games played and average stars per game
+            previous_games = user.games_played  # Number of games played so far
+            #calculate new average
+            if previous_games:
+                user.average_stars_per_game = ((user.average_stars_per_game or 0) * previous_games + score) / (previous_games + 1)
+            else:
+                user.average_stars_per_game = score  # First game, so the average equals the score
+            # Increment games played counter
+            user.games_played = previous_games + 1  
+            user.save()
+
         context = {
             "score": score,
             "username": CustomUser(pk=user_pk).username,
