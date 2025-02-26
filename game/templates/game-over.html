@@ -16,13 +16,18 @@
 
 <div class="answers">
 
-<h1>Your final score is {{score}} Points</h1>
-<div>
-    <p>Correct Answers:  {{ correct_answers_number }} / 10</p>
-    <button id = toggleButton class = "futuristic-button explanations-button" onclick="toggleExplanations()">Explain Wrong Answers</button>
+    <h1>Summary</h1>
+<div class=" summary">
+<h2>Topic: {{ selected_topic|default:"General" }}</h2>
+<h2>Difficulty: {{ difficulty|default:"easy" }}</h2>
+<h2>Correct Answers:  {{ correct_answers_number }} / 10</h2>    
+<h2>Stars earned : {{score}} </h2>
+<h2>Coins earned : {{ score }}</h2>
 </div>
 
-
+<div>    
+    
+</div>
 
 <div id = "explanations" class = "explanations">
 {% if wrong_answers %}
@@ -40,16 +45,17 @@
 {% endif %}
 </div>
 
-<h2>Coins earned : {{ score }}</h2>
+
 
 <div class = "game_over_buttons">
 <!-- Play Again Form -->
-<form action="/game-start" method="post">
+<form action="/game/" method="post">
     {% csrf_token %}
     <input type="hidden" name="topic" value="{{ selected_topic }}">
     <input type="hidden" name="difficulty" value="{{ difficulty }}">
     <button class = "futuristic-button" type="submit">Play again</button>
 </form>
+<button id = toggleButton class = "futuristic-button explanations-button" onclick="toggleExplanations()">Explain Wrong Answers</button>
 <button class = "futuristic-button" type="button" onclick="window.location.href='/'">Back</button>
 </div>
 <!-- Back Button -->

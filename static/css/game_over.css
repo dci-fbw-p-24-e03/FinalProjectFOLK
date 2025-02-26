@@ -5,6 +5,8 @@
 
 .game_over_buttons{
 
+
+    padding-top: 5%;
     display: flex;
     padding-bottom: 2% ;
     align-items: center;
@@ -79,4 +81,13 @@
     background: linear-gradient(90deg, #ffb143, #ff8b2c);
     box-shadow: 0 0 20px rgb(255, 208, 202);
     transform: scale(1.05);
+}
+
+.summary {
+    padding-top: 4%;
+    text-align: left;
+}
+h1{
+
+    text-align: center;
 }

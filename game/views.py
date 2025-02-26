@@ -81,6 +81,7 @@ def game_start(request):
             # The user did NOT type a custom topic (they left the placeholder?)
             # => use the dropdown topic
             topic = selected_topic
+        print(topic)
         difficulty = request.POST.get("difficulty")
         # Add the posted information to the "session". 'request.session' is a dictionary for storing information
         # used during the course of the game. The information is stored in a cooky in the front end.
@@ -137,10 +138,10 @@ def game_start(request):
         not_questions = []
         request.session["questions"] = []
         request.session["score"] = 0
-        if request.session.get("topic") != None:
-            del request.session["topic"]
-        if request.session.get("difficulty") != None:
-            del request.session["difficulty"]
+        # if request.session.get("topic") != None:
+        #     del request.session["topic"]
+        # if request.session.get("difficulty") != None:
+        #     del request.session["difficulty"]
 
         return render(request, "game-over.html", context)
 
@@ -205,7 +206,7 @@ def start_result(request):
     if previous_questions:
         last_question = previous_questions[-1]
     else:
-        last_question = []
+        last_question = {}
 
     if last_question:
         correct_answer = last_question["correct_answer"]
@@ -235,12 +236,15 @@ def start_result(request):
 
     correct_answer = last_question[correct_answer]
     correct_option = last_question["correct_answer"]
-
+    print(last_question)
+    print(request.session.get("topic"))
     context = last_question | {
         "score": score,
         "submitted_answer": submitted_answer,
         "correct_option": correct_option,
         "result": result,
+        "topic" : request.session.get("topic"),
+        "difficulty" : request.session.get("difficulty"),
     }
 
     return render(request, "start-result.html", context)
