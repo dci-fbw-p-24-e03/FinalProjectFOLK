@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import CustomUser
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth import login, logout
 from .form import CustomUserCreationForm, UserUpdateForm
@@ -75,19 +76,19 @@ class LeaderboardListView(ListView):
 # to not reload the entire page)
 
 
-def leaderboard_partial(request):
+def leaderboard_swap(request):
     users = CustomUser.objects.all().order_by("-stars")
     return render(
         request,
-        template_name="leaderboard_partial.html",
+        template_name="leaderboard_swap.html",
         context={"users": users},
     )
 
-def login_partial(request):
+def login_swap(request):
     if request.method == "GET":
         # Just render the partial with an empty form
         form = AuthenticationForm()
-        return render(request, 'login_partial.html', {'form': form})
+        return render(request, 'login_swap.html', {'form': form})
 
     elif request.method == "POST":
         # Attempt to authenticate & login
@@ -100,8 +101,24 @@ def login_partial(request):
             response['HX-Redirect'] = reverse('user_details', args=[user.username])
             return response
         # If form is not valid, re-render partial with errors:
-        return render(request, 'login_partial.html', {'form': form})
+        return render(request, 'login_swap.html', {'form': form})
 
-def userdetail_partial(request):
+
+def userdetail_swap(request):
     user = request.user
-    return render(request, 'profile_partial.html', {'user': user})
+    return render(request, 'profile_swap.html', {'user': user})
+
+@login_required
+def userupdate_swap(request):
+    user = request.user  # Hole den aktuellen Benutzer
+    
+    if request.method == "POST":
+        form = UserUpdateForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse("home_view"))  # Nach erfolgreichem Update zur Startseite
+    else:
+        form = UserUpdateForm(instance=user)  # Lade das Formular mit bestehenden Werten
+
+    return render(request, "profile_update_swap.html", {"form": form})
+

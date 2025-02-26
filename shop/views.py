@@ -51,10 +51,10 @@ def confirm_purchase(request, product_id):
 # to not reload the entire page)
 
 
-def shop_partial(request):
+def shop_swap(request):
     products = Product.objects.all()
     return render(
         request,
-        template_name="shop_partial.html",
+        template_name="shop_swap.html",
         context={"products": products},
     )

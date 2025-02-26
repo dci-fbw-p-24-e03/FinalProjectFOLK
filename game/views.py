@@ -254,7 +254,7 @@ def start_result(request):
 # to not reload the entire page)
 
 
-def game_settings_partial(request):
+def game_settings_swap(request):
     """Render Opening Page of Game
 
     Args:
@@ -283,4 +283,4 @@ def game_settings_partial(request):
     if request.session.get("difficulty") != None:
         del request.session["difficulty"]
 
-    return render(request, "game_partial.html")
+    return render(request, "game_swap.html")

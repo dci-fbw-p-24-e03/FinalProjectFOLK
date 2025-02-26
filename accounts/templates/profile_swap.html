@@ -1,6 +1,3 @@
-{% extends 'base.html' %} {% load static %} {% block title %} The AI-Quiz -
-Profile {% endblock %} {% block content %}
-
 <div class="base-container">
   <div class="content-container-shadow profile">
     <h1>Welcome to {{ user.username }}'s Profile</h1>
@@ -17,7 +14,7 @@ Profile {% endblock %} {% block content %}
     <!-- Always show Nation -->
 
     {% if user.is_authenticated %} {% if user == request.user %}
-    <h4><span>Email: </span> {{ user.email }}</h3>
+    <h4><span>Email: </span> {{ user.email }}</h4>
     <!-- Show Email only if logged in and it's their own profile -->
     <h4><span>Coins: </span> {{ user.coins }}</h4>
     <!-- Show Coins only if logged in and it's their own profile -->
@@ -33,16 +30,9 @@ Profile {% endblock %} {% block content %}
     <!-- Show Update Profile button only for own profile -->
     {% endif %} {% endif %}
     <div>
-      <img
-        src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'assets/profile_placeholder.jpeg' %}{% endif %}"
-        alt="Profile image"
-        width="300"
-        height="300"
-      />
+     {% if user.image %}
+      <img src="{{ user.image.url }}" alt="User Image" />
+      {% endif %}
     </div>
   </div>
-
-
 </div>
-
-{% endblock %}

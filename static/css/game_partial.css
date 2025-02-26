@@ -5,46 +5,18 @@
     height: 100vh; /* Ensure the container takes up full height */
 }
 
-.quiz-settings {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%; /* Centering vertically */
-    width: 100%;
-    margin-top: 100%;
-    margin: 0%;
-    border-color: red;
-}
-
-.quiz-settingsg h1{
+.quiz-settings h1{
     color: red;
-    margin-bottom: 10%;
-    margin-top: 30%;
     font-size: 5em;
 }
 
 .quiz-settings form {
-    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Evenly spaces form elements */
+    gap: 10px; /* Evenly spaces form elements */
     width: 500px;
-}
-
-.quiz-settings .dropdown-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-}
-
-.quiz-settings .input-field {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
 }
 
 .quiz-settings label {
@@ -53,20 +25,17 @@
 }
 
 .quiz-settings select, input{
-    padding: 2px;
     border-radius: 5px;
-    border: 1px solid #ccc;
     font-size: 18px;
     height: 45px;
-
 }
 
 .quiz-settings button{
-    margin-top: 40px;
-    padding: 12px;
+    margin: 5%;
+    border: none;
     border-radius: 5px;
-    border: 1px solid #ccc;
     font-size: 20px;
+    justify-content: center;
     height: 90px;
     background-color: rgb(175, 16, 16);
 }

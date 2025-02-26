@@ -6,5 +6,5 @@ urlpatterns = [
     path("game-start", game_start, name="game_start"),
     path("start-result", start_result, name="start_result"),
     #path('game-over', game_over, "game_over"),
-    path("game-settings-partial/", game_settings_partial, name="game_settings_partial"),
+    path("game-settings-swap/", game_settings_swap, name="game_settings_swap"),
 ]

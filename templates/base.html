@@ -44,7 +44,7 @@
         -->
         <a
           href="{% url 'game_view' %}"
-          hx-get="{% url 'game_settings_partial' %}"
+          hx-get="{% url 'game_settings_swap' %}"
           hx-target="#content-area"
           hx-swap="innerHTML"
           hx-push-url="{% url 'game_view' %}"
@@ -53,7 +53,7 @@
         >
         <a
           href="{% url 'leaderboard' %}"
-          hx-get="{% url 'leaderboard_partial' %}"
+          hx-get="{% url 'leaderboard_swap' %}"
           hx-target="#content-area"
           hx-swap="innerHTML"
           hx-push-url="{% url 'leaderboard' %}"
@@ -62,7 +62,7 @@
         >
         <a
           href="{% url 'shop_view' %}"
-          hx-get="{% url 'shop_partial' %}"
+          hx-get="{% url 'shop_swap' %}"
           hx-target="#content-area"
           hx-swap="innerHTML"
           hx-push-url="{% url 'shop_view' %}"
@@ -71,7 +71,7 @@
         {% if request.user.is_authenticated %}
         <a
           href="{% url 'user_details' user.username %}"
-          hx-get="{% url 'profile_partial' %}"
+          hx-get="{% url 'profile_swap' %}"
           hx-target="#content-area"
           hx-swap="innerHTML"
           hx-push-url="{% url 'user_details' request.user.username %}"
@@ -81,7 +81,7 @@
         {% else %}
         <a
           href="{% url 'login_view' %}"
-          hx-get="{% url 'login_partial' %}"
+          hx-get="{% url 'login_swap' %}"
           hx-target="#content-area"
           hx-swap="innerHTML"
           hx-push-url="{% url 'login_view' %}"
