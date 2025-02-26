@@ -1,36 +1,4 @@
-
-.profile {
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-    text-align: center;
-    width: 70vw;
-    max-width: 600px;
-    color: white;
-}
-
-h1 {
-    font-family: 'Pixelify Sans', sans-serif;
-    font-size: 2.5em;
-    text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
-    animation: rainbow-glow 3s ease-in-out infinite;
-}
-
-@keyframes rainbow-glow {
-    0%   { text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff; }
-    50%  { text-shadow: 0 0 10px #00ff00, 0 0 20px #ffff00; }
-    100% { text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff; }
-}
-
-h3, h4 {
-    font-size: 1.2em;
-    font-family: "Space Mono", serif;
-    text-shadow: 0 0 5px #00ffff;
-    margin: 10px 0;
-}
-
-.details {
+.update-button {
     display: inline-block;
     margin-top: 15px;
     padding: 10px 15px;
@@ -41,8 +9,8 @@ h3, h4 {
     transition: background-color 0.3s ease;
 }
 
-.details:hover {
-    background-color: #45a049;
+.update-button:hover {
+    background-color: #4595a0;
 }
 
 .profile img {
