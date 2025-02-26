@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .ai import get_question, get_explanations
 from .models import Questions
 from accounts.models import CustomUser
-
+from datetime import datetime
 # Create your views here.
 
 
@@ -57,9 +57,18 @@ def game_start(request):
         is transmitted to the start_result view. The target of this htmx request is again the swap-container.
     """
 
+    # Record time, when the game starts
+    now = datetime.now()
+    # Transform datetime object into string
+    pattern = "%d/%m/%Y, %H:%M:%S%f"
+    now = now.strftime(pattern)
+    # Store start time in the session
+    request.session["start_time"] = now
+    
     # Previous questions is a list of dictionaries, each dictionary comprising a previous question,
     # the possible answers and the correct answer.
     previous_questions = request.session.get("questions")
+    
 
     # Retrieving the questions already asked by the user and stored in the Questions database
     user_pk = request.user.pk
@@ -97,6 +106,7 @@ def game_start(request):
         score = request.session.get("score")
 
         wrong_answers = request.session.get("wrong_answers", [])
+        number_wrong_answers = len(wrong_answers)
 
         # Get explanations
         explanations = get_explanations(
@@ -117,6 +127,7 @@ def game_start(request):
             "wrong_answers": wrong_answers,  # Now each entry includes an explanation
             "correct_answers_number": 10 - len(wrong_answers),
             "difficulty": request.session.get("difficulty"),
+            "number_wrong_answers": number_wrong_answers,
         }
 
         # store the questions asked during this game in the database and answered correctly
@@ -202,6 +213,20 @@ def start_result(request):
         The container comprises the correct answer as well as the resulting score of the user.
 
     """
+    
+    # Record time until the start result is called = time for chosing the question
+    now = datetime.now()
+    
+    # Retrieve time from session for starting the game and transform into a datetime object
+    then = request.session.get("start_time")
+    pattern = "%d/%m/%Y, %H:%M:%S%f"
+    then = datetime.strptime(then, pattern)
+    
+    # Calculate the time difference in seconds
+    time_difference = now - then
+    time_difference = time_difference.total_seconds()
+    time_difference = round(time_difference)
+    
     previous_questions = request.session.get("questions")
     if previous_questions:
         last_question = previous_questions[-1]
@@ -215,7 +240,7 @@ def start_result(request):
 
     score = request.session.get("score")
     if submitted_answer == correct_answer:
-        score += 5
+        score += 20 - time_difference
         request.session["score"] = score
         result = "+5"
     else:
