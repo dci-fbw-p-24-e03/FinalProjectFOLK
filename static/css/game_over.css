@@ -56,10 +56,10 @@
     animation: glow 1.5s infinite alternate;
 }
 
-.explanations {
+/* .explanations {
 
     display : none
-}
+} */
 
 /* copying initial styling to just give it another color */
 
@@ -90,4 +90,23 @@
 h1{
 
     text-align: center;
+}
+
+.carousel-item{
+
+    background-color: red;
+}
+
+.carousel-inner {
+
+    background-color: blue;
+}
+
+.carousel {
+    max-width: 600px; /* Set a maximum width for the carousel */
+    margin: 20px auto; /* Center the carousel */
+    border: 1px solid #ddd; /* Add a border around the carousel */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Prevent overflow of content */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
