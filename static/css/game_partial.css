@@ -5,7 +5,7 @@
     height: 100vh; /* Ensure the container takes up full height */
 }
 
-.topic-chosing{
+.quiz-settings {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -16,19 +16,14 @@
     border-color: red;
 }
 
-.topic-chosing h2{
+.quiz-settingsg h1{
     color: red;
-    font-family: "Pixelify Sans", sans-serif;
-    text-align: center;
     margin-bottom: 10%;
     margin-top: 30%;
     font-size: 5em;
-    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #00ffff,
-    0 0 40px #00ffff, 0 0 50px #ffff00, 0 0 60px #ffff00;
-    animation: rainbow-glow 3s ease-in-out infinite;
 }
 
-.topic-chosing form {
+.quiz-settings form {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     padding: 20px;
@@ -39,25 +34,25 @@
     width: 500px;
 }
 
-.topic-chosing .dropdown-container {
+.quiz-settings .dropdown-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
     text-align: center;
 }
 
-.topic-chosing .input-field {
+.quiz-settings .input-field {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.topic-chosing label {
+.quiz-settings label {
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-.topic-chosing select, input{
+.quiz-settings select, input{
     padding: 2px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -66,7 +61,7 @@
 
 }
 
-.topic-chosing button{
+.quiz-settings button{
     margin-top: 40px;
     padding: 12px;
     border-radius: 5px;
@@ -76,7 +71,7 @@
     background-color: rgb(175, 16, 16);
 }
 
-.topic-chosing button:hover {
+.quiz-settings button:hover {
     background-color: green;
     cursor: pointer;
 }
