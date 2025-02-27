@@ -30,7 +30,11 @@ def confirm_purchase(request, product_id):
         order = Order.objects.create(
             user=user, product=product, quantity=1, total=total_price
         )
-
+        
+        #save item in 'show_products_users' table
+        product.users.add(user)
+        product.save()
+        
         user.coins -= total_price
         user.save()
 

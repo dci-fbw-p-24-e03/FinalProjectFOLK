@@ -18,20 +18,25 @@ function initializeLeaderboard() {
 
         // Toggle between "Stars" and "Average Stars per Game"
         isAverageMode = !isAverageMode;
-        starsHeader.textContent = isAverageMode ? "Average Stars per Game" : "Stars";
+        if (isAverageMode) {
+            starsHeader.innerHTML = "Average Stars per Game / <span class='inactive'>Stars</span>";
+        } else {
+            starsHeader.innerHTML = "Stars / <span class='inactive'>Avg. Stars</span>";
+        }
 
         // Update displayed star values
+        // Stars column is now the 5th column (index 4) because we inserted "Total Games"
         rows.forEach(row => {
-            let starsCell = row.cells[3];
+            let starsCell = row.cells[4];
             let originalStars = parseFloat(starsCell.dataset.originalStars);
             let averageStars = parseFloat(starsCell.dataset.averageStars);
             starsCell.textContent = isAverageMode ? averageStars.toFixed(2) : originalStars;
         });
 
-        // Sort rows
+        // Sort rows based on the updated star values (descending)
         let sortedRows = rows.slice().sort((a, b) => {
-            let aValue = parseFloat(a.cells[3].textContent);
-            let bValue = parseFloat(b.cells[3].textContent);
+            let aValue = parseFloat(a.cells[4].textContent);
+            let bValue = parseFloat(b.cells[4].textContent);
             return bValue - aValue; // descending
         });
 

@@ -23,6 +23,11 @@ body {
     background-size: cover;
 }
 
+.elder_arena {
+    background: url("../assets/elder_world.webp");
+    background-size: cover;
+}
+
 #swap-container{
     display: flex;
     flex-direction: row;

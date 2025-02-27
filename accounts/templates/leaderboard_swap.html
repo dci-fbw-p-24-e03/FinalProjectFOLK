@@ -8,22 +8,29 @@
                     <th></th>
                     <th>Name</th>
                     <th>Nation</th>
-                    <th id="stars-header" style="cursor: pointer;" title="Click to switch">Stars</th>
- 
+                    <th>Total Games</th>
+                    <th id="stars-header" style="cursor: pointer;" title="Click to switch">
+                        Stars / <span class="inactive">Avg. Stars</span>
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 {% for user in users %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td><a href="{% url 'user_details' username=user.username %}" class="profile-link">{{ user.username }}</a></td>
+                        <td>
+                            <a href="{% url 'user_details' username=user.username %}" class="profile-link">
+                                {{ user.username }}
+                            </a>
+                        </td>
                         <td>
                             <div class="nation-container">
                                 <img src="https://flagicons.lipis.dev/flags/4x3/{{ user.nation|lower }}.svg" alt="{{ user.nation }}" class="flag-icon">
                                 <span class="nation-name">{{ user.nation|upper }}</span> 
                             </div>
                         </td>
-                        <td data-original-stars="{{ user.stars }}" data-average-stars="{{ user.average_stars_per_game }}"style="font-weight: bold;">
+                        <td style="font-weight: bold;">{{ user.games_played }}</td>
+                        <td data-original-stars="{{ user.stars }}" data-average-stars="{{ user.average_stars_per_game }}" style="font-weight: bold;">
                             {{ user.stars }}
                         </td>
                     </tr>

@@ -27,7 +27,8 @@
   </head>
 
 
-  <body class="{% if theme|lower == 'space' %}space_arena{% else %}standard_arena{% endif %}"></body>
+  <body class="{% if theme|lower == 'space' %}space_arena{% elif theme|lower == 'elder' %}elder_arena{% else %}standard_arena{% endif %}"></body>
+
 
   <div id="swap-container">
     <div class="player-div">
