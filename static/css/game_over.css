@@ -56,10 +56,10 @@
     animation: glow 1.5s infinite alternate;
 }
 
-/* .explanations {
+.explanations {
 
     display : none
-} */
+} 
 
 /* copying initial styling to just give it another color */
 
@@ -90,6 +90,7 @@
 h1{
 
     text-align: center;
+    margin-top: -3%;
 }
 
 
@@ -98,11 +99,11 @@ h1{
 
 /* Slideshow container */
 .slideshow-container {
-  max-width: 1000px;
+  
   position: relative;
   margin: auto;
-  padding-left: 20%;
-  padding-right: 20%;
+  padding-left: 6%;
+  padding-right: 6%;
 }
 
 /* Hide the images by default */
@@ -116,6 +117,18 @@ h1{
 .mySlides:first-child {
 display: block;
 }
+
+.correct-answer {
+    color: #45ce65;
+    font-weight: bold;
+}
+
+.wrong-answer {
+    color: #df0f0f;
+    font-weight: bold;
+}
+
+
 
 
 /* Next & previous buttons */
@@ -139,6 +152,11 @@ display: block;
   right: 0;
   border-radius: 3px 0 0 3px;
 }
+
+.prev {
+    left: 0;
+    border-radius: 3px 0 0 3px;
+  }
 
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
@@ -175,6 +193,21 @@ display: block;
 }
 
 .explanation-text{
-    width: 70%;
+    width: 95%;
     text-align: block;
+}
+
+.dots {
+    
+    text-align:center
+}
+
+
+
+.image_facts_row {
+
+display: flex;
+flex-direction: row !important;
+justify-content: space-between;
+
 }

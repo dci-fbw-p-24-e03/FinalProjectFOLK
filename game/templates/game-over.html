@@ -1,5 +1,7 @@
 
 {% load static %}
+{% load highlight_correct_answer %}
+
 
 
 <!-- <style>
@@ -16,30 +18,45 @@
 
 <div class="answers">
 
-    <h1>Summary</h1>
+    
+<h1>Summary</h1>
+
+<div class=" image_facts_row">
+   
 <div class=" summary">
 <h2>Topic: {{ selected_topic|default:"General" }}</h2>
 <h2>Difficulty: {{ difficulty|default:"easy" }}</h2>
 <h2>Correct Answers:  {{ correct_answers_number }} / 10</h2>    
 <h2>Stars earned : {{score}} </h2>
 <h2>Coins earned : {{ score }}</h2>
+
 </div>
 
-<div>    
-    
+<div class="player_div_resultscreen" id="player_1">
+    <h2>{{ user.username }}</h2>
+    <img src="{{ user.image.url }}" alt="male" />
+    <h2 id="result" class="score-positive" data-base="{{ score|cut:'+' }}">Score: {{ score }}</h2>
 </div>
+
+</div>
+
+
 
 
 
 <!-- Slideshow container -->
+ <div class = "explanations" id = "explanations">
 <div class="slideshow-container">
 
     <!-- Full-width images with number and caption text -->
     {% if wrong_answers %}
     {% for wrong_answer in wrong_answers %}
         <div class="mySlides fade">
-        <div class="explanation-text"><h1>{{ wrong_answer.question }}</h1></div>
-        <div class="explanation-text"><h3>{{ wrong_answer.explanation }}</h3></div>
+        <div class="explanation-text">
+            <h3>{{ wrong_answer.question }}</h3></div>
+        <div class="explanation-text">
+            <h4>{{ wrong_answer.explanation|highlight_correct:wrong_answer.correct_answer|highlight_wrong:wrong_answer.submitted_answer_text|safe }}</h4></div>
+           
         </div>
     {% endfor %}
     {% endif %}
@@ -52,13 +69,14 @@
   <br>
   
   <!-- The dots/circles -->
-  <div style="text-align:center">
+  <div class=" dots" >
 
     {% for wrong_answer in wrong_answers %}
     <span class="dot" onclick="plusSlides(1)"></span>
      {% endfor %}
   
   </div>
+</div>
 
 
 
