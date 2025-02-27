@@ -82,6 +82,15 @@
                 id="id_password_repeat" 
                 placeholder="--Repeat New Password--" 
             >
+            <p>
+                <input
+                  class="w3-check"
+                  type="checkbox"
+                  id="toggle-input"
+                  onclick="PasswordVisibility()"
+                />
+                Show Password
+            </p>
             {% if form.password_repeat.errors %}
                 <div class="error">{{ form.password_repeat.errors }}</div>
             {% endif %}

@@ -43,8 +43,21 @@
   }
 }
 
-.base-container a {
-  font-size: 2vmin;
+.base-container input {
+  color:rgb(81, 81, 81);
+}
+
+#toggle-input {
+  height: 4vmin;
+}
+
+.login p,
+.profile-update p,
+.register p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3vmin;
 }
 
 .content-container-shadow {
@@ -94,8 +107,7 @@ form {
   display: flex;
   flex-direction: column;
   text-align: center;
-  gap: 10px; /* Evenly spaces form elements */
-  width: 500px;
+  gap: 10px;
 }
 
 select, input {

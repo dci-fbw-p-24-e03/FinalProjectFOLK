@@ -4,6 +4,10 @@
   gap: 1vmin;
 }
 
+.shop {
+  align-items: flex-start;
+}
+
 .content-container h2 {
   font-size: 2em;
   text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
