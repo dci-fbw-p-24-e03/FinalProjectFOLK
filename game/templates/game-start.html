@@ -3,15 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
     <script src="{% static 'js/timer.js' %}"></script>
     <script src="{% static 'js/explanations_button.js' %}"></script>
-    <script src="{% static 'js/carousel.js' %}"></script>
     
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -40,13 +34,13 @@
 
       <div class="footer_div" id="player_1">
         <h2>{{ user.username }}</h2>
-        <img src="{{ user.image }}" alt="male" />
+        <img src="{{ user.image.url }}" alt="male" />
         <h2 id="result" class="score-positive" data-base="{{ score|cut:'+' }}">Score: {{ score }}</h2>
       </div>
 
         <div class="footer_div" id="player_2">
           <h2>{{ user.username }}</h2>
-          <img src="{{ user.image }}" alt="male" />
+          <img src="{{ user.image.url }}" alt="male" />
           <h2 id="result" class="score-positive" data-base="{{ score|cut:'+' }}">Score: {{ score }}</h2>
       </div>
               
@@ -118,13 +112,13 @@
 
       <div class="footer_div" id="player_3">
         <h2>{{ user.username }}</h2>
-        <img src="{{ user.image }}"" alt="male" />
+        <img src="{{ user.image.url }}"" alt="male" />
         <h2 id="result" class="score-positive" data-base="{{ score|cut:'+' }}">Score: {{ score }}</h2>
       </div>
 
       <div class="footer_div" id="player_4">
         <h2>{{ user.username }}</h2>
-        <img src="{{ user.image }}"" alt="male" />
+        <img src="{{ user.image.url }}"" alt="male" />
         <h2 id="result" class="score-positive" data-base="{{ score|cut:'+' }}">Score: {{ score }}</h2>
       </div>
 
