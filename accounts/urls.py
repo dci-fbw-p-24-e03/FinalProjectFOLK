@@ -12,5 +12,6 @@ urlpatterns = [
      path('leaderboard-swap/', leaderboard_swap, name='leaderboard_swap'),
      path('login-swap/', login_swap, name='login_swap'),
      path('users-swap/', userdetail_swap, name='profile_swap'),
-     path('userupdate-swap/', userupdate_swap, name='userupdate_swap')
+     path('userupdate-swap/', userupdate_swap, name='userupdate_swap'),
+     path("register-swap/", register_swap, name="register_swap")
  ]

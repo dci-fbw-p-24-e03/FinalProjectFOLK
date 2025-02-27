@@ -1,29 +1,51 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block title %} The AI-Quiz - Login {% endblock %}
+{% extends 'base.html' %} {% block title %} The AI-Quiz - Login {% endblock %}
 {% block content %}
 
-<div class="update-container">
-  <div class="update-form">
-    <h2>Login</h2>
+<div class="base-container">
+  <div class="content-container-shadow login">
+    <h1>Login</h1>
     <form method="post">
       {% csrf_token %}
-      {% for field in form %}
-        <div class="form-group">
-          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-          {{ field }}
-          {% if field.errors %}
-            <div class="error">
-              {{ field.errors }}
-            </div>
-          {% endif %}
-        </div>
-      {% endfor %}
-
-      <button type="submit">Login</button>
-      <a href="{% url 'register_view' %}">
-        <button type="button" class="cancel-button">Register</button>
-      </a>
+      <label for="id_username">Username:</label>
+      <input 
+        type="text" 
+        name="username" 
+        id="id_username" 
+        required 
+      />
+      {% if field.errors %}
+      <div class="error">{{ form.username.error }}</div>
+      {% endif %}
+      <label for="id_password">Password:</label>
+      <input 
+        type="password" 
+        name="password" 
+        id="id_password" 
+        required 
+      />
+      <p>
+        <input
+          class="w3-check"
+          type="checkbox"
+          id="toggle-input"
+          onclick="PasswordVisibility()"
+        />
+        Show Password
+      </p>
+      {% if field.errors %}
+      <div class="error">{{ form.password.error }}</div>
+      {% endif %}
+      <div class="row-buttons"> 
+        <button type="submit">LOGIN</button>
+        <a 
+          href="{% url 'register_view' %}"
+          hx-get="{% url 'register_swap' %}"
+          hx-target="#content-area"
+          hx-swap="innerHTML"
+          hx-push-url="{% url 'register_view' %}">
+          <span class="cancel-button">REGISTER</span>
+        </a>
+      </div>
     </form>
   </div>
 </div>

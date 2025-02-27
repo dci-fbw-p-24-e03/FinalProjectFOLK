@@ -8,12 +8,6 @@
     font-size: 18px;
     height: 45px;
 }
-
-.profile-update select:focus{
-    outline: none;
-    border: 1px solid #00ffff;
-    background-color: #444;
-}
 #img-input {
     display: flex;
     flex-direction: row;
@@ -36,6 +30,10 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 20px;
+}
+
+.cancel-button {
+    width: 100%;
 }
 
 .profile-update button:hover {

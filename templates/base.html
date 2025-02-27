@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{% static 'css/register.css' %}" />
     <link rel="stylesheet" href="{% static 'css/login.css' %}" />
     <link rel="stylesheet" href="{% static 'css/game_partial.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/purchase_success.css' %}">
     <link
       href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap"
       rel="stylesheet"
@@ -102,6 +103,7 @@
     <script src="{% static 'js/base_circuitboard.js' %}"></script>
     <script src="{% static 'js/leaderboard.js' %}"></script>
     <script src="{% static 'js/game_topic_selection.js' %}"></script>
+    <script src="{% static 'js/toggle_password_visibility.js' %}"></script>
     <script>
       document.body.addEventListener("htmx:configRequest", (event) => {
         event.detail.headers["X-CSRFToken"] = document.querySelector(

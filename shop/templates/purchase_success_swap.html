@@ -1,0 +1,28 @@
+<div class="purchase-success">
+    <div id="confirmation-box">
+        {% if error_message %}
+            <h2 style="color: #f44336;">Purchase Failed</h2>
+            <p>{{ error_message }}</p>
+            <a 
+                href="{% url 'shop_view' %}" 
+                class="btn"
+                hx-get="{% url 'shop_swap' %}"
+                hx-target="#content-area"
+                hx-swap="innerHTML"
+                hx-push-url="{% url 'shop_view' %}"
+                >Back to Shop</a>
+        {% else %}
+            <h2>Purchase Successful!</h2>
+            <p><strong>{{ product.name }}</strong></p>
+            <p>Total: ${{ total_price }}</p>
+            <a 
+                href="{% url 'shop_view' %}" 
+                class="btn"
+                hx-get="{% url 'shop_swap' %}"
+                hx-target="#content-area"
+                hx-swap="innerHTML"
+                hx-push-url="{% url 'shop_view' %}"
+                >Back to Shop</a>
+        {% endif %}
+    </div>
+</div>

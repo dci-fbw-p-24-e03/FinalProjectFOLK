@@ -2,6 +2,7 @@
     <div class="content-container-shadow profile-update">
         <h1>Update Your Profile</h1>
         <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
             <!-- Username -->
             <label for="id_username">Username:</label>
@@ -77,6 +78,15 @@
                 id="id_password_repeat" 
                 placeholder="--Repeat New Password--" 
             >
+            <p>
+                <input
+                  class="w3-check"
+                  type="checkbox"
+                  id="toggle-input"
+                  onclick="PasswordVisibility()"
+                />
+                Show Password
+            </p>
             {% if form.password_repeat.errors %}
                 <div class="error">{{ form.password_repeat.errors }}</div>
             {% endif %}

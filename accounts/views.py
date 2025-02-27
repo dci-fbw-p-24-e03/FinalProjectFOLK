@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import CustomUser
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
@@ -110,15 +110,26 @@ def userdetail_swap(request):
 
 @login_required
 def userupdate_swap(request):
-    user = request.user  # Hole den aktuellen Benutzer
+    user = request.user 
     
     if request.method == "POST":
         form = UserUpdateForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
-            return redirect(reverse("home_view"))  # Nach erfolgreichem Update zur Startseite
+            return redirect(reverse("home_view")) 
     else:
-        form = UserUpdateForm(instance=user)  # Lade das Formular mit bestehenden Werten
+        form = UserUpdateForm(instance=user)
 
     return render(request, "profile_update_swap.html", {"form": form})
 
+def register_swap(request):
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()  # Benutzer speichern
+            login(request, user)  # Direkt einloggen nach der Registrierung
+            return redirect(reverse("home_view"))  # Weiterleitung nach Registrierung
+    else:
+        form = CustomUserCreationForm()
+
+    return render(request, "register_swap.html", {"form": form})

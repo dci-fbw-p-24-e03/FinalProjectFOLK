@@ -62,3 +62,36 @@ def shop_swap(request):
         template_name="shop_swap.html",
         context={"products": products},
     )
+
+@login_required
+def buy_product_swap(request, product_id):
+    product = Product.objects.get(id=product_id)
+    return render(request, "buy_confirmation_swap.html", {"product": product})
+
+
+@login_required
+def confirm_purchase_swap(request, product_id):
+    product = Product.objects.get(id=product_id)
+    user = request.user
+    total_price = product.price
+
+    if user.coins >= total_price:
+        # Create order
+        order = Order.objects.create(
+            user=user, product=product, quantity=1, total=total_price
+        )
+
+        user.coins -= total_price
+        user.save()
+
+        return render(
+            request,
+            "purchase_success_swap.html",
+            {"product": product, "total_price": total_price},
+        )
+    else:
+        return render(
+            request,
+            "purchase_success_swap.html",
+            {"error_message": "Not enough coins to complete the purchase."},
+        )
