@@ -255,6 +255,7 @@ def start_result(request):
         correct_answer = last_question["correct_answer"]
 
     submitted_answer = request.POST.get("options")
+    submitted_answer_text = last_question.get(submitted_answer, '')
 
     score = request.session.get("score")
     if submitted_answer == correct_answer:
@@ -266,6 +267,7 @@ def start_result(request):
         wrong_question = {
             "question": last_question["question"],
             "correct_answer": last_question[last_question["correct_answer"]],
+            "submitted_answer_text": submitted_answer_text,
         }
         # Initialize the list if it doesn't exist
         if request.session.get("wrong_answers") is None:
@@ -283,6 +285,7 @@ def start_result(request):
     context = last_question | {
         "score": score,
         "submitted_answer": submitted_answer,
+        "submitted_answer_text": submitted_answer_text,
         "correct_option": correct_option,
         "result": result,
         "topic" : request.session.get("topic"),
