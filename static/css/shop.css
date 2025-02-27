@@ -15,7 +15,6 @@
 
 .product-category {
   display: flex;
-  flex-wrap: wrap;
 }
 
 .product-category .product-box {

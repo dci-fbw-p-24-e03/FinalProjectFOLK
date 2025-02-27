@@ -25,7 +25,14 @@ The AI-Quiz - Shop
           </div>
           <div class="action">
             {% if user.is_authenticated %}
-            <a href="{% url 'buy_product' product.id %}" class="btn">Buy</a>
+            <a 
+              href="{% url 'buy_product' product.id %}" 
+              class="btn"
+              hx-get="{% url 'buy_product_swap' product.id %}"
+              hx-target="#content-area"
+              hx-swap="innerHTML"
+              hx-push-url="{% url 'buy_product' product.id %}"
+            >Buy</a>
             {% endif %}
           </div>
         </div>
@@ -52,7 +59,14 @@ The AI-Quiz - Shop
           </div>
           <div class="action">
             {% if user.is_authenticated %}
-            <a href="{% url 'buy_product' product.id %}" class="btn">Buy</a>
+            <a 
+              href="{% url 'buy_product' product.id %}" 
+              class="btn"
+              hx-get="{% url 'buy_product_swap' product.id %}"
+              hx-target="#content-area"
+              hx-swap="innerHTML"
+              hx-push-url="{% url 'buy_product' product.id %}"
+            >Buy</a>
             {% endif %}
           </div>
         </div>
@@ -79,7 +93,14 @@ The AI-Quiz - Shop
           </div>
           <div class="action">
             {% if user.is_authenticated %}
-            <a href="{% url 'buy_product' product.id %}" class="btn">Buy</a>
+            <a 
+              href="{% url 'buy_product' product.id %}" 
+              class="btn"
+              hx-get="{% url 'buy_product_swap' product.id %}"
+              hx-target="#content-area"
+              hx-swap="innerHTML"
+              hx-push-url="{% url 'buy_product' product.id %}"
+            >Buy</a>
             {% endif %}
           </div>
         </div>
