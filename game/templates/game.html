@@ -36,11 +36,15 @@
 
       <label for="theme">Choose Theme:</label>
       <select name="theme">
-        <option value="">--Choose Background Theme--</option>
-        
-        <option value="AI-Quiz">AI-Quiz</option>
-        <option value="space">Space</option>
-        <option value="elder">Elder World</option>
+          <option value="">--Choose Background Theme--</option>
+          <option value="AI-Quiz">AI-Quiz (Default)</option>
+          {% for theme in theme_options %}
+              {% if theme in purchased_themes %}
+                  <option value="{{ theme }}">{{ theme }}</option>
+              {% else %}
+                  <option value="{{ theme }}" disabled>{{ theme }} (not owned)</option>
+              {% endif %}
+          {% endfor %}
       </select>
 
       <button type="submit">Let's Play!</button>

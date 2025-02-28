@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .ai import get_question, get_explanations
 from .models import Questions
 from accounts.models import CustomUser
+from shop.models import Product
 from datetime import datetime
 # Create your views here.
 
@@ -35,7 +36,24 @@ def game_view(request):
     if request.session.get("difficulty") != None:
         del request.session["difficulty"]
 
-    return render(request, "game.html")
+    #define theme options
+    theme_options = ["Space - Theme", "Elder World - Theme"]
+
+    #find purchased themes (if user is logged in )
+    if request.user.is_authenticated:
+        purchased_themes = Product.objects.filter(
+            name__in=theme_options,
+            users=request.user
+        ).values_list("name", flat=True)
+    else:
+        purchased_themes = []
+
+    context = {
+        "theme_options": theme_options,
+        "purchased_themes": purchased_themes,
+    }
+
+    return render(request, "game.html", context)
 
 
 def game_start(request):
