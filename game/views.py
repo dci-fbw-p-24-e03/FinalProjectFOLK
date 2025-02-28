@@ -346,4 +346,22 @@ def game_settings_swap(request):
     if request.session.get("difficulty") != None:
         del request.session["difficulty"]
 
-    return render(request, "game_swap.html")
+
+     #define theme options
+    theme_options = ["Space - Theme", "Elder World - Theme"]
+
+    #find purchased themes (if user is logged in )
+    if request.user.is_authenticated:
+        purchased_themes = Product.objects.filter(
+            name__in=theme_options,
+            users=request.user
+        ).values_list("name", flat=True)
+    else:
+        purchased_themes = []
+
+    context = {
+        "theme_options": theme_options,
+        "purchased_themes": purchased_themes,
+    }
+
+    return render(request, "game_swap.html", context)
