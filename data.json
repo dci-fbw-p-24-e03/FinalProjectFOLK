@@ -1,288 +1,880 @@
 [
-  {
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 1,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 1,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 1,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": 1,
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+        "name": "Can add permission",
+        "content_type": 2,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can change permission",
+        "content_type": 2,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": 2,
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+        "name": "Can view permission",
+        "content_type": 2,
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+        "name": "Can add group",
+        "content_type": 3,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can change group",
+        "content_type": 3,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can delete group",
+        "content_type": 3,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can view group",
+        "content_type": 3,
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 4,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 4,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 4,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can view content type",
+        "content_type": 4,
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 5,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 5,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 5,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+        "name": "Can view session",
+        "content_type": 5,
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can add user",
+        "content_type": 6,
+        "codename": "add_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can change user",
+        "content_type": 6,
+        "codename": "change_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can delete user",
+        "content_type": 6,
+        "codename": "delete_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can view user",
+        "content_type": 6,
+        "codename": "view_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add product",
+        "content_type": 7,
+        "codename": "add_product"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change product",
+        "content_type": 7,
+        "codename": "change_product"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete product",
+        "content_type": 7,
+        "codename": "delete_product"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can view product",
+        "content_type": 7,
+        "codename": "view_product"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+        "name": "Can add order",
+        "content_type": 8,
+        "codename": "add_order"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+        "name": "Can change order",
+        "content_type": 8,
+        "codename": "change_order"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+        "name": "Can delete order",
+        "content_type": 8,
+        "codename": "delete_order"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+        "name": "Can view order",
+        "content_type": 8,
+        "codename": "view_order"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+        "name": "Can add questions",
+        "content_type": 9,
+        "codename": "add_questions"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+        "name": "Can change questions",
+        "content_type": 9,
+        "codename": "change_questions"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+        "name": "Can delete questions",
+        "content_type": 9,
+        "codename": "delete_questions"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+        "name": "Can view questions",
+        "content_type": 9,
+        "codename": "view_questions"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+        "app_label": "accounts",
+        "model": "customuser"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+        "app_label": "shop",
+        "model": "product"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+        "app_label": "shop",
+        "model": "order"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+        "app_label": "game",
+        "model": "questions"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "pf60ek2o3i1bnpcp3nd3da85w3tfry6v",
+    "fields": {
+        "session_data": ".eJxVjM0OwiAQhN-FsyGy_Gzx6N1nIAsLUjU0Ke3J-O62SQ96nPm-mbcItC41rD3PYWRxEeosTr9lpPTMbSf8oHafZJraMo9R7oo8aJe3ifPrerh_B5V63dYDOCRtXMnJAjFEtFuyyZM1zhcNqE1hg4AWVWFGVhaMHjAqzwm8-HwB6Rk3LA:1tnflm:dWPIlXbrrdtKMKPHJ5bZk6MWzcfYIcupQGh2NmrQl7U",
+        "expire_date": "2025-03-13T15:25:50.062Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "wzondw7kr10mbhisktsoh3wscnjdkp3j",
+    "fields": {
+        "session_data": ".eJxVjM0OwiAQhN-FsyGy_Gzx6N1nIAsLUjU0Ke3J-O62SQ96nPm-mbcItC41rD3PYWRxEeosTr9lpPTMbSf8oHafZJraMo9R7oo8aJe3ifPrerh_B5V63dYDOCRtXMnJAjFEtFuyyZM1zhcNqE1hg4AWVWFGVhaMHjAqzwm8-HwB6Rk3LA:1tnJB2:dzMizrqT2y0ZcHhZ7ld0xnzwQmSNwfRHNClulqPPhIg",
+        "expire_date": "2025-03-12T15:18:24.958Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "y0xxb6m6gnwxqy9x13zmbo5gi15sve3h",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQBe_iGllex5-Ykj5nsNafxQFkS3FSIe5OIqWA9s28eTOP21r81vPi58SuDNjldwsYn7keID2w3huPra7LHPih8JN2PrWUX7fT_QsU7GV_C1KYKAJk4wZF1gQrQTuVQ3QCwFgtdSAYHO3NKPU4QhpQoCEQLpFhny_fyjfM:1tm8LT:tke6j6Rys8z6q6yX4Xig9LPCv7fVKkieVLf9VSQaTFU",
+        "expire_date": "2025-03-09T09:32:19.540Z"
+    }
+},
+{
+    "model": "accounts.customuser",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$oDB2Jm62U39odVAyw50Bpc$bKG+Glr84Ldxp+kHbOz1Q8cOnfjIseN2OmFHZeEKL5c=",
+        "last_login": "2025-02-25T09:41:02.850Z",
+        "is_superuser": false,
+        "username": "Friedi1",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-02-23T09:29:52.811Z",
+        "image": "/static/assets/profile_placeholder.jpeg",
+        "stars": null,
+        "coins": 0,
+        "nation": "DE",
+        "average_stars_per_game": null,
+        "games_played": 0,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.customuser",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$tiXQ4ZZbIqsPeivdSLTbQr$1M6XwWgZET4T8FCQVMTlPMXluECUdbr/F6oLhrbwxuo=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "User_1",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-02-23T09:30:26.364Z",
+        "image": "/static/assets/profile_placeholder.jpeg",
+        "stars": null,
+        "coins": 0,
+        "nation": "DE",
+        "average_stars_per_game": null,
+        "games_played": 0,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.customuser",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$uRKFp6kMERmBRcn7DOVjtx$qKso7XIXQD7pES/EwL6xeEZ3yzZQDsnFWFtHNJ+ITjo=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "User_2",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-02-23T09:30:56.192Z",
+        "image": "/static/assets/profile_placeholder.jpeg",
+        "stars": null,
+        "coins": 0,
+        "nation": "DE",
+        "average_stars_per_game": null,
+        "games_played": 0,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.customuser",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$tTyMScnJSlpFQUcHpw2tth$LU1RGIavr35zSF910yiVlCJ3MkTD0vv8cLPqZUwkCj8=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "User_3",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-02-23T09:31:22.169Z",
+        "image": "/static/assets/profile_placeholder.jpeg",
+        "stars": null,
+        "coins": 0,
+        "nation": "DE",
+        "average_stars_per_game": null,
+        "games_played": 0,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.customuser",
+    "pk": 10,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$rdUFL8OsnlpU7s7wSQVwCM$5aQHbLUVPVVYR5w8GWytX56ETyFSS3U4I+Mgq0bj+DQ=",
+        "last_login": "2025-02-27T15:25:50.014Z",
+        "is_superuser": true,
+        "username": "Admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-02-25T10:03:43.439Z",
+        "image": "user_profile_images/profile_placeholder.jpeg",
+        "stars": null,
+        "coins": 0,
+        "nation": "DE",
+        "average_stars_per_game": null,
+        "games_played": 0,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.customuser",
+    "pk": 11,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$0VA6E7FD1VWICj1SH5HojU$f25AGpuLozhSn6GwTpv5PU/MuL8gOkFM/Do19beLwXc=",
+        "last_login": "2025-02-25T10:08:16.841Z",
+        "is_superuser": false,
+        "username": "User_4",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-02-25T10:07:25.580Z",
+        "image": "user_profile_images/profile_placeholder.jpeg",
+        "stars": null,
+        "coins": 0,
+        "nation": "DE",
+        "average_stars_per_game": null,
+        "games_played": 0,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.customuser",
+    "pk": 12,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$IyXCdHc6P0Lza6MuVnZCrz$1NNE4uJ3VV+E5gesm7vKhO9qch8pfAzl152puPJqoSc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "User_5",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-02-25T10:17:50.158Z",
+        "image": "user_profile_images/profile_placeholder.jpeg",
+        "stars": null,
+        "coins": 0,
+        "nation": "DE",
+        "average_stars_per_game": null,
+        "games_played": 0,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
     "model": "shop.product",
     "pk": 1,
     "fields": {
-      "name": "50/50 Joker",
-      "description": "The 50/50 Joker minimizes the choices by 50%.",
-      "price": "15.00",
-      "image": "product_images/home.webp",
-      "category": "joker"
+        "name": "50/50 Joker",
+        "description": "The 50/50 Joker minimizes the choices by 50%.",
+        "price": "15.00",
+        "image": "product_images/home.webp",
+        "category": "joker",
+        "users": []
     }
-  },
-  {
+},
+{
     "model": "shop.product",
     "pk": 2,
     "fields": {
-      "name": "Telephone joker",
-      "description": "The Phone Joker allows players to get a hint or answer suggestion from a virtual assistant.",
-      "price": "100.00",
-      "image": "product_images/poker.webp",
-      "category": "joker"
+        "name": "Telephone joker",
+        "description": "The Phone Joker allows players to get a hint or answer suggestion from a virtual assistant.",
+        "price": "100.00",
+        "image": "product_images/poker.webp",
+        "category": "joker",
+        "users": []
     }
-  },
-  {
+},
+{
     "model": "shop.product",
     "pk": 3,
     "fields": {
-      "name": "Nova",
-      "description": "Nova is an advanced AI bot designed to challenge players in a fast-paced quiz game, equipped with vast knowledge and quick reflexes.",
-      "price": "50.00",
-      "image": "product_images/profile_placeholder.jpeg",
-      "category": "opponents"
+        "name": "Nova",
+        "description": "Nova is an advanced AI bot designed to challenge players in a fast-paced quiz game, equipped with vast knowledge and quick reflexes.",
+        "price": "50.00",
+        "image": "product_images/profile_placeholder.jpeg",
+        "category": "opponents",
+        "users": []
     }
-  },
-  {
+},
+{
     "model": "shop.product",
     "pk": 4,
     "fields": {
-      "name": "Nebula",
-      "description": "This skin gives the game a sense of infinite space, enhancing the excitement of every quiz round with a deep, starry atmosphere.",
-      "price": "20.00",
-      "image": "product_images/background-3.webp",
-      "category": "skins"
+        "name": "Nebula",
+        "description": "This skin gives the game a sense of infinite space, enhancing the excitement of every quiz round with a deep, starry atmosphere.",
+        "price": "20.00",
+        "image": "product_images/background-3.webp",
+        "category": "skins",
+        "users": []
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 1,
     "fields": {
-      "user": 2,
-      "product": 1,
-      "quantity": 1,
-      "total": "15.00",
-      "order_date": "2025-02-12T15:28:21.970Z"
+        "user": 2,
+        "product": 1,
+        "quantity": 1,
+        "total": "15.00",
+        "order_date": "2025-02-12T15:28:21.970Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 2,
     "fields": {
-      "user": 2,
-      "product": 1,
-      "quantity": 1,
-      "total": "15.00",
-      "order_date": "2025-02-12T15:37:36.971Z"
+        "user": 2,
+        "product": 1,
+        "quantity": 1,
+        "total": "15.00",
+        "order_date": "2025-02-12T15:37:36.971Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 3,
     "fields": {
-      "user": 2,
-      "product": 2,
-      "quantity": 1,
-      "total": "100.00",
-      "order_date": "2025-02-13T13:44:16.516Z"
+        "user": 2,
+        "product": 2,
+        "quantity": 1,
+        "total": "100.00",
+        "order_date": "2025-02-13T13:44:16.516Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 4,
     "fields": {
-      "user": 2,
-      "product": 1,
-      "quantity": 1,
-      "total": "15.00",
-      "order_date": "2025-02-14T09:01:28.889Z"
+        "user": 2,
+        "product": 1,
+        "quantity": 1,
+        "total": "15.00",
+        "order_date": "2025-02-14T09:01:28.889Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 5,
     "fields": {
-      "user": 2,
-      "product": 1,
-      "quantity": 1,
-      "total": "15.00",
-      "order_date": "2025-02-14T09:21:28.214Z"
+        "user": 2,
+        "product": 1,
+        "quantity": 1,
+        "total": "15.00",
+        "order_date": "2025-02-14T09:21:28.214Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 6,
     "fields": {
-      "user": 2,
-      "product": 1,
-      "quantity": 1,
-      "total": "15.00",
-      "order_date": "2025-02-14T09:22:19.016Z"
+        "user": 2,
+        "product": 1,
+        "quantity": 1,
+        "total": "15.00",
+        "order_date": "2025-02-14T09:22:19.016Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 7,
     "fields": {
-      "user": 2,
-      "product": 1,
-      "quantity": 1,
-      "total": "15.00",
-      "order_date": "2025-02-14T09:23:15.584Z"
+        "user": 2,
+        "product": 1,
+        "quantity": 1,
+        "total": "15.00",
+        "order_date": "2025-02-14T09:23:15.584Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 8,
     "fields": {
-      "user": 2,
-      "product": 3,
-      "quantity": 1,
-      "total": "50.00",
-      "order_date": "2025-02-18T12:51:23.066Z"
+        "user": 2,
+        "product": 3,
+        "quantity": 1,
+        "total": "50.00",
+        "order_date": "2025-02-18T12:51:23.066Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 9,
     "fields": {
-      "user": 2,
-      "product": 4,
-      "quantity": 1,
-      "total": "20.00",
-      "order_date": "2025-02-18T13:13:26.959Z"
+        "user": 2,
+        "product": 4,
+        "quantity": 1,
+        "total": "20.00",
+        "order_date": "2025-02-18T13:13:26.959Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 10,
     "fields": {
-      "user": 2,
-      "product": 2,
-      "quantity": 1,
-      "total": "100.00",
-      "order_date": "2025-02-18T14:31:29.447Z"
+        "user": 2,
+        "product": 2,
+        "quantity": 1,
+        "total": "100.00",
+        "order_date": "2025-02-18T14:31:29.447Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 11,
     "fields": {
-      "user": 2,
-      "product": 4,
-      "quantity": 1,
-      "total": "20.00",
-      "order_date": "2025-02-18T14:55:44.663Z"
+        "user": 2,
+        "product": 4,
+        "quantity": 1,
+        "total": "20.00",
+        "order_date": "2025-02-18T14:55:44.663Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 12,
     "fields": {
-      "user": 2,
-      "product": 4,
-      "quantity": 1,
-      "total": "20.00",
-      "order_date": "2025-02-18T14:59:34.570Z"
+        "user": 2,
+        "product": 4,
+        "quantity": 1,
+        "total": "20.00",
+        "order_date": "2025-02-18T14:59:34.570Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 13,
     "fields": {
-      "user": 2,
-      "product": 4,
-      "quantity": 1,
-      "total": "20.00",
-      "order_date": "2025-02-18T15:00:12.528Z"
+        "user": 2,
+        "product": 4,
+        "quantity": 1,
+        "total": "20.00",
+        "order_date": "2025-02-18T15:00:12.528Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 14,
     "fields": {
-      "user": 2,
-      "product": 4,
-      "quantity": 1,
-      "total": "20.00",
-      "order_date": "2025-02-18T15:00:20.797Z"
+        "user": 2,
+        "product": 4,
+        "quantity": 1,
+        "total": "20.00",
+        "order_date": "2025-02-18T15:00:20.797Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 15,
     "fields": {
-      "user": 2,
-      "product": 4,
-      "quantity": 1,
-      "total": "20.00",
-      "order_date": "2025-02-18T15:00:41.484Z"
+        "user": 2,
+        "product": 4,
+        "quantity": 1,
+        "total": "20.00",
+        "order_date": "2025-02-18T15:00:41.484Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 16,
     "fields": {
-      "user": 2,
-      "product": 4,
-      "quantity": 1,
-      "total": "20.00",
-      "order_date": "2025-02-18T15:01:52.967Z"
+        "user": 2,
+        "product": 4,
+        "quantity": 1,
+        "total": "20.00",
+        "order_date": "2025-02-18T15:01:52.967Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 17,
     "fields": {
-      "user": 2,
-      "product": 4,
-      "quantity": 1,
-      "total": "20.00",
-      "order_date": "2025-02-18T15:03:34.304Z"
+        "user": 2,
+        "product": 4,
+        "quantity": 1,
+        "total": "20.00",
+        "order_date": "2025-02-18T15:03:34.304Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 18,
     "fields": {
-      "user": 2,
-      "product": 4,
-      "quantity": 1,
-      "total": "20.00",
-      "order_date": "2025-02-18T15:04:05.155Z"
+        "user": 2,
+        "product": 4,
+        "quantity": 1,
+        "total": "20.00",
+        "order_date": "2025-02-18T15:04:05.155Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 19,
     "fields": {
-      "user": 2,
-      "product": 4,
-      "quantity": 1,
-      "total": "20.00",
-      "order_date": "2025-02-18T15:04:57.393Z"
+        "user": 2,
+        "product": 4,
+        "quantity": 1,
+        "total": "20.00",
+        "order_date": "2025-02-18T15:04:57.393Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 20,
     "fields": {
-      "user": 2,
-      "product": 4,
-      "quantity": 1,
-      "total": "20.00",
-      "order_date": "2025-02-18T15:05:47.533Z"
+        "user": 2,
+        "product": 4,
+        "quantity": 1,
+        "total": "20.00",
+        "order_date": "2025-02-18T15:05:47.533Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 21,
     "fields": {
-      "user": 2,
-      "product": 1,
-      "quantity": 1,
-      "total": "15.00",
-      "order_date": "2025-02-18T16:20:05.902Z"
+        "user": 2,
+        "product": 1,
+        "quantity": 1,
+        "total": "15.00",
+        "order_date": "2025-02-18T16:20:05.902Z"
     }
-  },
-  {
+},
+{
     "model": "shop.order",
     "pk": 22,
     "fields": {
-      "user": 2,
-      "product": 2,
-      "quantity": 1,
-      "total": "100.00",
-      "order_date": "2025-02-18T16:20:32.476Z"
+        "user": 2,
+        "product": 2,
+        "quantity": 1,
+        "total": "100.00",
+        "order_date": "2025-02-18T16:20:32.476Z"
     }
-  }
+}
 ]

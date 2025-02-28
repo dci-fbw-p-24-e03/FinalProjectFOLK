@@ -1,10 +1,11 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.db.utils import IntegrityError
+from django.core.exceptions import ValidationError
+from decimal import Decimal
 from django.contrib.auth import get_user_model
 from shop.models import Product, Order
-from decimal import Decimal
+
 
 
 # tests for models.py
@@ -33,6 +34,7 @@ class ProductModelTest(TestCase):
         self.assertEqual(self.product.description, "This is a test product.")
         self.assertEqual(self.product.price, Decimal("9.99"))
         self.assertEqual(self.product.category, "joker")
+        self.assertEqual(self.product.image, "test_image.jpeg")
 
     def test_default_category(self):
         """Test if the default category is set to 'skins'"""
@@ -68,13 +70,15 @@ class ProductModelTest(TestCase):
 
     def test_product_fails_without_image(self):
         """Test if product creation fails when image is required"""
-        with self.assertRaises(IntegrityError):  # fails, if img is required
-            Product.objects.create(
-                name="Fail Product",
-                description="This should not work.",
-                price=Decimal("5.99"),
-                category="skins"
-            )
+        product = Product(
+            # name is missing
+            description="This should fail.",
+            price=Decimal("5.99"),
+            category="skins",
+            image=None  # image is missing
+        )
+        with self.assertRaises(ValidationError):  
+            product.full_clean()
 
 
 class OrderModelTest(TestCase):
