@@ -153,7 +153,7 @@ def get_explanations(wrong_questions: list[dict[str, str]]) -> dict[str, str]:
     """
     # Safety: If there are no wrong questions, return empty dict immediately.
     if not wrong_questions:
-        print("No wrong questions provided; returning empty explanations.")
+        # print("No wrong questions provided; returning empty explanations.")
         return {}
 
     # Build the prompt for the API

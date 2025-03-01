@@ -1,0 +1,43 @@
+# This will build an image and container of the app in the current folder
+# change tag name of dockerfile using: docker tag old_name new_name
+
+
+services:
+
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+      # the first port is for the local machine, the last port is for the container
+    volumes:
+     - .:/app
+    
+    environment:
+      - DEBUG=True
+      - DJANGO_SUPERUSER_USERNAME=admin
+      - DJANGO_SUPERUSER_PASSWORD=admin
+      - DJANGO_SUPERUSER_EMAIL=admin@example.com
+    
+    depends_on:
+      - db
+    
+    # make migrations prior to running the app.
+    command: >
+      sh -c "python manage.py migrate &&
+      gunicorn --bind 0.0.0.0:8000 AI_quiz.wsgi:application"
+    
+  db:
+    image: postgres
+    environment: 
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: aiquiz
+
+  app:
+    build: .
+    image: ai_quiz
+    container_name: ai_quiz
+    ports: 
+      - "8001:8000"
+    volumes:
+      - .:/app
