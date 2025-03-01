@@ -2,6 +2,7 @@
 # running gunicorn and using static files in particular CSS files!
 # Add STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles") to settings.py  # Create staticfiles for deployment
 # Add '0.0.0.0' to allowed hosts in settings.py
+# Add '2.201.2.116' to allowed hosts in settings.py, the name of my mini-server!
 
 # Use an official Python runtime as a parent image
 FROM python:3.12-slim
