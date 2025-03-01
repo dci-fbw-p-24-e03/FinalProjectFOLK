@@ -1,0 +1,65 @@
+Use the "docker context ls" command to view what contexts are available on your machine.The current context is indicated with an asterisk (*);
+
+$ docker context ls
+NAME            DESCRIPTION                               DOCKER ENDPOINT                                        ERROR
+default *       Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                            
+desktop-linux   Docker Desktop                            unix:///home/dci-student/.docker/desktop/docker.sock 
+
+
+Use "docker context use" to switch between the Docker Desktop and Docker Engine contexts.
+
+$ docker context use default
+default
+Current context is now "default"
+
+Use the desktop-linux context to interact with Docker Desktop!
+
+
+For pushing images to docker hub:
+
+1. Login to docker
+
+docker login kilianklaiber
+
+4. If login doesn't work, because desktop cred store doesn't exist, then overwrite this
+Content of ~/.docker/config.json
+
+{
+        "auths": {},
+        "credsStore": "desktop",
+        "plugins": {
+                "-x-cli-hints": {
+                        "enabled": "true"
+                }
+        },
+        "features": {
+                "hooks": "true"
+        }
+
+using the following comand: echo '{"auths": {}}' > ~/.docker/config.json
+The password won't be encrypted on your local computer but so be it, it works.
+
+2. Check whether the image TAG conforms with this convention:
+<YOUR-USERNAME>/Image-NAME
+
+Username is your name on dockerhub (kilianklaiber)
+
+$docker images
+REPOSITORY             TAG       IMAGE ID       CREATED       SIZE
+finalprojectfolk-web   latest    e9da470a0e7b   2 hours ago   323MB
+ai_quiz                latest    06af97f0aba1   2 hours ago   323MB
+postgres               latest    563071385448   2 days ago    438MB
+
+3. Rename the TAG if necessary:
+
+docker tag <existing-image>:<old-tag> <new-image>:<new-tag>
+
+REPOSITORY              TAG            IMAGE ID       CREATED       SIZE
+kilianklaiber/ai_quiz   postgres_v01   563071385448   2 days ago    438MB
+
+The name of the repository must be identical on docker hub. If the names differ,
+then the image cannot be pushed.
+
+4. push the image onto docker hub using the command:
+
+docker push kilianklaiber/ai_quiz:postgres_v01
