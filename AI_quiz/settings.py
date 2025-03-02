@@ -101,7 +101,7 @@ DATABASES = {
         "PASSWORD": "postgres",
         # to make the docker compose work, the HOST has to be changed to "db"
         # Use HOST: "localhost" for testing
-        "HOST": "localhost",
+        "HOST": "db",
         "PORT": "5432",
     }
 }
