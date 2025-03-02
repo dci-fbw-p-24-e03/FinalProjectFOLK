@@ -1,0 +1,97 @@
+
+.buy_confirmation {
+    font-family: "Space Mono", serif;
+    background-color: black;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+#confirmation-box {
+    background-color: black;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;  
+    margin: 0 auto;
+}
+
+h2 {
+    color: white;
+}
+
+#confirmation-box .product-box {
+    width: 100%;  
+    max-width: 500px;  
+    margin: 0 auto 20px auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    color: white;
+}
+
+#confirmation-box .product-image {
+    width: 100%;  
+    height: auto;
+    max-height: 350px;  
+    object-fit: contain;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+#confirmation-box .product-details {
+    text-align: center;
+}
+
+#confirmation-box .product-details h3 {
+    font-size: 1.4em;
+    margin: 10px 0;
+}
+
+#confirmation-box .product-details p {
+    font-size: 1em;
+    margin: 5px 0;
+}
+
+#confirmation-box .product-details .price {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #ff0;
+}
+
+#confirmation-box .buttons {
+    display: flex;
+    flex-direction: column;  
+    align-items: center;
+    margin-top: 20px;
+}
+
+#confirmation-box .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 1.1em;
+    max-width: 250px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+#confirmation-box .btn:hover {
+    background-color: #45a049;
+}
+
+#confirmation-box .cancel-btn {
+    background-color: #f44336;
+}
+
+#confirmation-box .cancel-btn:hover {
+    background-color: #e53935;
+}

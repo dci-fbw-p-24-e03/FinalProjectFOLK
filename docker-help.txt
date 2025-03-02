@@ -63,3 +63,14 @@ then the image cannot be pushed.
 4. push the image onto docker hub using the command:
 
 docker push kilianklaiber/ai_quiz:postgres_v01
+
+depends_on:
+  db:
+condition: service_healthy
+
+healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-U", "postgres", "-d", "aiquiz"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s

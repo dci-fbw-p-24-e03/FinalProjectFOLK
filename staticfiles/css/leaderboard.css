@@ -1,0 +1,108 @@
+.leaderboard-container {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 4%;
+  padding-top: 1.5%;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  border-radius: 16px;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Adjusted for 5 columns */
+th:nth-child(1) { width: 5%; }
+th:nth-child(2) { width: 15%; }
+th:nth-child(3) { width: 15%; }
+th:nth-child(4) { width: 20%; }
+th:nth-child(5) { width: 45%; }
+
+th,
+td {
+  padding: 20px;
+  text-align: center;
+}
+
+th {
+  background-color: #7289da;
+  color: #fff;
+  font-size: 1.5em;
+}
+
+#stars-header {
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#stars-header:hover {
+  background-color: #5b6eae;
+  color: #fff;
+}
+
+/* New styling for the inactive part */
+.inactive {
+    font-size: 0.8em;
+    color: #aaa;
+}
+
+td {
+  background-color: #2c2f33;
+  font-size: 1.2em;
+  color: #ddd;
+}
+
+/* Styling for table rows */
+tr:nth-child(even) td {
+  background-color: #2e3137;
+}
+
+tr:hover td {
+  background-color: #3a3f44;
+}
+
+.profile-link {
+  color: #ddd;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.profile-link:hover {
+  color: #ffcc00;
+  text-decoration: underline;
+}
+
+/* Flags */
+.nation-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  height: 35px;
+}
+
+.flag-icon {
+  width: 40px;
+  height: auto;
+  border-radius: 5px;
+  margin-right: 8px;
+}
+
+.nation-name {
+  display: none;
+  position: absolute;
+  left: 100%;
+  margin-left: 8px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.nation-container:hover .nation-name {
+  display: block;
+}

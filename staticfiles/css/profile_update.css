@@ -1,0 +1,50 @@
+.profile-update label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.profile-update select{
+    border-radius: 5px;
+    font-size: 18px;
+    height: 45px;
+}
+#img-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.profile-update .error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.profile-update button,
+.cancel-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.cancel-button {
+    width: 100%;
+}
+
+.profile-update button:hover {
+    background-color: #45a049;
+}
+
+.profile-update .cancel-button {
+    background-color: #f44336;
+    text-decoration: none;
+}
+
+.profile-update .cancel-button:hover {
+    background-color: #e53935;
+}

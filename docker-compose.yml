@@ -17,13 +17,13 @@ services:
       - DJANGO_SUPERUSER_USERNAME=admin
       - DJANGO_SUPERUSER_PASSWORD=admin
       - DJANGO_SUPERUSER_EMAIL=admin@example.com
-    depends_on:
-      db:
-        condition: service_healthy
+      - PGUSER=postgres
+
     # make migrations prior to running the app.
-    command: >
-      sh -c "python manage.py migrate &&
-      gunicorn --bind 0.0.0.0:8000 AI_quiz.wsgi:application"
+    command: 
+      sh -c "python manage.py collectstatic --noinput &&
+             python manage.py migrate &&
+             gunicorn --bind 0.0.0.0:8000 AI_quiz.wsgi:application"
     
   db:
     image: postgres:13
@@ -31,16 +31,9 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: aiquiz
-    ports:
-      - "5432:5432"
+      POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready", "-U", "postgres", "-d", "aiquiz"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
 
 volumes:
   postgres-data:
