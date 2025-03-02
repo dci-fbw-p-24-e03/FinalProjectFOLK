@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0',
                  'localhost',
+                 '127.0.0.1',
                  '2.201.2.116',
                  '192.168.2.2',
 ]
@@ -99,7 +100,8 @@ DATABASES = {
         "USER": "postgres",
         "PASSWORD": "postgres",
         # to make the docker compose work, the HOST has to be changed to "db"
-        "HOST": "db",
+        # Use HOST: "localhost" for testing
+        "HOST": "localhost",
         "PORT": "5432",
     }
 }

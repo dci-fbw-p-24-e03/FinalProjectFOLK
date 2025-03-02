@@ -26,8 +26,8 @@ RUN apt update && apt install -y libpq-dev
 COPY . .
 
 # Run migrations and collect static files; static files need to be collected for running gunicorn
-# RUN python manage.py makemigrations
-# RUN python manage.py migrate
+RUN python manage.py makemigrations
+RUN python manage.py migrate
 RUN python manage.py collectstatic --noinput
 
 
