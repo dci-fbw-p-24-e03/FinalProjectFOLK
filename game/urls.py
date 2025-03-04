@@ -7,4 +7,5 @@ urlpatterns = [
     path("start-result", start_result, name="start_result"),
     #path('game-over', game_over, "game_over"),
     path("game-settings-swap/", game_settings_swap, name="game_settings_swap"),
+    
 ]

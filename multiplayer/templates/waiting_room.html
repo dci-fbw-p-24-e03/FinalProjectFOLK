@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Waiting Room</title>
+</head>
+<body>
+    <h1>Waiting Room</h1>
+    <p>Matching... Please wait for an opponent.</p>
+
+    <!-- Leave Matchmaking Button -->
+    <form action="{% url 'leave_matchmaking' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Leave Matchmaking</button>
+    </form>
+
+    <!-- Script to poll for a match -->
+    <script>
+        function checkForMatch() {
+            fetch("{% url 'check_match' user_id=user_id %}")
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "matched") {
+                        window.location.href = "/game-room/" + data.room_id + "/";
+                    } else {
+                        setTimeout(checkForMatch, 2000);
+                    }
+                });
+        }
+        // Start checking when the page loads.
+        checkForMatch();
+    </script>
+</body>
+</html>

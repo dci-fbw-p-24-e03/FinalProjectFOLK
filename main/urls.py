@@ -5,8 +5,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-     path("", home_view, name="home_view"),
- ]
+    path("", home_view, name="home_view"),
+
+]
 
 # Serve media files during development
 if settings.DEBUG:

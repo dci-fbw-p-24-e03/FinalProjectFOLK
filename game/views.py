@@ -4,7 +4,10 @@ from .models import Questions
 from accounts.models import CustomUser
 from shop.models import Product
 from datetime import datetime
+
 # Create your views here.
+
+
 
 
 def game_view(request):
