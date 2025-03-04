@@ -25,5 +25,15 @@
     height="600"
   />
 </div>
+<button id="play-button" 
+        hx-post="{% url 'join_matchmaking' %}" 
+        hx-trigger="click" 
+        hx-swap="none">
+  Play
+</button>
+
+<div id="matchmaking-status"></div>
+
+
 {% endif %} 
 {% endblock %}

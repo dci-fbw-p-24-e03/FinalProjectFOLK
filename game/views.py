@@ -3,7 +3,10 @@ from .ai import get_question, get_explanations
 from .models import Questions
 from accounts.models import CustomUser
 from datetime import datetime
+
 # Create your views here.
+
+
 
 
 def game_view(request):

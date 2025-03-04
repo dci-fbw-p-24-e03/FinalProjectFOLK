@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "shop",
     "main",
     "game",
+    "multiplayer",
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_URL = 'media/'  # This is the URL prefix for accessing media files
 MEDIA_ROOT = BASE_DIR / 'media'  # This is where uploaded files will be stored on the server
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+    }
+}
