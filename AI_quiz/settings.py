@@ -26,12 +26,14 @@ SECRET_KEY = "django-insecure-onc&0lg7*21ew6fb29@#xbit20p0rktejy_-nx54b9)ny6h_a1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0",
+                "127.0.0.1"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -43,6 +45,8 @@ INSTALLED_APPS = [
     "main",
     "game",
     "multiplayer",
+    "channels",
+
 ]
 
 MIDDLEWARE = [
@@ -75,7 +79,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "AI_quiz.wsgi.application"
+# WSGI_APPLICATION = "AI_quiz.wsgi.application"
+ASGI_APPLICATION = 'AI_quiz.asgi.application'
 
 
 # Database
@@ -140,6 +145,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -156,4 +162,13 @@ CACHES = {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": "redis://127.0.0.1:6379/1",
     }
+}
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
 }

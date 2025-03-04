@@ -1,0 +1,303 @@
+html {
+    overflow: hidden;
+  }
+
+body {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;     /* Centers vertically */
+    height: 100vh;           /* Full viewport height */
+    width: 100vw;            /* Full viewport width */
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    margin: 0%;
+}
+
+.standard_arena {
+    background: url("../assets/futuristic_arena.webp");
+    background-size: cover;
+}
+
+.space_arena {
+    background: url("../assets/space_arena.webp");
+    background-size: cover;
+}
+
+.elder_arena {
+    background: url("../assets/elder_world.webp");
+    background-size: cover;
+}
+
+#swap-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.player-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+    width: 80%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    margin-top: 1%;
+    margin-bottom: 1%;}
+
+.answers, .play_box {
+    /* This makes it 80% of the viewport width */
+    width: 80vw; 
+
+    /* Optional: constrain the width so it doesn't get too small or too big */
+    min-width: 300px;  
+    max-width: 1000px; 
+
+    min-height: 70vh;
+    padding: 5%;
+    margin: 2% auto;  /* 'auto' centers it horizontally */
+    box-sizing: border-box;  /* Includes padding in the width */
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 16px;
+}
+
+#player_2{
+    opacity: 0%;
+}
+
+#player_3{
+    opacity: 0%;
+}
+
+#player_4{
+    opacity: 0%;
+}
+
+#player_2{
+    opacity: 0%;
+}
+
+#player_3{
+    opacity: 0%;
+}
+
+#player_4{
+    opacity: 0%;
+}
+
+.form{
+    height: 100%;
+}
+
+.answers, .play_box {
+    /* This makes it 80% of the viewport width */
+    width: 80vw; 
+
+    /* Optional: constrain the width so it doesn't get too small or too big */
+    min-width: 300px;  
+    max-width: 1000px; 
+
+    min-height: 70vh;
+    padding: 5%;
+    margin: 2% auto;  /* 'auto' centers it horizontally */
+    box-sizing: border-box;  /* Includes padding in the width */
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 16px;
+}
+
+
+.question_box{
+    min-height: 150px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+
+/* Question text styling */
+.question {
+    text-align: block;
+    color: #fff;
+    font-size: xx-large;
+    margin-bottom: 5%;
+    
+}
+
+.answer_box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; /* Distributes space evenly */
+    height: 50vh; /* Full height of the viewport */
+}
+
+
+.answer_pair, .center-screen {
+    flex: 1; /* Ensures all divs take equal height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content inside */
+    align-items: center;
+    height: 80%;
+}
+
+
+/* Hide default radio buttons */
+input[type="radio"] {
+    opacity: 0;
+    color:white;
+    display: none;
+}
+
+/* Style labels as modern buttons */
+.radio-button, .radio-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #7289da;
+    border-radius: 8px;
+    padding: 4%;
+    cursor: pointer;
+    margin: 20px;
+    transition: all 0.3s ease-in-out;
+    height: 100%;
+    width: 80%;
+    color: #fff;
+    background-color: transparent;
+    font-size: xx-large;
+}
+
+.radio-button:hover {
+
+background-color: #007bff;
+}
+
+/* Highlight style when a radio is selected */
+input:has(input:checked) {
+    border: 2px solid #0b29b1;
+    background-color: #007bff;
+    color: #eaf0ec;
+}
+
+/* Center buttons container */
+.button_div {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Timer container styling */
+.timer_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Additional answer choice button spacing */
+.answer_choice_button {
+    margin: 20px;
+}
+
+
+/* Countdown container centering */
+.countdown_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Timer SVG styling */
+.timer {
+    margin-top: 10px;
+}
+
+.timer > svg {
+    width: 200px;
+    height: 200px;
+}
+
+.timer > svg > circle {
+    fill: none;
+    stroke-opacity: 0.3;
+    stroke: #0d6efd;
+    stroke-width: 10;
+    transform-origin: center center;
+    transform: rotate(-90deg);
+}
+
+.timer > svg > circle + circle {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    stroke-linecap: round;
+    stroke-opacity: 1;
+}
+
+.timer.animatable > svg > circle + circle {
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+.timer > svg > text {
+    font-size: xx-large;
+    fill: #fff;
+}
+
+.timer > svg > text + text {
+    font-size: 1rem;
+}
+
+/* Correct and wrong answer indicators */
+.correct_answer {
+    border: 2px solid #0bb14b;
+    background-color: #45ce65;
+}
+
+.wrong_answer {
+    border: 2px solid #e20000;
+    background-color: #df0f0f;
+}
+
+/* Footer positioning with modern container styling */
+footer {
+    display: flex;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.footer_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Image styling with subtle rounding */
+img {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+}
+
+.score-positive {
+    color: #45ce65;
+  }
+  
+.score-negative {
+color: #df0f0f;
+}

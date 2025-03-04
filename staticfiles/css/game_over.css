@@ -1,0 +1,213 @@
+/* body { 
+
+    color : white
+} */
+
+.game_over_buttons{
+
+
+    padding-top: 5%;
+    display: flex;
+    padding-bottom: 2% ;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row !important;
+}
+
+
+
+.futuristic-button {
+    background: linear-gradient(90deg, #007bff, #0056b3); /* Blue gradient */
+    color: white; /* White text */
+    font-size: 1.2em;
+    font-family: 'Arial', sans-serif;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px; /* Rounded corners */
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.7); /* Blue glow effect */
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover effect */
+.futuristic-button:hover {
+    background: linear-gradient(90deg, #0056b3, #003f7f);
+    box-shadow: 0 0 20px rgba(0, 123, 255, 1);
+    transform: scale(1.05);
+}
+
+/* Active (click) effect */
+.futuristic-button:active {
+    transform: scale(0.95);
+}
+
+/* Optional: Add a subtle glow animation */
+@keyframes glow {
+    0% { box-shadow: 0 0 10px rgba(0, 123, 255, 0.7); }
+    50% { box-shadow: 0 0 20px rgba(0, 123, 255, 1); }
+    100% { box-shadow: 0 0 10px rgba(0, 123, 255, 0.7); }
+}
+
+.futuristic-button.glow {
+    animation: glow 1.5s infinite alternate;
+}
+
+.explanations {
+
+    display : none
+} 
+
+/* copying initial styling to just give it another color */
+
+.futuristic-button.explanations-button {
+    background: linear-gradient(90deg, #ff7d26, #fd5912);
+    box-shadow: 0 0 10px rgb(255, 193, 5);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Default hover effect */
+.futuristic-button.explanations-button:hover {
+    background: linear-gradient(90deg, #ffb143, #ff8b2c);
+    box-shadow: 0 0 20px rgb(255, 208, 202);
+    transform: scale(1.05);
+}
+
+/* Keep hover style when toggled */
+.futuristic-button.explanations-button.toggled {
+    background: linear-gradient(90deg, #ffb143, #ff8b2c);
+    box-shadow: 0 0 20px rgb(255, 208, 202);
+    transform: scale(1.05);
+}
+
+.summary {
+    padding-top: 4%;
+    text-align: left;
+}
+h1{
+
+    text-align: center;
+    margin-top: -3%;
+}
+
+
+
+* {box-sizing:border-box}
+
+/* Slideshow container */
+.slideshow-container {
+  
+  position: relative;
+  margin: auto;
+  padding-left: 6%;
+  padding-right: 6%;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+
+
+/* Show only the first image */
+.mySlides:first-child {
+display: block;
+}
+
+.correct-answer {
+    color: #45ce65;
+    font-weight: bold;
+}
+
+.wrong-answer {
+    color: #df0f0f;
+    font-weight: bold;
+}
+
+
+
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev {
+    left: 0;
+    border-radius: 3px 0 0 3px;
+  }
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+.explanation-text{
+    width: 95%;
+    text-align: block;
+}
+
+.dots {
+    
+    text-align:center
+}
+
+
+
+.image_facts_row {
+
+display: flex;
+flex-direction: row !important;
+justify-content: space-between;
+
+}
