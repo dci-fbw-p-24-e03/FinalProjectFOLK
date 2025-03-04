@@ -64,6 +64,12 @@ then the image cannot be pushed.
 
 docker push kilianklaiber/ai_quiz:postgres_v01
 
+5. If you are unhappy with the build then delete everything with the single command:
+
+docker system prune -a -f
+
+6. rebuild using docker compose up --build
+
 depends_on:
   db:
 condition: service_healthy

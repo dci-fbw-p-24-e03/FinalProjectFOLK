@@ -2,6 +2,21 @@
 # change tag name of dockerfile using: docker tag old_name new_name
 
 services:
+  db:
+      image: postgres:13
+      environment: 
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_DB=aiquiz
+      volumes:
+        - postgres-data:/var/lib/postgresql/data
+
+      healthcheck:
+            test: ["CMD-SHELL", "pg_isready"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 30s
 
   web:
     build: .
@@ -11,13 +26,16 @@ services:
     volumes:
       - .:/app
     environment:
-      - DEBUG=True
       - DJANGO_SETTINGS_MODULE=AI_quiz.settings
       - DJANGO_ALLOWED_HOSTS=localhost, 0.0.0.0, 127.0.0.1, 2.201.2.116, 192.168.2.2, db
       - DJANGO_SUPERUSER_USERNAME=admin
       - DJANGO_SUPERUSER_PASSWORD=admin
       - DJANGO_SUPERUSER_EMAIL=admin@example.com
       - PGUSER=postgres
+      - PGPASSWORD=postgres
+    depends_on:
+      db:
+        condition: service_healthy
 
     # make migrations prior to running the app.
     command: 
@@ -25,15 +43,6 @@ services:
              python manage.py migrate &&
              gunicorn --bind 0.0.0.0:8000 AI_quiz.wsgi:application"
     
-  db:
-    image: postgres:13
-    environment: 
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: aiquiz
-      POSTGRES_HOST_AUTH_METHOD: trust
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
 
 volumes:
   postgres-data:
