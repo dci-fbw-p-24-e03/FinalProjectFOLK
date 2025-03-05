@@ -1,12 +1,13 @@
 name: ai-quiz
 
 services:
-  - name: web
-    github: dci-fbw-p-24-e03/FinalProjectFOLK
-    branch: test
-    deploy_on_push: true
-    environment_slug: python
-    build_command: pip install -r requirements.txt
-    run_command: daphne -b 0.0.0.0 -p 8080 AI_quiz.asgi:application --http-timeout 3600
-    http_port: 8080
-    instance_count: 1
+  name: web
+  github: dci-fbw-p-24-e03/FinalProjectFOLK
+  branch: test
+  deploy_on_push: true
+  environment_slug: python
+  build_command: pip install -r requirements.txt
+  run_command: daphne -b 0.0.0.0 -p 8080 AI_quiz.asgi:application --http-timeout 3600
+  http_port: 8080
+  instance_count: 1
+
