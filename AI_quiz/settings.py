@@ -27,7 +27,8 @@ SECRET_KEY = "django-insecure-onc&0lg7*21ew6fb29@#xbit20p0rktejy_-nx54b9)ny6h_a1
 DEBUG = True
 
 ALLOWED_HOSTS = ["0.0.0.0",
-                "ai-quiz-app-a8p6g.ondigitalocean.app"]
+                "127.0.0.1",
+		"206.189.56.249"]
 
 
 # Application definition
@@ -160,7 +161,7 @@ MEDIA_ROOT = BASE_DIR / 'media'  # This is where uploaded files will be stored o
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": "redis://0.0.0.0:6379/1",
     }
 }
 
@@ -168,11 +169,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": [('0.0.0.0', 6379)],
         },
     },
 }
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://ai-quiz-app-a8p6g.ondigitalocean.app"
-]
