@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-onc&0lg7*21ew6fb29@#xbit20p0rktejy_-nx54b9)ny6h_a1
 DEBUG = True
 
 ALLOWED_HOSTS = ["0.0.0.0",
-                "127.0.0.1"]
+                "ai-quiz-app-a8p6g.ondigitalocean.app"]
 
 
 # Application definition
