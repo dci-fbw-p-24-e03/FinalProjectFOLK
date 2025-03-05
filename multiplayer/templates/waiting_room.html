@@ -2,10 +2,18 @@
 <html>
 <head>
     <title>Waiting Room</title>
+    <link rel="stylesheet" href="{% static 'css/loading.css' %}">
 </head>
 <body>
     <h1>Waiting Room</h1>
     <p>Matching... Please wait for an opponent.</p>
+
+    <div class="loader">
+        <span>Loading</span>
+        <span class="dot">.</span>
+        <span class="dot">.</span>
+        <span class="dot">.</span>
+    </div>
 
     <!-- Leave Matchmaking Button -->
     <form action="{% url 'leave_matchmaking' %}" method="post">
