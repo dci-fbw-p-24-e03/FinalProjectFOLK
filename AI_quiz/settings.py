@@ -172,3 +172,7 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://ai-quiz-app-a8p6g.ondigitalocean.app"
+]
