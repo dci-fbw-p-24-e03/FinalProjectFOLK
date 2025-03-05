@@ -1,15 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Waiting Room</title>
-    <link rel="stylesheet" href="{% static 'css/loading.css' %}">
-</head>
-<body>
-    <h1>Waiting Room</h1>
-    <p>Matching... Please wait for an opponent.</p>
+{% extends 'base.html' %}
+{% block title %} Waiting Room {% endblock %}
+{% block content %}
+
+    <style>
+        /* hides navbar! */
+        nav,
+        nav::before,
+        nav::after,
+        header {
+            display: none;
+        }
+    </style>
 
     <div class="loader">
-        <span>Loading</span>
+        <span>Waiting for Opponent</span>
         <span class="dot">.</span>
         <span class="dot">.</span>
         <span class="dot">.</span>
@@ -37,5 +41,5 @@
         // Start checking when the page loads.
         checkForMatch();
     </script>
-</body>
-</html>
+
+{% endblock %}
