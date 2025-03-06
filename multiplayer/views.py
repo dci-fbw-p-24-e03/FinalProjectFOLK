@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.core.cache import cache
 from django.urls import reverse
 import uuid
-from django.contrib.auth.models import User  # Import User model
+from accounts.models import CustomUser  # Import User model
 
 # Create your views here.
 MATCHMAKING_POOL_KEY = "matchmaking_pool"
@@ -28,23 +28,23 @@ def join_matchmaking(request):
     if waiting_players:
         opponent_id = waiting_players.pop(0)
 
-        # # Get the opponent's user data
-        # opponent = User.objects.get(id=opponent_id)  # Fetch opponent user
-        # opponent_data = {
-        #     "id": opponent.id,
-        #     "username": opponent.username,
-        #     "image": opponent.image,
-        #     "average": opponent.average_stars_per_game,
-        # }
+        # Get the opponent's user data
+        opponent = CustomUser.objects.get(id=opponent_id)  # Fetch opponent user
+        opponent_data = {
+            "id": opponent.id,
+            "username": opponent.username,
+            "image": opponent.image,
+            "average": opponent.average_stars_per_game,
+        }
 
-        # # Get the current user's data
-        # user = request.user
-        # user_data = {
-        #     "id": user.id,
-        #     "username": user.username,
-        #     "image":user.image,
-        #     "average": user.average_stars_per_game,
-        # }
+        # Get the current user's data
+        user = request.user
+        user_data = {
+            "id": user.id,
+            "username": user.username,
+            "image":user.image,
+            "average": user.average_stars_per_game,
+        }
 
         # Update the cache with the new state of the pool
         cache.set(MATCHMAKING_POOL_KEY, waiting_players, timeout=60)
@@ -53,8 +53,13 @@ def join_matchmaking(request):
         room_id = str(uuid.uuid4())  # New unique game room id
         cache.set(f"game_room:{room_id}", {
             "players": [user_id, opponent_id],
-            # "player_data": [user_data, opponent_data]
+            "player_data": [user_data, opponent_data]
         }, timeout=600)
+        
+        # *** NEW: Update active_game_rooms so that check_match can find this room ***
+        active_game_rooms = cache.get("active_game_rooms", [])
+        active_game_rooms.append(room_id)
+        cache.set("active_game_rooms", active_game_rooms, timeout=600)
 
         return JsonResponse({
             "status": "matched", 
