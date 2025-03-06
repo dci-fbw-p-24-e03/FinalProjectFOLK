@@ -1,0 +1,10 @@
+{% extends 'base.html' %} 
+{% block title %}Thank You{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <p>We have received your message and will respond as soon as possible.
+    Thank you for your patience!</p><br>
+    <button onclick="window.location.href='{% url 'home_view' %}'" class="btn btn-primary">Back to Homepage</button>
+</div>
+{% endblock %}

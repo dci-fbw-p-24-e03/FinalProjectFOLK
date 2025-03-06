@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{% static 'css/game_partial.css' %}" />
     <link rel="stylesheet" href="{% static 'css/purchase_success.css' %}">
     <link rel="stylesheet" href="{% static 'css/waiting_room.css' %}">
+    <link rel="stylesheet" href="{% static 'css/contact_us.css' %}">
+    <link rel="stylesheet" href="{% static 'css/contact_us_success.css' %}">
     <link
       href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap"
       rel="stylesheet"
@@ -96,7 +98,15 @@
 
     <main id="content-area">{% block content %}{% endblock %}</main>
     <footer>
-      <p>&copy; 2025 The AI-Quiz. All rights reserved</p>
+      <div>
+        <a href="{% url 'contact_us' %}"><span>> Impressum <</span></a>
+      </div>
+      <div>
+        <p>&copy; 2025 The AI-Quiz. All rights reserved</p>
+      </div>
+      <div>
+        <a href="{% url 'contact_us' %}"><span>> Contact us here <</span></a>
+      </div>
     </footer>
 
     <!-- Include JS scripts -->
