@@ -57,14 +57,15 @@ def join_matchmaking(request):
 
         # Create a new game room for the matched players, including full user data
         room_id = str(uuid.uuid4())  # New unique game room id
-        cache.set(
-            f"game_room:{room_id}",
-            {
-                "players": [user_id, opponent_id],
-                "player_data": [user_data, opponent_data],
-            },
-            timeout=600,
-        )
+        cache.set(f"game_room:{room_id}", {
+            "players": [user_id, opponent_id],
+            "player_data": [user_data, opponent_data]
+        }, timeout=600)
+        
+        # *** NEW: Update active_game_rooms so that check_match can find this room ***
+        active_game_rooms = cache.get("active_game_rooms", [])
+        active_game_rooms.append(room_id)
+        cache.set("active_game_rooms", active_game_rooms, timeout=600)
 
         # *** NEW: Update active_game_rooms so that check_match can find this room ***
         active_game_rooms = cache.get("active_game_rooms", [])
