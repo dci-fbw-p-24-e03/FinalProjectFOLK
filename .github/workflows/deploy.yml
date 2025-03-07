@@ -37,12 +37,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Verify PostgreSQL is running
-        run: |
-          sudo systemctl status postgresql || echo "PostgreSQL is not running"
-          psql -U postgres -d aiquiz -c "SELECT 1;" || echo "Database connection failed"
-
-
       - name: Run tests
         run: python manage.py test
 
@@ -51,10 +45,10 @@ jobs:
           Key: ${{ secrets.DROPLET_SSH_KEY }}
           Address: ${{ secrets.DROPLET_IP }}
         run: |
-          mkdir -p ~/.ssh
-          echo "$Key" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H $Address >> ~/.ssh/known_hosts
+          mkdir -p $HOME/.ssh
+          echo "$Key" > $HOME/.ssh/id_ed25519
+          chmod 600 $HOME/.ssh/id_ed25519
+          ssh-keyscan -H $Address >> $HOME/.ssh/known_hosts
       
       - name: Debug SSH Key
         run: |
