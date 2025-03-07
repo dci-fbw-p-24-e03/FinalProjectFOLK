@@ -56,7 +56,7 @@ jobs:
 
       - name: Call Droplet with SSH Key
         run: |
-          ssh-keyscan -H $Address >> ~/.ssh/known_hosts
+          ssh-keyscan $Address >> ~/.ssh/known_hosts
       
       
 
