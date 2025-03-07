@@ -37,6 +37,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Set up PostgreSQL
+        uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: "13" 
+          postgresql db: "aiquiz"
+          postgresql user: "postgres"
+          postgresql password: "postgres"
+
+      - name: Verify PostgreSQL is running
+        run: |
+          sudo systemctl status postgresql || echo "PostgreSQL is not running"
+          psql -U postgres -d aiquiz -c "SELECT 1;" || echo "Database connection failed"
+
+
       - name: Run tests
         run: python manage.py test
 
