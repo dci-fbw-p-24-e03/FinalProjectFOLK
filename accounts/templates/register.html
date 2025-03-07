@@ -6,6 +6,7 @@
     <div class="content-container-shadow register">
       <h1>Register</h1>
       <form method="post" enctype="multipart/form-data">
+        <!-- {{ form.as_p }} -->
         {% csrf_token %}
           <label for="id_username">Username:</label>
           <input 

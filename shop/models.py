@@ -18,7 +18,7 @@ class Product(models.Model):
         max_length=20, choices=CATEGORY_CHOICES, default="skins"
     )
     users = models.ManyToManyField(
-        "accounts.CustomUser", blank=True, null=True
+        "accounts.CustomUser", blank=True
     )  # Many-to-many relationship
 
     def clean(self):

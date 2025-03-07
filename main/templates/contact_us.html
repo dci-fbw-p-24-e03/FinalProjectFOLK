@@ -1,0 +1,27 @@
+{% extends 'base.html' %} 
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+    <h1>Contact Us</h1>
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_name"></label>
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                <label for="id_email"></label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label for="id_message"></label>
+                {{ form.message }}
+            </div>
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-danger" onclick="window.location.href='/'">Cancel</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
