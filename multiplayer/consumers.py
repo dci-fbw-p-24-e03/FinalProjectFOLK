@@ -29,7 +29,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         # Turn received data into a python readable dictionary
         data = json.loads(text_data)
-
+        
         print("received data: ", data)
         # Retrieve the chat message
         message = data.get("chat_message")
