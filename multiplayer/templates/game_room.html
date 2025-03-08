@@ -4,25 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/htmx-ext-ws@2.0.2" integrity="sha384-932iIqjARv+Gy0+r6RTGrfCkCKS5MsF539Iqf6Vt8L4YmbnnWI2DSFoMD90bvXd0" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
                                                   
 
 </head>
 <!-- connect to the websocket -->
-<body hx-ext="ws">
+<body>
 
-    <div hx-ws="connect:/game-room/{{ room_id }}/"></div>
 
-    <div hx-ext="ws" ws-connect="ws://localhost:8000/game-room/{{ room_id }}/">
-        <div id="message">
-            <!-- Messages will be dynamically updated here -->
-        </div>
 
-        <form id="form" ws-send>
-            <input name="chat_message">
-        </form>
+    <div 
+    hx-ext="ws" 
+    ws-connect="ws://127.0.0.1:8000/game-room/{{ room_id }}/">
+
+    <form id="form" ws-send>
+        <p>Chat Here!</p>
+        <input id="myInput" name="chat_message">
+    </form>
+    
+
+    <section class="chat-container">
+    <div id="chat_message" hx-swap-oob="beforeend">  </div>
+
+</section>
+
     </div>
 
 
@@ -50,3 +56,5 @@
 </div>
 
 </html>
+
+
