@@ -4,7 +4,6 @@ from django.core.cache import cache
 from .cache_functions import get_game_room
 from game.ai import get_question
 
-
 class ChatConsumer(AsyncWebsocketConsumer):
 
     async def connect(self):
@@ -16,7 +15,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         # Identify the first game room, in which the user is registered.
         self.room_name = get_game_room(user)
 
-        # Create a group on the basis of the game room
+        # Create a chat group on the basis of the game room
         self.room_group_name = f"chat_{self.room_name}"
 
         # Join the group
@@ -174,3 +173,4 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         # Send the message to the WebSocket
         await self.send(text_data=json.dumps({"message": message}))
+
