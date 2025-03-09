@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import  results, multi_play, join_matchmaking, waiting_room, check_match, leave_matchmaking, game_room
+from .views import  multi_play, join_matchmaking, waiting_room, check_match, leave_matchmaking, game_room
 
 urlpatterns = [
     

@@ -16,7 +16,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         # Identify the first game room, in which the user is registered.
         self.room_name = get_game_room(user)
 
-        # Create a chat group on the basis of the game room
+        # Create a group on the basis of the game room
         self.room_group_name = f"chat_{self.room_name}"
 
         # Join the group
