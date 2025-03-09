@@ -125,42 +125,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             # This message is only sent to the use who chatted.
             await self.send('<input id="myInput" name="chat_message">')
 
-        # If the player pressed the play button:
-        play = data.get("play")
-        if play != None:
-            # Send a message to the player asking him to wait for his opponent to respond in kind
-            context = f"<div id='play'> Wait for Opponent</div>"
-            await self.send(context)
 
-            # Save the players choice in the cache.
-            if game_room.get("ready") == None:
-                game_room["ready"] = 1
-                cache.set(f"game_room:{self.room_name}", game_room)
-            else:
-                game_room["ready"] += 1
-                cache.set(f"game_room:{self.room_name}", game_room)
-            
-            # Get the questions for the game and save them in the cache!!
-
-        # If all the players in the game room have chosen to play
-        # then let the game begin
-
-        if len(game_room.get("players")) == game_room.get("ready"):
-            print("let's play!")
-
-            # render an new page for playing by sending an htmx tag
-            # to all participants in the front end simultaneously, which will
-            # swap the content of the website
-
-            context = "<div id='lets_play' hx-get='/multi_play' hx-target='#swap-multi_play' hx-trigger='load'> </div>"
-            # Send the letsplay div to all the members of the chat group simultaneously.
-            await self.channel_layer.group_send(
-                self.room_group_name,
-                {
-                    "type": "chat_message",  # The event type for the message
-                    "message": context,  # The message content
-                },
-            )
 
     async def chat_message(self, event):
         # This method will be called when a message is received from the group

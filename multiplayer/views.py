@@ -48,7 +48,7 @@ def join_matchmaking(request):
         user_data = {
             "id": user.id,
             "username": user.username,
-            "image":user.image,
+            "image": user.image,
             "average": user.average_stars_per_game,
         }
 
