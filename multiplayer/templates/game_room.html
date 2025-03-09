@@ -9,14 +9,22 @@
                                                   
 
 </head>
-<!-- connect to the websocket -->
-<body>
+
+<!--  Swap the body for /multi_play -->
+<body id= 'swap-multi_play'>
+
+    <!-- Do not delete! Necessary for swapping the body and beginning the game -->
+     <!-- This div will be replaced by: 
+      "<div id='lets_play' hx-get='/multi_play' hx-target='#swap-multi_play' hx-trigger='load'> </div>" 
+      This will trigger swapping the body immediately.
+      -->
+    <div id='lets_play'></div>
 
 
-
+    <!-- Create websocket, chat with your opponent and start the game. -->
     <div 
     hx-ext="ws" 
-    ws-connect="ws://127.0.0.1:8000/game-room/{{ room_id }}/">
+    ws-connect="ws://127.0.0.1:8000/game-room/">
 
     <form id="form" ws-send>
         <p>Chat Here!</p>
@@ -26,34 +34,26 @@
 
     <section class="chat-container">
     <div id="chat_message" hx-swap-oob="beforeend">  </div>
+    </section>
 
-</section>
+    <section class="play-button">
+
+        <button id="play" name="play" ws-send> Let's Play</button>
+    </section>
 
     </div>
 
+    <h1>You've got matched succesfully !</h1>
+    {% for player in players %}
+        <h1>{{player.username}}</h1>
+        <img src="{{player.image.url}}">
+        {% if not forloop.last %}
+        <div><h1>VERSUS</h1></div>
+        {% endif %}
+        
+    {% endfor %}
 
 </body>
-
-
-<h1>you got matched succesfully !</h1>
-
-<div>
-<div>
-    <h3>{{ user_data.username }}</h3>
-    <img src="{{ user_data.image.url }}" alt="image">
-    <h3>{{ user_data.average }} </h3>
-
-</div>
-
-<div><h1>VERSUS</h1></div>
-
-<div>
-    <h3>{{ opponent_data.username }}</h3>
-    <img src="{{ opponent_data.image.url }}" alt="image">
-    <h3>{{ opponent_data.average }} </h3>
-
-</div>
-</div>
 
 </html>
 

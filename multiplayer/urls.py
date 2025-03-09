@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import  join_matchmaking, waiting_room, check_match, leave_matchmaking, game_room
+from .views import  multi_play, join_matchmaking, waiting_room, check_match, leave_matchmaking, game_room
 
 urlpatterns = [
     
@@ -8,4 +8,5 @@ urlpatterns = [
     path("check-match/<str:user_id>/", check_match, name="check_match"),
     path("leave-matchmaking/", leave_matchmaking, name="leave_matchmaking"),
     path("game-room/<str:room_id>/", game_room, name="game_room"),
+    path("multi_play/", multi_play, name="multi_play"),
 ]
