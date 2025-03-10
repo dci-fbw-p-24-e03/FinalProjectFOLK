@@ -55,7 +55,7 @@ jobs:
           cat ~/.ssh/id_ed25519 || echo "SSH key not found or cannot be read!"
 
       - name: Debug Address Variable
-        run: echo "Connecting to '$Address'"
+        run: echo "Connecting to '${{ secrets.DROPLET_IP }}'"
         
       - name: Call Droplet with SSH Key
         run: |
