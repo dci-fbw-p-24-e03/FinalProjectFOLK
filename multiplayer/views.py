@@ -5,6 +5,7 @@ from django.core.cache import cache
 from django.urls import reverse
 import uuid
 from accounts.models import CustomUser  # Import User model
+from . cache_functions import get_game_room, get_players
 
 # Create your views here.
 MATCHMAKING_POOL_KEY = "matchmaking_pool"
@@ -144,5 +145,16 @@ def waiting_room(request, user_id):
     return render(request, "waiting_room.html", {"user_id": user_id})
 
 def multi_play(request):
-    print("multiplay request", request)
-    return render(request, "multi_play.html")
+    
+    user = request.user
+    user = str(user)
+    print("multiplay_user: ", user)
+    game_room_name = get_game_room(user)
+    players = get_players(game_room=game_room_name)
+    print("players: ", players)
+    
+    context = {"user": user,
+               "players": players,
+               "game_room_name": game_room_name}
+    
+    return render(request, "multi_play.html", context)
