@@ -173,4 +173,3 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         # Send the message to the WebSocket
         await self.send(text_data=json.dumps({"message": message}))
-
