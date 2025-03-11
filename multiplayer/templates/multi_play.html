@@ -1,8 +1,10 @@
 
-<p>multi_play</p>
-
-<p>{{game_room_name}}</p>
-<p>{{user}}</p>
-<p>{{players}}</p>
-<p>multi_play</p>
-<p>{{players}}</p>
+<p>Current Player: {{user}}</p>
+{% for player in players %}
+<p>player: {{ player }}</p>
+{% endfor %}
+<p>Question: {{question}}</p>
+<p>A: {{A}}</p>
+<p>B: {{B}}</p>
+<p>C: {{C}}</p>
+<p>D: {{D}}</p>
