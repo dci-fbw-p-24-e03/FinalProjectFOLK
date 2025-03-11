@@ -291,12 +291,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 
 def get_game_room(username: str) -> str | None:
-    """Returng the first game room from the list of game rooms in the cache,
+    """Return the first game room from the list of game rooms in the cache,
     in which the user is registered.
     """
     # Get all the active game rooms in the cache
     active_game_rooms = cache.get("active_game_rooms")
-    
+
     if active_game_rooms == None:
         return None
 
@@ -319,11 +319,11 @@ def get_game_room(username: str) -> str | None:
 
 
 def get_players(game_room: str) -> list[str] | None:
-    """ Return the list of users currently in the game room.
+    """Return the list of users currently in the game room.
     Example for the room content in the cache:
-    {'players': ['3', '2'], 
+    {'players': ['3', '2'],
     'player_data': [
-        {'id': 3, 'username': 'Ole', 'image': <ImageFieldFile: user_profile_images/profile_placeholder.jpeg>, 'average': 2.25}, 
+        {'id': 3, 'username': 'Ole', 'image': <ImageFieldFile: user_profile_images/profile_placeholder.jpeg>, 'average': 2.25},
         {'id': 2, 'username': 'kilian', 'image': <ImageFieldFile: user_profile_images/0kIPXTKI_400x400.jpg>, 'average': 19.8}]
         }
     """
