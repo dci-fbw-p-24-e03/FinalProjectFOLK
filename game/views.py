@@ -4,7 +4,8 @@ from .models import Questions
 from accounts.models import CustomUser
 from shop.models import Product
 from datetime import datetime
-
+import json
+from django.http import JsonResponse
 # Create your views here.
 
 
@@ -77,6 +78,10 @@ def game_start(request):
         can chose one possible answer and submit his answer, whereby a post request hx-post="/game-flow"
         is transmitted to the start_result view. The target of this htmx request is again the swap-container.
     """
+    print("🔍 Neue Anfrage erhalten!")
+    print("➡️ Methode:", request.method)
+    print("➡️ Headers:", request.headers)
+    print("➡️ Body (Raw):", request.body)
 
     # Record time, when the game starts
     now = datetime.now()
