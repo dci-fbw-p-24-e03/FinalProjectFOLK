@@ -26,11 +26,7 @@
         <div id='lets_play'></div>
 
 
-    <!-- Create websocket, chat with your opponent and start the game. -->
-    <div 
-    hx-ext="ws" 
-    ws-connect="ws://127.0.0.1:8000/game-room/">
-
+        <!-- Chat with your opponent using websocket connection. -->
     <form id="form" ws-send>
         <p>Chat Here!</p>
         <input id="myInput" name="chat_message">
@@ -41,12 +37,14 @@
     <div id="chat_message" hx-swap-oob="beforeend">  </div>
     </section>
 
+  
+
     <section class="play-button">
 
         <button id="play" name="play" ws-send> Let's Play</button>
     </section>
 
-    </div>
+    
 
     <h1>You've got matched succesfully !</h1>
     {% for player in players %}
