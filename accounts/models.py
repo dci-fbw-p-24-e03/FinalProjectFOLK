@@ -236,10 +236,10 @@ class CustomUser(AbstractUser):
     ]
 
     image = models.ImageField(upload_to="user_profile_images/", default="user_profile_images/profile_placeholder.jpeg")
-    stars = models.IntegerField(null=True)
+    stars = models.IntegerField(default=0)
     coins = models.IntegerField(default=0)
     nation = models.CharField(max_length=2, choices=NATION_CHOICES, default='DE')
-    average_stars_per_game = models.FloatField(null=True, blank=True)
+    average_stars_per_game = models.FloatField(default=0)
     games_played = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):

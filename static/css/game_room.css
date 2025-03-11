@@ -1,0 +1,157 @@
+h1 {
+    text-align: center;
+}
+
+.standard_arena {
+    background: url("../assets/futuristic_arena.webp");
+    background-size: cover;
+}
+
+.versus_div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 5%;
+}
+
+.versus_style_div {
+    font-size: 2rem; 
+    color: white;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 0.3%;
+    padding-left: 2%;
+    padding-right: 2%;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.button_chat_div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.player_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.flag-icon {
+    width: 35%;
+    height: auto;
+    border-radius: 5px;
+    margin-right: 8px;
+}
+
+/* Angepasste Chatbox passend zum Versus-Design */
+.chat-container {
+    width: 400px;  /* Breitere Chatbox */
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.0); /* Passender Hintergrund */
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px; /* Abgerundete Ecken */
+    overflow: hidden;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+/* Chat-Nachrichtenbereich */
+#chat_message {
+    flex-grow: 1;
+    color: white;
+    padding: 15px;
+    overflow-y: auto;
+    font-size: 1.5rem;  /* Gut lesbare Schriftgröße */
+    line-height: 1.5;
+}
+
+/* Angepasstes Chat-Formular – nun vollständig in der Box integriert */
+form {
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 10px;
+    align-items: center;
+    border-radius: 16px;
+}
+
+/* Angepasstes Eingabefeld mit Placeholder-Styling */
+input {
+    margin-top: 6px;
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 1.5rem;
+    transition: box-shadow 0.3s;
+    background-color: #fff;
+    color: #000;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+/* Styling für den Placeholder-Text */
+input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Futuristic Button Styles */
+.futuristic-button {
+    background: linear-gradient(90deg, #007BFF, #0056B3);
+    color: white;
+    font-size: 1.2em;
+    font-family: 'Arial', sans-serif;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.7);
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.futuristic-button:hover {
+    background: linear-gradient(90deg, #0056B3, #003F7F);
+    box-shadow: 0 0 20px rgba(0, 123, 255, 1);
+    transform: scale(1.05);
+}
+
+.futuristic-button:active {
+    transform: scale(0.95);
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 10px rgba(0, 123, 255, 0.7); }
+    50% { box-shadow: 0 0 20px rgba(0, 123, 255, 1); }
+    100% { box-shadow: 0 0 10px rgba(0, 123, 255, 0.7); }
+}
+
+.futuristic-button.glow {
+    animation: glow 1.5s infinite alternate;
+}
+
+.futuristic-button.toggled {
+    background: linear-gradient(90deg, #FFB143, #FF8B2C);
+    box-shadow: 0 0 20px rgb(255, 208, 202);
+    transform: scale(1.05);
+}
