@@ -4,6 +4,7 @@ from django.core.cache import cache
 from .cache_functions import get_game_room
 from game.ai import get_question
 
+
 class ChatConsumer(AsyncWebsocketConsumer):
 
     async def connect(self):
@@ -76,9 +77,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 cache.set(f"game_room:{self.room_name}", game_room)
 
             # Get the questions for the game and save them in the cache!!
-            
+
             if game_room.get("questions") == None:
-                print("getting questions")
                 questions = []
                 for index in range(2):
                     not_questions = []
@@ -87,14 +87,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
                             not_questions.append(question["question"])
                     question = get_question(not_questions=not_questions)
                     questions.append(question)
-            
-                print("Questions", questions)
+
                 game_room["questions"] = questions
                 cache.set(f"game_room:{self.room_name}", game_room)
             game_room = cache.get(f"game_room:{self.room_name}")
-            print("new game room: ", game_room)
-            
-            
 
             if game_room.get("questions") == None:
                 questions = []
@@ -160,6 +156,30 @@ class ChatConsumer(AsyncWebsocketConsumer):
             await self.send('<input id="myInput" name="chat_message">')
 
 
+
+        # If both players see the results page, then delete the last question that was previously displayed
+        # from the cache, such that the next question will be displayed when, the game returns to the
+        # multiplay page.
+        # The results message is sent from the results room only:
+        results = data.get("results")
+        if results == None or results == 0:
+            game_room = cache.get(f"game_room:{self.room_name}")
+            game_room["results"] = 1
+            cache.set(f"game_room:{self.room_name}", game_room)
+
+        else:
+            game_room = cache.get(f"game_room:{self.room_name}")
+            game_room["results"] += 1
+            cache.set(f"game_room:{self.room_name}", game_room)
+            # If all the players have entered the results room
+            if len(game_room.get("players")) == game_room["results"]:
+                # Get the list of questions and answers from the game_room
+                questions = game_room.get("questions")
+                # Delete the last question that was previously asked
+                questions.pop()
+                # Replace the questions with the shortened list of questions
+                #game_room.set("questions") = questions
+                #cache.set(f"game_room:{self.room_name}", game_room)
 
         # If both players see the results page, then delete the last question that was previously displayed
         # from the cache, such that the next question will be displayed when, the game returns to the
