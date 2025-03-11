@@ -3,12 +3,26 @@
 {% block content %}
 
     <style>
-        /* hides navbar! */
+        /* Versteckt die Navbar */
         nav,
         nav::before,
         nav::after,
-        header {
+        header,
+        footer,
+        footer span,
+        footer a:hover span,
+        footer a {
             display: none;
+        }
+        /* Styling für den Loader */
+        .loader {
+            margin-top: 20px;
+            text-align: center;
+        }
+        @keyframes blink {
+            0%, 20% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
         }
     </style>
 
@@ -19,26 +33,31 @@
         <span class="dot">.</span>
     </div>
 
-    <!-- Leave Matchmaking Button -->
     <form action="{% url 'leave_matchmaking' %}" method="post">
         {% csrf_token %}
         <button type="submit">Leave Matchmaking</button>
     </form>
 
-    <!-- Script to poll for a match -->
     <script>
         function checkForMatch() {
             fetch("{% url 'check_match' user_id=user_id %}")
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === "matched") {
-                        window.location.href = "/game-room/" + data.room_id + "/";
+                        const loader = document.querySelector(".loader");
+                        while (loader.children.length > 1) {
+                            loader.removeChild(loader.lastChild);
+                        }
+                        // overwrites only the first span element 
+                        loader.children[0].textContent = "Match Found! Starting game...";
+                        setTimeout(() => {
+                            window.location.href = "/game-room/" + data.room_id + "/";
+                        }, 4000);
                     } else {
                         setTimeout(checkForMatch, 2000);
                     }
                 });
         }
-        // Start checking when the page loads.
         checkForMatch();
     </script>
 
