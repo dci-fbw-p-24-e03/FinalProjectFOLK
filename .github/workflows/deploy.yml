@@ -8,10 +8,20 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: aiquiz
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.10, 3.12]
+        python-version: ["3.10", "3.12"]
 
     steps:
       - name: Checkout repository
@@ -31,16 +41,35 @@ jobs:
         run: python manage.py test
 
       - name: Setup SSH Key
+        env:
+          Key: ${{ secrets.DROPLET_SSH_KEY }}
+          Address: ${{ secrets.DROPLET_IP }}
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.DROPLET_SSH_KEY }}" > ~/.ssh/id_ed25519
+          echo '${{ secrets.DROPLET_SSH_KEY }}' > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H ${{ secrets.DROPLET_IP }} >> ~/.ssh/known_hosts
+
+      - name: Debug SSH Key
+        run: |
+          ls -lah ~/.ssh/
+          cat ~/.ssh/id_ed25519 || echo "SSH key not found or cannot be read!"
+
+      - name: Debug Address Variable
+        run: echo "Connecting to '${{ secrets.DROPLET_IP }}'"
+        
+      - name: Call Droplet with SSH Key
+        run: |
+          ssh-keyscan -p 50000 '${{ secrets.DROPLET_IP }}' >> ~/.ssh/known_hosts
+      
+      
+
 
       - name: Deploy via SSH to DigitalOcean Droplet
+        env:
+          Address: ${{ secrets.DROPLET_IP }}
         if: success()  # Deploy only if tests pass
         run: |
-          ssh -i ~/.ssh/id_ed25519 -p 50000 root@${{ secrets.DROPLET_IP }} << 'EOF'
+          ssh -i ~/.ssh/id_ed25519 -p 50000 root@$Address << 'EOF'
           cd /root/home/FinalProjectFOLK
           git pull origin test
           source venv/bin/activate

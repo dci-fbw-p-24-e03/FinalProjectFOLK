@@ -1,11 +1,12 @@
+import os
 from django.test import TestCase
+from django.conf import settings
 from django.urls import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.exceptions import ValidationError
 from decimal import Decimal
 from django.contrib.auth import get_user_model
 from shop.models import Product, Order
-
 
 
 # tests for models.py
@@ -17,8 +18,13 @@ User = get_user_model()
 class ProductModelTest(TestCase):
     def setUp(self):
         """Create a test product"""
+        # Ensure no previous test image remains
+        image_path = os.path.join(settings.MEDIA_ROOT, "product_images/test_image.jpeg")
+        if os.path.exists(image_path):
+            os.remove(image_path)
+
         image = SimpleUploadedFile(
-            "test_image.jpg", b"\x00" * 1024, content_type="image/jpeg"
+            "test_image.jpeg", b"\x00" * 1024, content_type="image/jpeg"
         )
         self.product = Product.objects.create(
             name="Test Product",
@@ -34,14 +40,20 @@ class ProductModelTest(TestCase):
         self.assertEqual(self.product.description, "This is a test product.")
         self.assertEqual(self.product.price, Decimal("9.99"))
         self.assertEqual(self.product.category, "joker")
-        self.assertEqual(self.product.image, "test_image.jpeg")
+        self.assertEqual(self.product.image, "product_images/test_image.jpeg")
 
     def test_default_category(self):
         """Test if the default category is set to 'skins'"""
+        image_path = os.path.join(settings.MEDIA_ROOT, "product_images/test_image.jpeg")
+        if os.path.exists(image_path):
+            os.remove(image_path)
         default_product = Product.objects.create(
             name="Default Product",
             description="This is a default category test.",
             price=Decimal("5.00"),
+            image=SimpleUploadedFile(
+                "test_image.jpeg", b"\x00" * 1024, content_type="image/jpeg"
+            ),
         )
         self.assertEqual(default_product.category, "skins")
 
@@ -54,30 +66,33 @@ class ProductModelTest(TestCase):
         user = User.objects.create_user(username="testuser", password="password123")
         self.product.users.add(user)
         self.assertIn(user, self.product.users.all())
-    
+
     def test_product_creation_without_image(self):
         """Test if a product can be created without an image"""
-        product = Product.objects.create(
+        product = Product(
             name="No Image Product",
             description="This product has no image.",
             price=Decimal("5.99"),
-            category="skins"
+            category="skins",
+            # image is missing
         )
-        
-        self.assertIsNotNone(product)  # was product created?
-        self.assertEqual(product.name, "No Image Product")
-        self.assertEqual(product.image, "")  # if img is optional, it should be empty
+        # Now call full_clean() inside the assertion to check for ValidationError
+        with self.assertRaises(ValidationError) as context:
+            product.full_clean()
+
+        # Optional: Check that the error is specifically about the image field
+        self.assertIn("image", context.exception.message_dict)
 
     def test_product_fails_without_image(self):
-        """Test if product creation fails when image is required"""
+        """Test if product creation fails when required fields are missing"""
         product = Product(
             # name is missing
             description="This should fail.",
             price=Decimal("5.99"),
             category="skins",
-            image=None  # image is missing
+            image=None,  # image is missing
         )
-        with self.assertRaises(ValidationError):  
+        with self.assertRaises(ValidationError):
             product.full_clean()
 
 
@@ -87,8 +102,12 @@ class OrderModelTest(TestCase):
         self.user = User.objects.create_user(
             username="testuser", password="password123"
         )
+        image_path = os.path.join(settings.MEDIA_ROOT, "product_images/test_image.jpeg")
+        if os.path.exists(image_path):
+            os.remove(image_path)
+
         image = SimpleUploadedFile(
-            "test_image.jpg", b"\x00" * 1024, content_type="image/jpeg"
+            "test_image.jpeg", b"\x00" * 1024, content_type="image/jpeg"
         )
         self.product = Product.objects.create(
             name="Order Product",
@@ -130,14 +149,18 @@ class ShopViewTests(TestCase):
         self.user = User.objects.create_user(
             username="testuser", password="password123", coins=20
         )
-        # image = SimpleUploadedFile(
-        #     "test_image.jpg", b"\x00" * 1024, content_type="image/jpeg"
-        # )
+        image_path = os.path.join(settings.MEDIA_ROOT, "product_images/test_image.jpeg")
+        if os.path.exists(image_path):
+            os.remove(image_path)
+
+        image = SimpleUploadedFile(
+            "test_image.jpeg", b"\x00" * 1024, content_type="image/jpeg"
+        )
         self.product = Product.objects.create(
             name="Test Product",
             description="Shop product for test.",
             price=Decimal("10.00"),
-            # image=image,
+            image=image,
             category="joker",
         )
 
@@ -200,8 +223,12 @@ class ShopSwapViewTests(TestCase):
         self.user = User.objects.create_user(
             username="testuser", password="password123", coins=20
         )
+        image_path = os.path.join(settings.MEDIA_ROOT, "product_images/test_image.jpeg")
+        if os.path.exists(image_path):
+            os.remove(image_path)
+
         image = SimpleUploadedFile(
-            "test_image.jpg", b"\x00" * 1024, content_type="image/jpeg"
+            "test_image.jpeg", b"\x00" * 1024, content_type="image/jpeg"
         )
         self.product = Product.objects.create(
             name="Test Product",
