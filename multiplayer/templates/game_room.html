@@ -24,7 +24,29 @@
       This will trigger swapping the body immediately.
       -->
         <div id='lets_play'></div>
-    <div class = "versus_div">
+
+
+        <!-- Chat with your opponent using websocket connection. -->
+    <form id="form" ws-send>
+        <p>Chat Here!</p>
+        <input id="myInput" name="chat_message">
+    </form>
+    
+
+    <section class="chat-container">
+    <div id="chat_message" hx-swap-oob="beforeend">  </div>
+    </section>
+
+  
+
+    <section class="play-button">
+
+        <button id="play" name="play" ws-send> Let's Play</button>
+    </section>
+
+    
+
+    <h1>You've got matched succesfully !</h1>
     {% for player in players %}
         <div class = "player_div">
         <h1>{{player.username}}</h1>
