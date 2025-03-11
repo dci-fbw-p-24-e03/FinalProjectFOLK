@@ -77,6 +77,25 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 cache.set(f"game_room:{self.room_name}", game_room)
 
             # Get the questions for the game and save them in the cache!!
+            
+            if game_room.get("questions") == None:
+                print("getting questions")
+                questions = []
+                for index in range(2):
+                    not_questions = []
+                    if questions != []:
+                        for question in questions:
+                            not_questions.append(question["question"])
+                    question = get_question(not_questions=not_questions)
+                    questions.append(question)
+            
+                print("Questions", questions)
+                game_room["questions"] = questions
+                cache.set(f"game_room:{self.room_name}", game_room)
+            game_room = cache.get(f"game_room:{self.room_name}")
+            print("new game room: ", game_room)
+            
+            
 
             if game_room.get("questions") == None:
                 questions = []
