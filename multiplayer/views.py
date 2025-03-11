@@ -165,3 +165,26 @@ def multi_play(request):
                }
     
     return render(request, "multi_play.html", context)
+
+def results(request):
+    user = request.user
+    user = str(user)
+    game_room_name = get_game_room(user)
+    players = get_players(game_room=game_room_name)
+    game_room = cache.get(f"game_room:{game_room_name}")
+    questions = game_room["questions"]
+    question = questions.pop()
+    
+    context = {"user": user,
+            "players": players,
+            "game_room_name": game_room_name,
+            "question": question["question"],
+            "A": question["A"],
+            "B": question["B"],
+            "C": question["C"],
+            "D": question["D"],
+            "answer": question["correct_answer"],
+            }
+    return render(request, "results.html", context)
+    
+    
