@@ -75,7 +75,8 @@ def delete_question_from_questions(question: str, questions: list[dict]) -> list
     Returns:
         list[dict]: List of dictionary with one item less corresponding to the passed quesion.
     """
-    for index, question_item in enumerate(questions):
-        if question_item["question"] == question:
-            del questions[index]
-    return questions
+    if questions != None:
+        for index, question_item in enumerate(questions):
+            if question_item["question"] == question:
+                del questions[index]
+        return questions

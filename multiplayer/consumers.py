@@ -132,7 +132,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         user = str(user)
         game_room_name = get_game_room(user)
         game_room = cache.get(f"game_room:{game_room_name}")
-        questions = game_room["questions"]
+        questions = game_room.get("questions")
         remaining_questions=delete_question_from_questions(current_question, questions)
         print(f"This is the remaining question: {remaining_questions}")
         game_room["questions"] = remaining_questions
