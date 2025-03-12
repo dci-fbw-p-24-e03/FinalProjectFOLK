@@ -2,63 +2,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/game_room.css' %}" />
-    <title>Document</title>
-    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/game_room.css' %}" />
+  <title>Document</title>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
+  
+  <script>
+    // Function to scroll the chat to the bottom
+    function scrollToBottom() {
+      const chatContainer = document.querySelector('.chat-container');
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    // Scroll to bottom when new messages are added
+    document.addEventListener("DOMContentLoaded", function() {
+      const chatMessageContainer = document.getElementById("chat_message");
+
+      // Observe new messages being added to the chat container
+      const observer = new MutationObserver(scrollToBottom);
+      observer.observe(chatMessageContainer, {
+        childList: true, // Observe additions of new children (messages)
+      });
+    });
+  </script>
+  
 </head>
-<!--  Swap the body for /multi_play -->
-<body class = "standard_arena">
-        <!-- Create websocket, chat with your opponent and start the game. -->
-        <div
-        hx-ext="ws"
-        ws-connect="ws://127.0.0.1:8000/game-room/">
+<body class="standard_arena">
+  <!-- Create websocket, chat with your opponent and get ready for the game. -->
+  <div hx-ext="ws" ws-connect="ws://127.0.0.1:8000/game-room/">
     <header>
     </header>
-    <main id= 'swap-multi_play'>
-    <!-- Do not delete! Necessary for swapping the body and beginning the game -->
-     <!-- This div will be replaced by:
-      "<div id='lets_play' hx-get='/multi_play' hx-target='#swap-multi_play' hx-trigger='load'> </div>"
-      This will trigger swapping the body immediately.
+    <main id="swap-multi_play">
+      <!-- Do not delete! Necessary for swapping the body and beginning the game -->
+      <!-- This div will be replaced by:
+           "<div id='lets_play' hx-get='/multi_play' hx-target='#swap-multi_play' hx-trigger='load'> </div>"
+           This will trigger swapping the body immediately.
       -->
-        <div id='lets_play'></div>
-    <div class = "versus_div">
-    {% for player in players %}
-        <div class = "player_div">
-        <h1>{{player.username}}</h1>
-        <img src="{{player.image.url}}">
-        <h2>Star rating: {{player.average_stars_per_game}}</h2>
-        <h3>
-        <img src="https://flagicons.lipis.dev/flags/4x3/{{ player.nation|lower }}.svg" alt="{{ player.nation }}" class="flag-icon"></h3>
-        </div>
-        {% if not forloop.last %}
-        <div class = "versus_style_div"><h1>VERSUS</h1></div>
-        {% endif %}
-    {% endfor %}
-</div>
-<div class="button_chat_div">
-            <section class="play-button">
-            <button class = "futuristic-button" id="play" name="play" ws-send> Let's Play</button>
+      <div id="lets_play"></div>
+      
+      <div class="versus_div">
+        {% for player in players %}
+          <div class="player_div">
+            <h1>{{ player.username }}</h1>
+            <img class="profile_image" src="{{ player.image.url }}">
+            <h2>Average Stars: {{ player.average_stars_per_game }}</h2>
+            <h3>
+              <img src="https://flagicons.lipis.dev/flags/4x3/{{ player.nation|lower }}.svg" alt="{{ player.nation }}" class="flag-icon">
+            </h3>
+            <!-- Button for getting ready for the game only -->
+            {% if player == request.user %}
+            <button class="futuristic-button" id="play" name="play" ws-send> Let's Play</button>
+            {% endif %}
+          </div>
+          {% if not forloop.last %}
+            <div class="versus_style_div"><h1>VERSUS</h1></div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      <!-- Centered, enlarged chat box with smaller text -->
+      <div class="button_chat_div">
+        <div class="chat_div">
+          <!-- Chat with your opponent using websocket connection. -->
+          <form id="form" ws-send>
+            <input id="myInput" name="chat_message" placeholder="Type your message here:">
+            <section class="chat-container">
+              <div id="chat_message" hx-swap-oob="beforeend"></div>
             </section>
-            <div class=" chat_div">
-            <!-- Chat with your opponent using websocket connection. -->
-            <form id="form" ws-send>
-                <input id="myInput" name="chat_message" placeholder="Type your message here:">
-                <section class="chat-container">
-                    <div id="chat_message" hx-swap-oob="beforeend">  </div>
-                </section>
-            </form>
-            </div>
-                <section class="play-button">
-                    <button class = "futuristic-button" id="play" name="play" ws-send> Let's Play</button>
-                    </section>
-</div>
+          </form>
+        </div>
+      </div>
+      
     </main>
     <footer>
     </footer>
-   <!-- Do not delete this div. It is necessary for having the websocket word. -->
-    </div>
+    <!-- Do not delete this div. It is necessary for having the websocket work. -->
+  </div>
 </body>
 </html>

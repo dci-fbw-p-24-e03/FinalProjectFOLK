@@ -7,15 +7,21 @@ h1 {
     background-size: cover;
 }
 
-.versus_div{
+.versus_div {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 5%;
+    padding-top: 2%;
+}
+
+.profile_image {
+    width: 70%;
+    height: 70%;
+    border-radius: 8px;
 }
 
 .versus_style_div {
-    font-size: 2rem; 
+    font-size: 1.3rem; 
     color: white;
     display: flex;
     align-items: center;
@@ -29,7 +35,7 @@ h1 {
 
 .button_chat_div {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;  /* Center the chat box */
     align-items: center;
     margin-left: 10%;
     margin-right: 10%;
@@ -47,6 +53,7 @@ h1 {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     margin-left: 10%;
     margin-right: 10%;
+    padding-bottom: 10px; /* Added spacing for the button */
 }
 
 .flag-icon {
@@ -54,32 +61,33 @@ h1 {
     height: auto;
     border-radius: 5px;
     margin-right: 8px;
+    margin-top: -5%; 
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-/* Angepasste Chatbox passend zum Versus-Design */
+/* Enlarged chat container */
 .chat-container {
-    width: 400px;  /* Breitere Chatbox */
-    height: 300px;
-    background-color: rgba(0, 0, 0, 0.0); /* Passender Hintergrund */
+    background-color: rgba(0, 0, 0, 0.0); /* Transparent background */
     display: flex;
     flex-direction: column;
-    border-radius: 16px; /* Abgerundete Ecken */
-    overflow: hidden;
+    border-radius: 16px;
+    overflow-y: auto;
+    height: 250px; /* Increased height for a larger chat box */
+    width: 600px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
 }
 
-/* Chat-Nachrichtenbereich */
+/* Chat messages with smaller font */
 #chat_message {
     flex-grow: 1;
     color: white;
     padding: 15px;
-    overflow-y: auto;
-    font-size: 1.5rem;  /* Gut lesbare Schriftgröße */
+    font-size: 1.2rem;  /* Reduced font size */
     line-height: 1.5;
 }
 
-/* Angepasstes Chat-Formular – nun vollständig in der Box integriert */
+/* Chat form styling */
 form {
     display: flex;
     flex-direction: column;
@@ -89,13 +97,13 @@ form {
     border-radius: 16px;
 }
 
-/* Angepasstes Eingabefeld mit Placeholder-Styling */
+/* Chat input styling */
 input {
     margin-top: 6px;
     flex-grow: 1;
     border: 1px solid #ccc;
     padding: 10px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     transition: box-shadow 0.3s;
     background-color: #fff;
     color: #000;
@@ -106,7 +114,7 @@ input:focus {
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
 }
 
-/* Styling für den Placeholder-Text */
+/* Styling for the placeholder text */
 input::placeholder {
     color: #999;
     font-style: italic;
@@ -114,26 +122,28 @@ input::placeholder {
 
 /* Futuristic Button Styles */
 .futuristic-button {
-    background: linear-gradient(90deg, #007BFF, #0056B3);
+    background-color: #006600; 
     color: white;
     font-size: 1.2em;
     font-family: 'Arial', sans-serif;
     border: none;
     padding: 12px 24px;
-    border-radius: 12px;
+    border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.7);
+    box-shadow: 0 0 10px rgba(0, 123, 0, 0.7);
     transition: all 0.3s ease-in-out;
     text-transform: uppercase;
     letter-spacing: 1px;
     position: relative;
     overflow: hidden;
+    margin-bottom: 5%;
 }
 
+/* Enhanced hover effect for the start-game button in green */
 .futuristic-button:hover {
-    background: linear-gradient(90deg, #0056B3, #003F7F);
-    box-shadow: 0 0 20px rgba(0, 123, 255, 1);
-    transform: scale(1.05);
+    background: linear-gradient(90deg, #4CAF50, #4CAF50) ;
+    box-shadow: 0 0 20px rgba(0, 123, 0, 1);
+    transform: scale(1.1);
 }
 
 .futuristic-button:active {
@@ -141,9 +151,9 @@ input::placeholder {
 }
 
 @keyframes glow {
-    0% { box-shadow: 0 0 10px rgba(0, 123, 255, 0.7); }
-    50% { box-shadow: 0 0 20px rgba(0, 123, 255, 1); }
-    100% { box-shadow: 0 0 10px rgba(0, 123, 255, 0.7); }
+    0% { box-shadow: 0 0 10px rgba(0, 123, 0, 0.7); }
+    50% { box-shadow: 0 0 20px rgba(0, 123, 0, 1); }
+    100% { box-shadow: 0 0 10px rgba(0, 123, 0, 0.7); }
 }
 
 .futuristic-button.glow {

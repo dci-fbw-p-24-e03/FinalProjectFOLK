@@ -166,7 +166,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 },
             )
         # Retrieve the message
-        message = data.get("chat_message", "No message received")
+        message = data.get("chat_message")
     
         # Identify the user who chatted
         chatter = self.scope["user"]
@@ -175,26 +175,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         
         print("user", chatter, "in game room", self.room_name)
 
-        # If you received a chat message then post it:
-        if message != None:
-        # Clear the text from the input field by replacing it with an identical input tag:
-            await self.send('<input id="myInput" name="chat_message">')
-            # Create the response, which will replace the div with the id 'chat_message'
-            # The chat content is automatically inserted at the end of the div. The residual content remains.
-            context = f"<div id='chat_message' hx-swap-oob='beforeend'> <p>{chatter}: {message}</p> </div> "
 
-            # Send the chat to all the members of the chat group.
-            await self.channel_layer.group_send(
-                self.room_group_name,
-                {
-                    "type": "chat_message",  # The event type for the message
-                    "message": context,  # The message content
-                },
-            )
-
-            # Clear the text from the input field by replacing it with an identical input tag:
-            # This message is only sent to the use who chatted.
-            await self.send('<input id="myInput" name="chat_message">')
 
 
 
