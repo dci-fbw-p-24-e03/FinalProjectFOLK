@@ -332,4 +332,25 @@ main::-webkit-scrollbar-thumb {
 footer {
   position: absolute;
   bottom: 0;
+  display: flex;
+  justify-content:space-between;
+  z-index: 100;
+  gap: 20rem; 
+}
+
+
+footer span {
+  font-family: "Space Mono", serif;
+  font-size: 1.4rem;      
+  color: #fff;          
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+footer a:hover span {
+  color: yellow;
+}
+
+footer a {
+  text-decoration: none;
 }
