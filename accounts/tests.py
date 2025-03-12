@@ -40,7 +40,7 @@ class CustomUserModelTest(TestCase):
         new_user = CustomUser.objects.create_user(username="newuser", email="new@example.com", password="securepass")
         self.assertEqual(new_user.coins, 0)
         self.assertEqual(new_user.nation, "DE")
-        self.assertIsNone(new_user.stars)
+        self.assertEqual(new_user.stars, 0)
 
     def test_image_resizing(self):
         """Test if the image resizing method works correctly"""
