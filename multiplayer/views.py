@@ -63,7 +63,7 @@ def join_matchmaking(request):
                 "players": [user_id, opponent_id],
                 "player_data": [user_data, opponent_data],
             },
-            timeout=600,
+            timeout=120,
         )
 
         # *** NEW: Update active_game_rooms so that check_match can find this room ***
@@ -200,6 +200,9 @@ def results(request):
             "D": question["D"],
             "answer": question["correct_answer"],
             }
-    return render(request, "results.html", context)
+    if questions!=[]:
+        return render(request, "results.html", context)
+    else:
+        return render(request, "multi_play_over.html")
     
     

@@ -9,5 +9,5 @@ urlpatterns = [
     path("leave-matchmaking/", leave_matchmaking, name="leave_matchmaking"),
     path("game-room/<str:room_id>/", game_room, name="game_room"),
     path("multi_play/", multi_play, name="multi_play"),
-    path("results/", results, name="results")
+    path("results/", results, name="results"),
 ]

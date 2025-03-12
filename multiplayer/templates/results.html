@@ -1,5 +1,9 @@
+<div hx-get="/multi_play"
+hx-target="#swap-multi_play"
+hx-trigger="every 5s"></div>
+
 <form id="form" ws-send hx-trigger="load"> 
-    <input id="results" name="results" style="display: none;">
+    <input id="results" name="results" style="display: none;" value="{{question}}">
 </form>
 
 <h1>Results Page</h1>

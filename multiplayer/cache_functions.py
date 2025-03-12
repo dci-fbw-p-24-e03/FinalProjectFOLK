@@ -52,3 +52,30 @@ def get_players(game_room: str) -> list[str] | None:
         player_names.append(player["username"])
 
     return player_names
+
+def delete_question_from_questions(question: str, questions: list[dict]) -> list[dict]:
+    """Delete the last question and answers from the list of questions created by Ai
+    Args:
+        question (str): _Question previously asked to players_
+        questions (list[dict]): list of questions of this form:
+        [   {'question': "Which planet in our solar system is known as the 'Red Planet'?",
+            'A': 'Earth',
+            'B': 'Jupiter',
+            'C': 'Saturn',
+            'D': 'Mars',
+            'correct_answer': 'D'},
+            {'question':
+            'What is the largest living structure on Earth?',
+            'A': 'The Great Wall of China',
+            'B': 'The Great Barrier Reef',
+            'C': 'The Amazon Rainforest',
+            'D': 'The Grand Canyon',
+            'correct_answer': 'B'}
+            ]
+    Returns:
+        list[dict]: List of dictionary with one item less corresponding to the passed quesion.
+    """
+    for index, question_item in enumerate(questions):
+        if question_item["question"] == question:
+            del questions[index]
+    return questions
