@@ -38,7 +38,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         # Retrieve the game room used by the players
         game_room = cache.get(f"game_room:{self.room_name}")
 
-        print("user", chatter, "in game room", self.room_name)
+        #print("user", chatter, "in game room", self.room_name)
 
         # If you received a chat message then post it:
         if message != None:
@@ -95,7 +95,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         # then let the game begin
 
         if len(game_room.get("players")) == game_room.get("ready"):
-            print("Two players in a playroom: let's play!")
+            #print("Two players in a playroom: let's play!")
             # render an new page for playing by sending an htmx tag
             # to all participants in the front end simultaneously, which will
             # swap the content of the website
@@ -117,7 +117,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         # Retrieve the game room used by the players
         game_room = cache.get(f"game_room:{self.room_name}")
         
-        print("user", chatter, "in game room", self.room_name)
+        #print("user", chatter, "in game room", self.room_name)
 
 
 
@@ -134,10 +134,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
         game_room = cache.get(f"game_room:{game_room_name}")
         questions = game_room.get("questions")
         remaining_questions=delete_question_from_questions(current_question, questions)
-        print(f"This is the remaining question: {remaining_questions}")
+        #print(f"This is the remaining question: {remaining_questions}")
         game_room["questions"] = remaining_questions
         cache.set(f"game_room:{self.room_name}", game_room)
-        print(f"This ist the game room after deleting the last question: {game_room}")
+        #print(f"This ist the game room after deleting the last question: {game_room}")
 
     async def chat_message(self, event):
         # This method will be called when a message is received from the group
