@@ -174,26 +174,37 @@ def multi_play(request):
         return render(request, "multi_play_over.html")
 
 def results(request):
-    user = request.user
-    user = str(user)
+    user = str(request.user)
     game_room_name = get_game_room(user)
-    players = get_players(game_room=game_room_name)
-    game_room = cache.get(f"game_room:{game_room_name}")
-    if game_room["questions"] is not []:
-        questions = game_room["questions"]
-        question = questions.pop()
+    game_room = cache.get(f"game_room:{game_room_name}", {})
 
-        context = {"user": user,
-                "players": players,
-                "game_room_name": game_room_name,
-                "question": question["question"],
-                "A": question["A"],
-                "B": question["B"],
-                "C": question["C"],
-                "D": question["D"],
-                "answer": question["correct_answer"],
-                }
-        return render(request, "results.html", context)
+    # Alle Spieler
+    players = game_room.get("players", [])
+    
+    # Aktuelle Frage holen
+    questions = game_room.get("questions", [])
+    current_question = questions[-1] if questions else None
+
+    # Spieler-Antworten abrufen
+    player_answers = game_room.get("answers", {}).get(user, [])
+
+    # Letzte Antwort des aktuellen Spielers
+    last_answer = player_answers[-1] if player_answers else None
+
+    context = {
+        "user": user,
+        "players": players,
+        "question": current_question["question"] if current_question else "N/A",
+        "A": current_question["A"] if current_question else "",
+        "B": current_question["B"] if current_question else "",
+        "C": current_question["C"] if current_question else "",
+        "D": current_question["D"] if current_question else "",
+        "answer": current_question["correct_answer"] if current_question else "",
+        "player_answer": last_answer["player_answer"] if last_answer else "N/A",
+    }
+
+    return render(request, "results.html", context)
+
 
     
     

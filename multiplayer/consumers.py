@@ -1,5 +1,6 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
 import json
+import asyncio
 from django.core.cache import cache
 from .cache_functions import get_game_room, delete_question_from_questions
 from game.ai import get_question
