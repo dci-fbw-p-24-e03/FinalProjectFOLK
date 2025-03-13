@@ -71,21 +71,6 @@ def join_matchmaking(request):
         active_game_rooms.append(room_id)
         cache.set("active_game_rooms", active_game_rooms, timeout=600)
 
-        # *** NEW: Update active_game_rooms so that check_match can find this room ***
-        active_game_rooms = cache.get("active_game_rooms", [])
-        active_game_rooms.append(room_id)
-        cache.set("active_game_rooms", active_game_rooms, timeout=600)
-
-        # *** NEW: Update active_game_rooms so that check_match can find this room ***
-        active_game_rooms = cache.get("active_game_rooms", [])
-        active_game_rooms.append(room_id)
-        cache.set("active_game_rooms", active_game_rooms, timeout=600)
-
-        # *** NEW: Update active_game_rooms so that check_match can find this room ***
-        active_game_rooms = cache.get("active_game_rooms", [])
-        active_game_rooms.append(room_id)
-        cache.set("active_game_rooms", active_game_rooms, timeout=600)
-
         return JsonResponse(
             {
                 "status": "matched",
