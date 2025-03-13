@@ -119,10 +119,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         
         #print("user", chatter, "in game room", self.room_name)
 
-
-
-
-
         # If both players see the results page, then delete the last question that was previously displayed
         # from the cache, such that the next question will be displayed when, the game returns to the
         # multiplay page.
