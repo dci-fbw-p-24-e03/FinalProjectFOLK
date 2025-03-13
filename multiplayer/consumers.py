@@ -109,18 +109,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     "message": context,  # The message content
                 },
             )
-        # Retrieve the message
-        message = data.get("chat_message")
-    
-        # Identify the user who chatted
-        chatter = self.scope["user"]
-        # Retrieve the game room used by the players
-        game_room = cache.get(f"game_room:{self.room_name}")
-        
-        #print("user", chatter, "in game room", self.room_name)
-
-
-
 
 
         # If both players see the results page, then delete the last question that was previously displayed
