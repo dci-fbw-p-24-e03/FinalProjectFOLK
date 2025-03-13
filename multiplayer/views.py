@@ -145,26 +145,33 @@ def waiting_room(request, user_id):
     return render(request, "waiting_room.html", {"user_id": user_id})
 
 def multi_play(request):
-    
     user = request.user
-    user = str(user)
-    game_room_name = get_game_room(user)
+    username = str(user)
+    game_room_name = get_game_room(username)
     players = get_players(game_room=game_room_name)
+    for player in players:
+        print("player:", player)
+        if player != username:
+            opponent_name = player
+    opponent = CustomUser.objects.get(username=opponent_name)
     game_room = cache.get(f"game_room:{game_room_name}")
     questions = game_room["questions"]
-    question = questions.pop()
-    
-    context = {"user": user,
-               "players": players,
-               "game_room_name": game_room_name,
-               "question": question["question"],
-               "A": question["A"],
-               "B": question["B"],
-               "C": question["C"],
-               "D": question["D"]
-               }
-    
-    return render(request, "multi_play.html", context)
+    if questions != []:
+        question = questions[-1]
+        context = { "user": user,
+                   "opponent": opponent,
+                "username": username,
+                "players": players,
+                "game_room_name": game_room_name,
+                "question": question["question"],
+                "A": question["A"],
+                "B": question["B"],
+                "C": question["C"],
+                "D": question["D"]
+                }
+        return render(request, "multi_play.html", context)
+    else:
+        return render(request, "multi_play_over.html")
 
 def results(request):
     user = request.user
@@ -187,7 +194,6 @@ def results(request):
             }
     if questions!=[]:
         return render(request, "results.html", context)
-    else:
-        return render(request, "multi_play_over.html")
+
     
     
