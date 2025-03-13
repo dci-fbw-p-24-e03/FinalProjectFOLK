@@ -109,18 +109,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     "message": context,  # The message content
                 },
             )
-        # Retrieve the message
-        message = data.get("chat_message")
-    
-        # Identify the user who chatted
-        chatter = self.scope["user"]
-        # Retrieve the game room used by the players
-        game_room = cache.get(f"game_room:{self.room_name}")
-        
-        #print("user", chatter, "in game room", self.room_name)
 
         # If both players see the results page, then delete the last question that was previously displayed
-        # from the cache, such that the next question will be displayed when, the game returns to the
+        # from the cache, such that the next question will be displayed when the game returns to the
         # multiplay page.
         # The results message is sent from the results room only:
         current_question=data.get("results")
@@ -134,6 +125,27 @@ class ChatConsumer(AsyncWebsocketConsumer):
         game_room["questions"] = remaining_questions
         cache.set(f"game_room:{self.room_name}", game_room)
         #print(f"This ist the game room after deleting the last question: {game_room}")
+
+        # Delete the Game Room, if the game is over for all the users:
+        # If you received a message from a player that he has reached the end of the game
+        # from the front end
+        game_over = data.get("game_over")
+        if game_over != None:
+            # Check if he is the first player who ended the game
+            if game_room.get("game_over") == None:
+                # If he is the frist player, then create the key game_over in the game_room and
+                # mark that a first player has ended the game.
+                game_room["game_over"] = 1
+                cache.set(f"game_room:{self.room_name}", game_room)
+            else:
+                # If he is not the first player who ended the game, then add 1 to the number of players
+                # who have come to the end of the game.
+                game_room["game_over"] += 1
+                cache.set(f"game_room:{self.room_name}", game_room)
+            # Check whether all the players in the game room have ended the game.
+            if len(game_room.get("players")) == game_room.get("game_over"):
+                # Delete the game room, when the  game has come to an end.
+                cache.delete(f"game_room:{game_room_name}")
 
     async def chat_message(self, event):
         # This method will be called when a message is received from the group
