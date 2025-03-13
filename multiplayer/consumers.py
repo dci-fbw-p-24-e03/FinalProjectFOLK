@@ -125,7 +125,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         game_room["questions"] = remaining_questions
         cache.set(f"game_room:{self.room_name}", game_room)
         #print(f"This ist the game room after deleting the last question: {game_room}")
-
+        
         # Delete the Game Room, if the game is over for all the users:
         # If you received a message from a player that he has reached the end of the game
         # from the front end
@@ -146,7 +146,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
             if len(game_room.get("players")) == game_room.get("game_over"):
                 # Delete the game room, when the  game has come to an end.
                 cache.delete(f"game_room:{game_room_name}")
-
     async def chat_message(self, event):
         # This method will be called when a message is received from the group
         # This method further defines the event type of the message as "chat_message"

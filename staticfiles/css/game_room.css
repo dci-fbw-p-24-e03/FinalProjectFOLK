@@ -1,0 +1,167 @@
+h1 {
+    text-align: center;
+}
+
+.standard_arena {
+    background: url("../assets/futuristic_arena.webp");
+    background-size: cover;
+}
+
+.versus_div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2%;
+}
+
+.profile_image {
+    width: 70%;
+    height: 70%;
+    border-radius: 8px;
+}
+
+.versus_style_div {
+    font-size: 1.3rem; 
+    color: white;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 0.3%;
+    padding-left: 2%;
+    padding-right: 2%;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.button_chat_div {
+    display: flex;
+    justify-content: center;  /* Center the chat box */
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.player_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-bottom: 10px; /* Added spacing for the button */
+}
+
+.flag-icon {
+    width: 35%;
+    height: auto;
+    border-radius: 5px;
+    margin-right: 8px;
+    margin-top: -5%; 
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Enlarged chat container */
+.chat-container {
+    background-color: rgba(0, 0, 0, 0.0); /* Transparent background */
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    overflow-y: auto;
+    height: 250px; /* Increased height for a larger chat box */
+    width: 600px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+/* Chat messages with smaller font */
+#chat_message {
+    flex-grow: 1;
+    color: white;
+    padding: 15px;
+    font-size: 1.2rem;  /* Reduced font size */
+    line-height: 1.5;
+}
+
+/* Chat form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 10px;
+    align-items: center;
+    border-radius: 16px;
+}
+
+/* Chat input styling */
+input {
+    margin-top: 6px;
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 1.2rem;
+    transition: box-shadow 0.3s;
+    background-color: #fff;
+    color: #000;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+/* Styling for the placeholder text */
+input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Futuristic Button Styles */
+.futuristic-button {
+    background-color: #006600; 
+    color: white;
+    font-size: 1.2em;
+    font-family: 'Arial', sans-serif;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 123, 0, 0.7);
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 5%;
+}
+
+/* Enhanced hover effect for the start-game button in green */
+.futuristic-button:hover {
+    background: linear-gradient(90deg, #4CAF50, #4CAF50) ;
+    box-shadow: 0 0 20px rgba(0, 123, 0, 1);
+    transform: scale(1.1);
+}
+
+.futuristic-button:active {
+    transform: scale(0.95);
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 10px rgba(0, 123, 0, 0.7); }
+    50% { box-shadow: 0 0 20px rgba(0, 123, 0, 1); }
+    100% { box-shadow: 0 0 10px rgba(0, 123, 0, 0.7); }
+}
+
+.futuristic-button.glow {
+    animation: glow 1.5s infinite alternate;
+}
+
+.futuristic-button.toggled {
+    background: linear-gradient(90deg, #FFB143, #FF8B2C);
+    box-shadow: 0 0 20px rgb(255, 208, 202);
+    transform: scale(1.05);
+}

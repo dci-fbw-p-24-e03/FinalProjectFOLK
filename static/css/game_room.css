@@ -9,14 +9,15 @@ h1 {
 
 .versus_div {
     display: flex;
+    flex-direction: row !important; 
     justify-content: space-between;
     align-items: center;
     padding-top: 2%;
 }
 
 .profile_image {
-    width: 70%;
-    height: 70%;
+    width: 60%;
+    height: 60%;
     border-radius: 8px;
 }
 
@@ -54,6 +55,7 @@ h1 {
     margin-left: 10%;
     margin-right: 10%;
     padding-bottom: 10px; /* Added spacing for the button */
+    width: 20%;
 }
 
 .flag-icon {
@@ -88,7 +90,7 @@ h1 {
 }
 
 /* Chat form styling */
-form {
+.chat_form {
     display: flex;
     flex-direction: column;
     background: rgba(0, 0, 0, 0.9);
@@ -164,4 +166,214 @@ input::placeholder {
     background: linear-gradient(90deg, #FFB143, #FF8B2C);
     box-shadow: 0 0 20px rgb(255, 208, 202);
     transform: scale(1.05);
+}
+
+
+/* ----------------------------------------------------------------------------- */
+
+
+.answers, .play_box {
+    /* This makes it 80% of the viewport width */
+    width: 80vw; 
+
+    /* Optional: constrain the width so it doesn't get too small or too big */
+    min-width: 300px;  
+    max-width: 1000px; 
+
+    min-height: 70vh;
+    padding: 5%;
+    margin: 2% auto;  /* 'auto' centers it horizontally */
+    box-sizing: border-box;  /* Includes padding in the width */
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 16px;
+}
+
+.question_box{
+    margin-top: -2%;
+    min-height: 150px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+
+/* Question text styling */
+.question {
+    text-align: block;
+    color: #fff;
+    font-size: xx-large;
+    margin-bottom: 5%;
+    
+}
+
+.answer_box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; /* Distributes space evenly */
+    height: 50vh; /* Full height of the viewport */
+}
+
+
+.answer_pair, .center-screen {
+    flex: 1; /* Ensures all divs take equal height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content inside */
+    align-items: center;
+    height: 80%;
+}
+
+/* Hide default radio buttons */
+input[type="radio"] {
+    opacity: 0;
+    color:white;
+    display: none;
+}
+
+/* Style labels as modern buttons */
+.radio-button, .radio-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #7289da;
+    border-radius: 8px;
+    padding: 4%;
+    cursor: pointer;
+    margin: 20px;
+    transition: all 0.3s ease-in-out;
+    height: 100%;
+    width: 80%;
+    color: #fff;
+    background-color: transparent;
+    font-size: xx-large;
+}
+
+.radio-button:hover {
+
+background-color: #007bff;
+}
+
+/* Highlight style when a radio is selected */
+input:has(input:checked) {
+    border: 2px solid #0b29b1;
+    background-color: #007bff;
+    color: #eaf0ec;
+}
+
+/* Center buttons container */
+.button_div {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Timer container styling */
+.timer_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Additional answer choice button spacing */
+.answer_choice_button {
+    margin: 20px;
+}
+
+
+/* Countdown container centering */
+.countdown_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Timer SVG styling */
+.timer {
+    margin-top: 10px;
+}
+
+.timer > svg {
+    width: 200px;
+    height: 200px;
+}
+
+.timer > svg > circle {
+    fill: none;
+    stroke-opacity: 0.3;
+    stroke: #0d6efd;
+    stroke-width: 10;
+    transform-origin: center center;
+    transform: rotate(-90deg);
+}
+
+.timer > svg > circle + circle {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    stroke-linecap: round;
+    stroke-opacity: 1;
+}
+
+.timer.animatable > svg > circle + circle {
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+.timer > svg > text {
+    font-size: xx-large;
+    fill: #fff;
+}
+
+.timer > svg > text + text {
+    font-size: 1rem;
+}
+
+#player_3{
+    opacity: 0%;
+}
+
+#player_4{
+    opacity: 0%;
+}
+
+.play_form{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+    border-radius: 16px;
+}
+
+.profile_image_multi_play {
+    width: 90%;
+    height: 90%;
+    border-radius: 8px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.player_div_multi_play {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    padding-bottom: 10px; /* Added spacing for the button */
+    width: 15%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.versus_div_multi_play {
+    display: flex;
+    flex-direction: row !important; 
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2%;
+    padding-right: 2%;
 }

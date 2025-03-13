@@ -82,22 +82,6 @@ body {
     height: 100%;
 }
 
-.answers, .play_box {
-    /* This makes it 80% of the viewport width */
-    width: 80vw; 
-
-    /* Optional: constrain the width so it doesn't get too small or too big */
-    min-width: 300px;  
-    max-width: 1000px; 
-
-    min-height: 70vh;
-    padding: 5%;
-    margin: 2% auto;  /* 'auto' centers it horizontally */
-    box-sizing: border-box;  /* Includes padding in the width */
-    background-color: rgba(0, 0, 0, 0.9);
-    border-radius: 16px;
-}
-
 
 .question_box{
     min-height: 150px;
@@ -284,8 +268,8 @@ img {
 
 .score-positive {
     color: #45ce65;
-  }
+}
   
 .score-negative {
-color: #df0f0f;
+    color: #df0f0f;
 }

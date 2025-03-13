@@ -1,43 +1,49 @@
+<div hx-get="/results" hx-target="#swap-multi_play" hx-trigger="every 15s"></div>
 
-<div hx-get="/results"
-hx-target="#swap-multi_play"
-hx-trigger="every 15s"></div>
+<form ws-send id="answers" name="answers" hx-trigger="change from:input[name='options']" class="form">
+  {% csrf_token %}
+  <div class="versus_div_multi_play">
+    <!-- Linke Spalte: Aktueller User -->
+    <div class="player_div_multi_play">
+      <h1>{{ user.username }}</h1>
+      <img class="profile_image_multi_play" src="{{ user.image.url }}" alt="{{ user.username }}">
+      <h2>Average Stars: {{ user.average_stars_per_game }}</h2>
+      <h3>
+        <img src="https://flagicons.lipis.dev/flags/4x3/{{ user.nation|lower }}.svg" alt="{{ user.nation }}" class="flag-icon">
+      </h3>
+    </div>
 
-<h1>Play Page</h1>
-
-<p>Current Player: {{user}}</p>
-{% for player in players %}
-<p>player: {{ player }}</p>
-{% endfor %}
-<p>Question: {{question}}</p>
-<p>A: {{A}}</p>
-<p>B: {{B}}</p>
-<p>C: {{C}}</p>
-<p>D: {{D}}</p>
-
-<div >
-    <form
-    ws-send
-    id="answers"
-    name="answers"
-    hx-trigger="change from:input[name='options']"
-    class="form"
-  >
-    {% csrf_token %}
+    <!-- Mittlere Spalte: Frage und Antworten -->
     <div class="play_box">
-      <div class="question_box"><h1 class="question">{{ question }}</h1></div>
+      <div class="question_box">
+        <h1 class="question">{{ question }}</h1>
+      </div>
       <div class="answer_box">
         <div class="answer_pair">
           <label class="radio-button">
-            <input name="options" type="radio" id="option_1" value="A" /> {{ A }} 
+            <input name="options" type="radio" id="option_1" value="A" /> {{ A }}
           </label>
           <label class="radio-button">
             <input name="options" type="radio" id="option_2" value="B" /> {{ B }}
           </label>
         </div>
+        <div class="center-screen">
+          <div class="countdown_div">
+            <div class="timer animatable">
+              <svg>
+                <circle cx="50%" cy="50%" r="45" />
+                <circle cx="50%" cy="50%" r="45" pathLength="1" />
+                <text x="100" y="100" text-anchor="middle">
+                  <tspan id="timeLeft"></tspan>
+                </text>
+                <text x="100" y="120" text-anchor="middle">seconds</text>
+              </svg>
+            </div>
+          </div>
+        </div>
         <div class="answer_pair">
           <label class="radio-button">
-            <input name="options" type="radio" id="option_3" value="C" /> {{ C }} 
+            <input name="options" type="radio" id="option_3" value="C" /> {{ C }}
           </label>
           <label class="radio-button">
             <input name="options" type="radio" id="option_4" value="D" /> {{ D }}
@@ -45,6 +51,16 @@ hx-trigger="every 15s"></div>
         </div>
       </div>
     </div>
-  </form>
-</div>
+
+    <!-- Rechte Spalte: Gegner -->
+    <div class="player_div_multi_play">
+      <h1>{{ opponent.username }}</h1>
+      <img class="profile_image_multi_play" src="{{ opponent.image.url }}" alt="{{ opponent.username }}">
+      <h2>Average Stars: {{ opponent.average_stars_per_game }}</h2>
+      <h3>
+        <img src="https://flagicons.lipis.dev/flags/4x3/{{ opponent.nation|lower }}.svg" alt="{{ opponent.nation }}" class="flag-icon">
+      </h3>
+    </div>
+  </div>
+</form>
 
