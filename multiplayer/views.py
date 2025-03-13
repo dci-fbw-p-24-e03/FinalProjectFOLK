@@ -179,20 +179,20 @@ def results(request):
     game_room_name = get_game_room(user)
     players = get_players(game_room=game_room_name)
     game_room = cache.get(f"game_room:{game_room_name}")
-    questions = game_room["questions"]
-    question = questions.pop()
-    
-    context = {"user": user,
-            "players": players,
-            "game_room_name": game_room_name,
-            "question": question["question"],
-            "A": question["A"],
-            "B": question["B"],
-            "C": question["C"],
-            "D": question["D"],
-            "answer": question["correct_answer"],
-            }
-    if questions!=[]:
+    if game_room["questions"] is not []:
+        questions = game_room["questions"]
+        question = questions.pop()
+
+        context = {"user": user,
+                "players": players,
+                "game_room_name": game_room_name,
+                "question": question["question"],
+                "A": question["A"],
+                "B": question["B"],
+                "C": question["C"],
+                "D": question["D"],
+                "answer": question["correct_answer"],
+                }
         return render(request, "results.html", context)
 
     
