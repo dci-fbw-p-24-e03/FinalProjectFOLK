@@ -147,15 +147,21 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 # in the list, get the last question in the list, because it is the currently asked
                 # one
 
+                # Determine if the answer is correct or not (True or False)
+                correct_answer = current_question["correct_answer"]
+                is_correct = (answer == correct_answer)
+
                 # save a dictionary consisting of the current question, correct answer and answer
                 # chosen by the user in the list connected to the username inside the answer dict 
                 # inside the game_room dict
                 game_room["answers"][user].append({
                     "question": current_question["question"],
-                    "correct": current_question["correct_answer"],
-                    "player_answer": answer
+                    "correct_answer": correct_answer,
+                    "player_answer": answer,
+                    "correct": is_correct
                 })
-                print(game_room)
+
+                print(game_room["answers"])
                 
                 # save everything in the cache
                 cache.set(game_room_name, game_room) 
