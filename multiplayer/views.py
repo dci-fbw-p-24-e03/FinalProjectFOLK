@@ -150,9 +150,10 @@ def multi_play(request):
     game_room_name = get_game_room(username)
     players = get_players(game_room=game_room_name)
     for player in players:
-        print("player:", player)
+        print("player (multi_play view):", player)
         if player != username:
             opponent_name = player
+            print("opponents name (multi_play view): ", opponent_name)
     opponent = CustomUser.objects.get(username=opponent_name)
     game_room = cache.get(f"game_room:{game_room_name}")
     questions = game_room["questions"]
@@ -175,18 +176,27 @@ def multi_play(request):
 
 def results(request):
     user = request.user
-    user = str(user)
-    game_room_name = get_game_room(user)
-    players = get_players(game_room=game_room_name)
+    username = str(user)
+    game_room_name = get_game_room(username)
+    players = get_players(game_room=game_room_name)    
+    for player in players:
+        print("player (results view):", player)
+        if player != username:
+            opponent_name = player
+            print("opponents name (results view): ", opponent_name)
+    opponent_object = CustomUser.objects.get(username=opponent_name)
     game_room = cache.get(f"game_room:{game_room_name}")
     questions = game_room["questions"]
     current_question = questions[-1] if questions else None
-    player_answers = game_room.get("answers", {}).get(user, [])
+    player_answers = game_room.get("answers", {}).get(username, [])
+    opponent_answers=game_room.get("answers", {}).get(opponent_name, [])
     last_answer = player_answers[-1] if player_answers else None
+    last_answer_opponent=opponent_answers[-1] if opponent_answers else None
     if questions != []:
         question = questions[-1]
         context = {
             "user": user,
+            "opponent": opponent_object,
             "players": players,
             "question": current_question["question"] if current_question else "N/A",
             "A": current_question["A"] if current_question else "",
@@ -195,7 +205,9 @@ def results(request):
             "D": current_question["D"] if current_question else "",
             "answer": current_question["correct_answer"] if current_question else "",
             "player_answer": last_answer["player_answer"] if last_answer else "N/A",
+            "opponent_answer":last_answer_opponent["player_answer"] if last_answer_opponent else "N/A",
             "is_correct": last_answer["correct"] if last_answer else False,
+            "is_correct_opponent": last_answer_opponent["correct"] if last_answer_opponent else False,
         }
         if questions!=[]:
             return render(request, "results.html", context)
