@@ -110,7 +110,48 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 },
             )
 
+        # get the answer given by the user (input name=options in multi_play.html), get it
+        # from the scope (data); get the username, who has chosen the answer; get the value for
+        # the game_room_name key to get the corresponding game_room from the cache.
+        answer = data.get("options")
+        user = str(self.scope["user"])
+        game_room_name = f"game_room:{self.room_name}"
+        game_room = cache.get(game_room_name, {})
 
+        # if a user has actually chosen an answer 
+        if answer:
+            # make sure the key "answers" exists in the game_room dict. if it doesn't exist, create 
+            # it with an emtpy dict as value
+        
+            if "answers" not in game_room:
+                game_room["answers"] = {}
+
+            # every user needs to have a list to save their answers. If it doesn't exist in the
+            # game_room dict already, create it. It is saved in the answers dict inside the game_room
+            # dict as the value of the key "user" (username)
+            if user not in game_room["answers"]:
+                game_room["answers"][user] = []
+
+            # Check, if the key "questions" exists in the game_room dict and if the value to the 
+            # key (the list of questions) is not empty
+            if "questions" in game_room and game_room["questions"]:
+                current_question = game_room["questions"][-1]  # if there is a question (or more) in
+                # in the list, get the last question in the list, because it is the currently asked
+                # one
+
+                # save a dictionary consisting of the current question, correct answer and answer
+                # chosen by the user in the list connected to the username inside the answer dict 
+                # inside the game_room dict
+                game_room["answers"][user].append({
+                    "question": current_question["question"],
+                    "correct": current_question["correct_answer"],
+                    "player_answer": answer
+                })
+                print(game_room)
+                
+                # save everything in the cache
+                cache.set(game_room_name, game_room) 
+                
         # If both players see the results page, then delete the last question that was previously displayed
         # from the cache, such that the next question will be displayed when, the game returns to the
         # multiplay page.
