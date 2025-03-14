@@ -118,8 +118,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 },
             )
 
-###################################### During the Game #############################################
-
         # get the answer given by the user (input name=options in multi_play.html), get it
         # from the scope (data); get the username, who has chosen the answer; get the value for
         # the game_room_name key to get the corresponding game_room from the cache.
@@ -161,9 +159,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 
                 # save everything in the cache
                 cache.set(game_room_name, game_room) 
-
-######################## Showing Results and prepare for next Question #############################
-
+                
         # If both players see the results page, then delete the last question that was previously displayed
         # from the cache, such that the next question will be displayed when the game returns to the
         # multiplay page.

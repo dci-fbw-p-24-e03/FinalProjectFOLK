@@ -199,7 +199,5 @@ def results(request):
         if questions!=[]:
             return render(request, "results.html", context)
 
-
-
     
     
