@@ -202,10 +202,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
             # Check whether all the players in the game room have ended the game.
             # Check whether all the players in the game room have ended the game.
             if len(game_room.get("players")) == game_room.get("game_over"):
-                # Warte 10 Sekunden, bevor der game_room wirklich gelöscht wird
+                # Wait 10 seconds before the game room is deleted for sure
+                # (just in case a user needs a bit more time and switch to the multi_play_over html)
                 await asyncio.sleep(10)  
 
-                # Prüfe nochmal, ob die Daten noch benötigt werden
+                # Make sure the game room is not needed any longer
                 game_room = cache.get(f"game_room:{game_room_name}")
                 if game_room and len(game_room.get("players")) == game_room.get("game_over"):
                     cache.delete(f"game_room:{game_room_name}")
