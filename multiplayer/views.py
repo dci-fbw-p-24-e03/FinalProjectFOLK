@@ -178,19 +178,20 @@ def results(request):
     game_room_name = get_game_room(user)
     game_room = cache.get(f"game_room:{game_room_name}", {})
 
-    # Alle Spieler
+    # get all users that are playing in the room
     players = game_room.get("players", [])
     
-    # Aktuelle Frage holen
+    # get the current question
     questions = game_room.get("questions", [])
     current_question = questions[-1] if questions else None
 
-    # Spieler-Antworten abrufen
+    # get the answer to the question of each user
     player_answers = game_room.get("answers", {}).get(user, [])
 
-    # Letzte Antwort des aktuellen Spielers
+    # get the last answer of each user that belongs to the last question
     last_answer = player_answers[-1] if player_answers else None
 
+    # save everything in the context to access the information on the results page
     context = {
         "user": user,
         "players": players,
