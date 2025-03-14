@@ -21,10 +21,10 @@
       </div>
       <div class="answer_box">
         <div class="answer_pair">
-          <label class="radio-button">
+          <label id="A" class="radio-button">
             <input name="options" type="radio" id="option_1" value="A" /> {{ A }}
           </label>
-          <label class="radio-button">
+          <label id="B" class="radio-button">
             <input name="options" type="radio" id="option_2" value="B" /> {{ B }}
           </label>
         </div>
@@ -43,10 +43,10 @@
           </div>
         </div>
         <div class="answer_pair">
-          <label class="radio-button">
+          <label id="C" class="radio-button">
             <input name="options" type="radio" id="option_3" value="C" /> {{ C }}
           </label>
-          <label class="radio-button">
+          <label id="D" class="radio-button">
             <input name="options" type="radio" id="option_4" value="D" /> {{ D }}
           </label>
         </div>
@@ -54,7 +54,7 @@
     </div>
 
     <!-- Rechte Spalte: Gegner -->
-    <div class="player_div_multi_play">
+    <div class="opponent_div_multi_play">
       <h1>{{ opponent.username }}</h1>
       <img class="profile_image_multi_play" src="{{ opponent.image.url }}" alt="{{ opponent.username }}">
       <h2>Average Stars: {{ opponent.average_stars_per_game }}</h2>

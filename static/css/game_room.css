@@ -369,6 +369,26 @@ input:has(input:checked) {
     margin-right: 5%;
 }
 
+.opponent_div_multi_play {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    padding-bottom: 10px; /* Added spacing for the button */
+    width: 15%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.opponent_div_multi_play h1{
+    color: rgb(235, 11, 190);
+}
+
 .versus_div_multi_play {
     display: flex;
     flex-direction: row !important; 
@@ -376,4 +396,19 @@ input:has(input:checked) {
     align-items: center;
     padding-left: 2%;
     padding-right: 2%;
+}
+
+
+/*---------------- Results------------------ */
+
+.correct_answer {
+    background-color: #45ce65;
+}
+
+.wrong_answer {
+    background-color: #df0f0f;
+}
+
+.opponent_answer{
+    border: 5px solid rgb(235, 11, 190);
 }
