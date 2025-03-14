@@ -195,6 +195,7 @@ def results(request):
             "D": current_question["D"] if current_question else "",
             "answer": current_question["correct_answer"] if current_question else "",
             "player_answer": last_answer["player_answer"] if last_answer else "N/A",
+            "is_correct": last_answer["correct"] if last_answer else False,
         }
         if questions!=[]:
             return render(request, "results.html", context)
