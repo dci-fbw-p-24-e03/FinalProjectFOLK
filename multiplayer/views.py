@@ -174,37 +174,31 @@ def multi_play(request):
         return render(request, "multi_play_over.html")
 
 def results(request):
-    user = str(request.user)
+    user = request.user
+    user = str(user)
     game_room_name = get_game_room(user)
-    game_room = cache.get(f"game_room:{game_room_name}", {})
-
-    # get all users that are playing in the room
-    players = game_room.get("players", [])
-    
-    # get the current question
-    questions = game_room.get("questions", [])
+    players = get_players(game_room=game_room_name)
+    game_room = cache.get(f"game_room:{game_room_name}")
+    questions = game_room["questions"]
     current_question = questions[-1] if questions else None
-
-    # get the answer to the question of each user
     player_answers = game_room.get("answers", {}).get(user, [])
-
-    # get the last answer of each user that belongs to the last question
     last_answer = player_answers[-1] if player_answers else None
+    if questions != []:
+        question = questions[-1]
+        context = {
+            "user": user,
+            "players": players,
+            "question": current_question["question"] if current_question else "N/A",
+            "A": current_question["A"] if current_question else "",
+            "B": current_question["B"] if current_question else "",
+            "C": current_question["C"] if current_question else "",
+            "D": current_question["D"] if current_question else "",
+            "answer": current_question["correct_answer"] if current_question else "",
+            "player_answer": last_answer["player_answer"] if last_answer else "N/A",
+        }
+        if questions!=[]:
+            return render(request, "results.html", context)
 
-    # save everything in the context to access the information on the results page
-    context = {
-        "user": user,
-        "players": players,
-        "question": current_question["question"] if current_question else "N/A",
-        "A": current_question["A"] if current_question else "",
-        "B": current_question["B"] if current_question else "",
-        "C": current_question["C"] if current_question else "",
-        "D": current_question["D"] if current_question else "",
-        "answer": current_question["correct_answer"] if current_question else "",
-        "player_answer": last_answer["player_answer"] if last_answer else "N/A",
-    }
-
-    return render(request, "results.html", context)
 
 
     

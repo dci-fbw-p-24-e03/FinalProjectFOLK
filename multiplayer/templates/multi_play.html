@@ -1,6 +1,7 @@
 <div hx-get="/results" hx-target="#swap-multi_play" hx-trigger="every 15s"></div>
 
-<form ws-send id="answers" name="answers" hx-trigger="change from:input[name='options']" class="form">
+<form ws-send id="answers" name="options" hx-trigger="click once from:input[name='options']" class="form">
+  
   {% csrf_token %}
   <div class="versus_div_multi_play">
     <!-- Linke Spalte: Aktueller User -->
