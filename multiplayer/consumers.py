@@ -32,6 +32,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
         data = json.loads(text_data)
 
         print("received data: ", data)
+
+################################ The Chat ###################################
+
         # Retrieve the chat message
         message = data.get("chat_message")
         # Identify the user who chatted
@@ -60,6 +63,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             # Clear the text from the input field by replacing it with an identical input tag:
             # This message is only sent to the use who chatted.
             await self.send('<input id="myInput" name="chat_message">')
+
+################################## Get ready to Play #######################################
 
         # If the player pressed the play button:
         play = data.get("play")
@@ -92,6 +97,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 cache.set(f"game_room:{self.room_name}", game_room)
             game_room = cache.get(f"game_room:{self.room_name}")
 
+############################### All Users are ready to Play ########################################
+
         # If all the players in the game room have chosen to play
         # then let the game begin
 
@@ -111,7 +118,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 },
             )
 
-###################################### Game Progress ###############################################
+###################################### During the Game #############################################
 
         # get the answer given by the user (input name=options in multi_play.html), get it
         # from the scope (data); get the username, who has chosen the answer; get the value for
@@ -155,6 +162,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 # save everything in the cache
                 cache.set(game_room_name, game_room) 
 
+######################## Showing Results and prepare for next Question #############################
+
         # If both players see the results page, then delete the last question that was previously displayed
         # from the cache, such that the next question will be displayed when the game returns to the
         # multiplay page.
@@ -171,6 +180,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
         cache.set(f"game_room:{self.room_name}", game_room)
         #print(f"This ist the game room after deleting the last question: {game_room}")
         
+
+############################################ Game Over #############################################
+
         # Delete the Game Room, if the game is over for all the users:
         # If you received a message from a player that he has reached the end of the game
         # from the front end
