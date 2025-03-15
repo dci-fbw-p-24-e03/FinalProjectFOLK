@@ -177,8 +177,10 @@ def multi_play(request):
     game_room_name = get_game_room(username)
     players = get_players(game_room=game_room_name)
     for player in players:
+        #print("player (multi_play view):", player)
         if player != username:
             opponent_name = player
+            #print("opponents name (multi_play view): ", opponent_name)
     opponent = CustomUser.objects.get(username=opponent_name)
     game_room = cache.get(f"game_room:{game_room_name}")
     questions = game_room["questions"]
@@ -230,8 +232,10 @@ def results(request):
     game_room_name = get_game_room(username)
     players = get_players(game_room=game_room_name)    
     for player in players:
+        #print("player (results view):", player)
         if player != username:
             opponent_name = player
+            #print("opponents name (results view): ", opponent_name)
     opponent_object = CustomUser.objects.get(username=opponent_name)
     game_room = cache.get(f"game_room:{game_room_name}")
     questions = game_room["questions"]

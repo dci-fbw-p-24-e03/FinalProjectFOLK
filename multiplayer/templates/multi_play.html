@@ -1,3 +1,7 @@
+<!-- Inform the backend consumer that a game round has begun -->
+<input ws-send name="round" hx-trigger="load" style="display: none;" value="go!">
+
+<!-- Swap the content of the game after 15 seconds and end the game round -->
 <div hx-get="/results" hx-target="#swap-multi_play" hx-trigger="every 15s"></div>
 
 <form ws-send id="answers" name="options" hx-trigger="click once from:input[name='options']" class="form">

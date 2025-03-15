@@ -4,6 +4,7 @@ import asyncio
 from django.core.cache import cache
 from .cache_functions import get_game_room, delete_question_from_questions
 from game.ai import get_question
+from datetime import datetime
 
 class ChatConsumer(AsyncWebsocketConsumer):
 
@@ -31,7 +32,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         # Turn received data into a python readable dictionary
         data = json.loads(text_data)
 
-        print("received data: ", data)
+        #print("received data: ", data)
 
 ################################ The Chat ###################################
 
@@ -161,6 +162,29 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 },
             )
 
+############################### Record the beginning of a question round for each User ########################################
+
+        # Record the time that the multi_play page has been loaded
+        round = data.get("round")
+        if round != None:
+            
+            # Record time, when the game starts
+            round_start = datetime.now()
+            # Transform datetime object into string
+            pattern = "%d/%m/%Y, %H:%M:%S%f"
+            round_start = round_start.strftime(pattern)
+            # Store start time of user in the Cache
+            user = self.scope["user"]
+            user = str(user)
+            if game_room.get("round_start") == None:
+                game_room["round_start"] = round_start
+            else:
+                game_room["round_start"] = round_start
+            #print("Content of round_start: ", game_room["round_start"])
+            game_room_name = f"game_room:{self.room_name}"
+            cache.set(game_room_name, game_room)
+
+
         # get the answer given by the user (input name=options in multi_play.html), get it
         # from the scope (data); get the username, who has chosen the answer; get the value for
         # the game_room_name key to get the corresponding game_room from the cache.
@@ -171,6 +195,22 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         # if a user has actually chosen an answer 
         if answer:
+            
+            # Record the moment in time, in which the user chose an answer
+            choice_time = datetime.now()
+            
+            # Retrieve the round start from the cache
+            round_start = game_room.get("round_start")
+            # Transform the round start into a datetime object
+            pattern = "%d/%m/%Y, %H:%M:%S%f"
+            round_start = datetime.strptime(round_start, pattern)
+    
+            # Calculate the time difference in seconds
+            time_difference = choice_time - round_start
+            time_difference = time_difference.total_seconds()
+            time_difference = round(time_difference)
+    
+            print("time difference: ", time_difference)
             
             # make sure the key "answers" exists in the game_room dict. if it doesn't exist, create 
             # it with an emtpy dict as value
@@ -205,7 +245,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     "correct": is_correct
                 })
 
-                print(game_room["answers"])
+                # print(game_room["answers"])
                 
                 # save everything in the cache
                 cache.set(game_room_name, game_room)
