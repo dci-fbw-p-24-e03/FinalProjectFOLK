@@ -104,6 +104,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
             game_room[key] = data
             cache.set(f"game_room:{self.room_name}", game_room)
             print(game_room)
+            
+            if chosen_theme == "Space - Theme":
+                chosen_theme = "space_arena"
+            
+            context = f'<body id="theme" name="theme" class={chosen_theme}>'
+            await self.send(context)
+            
+            # <body class="{% if theme == 'Space - Theme' %}space_arena{% elif theme == 'Elder - World' %}elder_arena{% else %}standard_arena{% endif %}"></body>>
+
 
 
 

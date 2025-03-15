@@ -32,9 +32,11 @@
   </script>
   
 </head>
-<body class="{% if theme == 'Space - Theme' %}space_arena{% elif theme == 'Elder - World' %}elder_arena{% else %}standard_arena{% endif %}"></body>>
   <!-- Create websocket, chat with your opponent and get ready for the game. -->
   <div hx-ext="ws" ws-connect="ws://127.0.0.1:8000/game-room/">
+<body id="theme" name="theme" class="standard_arena">
+
+   
     <header>
     </header>
     <main id="swap-multi_play">
@@ -111,7 +113,8 @@
     </main>
     <footer>
     </footer>
-    <!-- Do not delete this div. It is necessary for having the websocket work. -->
-  </div>
+   
 </body>
+ <!-- Do not delete this div. It is necessary for having the websocket work. -->
+</div>
 </html>
