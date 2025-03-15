@@ -5,6 +5,7 @@ from django.core.cache import cache
 from django.urls import reverse
 import uuid
 from accounts.models import CustomUser  # Import User model
+from shop.models import Product
 from . cache_functions import get_game_room, get_players
 
 # Create your views here.
@@ -103,7 +104,32 @@ def game_room(request, room_id):
         player = CustomUser.objects.get(id=player_id)
         players.append(player)
 
-    return render(request, "game_room.html", {"room_id": room_id, "players": players})
+    # Themes dropdown added:
+
+        #define theme options
+    theme_options = ["Space - Theme", "Elder World - Theme"]
+
+        #find purchased themes (if user is logged in )
+    if request.user.is_authenticated:
+        purchased_themes = Product.objects.filter(
+            name__in=theme_options,
+            users=request.user
+        ).values_list("name", flat=True)
+    else:
+        purchased_themes = []
+
+    # Existing context
+    context = {"room_id": room_id, "players": players}
+
+    # Merge in new context data
+    context.update({
+        "theme_options": theme_options,
+        "purchased_themes": purchased_themes,
+    })
+
+    return render(request, "game_room.html", context) 
+
+    
 
 
 def leave_matchmaking(request):

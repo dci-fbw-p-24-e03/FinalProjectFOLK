@@ -2,8 +2,28 @@ h1 {
     text-align: center;
 }
 
+select {
+
+    background-color: #999;
+    color: white;
+    margin-top: 2%;
+    width: 70%;
+    font-size: larger;
+    border-radius: 8px;
+}
+
 .standard_arena {
     background: url("../assets/futuristic_arena.webp");
+    background-size: cover;
+}
+
+.space_arena {
+    background: url("../assets/space_arena.webp");
+    background-size: cover;
+}
+
+.elder_arena {
+    background: url("../assets/elder_world.webp");
     background-size: cover;
 }
 
@@ -74,7 +94,7 @@ h1 {
     flex-direction: column;
     border-radius: 16px;
     overflow-y: auto;
-    height: 250px; /* Increased height for a larger chat box */
+    height: 140px; /* Increased height for a larger chat box */
     width: 600px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -86,7 +106,7 @@ h1 {
     color: white;
     padding: 15px;
     font-size: 1.2rem;  /* Reduced font size */
-    line-height: 1.5;
+    line-height: 0.5;
 }
 
 /* Chat form styling */
@@ -105,10 +125,11 @@ input {
     flex-grow: 1;
     border: 1px solid #ccc;
     padding: 10px;
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     transition: box-shadow 0.3s;
-    background-color: #fff;
-    color: #000;
+    background-color: #999;
+    color: white;
+    border-radius: 8px;
 }
 
 input:focus {
@@ -118,7 +139,7 @@ input:focus {
 
 /* Styling for the placeholder text */
 input::placeholder {
-    color: #999;
+    color: white;
     font-style: italic;
 }
 
@@ -139,6 +160,7 @@ input::placeholder {
     position: relative;
     overflow: hidden;
     margin-bottom: 5%;
+    margin-top: 5%;
 }
 
 /* Enhanced hover effect for the start-game button in green */

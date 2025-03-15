@@ -68,7 +68,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         # If the player pressed the play button:
         play = data.get("play")
+
         if play != None:
+            print("playmsg:",play)
             # Send a message to the player asking him to wait for his opponent to respond in kind
             context = f"<div id='play' name='play'> Wait for Opponent</div>"
             await self.send(context)
@@ -80,6 +82,38 @@ class ChatConsumer(AsyncWebsocketConsumer):
             else:
                 game_room["ready"] += 1
                 cache.set(f"game_room:{self.room_name}", game_room)
+
+        #received data:  {'topic': 'sport', 'theme': 'AI-Quiz', 'difficulty': 'easy',
+        # Saving Choices ( theme,topic,difficulty ) in our cache:
+
+            chooser = self.scope["user"]
+
+            chosen_topic = data.get("topic")
+            chosen_theme = data.get("theme")
+            chosen_difficulty = data.get("difficulty")
+            print("choices:",chosen_difficulty,chosen_theme,chosen_topic)
+
+            key= f"{chooser}_choices" 
+            data = {
+                        "topic":chosen_topic,
+                        "difficulty":chosen_difficulty,
+                        "theme": chosen_theme
+                    }
+            
+            game_room = cache.get(f"game_room:{self.room_name}")
+            game_room[key] = data
+            cache.set(f"game_room:{self.room_name}", game_room)
+            print(game_room)
+
+
+
+        # get the game room 
+
+            #game_room["theme"] = 
+
+
+
+
 
             # Get the questions for the game and save them in the cache!!
 

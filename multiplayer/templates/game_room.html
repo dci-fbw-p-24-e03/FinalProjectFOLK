@@ -32,7 +32,7 @@
   </script>
   
 </head>
-<body class="standard_arena">
+<body class="{% if theme == 'Space - Theme' %}space_arena{% elif theme == 'Elder - World' %}elder_arena{% else %}standard_arena{% endif %}"></body>>
   <!-- Create websocket, chat with your opponent and get ready for the game. -->
   <div hx-ext="ws" ws-connect="ws://127.0.0.1:8000/game-room/">
     <header>
@@ -54,9 +54,39 @@
             <h3>
               <img src="https://flagicons.lipis.dev/flags/4x3/{{ player.nation|lower }}.svg" alt="{{ player.nation }}" class="flag-icon">
             </h3>
+            
+
             <!-- Button for getting ready for the game only -->
             {% if player == request.user %}
-            <button class="futuristic-button" id="play" name="play" ws-send> Let's Play</button>
+            <form id="play_choices" name="play_choices" ws-send>
+            <select name="topic" id="topic" onchange="toggleFields()">
+              <option value="">---Choose a Topic---</option>
+              <option value="anything">Anything</option>
+              <option value="sport">Sport</option>
+              <option value="history">History</option>
+              <option value="art">Art</option>
+              <option value="geography">Geography</option>
+            </select>
+            
+            <select name="theme">
+                <option value="">---Choose  Theme---</option>
+                <option value="AI-Quiz">AI-Quiz (Default)</option>
+                {% for theme in theme_options %}
+                    {% if theme in purchased_themes %}
+                        <option value="{{ theme }}">{{ theme }}</option>
+                    {% else %}
+                        <option value="{{ theme }}" disabled>{{ theme }} (not owned)</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <select name="difficulty">
+                <option value="">--Choose Difficulty--</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+            <button id="play" name="play" class="futuristic-button" > Let's Play</button>
+        </form>
             {% endif %}
           </div>
           {% if not forloop.last %}
