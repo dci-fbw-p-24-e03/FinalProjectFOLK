@@ -1,3 +1,66 @@
 <h1 style="color: white"><b>That's it!</b></h1>
 <!-- Immediately send a message to the backend that the current player has come to the end of the game -->
-<input ws-send hx-trigger="load" name="game_over" value= "game_over" style="display: none;">
+<input
+  ws-send
+  hx-trigger="load"
+  name="game_over"
+  value="game_over"
+  style="display: none"
+/>
+
+{% load static %} {% load highlight_correct_answer %}
+
+<div class="answers">
+  <h1>Summary</h1>
+
+  <div class="image_facts_row">
+    <div class="player_div_resultscreen" id="player_1">
+      <h2>{{ user.username }}</h2>
+      <img src="{{ user.image.url }}" alt="male" />
+    </div>
+  </div>
+
+  <!-- Slideshow container -->
+  <div class="explanations" id="explanations">
+    <div class="slideshow-container">
+      <!-- Full-width images with number and caption text -->
+      {% if wrong_answers %} {% for wrong_answer in wrong_answers %}
+      <div class="mySlides fade">
+        <div class="explanation-text">
+          <h3>{{ wrong_answer.question }}</h3>
+        </div>
+        <div class="explanation-text">
+          <h4>
+            {{
+            wrong_answer.explanation|highlight_correct:wrong_answer.correct_answer|highlight_wrong:wrong_answer.submitted_answer_text|safe
+            }}
+          </h4>
+        </div>
+      </div>
+      {% endfor %} {% endif %}
+
+      <!-- Next and previous buttons -->
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <br />
+
+    <!-- The dots/circles -->
+    <div class="dots">
+      {% for wrong_answer in wrong_answers %}
+      <span class="dot" onclick="plusSlides(1)"></span>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="game_over_buttons">
+    <button
+      id="toggleButton"
+      class="futuristic-button explanations-button"
+      onclick="toggleExplanations()"
+    >
+      Explain Wrong Answers
+    </button>
+  </div>
+  <!-- Back Button -->
+</div>
