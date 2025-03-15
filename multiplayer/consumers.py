@@ -128,6 +128,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         # if a user has actually chosen an answer 
         if answer:
+            
             # make sure the key "answers" exists in the game_room dict. if it doesn't exist, create 
             # it with an emtpy dict as value
         
@@ -164,8 +165,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 print(game_room["answers"])
                 
                 # save everything in the cache
-                cache.set(game_room_name, game_room) 
+                cache.set(game_room_name, game_room)
                 
+                 # Display the user' choice in the html:
+                 
+                tag = f'<label id={answer} class="radio-button" style="background-color: #007bff; color: #eaf0ec;">'
+                tag +=  f'<input name="options" type="radio" id="option_3" value="C" /> {current_question[answer]} </label>'
+                
+                await self.send(tag)
+                    
         # If both players see the results page, then delete the last question that was previously displayed
         # from the cache, such that the next question will be displayed when the game returns to the
         # multiplay page.
@@ -180,7 +188,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         #print(f"This is the remaining question: {remaining_questions}")
         game_room["questions"] = remaining_questions
         cache.set(f"game_room:{self.room_name}", game_room)
-        #print(f"This ist the game room after deleting the last question: {game_room}")
+        #print(f"This ist the game room after deleting the last question: {game_room}")                 
         
 
 ############################################ Game Over #############################################

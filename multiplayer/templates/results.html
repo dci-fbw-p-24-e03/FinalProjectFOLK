@@ -6,10 +6,101 @@ hx-trigger="every 5s"></div>
     <input id="results" name="results" style="display: none;" value="{{question}}">
 </form>
 
-<h1>Results Page</h1>
+
+<div class="versus_div_multi_play">
+    <!-- Linke Spalte: Aktueller User -->
+    <div class="player_div_multi_play">
+      <h1>{{ user.username }}</h1>
+      <img class="profile_image_multi_play" src="{{ user.image.url }}" alt="{{ user.username }}">
+      <h2>Average Stars: {{ user.average_stars_per_game }}</h2>
+      <h3>
+        <img src="https://flagicons.lipis.dev/flags/4x3/{{ user.nation|lower }}.svg" alt="{{ user.nation }}" class="flag-icon">
+      </h3>
+    </div>
+
+    <!-- Mittlere Spalte: Frage und Antworten -->
+    <div class="play_box">
+      <div class="question_box">
+        <h1 class="question">{{ question }}</h1>
+      </div>
+      <div class="answer_box">
+        <div class="answer_pair">
+          <label class="radio-button
+          {% if answer == 'A' %}correct_answer{% endif %}
+          {% if player_answer == 'A' and player_answer != answer %}wrong_answer{% endif %}
+          {% if opponent_answer == 'A'%}opponent_answer{% endif %}">
+        <input class="answer-button" name="options" type="radio" id="option_1" value="A" /> {{ A }} 
+        </label>
+
+        <label class="radio-button
+        {% if answer == 'B' %}correct_answer{% endif %}
+        {% if player_answer == 'B' and player_answer != answer %}wrong_answer{% endif %}
+        {% if opponent_answer == 'B'%}opponent_answer{% endif %}">
+        <input class="answer-button" name="options" type="radio" id="option_2" value="B" /> {{ B }}
+        </label>
+         <!--  <label id="A" class="radio-button">
+            <input name="options" type="radio" id="option_1" value="A" /> {{ A }}
+          </label>
+          <label id="B" class="radio-button">
+            <input name="options" type="radio" id="option_2" value="B" /> {{ B }}
+          </label> -->
+        </div>
+        <div class="center-screen">
+          <div class="countdown_div">
+            <div class="timer animatable">
+              <svg>
+                <circle cx="50%" cy="50%" r="45" />
+                <circle cx="50%" cy="50%" r="45" pathLength="1" />
+                <text x="100" y="100" text-anchor="middle">
+                  <tspan id="timeLeft"></tspan>
+                </text>
+                <text x="100" y="120" text-anchor="middle">seconds</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="answer_pair">
+          <label class="radio-button
+          {% if answer == 'C' %}correct_answer{% endif %}
+          {% if player_answer == 'C' and player_answer != answer %}wrong_answer{% endif %}
+          {% if opponent_answer == 'C'%}opponent_answer{% endif %}">
+            <input class="answer-button" name="options" type="radio" id="option_1" value="C" /> {{ C }} 
+            </label>
+             
+            <label class="radio-button
+            {% if answer == 'D' %}correct_answer{% endif %}
+            {% if player_answer == 'D' and player_answer != answer %}wrong_answer{% endif %}
+            {% if opponent_answer == 'D'%}opponent_answer{% endif %}">
+            <input class="answer-button" name="options" type="radio" id="option_2" value="D" /> {{ D }}
+          </label>
 
 
-<p>Current Player: {{user}}</p>
+       <!--    <label id="C" class="radio-button">
+            <input name="options" type="radio" id="option_3" value="C" /> {{ C }}
+          </label>
+          <label id="D" class="radio-button">
+            <input name="options" type="radio" id="option_4" value="D" /> {{ D }}
+          </label> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Rechte Spalte: Gegner -->
+    <div class="opponent_div_multi_play">
+      <h1>{{ opponent.username }}</h1>
+      <img class="profile_image_multi_play" src="{{ opponent.image.url }}" alt="{{ opponent.username }}">
+      <h2>Average Stars: {{ opponent.average_stars_per_game }}</h2>
+      <h3>
+        <img src="https://flagicons.lipis.dev/flags/4x3/{{ opponent.nation|lower }}.svg" alt="{{ opponent.nation }}" class="flag-icon">
+      </h3>
+    </div>
+  </div>
+
+
+<!-- <h1>Results Page</h1> -->
+
+
+<!-- <p>Current Player: {{user}}</p>
 {% for player in players %}
 <p>player: {{ player }}</p>
 {% endfor %}
@@ -18,4 +109,4 @@ hx-trigger="every 5s"></div>
 <p>B: {{B}}</p>
 <p>C: {{C}}</p>
 <p>D: {{D}}</p>
-<p>Correct Answer: {{answer}}</p>
+<p>Correct Answer: {{answer}}</p> -->
