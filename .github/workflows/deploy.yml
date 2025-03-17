@@ -69,7 +69,7 @@ jobs:
           Address: ${{ secrets.DROPLET_IP }}
         if: success()  # Deploy only if tests pass
         run: |
-          ssh -i ~/.ssh/id_ed25519 -p 50000 root@$Address << 'EOF'
+          ssh -i ~/.ssh/id_ed25519 -p 50000 root@'${{ secrets.DROPLET_IP }}' << 'EOF'
           cd /root/home/FinalProjectFOLK
           git pull origin test
           source venv/bin/activate
