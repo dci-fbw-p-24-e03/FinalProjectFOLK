@@ -147,7 +147,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 current_question = game_room["questions"][-1]  # if there is a question (or more) in
                 # in the list, get the last question in the list, because it is the currently asked
                 # one
-
+                print(f"This is the current question: {current_question}")
                 # Determine if the answer is correct or not (True or False)
                 correct_answer = current_question["correct_answer"]
                 is_correct = (answer == correct_answer)
@@ -158,7 +158,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 game_room["answers"][user].append({
                     "question": current_question["question"],
                     "correct_answer": correct_answer,
+                    "correct_answer_text": current_question[f"{correct_answer}"],
                     "player_answer": answer,
+                    "player_answer_text":current_question[f"{answer}"],
                     "correct": is_correct
                 })
 
