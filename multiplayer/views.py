@@ -178,6 +178,8 @@ def multi_play(request):
                 wrong_answer={
                     "question":answer["question"], 
                     "correct_answer":answer["correct_answer"],
+                    "correct_answer_text":answer["correct_answer_text"],
+                    "player_answer_text":answer["player_answer_text"],
                     }
                 wrong_answers.append(wrong_answer)
         explanations=get_explanations(
@@ -188,6 +190,7 @@ def multi_play(request):
             wrong_answer["explanation"] = explanations.get(
                 question_text, "No explanation available."
             )
+        
         context = {
             "user": user,
             "wrong_answers": wrong_answers,
