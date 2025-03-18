@@ -71,7 +71,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         play = data.get("play")
 
         if play != None:
-            print("playmsg:",play)
             # Send a message to the player asking him to wait for his opponent to respond in kind
             context = f"<div id='play' name='play'> Wait for Opponent</div>"
             await self.send(context)
@@ -92,7 +91,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             chosen_topic = data.get("topic")
             chosen_theme = data.get("theme")
             chosen_difficulty = data.get("difficulty")
-            print("choices:",chosen_difficulty,chosen_theme,chosen_topic)
+            #print("choices:",chosen_difficulty,chosen_theme,chosen_topic)
 
             key= f"{chooser}_choices" 
             data = {
@@ -104,7 +103,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             game_room = cache.get(f"game_room:{self.room_name}")
             game_room[key] = data
             cache.set(f"game_room:{self.room_name}", game_room)
-            print(game_room)
+            # print(game_room)
             
             if chosen_theme == "Space - Theme":
                 chosen_theme = "space_arena"
@@ -176,11 +175,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
             # Store start time of user in the Cache
             user = self.scope["user"]
             user = str(user)
-            if game_room.get("round_start") == None:
-                game_room["round_start"] = round_start
+            
+            print(f"{user}'s round start: ", round_start)
+            if game_room.get(f"{user}_round_start") == None:
+                game_room[f"{user}_round_start"] = round_start
             else:
-                game_room["round_start"] = round_start
-            #print("Content of round_start: ", game_room["round_start"])
+                game_room[f"{user}_round_start"] = round_start
             game_room_name = f"game_room:{self.room_name}"
             cache.set(game_room_name, game_room)
 
@@ -191,27 +191,33 @@ class ChatConsumer(AsyncWebsocketConsumer):
         answer = data.get("options")
         user = str(self.scope["user"])
         game_room_name = f"game_room:{self.room_name}"
-        game_room = cache.get(game_room_name, {})
-
+        game_room = cache.get(f"game_room:{self.room_name}")
         # if a user has actually chosen an answer 
         if answer:
             
             # Record the moment in time, in which the user chose an answer
             choice_time = datetime.now()
             
-            # Retrieve the round start from the cache
-            round_start = game_room.get("round_start")
-            # Transform the round start into a datetime object
-            pattern = "%d/%m/%Y, %H:%M:%S%f"
-            round_start = datetime.strptime(round_start, pattern)
-    
-            # Calculate the time difference in seconds
-            time_difference = choice_time - round_start
-            time_difference = time_difference.total_seconds()
-            time_difference = round(time_difference)
-    
-            print("time difference: ", time_difference)
+            print("choice time: ", choice_time)
             
+            # Retrieve the round start from the cache
+            round_start = game_room.get(f"{user}_round_start")
+            
+            print("cached start of the round: ", round_start)
+            
+            if round_start != None:
+                #print("round start retrieved: ", round_start)
+                # Transform the round start into a datetime object
+                pattern = "%d/%m/%Y, %H:%M:%S%f"
+                round_start = datetime.strptime(round_start, pattern)
+        
+                # Calculate the time difference in seconds
+                time_difference = choice_time - round_start
+                time_difference = time_difference.total_seconds()
+        
+            else:
+                time_difference = 5
+                
             # make sure the key "answers" exists in the game_room dict. if it doesn't exist, create 
             # it with an emtpy dict as value
         
@@ -242,8 +248,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     "question": current_question["question"],
                     "correct_answer": correct_answer,
                     "player_answer": answer,
-                    "correct": is_correct
+                    "correct": is_correct,
+                    "time": time_difference,
                 })
+                
+                #print("game room with timing: ", game_room)
 
                 # print(game_room["answers"])
                 
