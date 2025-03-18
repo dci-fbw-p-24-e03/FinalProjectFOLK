@@ -6,6 +6,13 @@
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
+.base-container.leaderboard {
+  width: 100%;
+}
+
+.base-container.leaderboard h1 {
+  padding-top: 0.5% !important;
+}
 table {
   border-collapse: collapse;
   table-layout: fixed;
@@ -106,3 +113,4 @@ tr:hover td {
 .nation-container:hover .nation-name {
   display: block;
 }
+

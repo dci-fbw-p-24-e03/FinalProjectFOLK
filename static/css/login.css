@@ -1,17 +1,77 @@
-.login .error {
+.update-container {
+  padding: 20px;
+}
+
+.update-form {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  text-align: center;
+  width: 70vw;
+  max-width: 600px;
+  color: white;
+  margin: 0 auto;
+  font-family: "Space Mono", serif;
+}
+
+.update-form h2 {
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 3em;
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+  animation: rainbow-glow 3s ease-in-out infinite;
+  margin-bottom: 20px;
+  color: white;
+}
+
+@keyframes rainbow-glow {
+  0% {
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+  }
+  50% {
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #ffff00;
+  }
+  100% {
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+  }
+}
+
+.update-form .form-group {
+  margin-bottom: 20px;
+}
+
+.update-form label {
+  font-size: 1.2em;
+  color: white;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.update-form input {
+  width: 60%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #333;
+  color: white;
+  font-size: 1em;
+}
+
+.update-form input:focus {
+  outline: none;
+  border: 1px solid #00ffff;
+  background-color: #333 !important;
+}
+
+.update-form .error {
   color: red;
-  font-size: 0.9em;
+  font-size: 1.1em;
   margin-top: 5px;
 }
 
-.row-buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  
-}
-
-.login button {
+/* Button styles */
+.update-form button {
   background-color: #4caf50;
   color: white;
   padding: 10px 20px;
@@ -19,18 +79,57 @@
   border-radius: 5px;
   font-size: 1.1em;
   cursor: pointer;
+  transition: background-color 0.3s ease;
   margin-top: 20px;
+  font-family: "Space Mono", serif;
+  font-weight: normal;
 }
 
+.update-form button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
 
-.login .cancel-button {
+.update-form .cancel-button {
   background-color: #f44336;
-  color: white;
+  display: inline-block;
   padding: 10px 20px;
-  border: none;
   border-radius: 5px;
   font-size: 1.1em;
   cursor: pointer;
+  transition: background-color 0.3s ease;
   margin-top: 20px;
+  text-align: center;
+  font-family: "Space Mono", serif;
+  font-weight: normal;
 }
 
+.update-form .cancel-button:hover {
+  background-color: #e53935;
+  transform: translateY(-2px);
+}
+
+.update-form a {
+  text-decoration: none;
+  color: white;
+  display: block;
+}
+
+.button-group button,
+.button-group a {
+  flex: 1;
+  max-width: 140px;
+  gap: 4px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.password-toggle {
+  margin: 10px;
+  font-size: 1.2em;
+}
+
+#toggle-input {
+  height: 2vmin;
+  margin-bottom: 2%;
+}
