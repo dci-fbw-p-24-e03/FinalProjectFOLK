@@ -1,46 +1,101 @@
-.content-area{
+/* Outer container: Zentriert den Inhalt über den ganzen Viewport, bleibt unverändert */
+.base-container.quiz-settings {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 100vh; /* Ensure the container takes up full height */
-}
-
-.quiz-settings h1{
-    color: red;
-    font-size: 5em;
-}
-
-.quiz-settings form {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Innerer Container: Etwas kleiner in der Breite und mit reduziertem Padding */
+  .content-container-shadow.quiz-settings {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px; /* Reduziertes Padding */
     border-radius: 10px;
-    padding: 20px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    text-align: center;
+    width: 60vw; /* Schmaler als zuvor (70vw) */
+    max-width: 500px; /* Kleiner als zuvor (600px) */
+    color: white;
+    font-family: "Space Mono", serif;
+    margin: 0 auto;
+  }
+  
+  /* Überschrift bleibt gleich */
+  .quiz-settings h1 {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 3em;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+    animation: rainbow-glow 3s ease-in-out infinite;
+    margin-bottom: 20px;
+    color: white;
+  }
+  
+  @keyframes rainbow-glow {
+    0% {
+      text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+    }
+    50% {
+      text-shadow: 0 0 10px #00ff00, 0 0 20px #ffff00;
+    }
+    100% {
+      text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+    }
+  }
+  
+  /* Formular: Die Elemente sind enger zusammen (geringerer gap) */
+  .quiz-settings form {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Evenly spaces form elements */
-    width: 500px;
-}
-
-.quiz-settings label {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.quiz-settings select, input{
+    gap: 5px; /* Verringerter Abstand */
+    width: 100%;
+  }
+  
+  /* Labels bleiben unverändert */
+  .quiz-settings label {
+    font-size: 1.2em;
+    color: white;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  /* Input- und Select-Felder: Etwas weniger Außenabstand */
+  .quiz-settings select,
+  .quiz-settings input {
+    width: 60%;
+    padding: 10px;
+    margin: 5px auto; /* Weniger vertikaler Abstand */
+    display: block;
     border-radius: 5px;
-    font-size: 18px;
-    height: 45px;
-}
-
-.quiz-settings button{
-    margin: 5%;
+    border: 1px solid #ddd;
+    background-color: #333;
+    color: white;
+    font-size: 1em;
+  }
+  
+  .quiz-settings select:focus,
+  .quiz-settings input:focus {
+    outline: none;
+    border: 1px solid #00ffff;
+    background-color: #333 !important;
+  }
+  
+  /* Button: Etwas kleiner und mit zentriertem Margin */
+  .quiz-settings button {
+    margin: 5% auto;
     border: none;
     border-radius: 5px;
-    font-size: 20px;
-    justify-content: center;
-    height: 90px;
-    background-color: rgb(175, 16, 16);
-}
-
-.quiz-settings button:hover {
-    background-color: green;
+    font-size: 1.1em;
+    padding: 10px 20px;
     cursor: pointer;
-}
+    background-color: #4caf50;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .quiz-settings button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+  }
+  

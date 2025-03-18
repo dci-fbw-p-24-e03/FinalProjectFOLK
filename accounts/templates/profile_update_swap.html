@@ -1,101 +1,97 @@
-<div class="base-container">
-    <div class="content-container-shadow profile-update">
-        <h1>Update Your Profile</h1>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-
-            <!-- Username -->
-            <label for="id_username">Username:</label>
-            <input 
-                type="text" 
-                name="username" 
-                id="id_username" 
-                value="{{ form.username.value|default:'' }}"
-            >
-                {% if form.username.errors %}
-                    <div class="error">{{ form.username.errors }}</div>
-                {% endif %}
-
-            <!-- Email -->
-            <label for="id_email">Email:</label>
-            <input 
-                type="email" 
-                name="email" 
-                id="id_email" 
-                value="{{ form.email.value|default:'' }}" 
-            >
-                {% if form.email.errors %}
-                    <div class="error">{{ form.email.errors }}</div>
-                {% endif %}
-
-            <!-- Nation -->
-            <label for="id_nation">Nation:</label>
-            <select 
-                name="nation" 
-                id="id_nation" 
-            >
-                {% for value, label in form.nation.field.choices %}
-                    <option value="{{ value }}" {% if form.nation.value == value %}selected{% endif %}>
-                        {{ label }}
-                    </option>
-                {% endfor %}
-            </select>
-                {% if form.nation.errors %}
-                    <div class="error">{{ form.nation.errors }}</div>
-                {% endif %}
-
-            <!-- Profile Image Upload -->
-            <label for="id_image">Upload New Profile Image:</label>
-            <div id="img-input">
-            <input 
-                type="file" 
-                name="image" 
-                id="id_image" 
-                placeholder="--Choose Image--"
-            >
-                {% if form.image.errors %}
-                    <div class="error">{{ form.image.errors }}</div>
-                {% endif %}
-            </div>
-            <!-- Password -->
-            <label for="id_password">New Password:</label>
-            <input 
-                type="password" 
-                name="password" 
-                id="id_password" 
-                placeholder="--New Password--" 
-            >
-                {% if form.password.errors %}
-                    <div class="error">{{ form.password.errors }}</div>
-                {% endif %}
-
-            <!-- Password Repeat -->
-            <label for="id_password_repeat">Repeat New Password:</label>
-            
-            <input 
-                type="password" 
-                name="password_repeat" 
-                id="id_password_repeat" 
-                placeholder="--Repeat New Password--" 
-            >
-            <p>
-                <input
-                  class="w3-check"
-                  type="checkbox"
-                  id="toggle-input"
-                  onclick="PasswordVisibility()"
-                />
-                Show Password
-            </p>
-            {% if form.password_repeat.errors %}
-                <div class="error">{{ form.password_repeat.errors }}</div>
-            {% endif %}
-            
-            <!-- Buttons -->
-            <button type="submit">UPDATE</button>
-            <a href="{% url 'user_details' user.username %}">
-                <span class="cancel-button">CANCEL</span>
-            </a>
-        </form>
+<div class="profile-update-container">
+    <div class="profile-update-box">
+      <h1>Update Your Profile</h1>
+      <form method="post" enctype="multipart/form-data" class="profile-update-form">
+        {% csrf_token %}
+  
+        <!-- Username -->
+        <label for="id_profile_update_username">Username:</label>
+        <input 
+          type="text" 
+          name="username" 
+          id="id_profile_update_username" 
+          value="{{ form.username.value|default:'' }}"
+        >
+        {% if form.username.errors %}
+          <div class="profile-update-error">{{ form.username.errors }}</div>
+        {% endif %}
+  
+        <!-- Email -->
+        <label for="id_profile_update_email">Email:</label>
+        <input 
+          type="email" 
+          name="email" 
+          id="id_profile_update_email" 
+          value="{{ form.email.value|default:'' }}" 
+        >
+        {% if form.email.errors %}
+          <div class="profile-update-error">{{ form.email.errors }}</div>
+        {% endif %}
+  
+        <!-- Nation -->
+        <label for="id_profile_update_nation">Nation:</label>
+        <select name="nation" id="id_profile_update_nation">
+          {% for value, label in form.nation.field.choices %}
+            <option value="{{ value }}" {% if form.nation.value == value %}selected{% endif %}>
+              {{ label }}
+            </option>
+          {% endfor %}
+        </select>
+        {% if form.nation.errors %}
+          <div class="profile-update-error">{{ form.nation.errors }}</div>
+        {% endif %}
+  
+        <!-- Profile Image Upload -->
+        <label for="id_profile_update_image">Upload New Profile Image:</label>
+        <div id="profile-update-img-input">
+          <input 
+            type="file" 
+            name="image" 
+            id="id_profile_update_image" 
+            placeholder="--Choose Image--"
+          >
+          {% if form.image.errors %}
+            <div class="profile-update-error">{{ form.image.errors }}</div>
+          {% endif %}
+        </div>
+  
+        <!-- Password -->
+        <label for="id_profile_update_password">New Password:</label>
+        <input 
+          type="password" 
+          name="password" 
+          id="id_profile_update_password" 
+        >
+        {% if form.password.errors %}
+          <div class="profile-update-error">{{ form.password.errors }}</div>
+        {% endif %}
+  
+        <!-- Password Repeat -->
+        <label for="id_profile_update_password_repeat">Repeat New Password:</label>
+        <input 
+          type="password" 
+          name="password_repeat" 
+          id="id_profile_update_password_repeat" 
+        >
+        <p>
+          <input
+            class="profile-update-checkbox"
+            type="checkbox"
+            id="profile-update-toggle-password"
+            onclick="PasswordVisibility()"
+          />
+          Show Password
+        </p>
+        {% if form.password_repeat.errors %}
+          <div class="profile-update-error">{{ form.password_repeat.errors }}</div>
+        {% endif %}
+  
+        <!-- Button Group -->
+        <div class="button-group">
+          <button type="submit">UPDATE</button>
+          <a href="{% url 'user_details' user.username %}">CANCEL</a>
+        </div>
+      </form>
     </div>
-</div>
+  </div>
+  

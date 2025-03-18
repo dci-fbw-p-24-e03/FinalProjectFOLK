@@ -7,7 +7,7 @@
       <!--dropdown container for pre-defined quiz topics-->
       <label for="topic">Choose Topic:</label>
       <select name="topic" id="topic" onchange="toggleFields()">
-        <option value="">--Choose a Topic--</option>
+        <option value=""></option>
         <option value="anything">Anything</option>
         <option value="sport">Sport</option>
         <option value="history">History</option>
@@ -20,12 +20,12 @@
         type="text"
         name="custom-topic"
         id="custom-topic"
-        placeholder="--Type Topic here--"
+        placeholder="Type Desired Topic!"
         oninput="toggleFields()"
       />
       <label for="difficulty">Choose Difficulty:</label>
       <select name="difficulty">
-        <option value="">--Choose Difficulty--</option>
+        <option value=""></option>
         <option value="easy">Easy</option>
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
@@ -33,7 +33,7 @@
 
       <label for="theme">Choose Theme:</label>
       <select name="theme">
-          <option value="">--Choose Background Theme--</option>
+          <option value=""></option>
           <option value="AI-Quiz">AI-Quiz (Default)</option>
           {% for theme in theme_options %}
               {% if theme in purchased_themes %}
