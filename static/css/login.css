@@ -127,6 +127,9 @@
 .password-toggle {
   margin: 10px;
   font-size: 1.2em;
+  display: flex;
+  flex-direction: column; /* Stacks the elements vertically */
+  align-items: center; /* Aligns the elements to the left */
 }
 
 #toggle-input {
