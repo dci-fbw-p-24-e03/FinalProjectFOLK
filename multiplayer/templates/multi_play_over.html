@@ -13,7 +13,16 @@
 <div class="answers">
   <h1>Summary</h1>
 
-  <div class="image_facts_row">
+  <div class="results_summary">
+    <div class="player_div_resultscreen" id="opponent">
+      <h2>{{ opponent.username }}</h2>
+      <img src="{{ opponent.image.url }}" alt="{{ opponent.username }}">
+      <p id="result" class="score-positive" data-base="{{ score|cut:'+' }}">
+        Score: everybody is a winner :D</p>
+      <p class="nation_flag">
+        <img src="https://flagicons.lipis.dev/flags/4x3/{{ opponent.nation|lower }}.svg" alt="{{ opponent.nation }}" class="flag-icon">
+      <p>
+    </div>
     <div class=" summary">
       <h2>Topic: Show topic here</h2>
       <h2>Difficulty: Show difficulty here</h2>
@@ -22,11 +31,14 @@
       <h2>Coins earned : Show earned coins here</h2>
     </div>
     <div class="player_div_resultscreen" id="player_1">
-      <h2>{{ user.username }}</h2>
-      <img src="{{ user.image.url }}" alt="male" />
-      <h2 id="result" class="score-positive" data-base="{{ score|cut:'+' }}">
+      <h2>{{ username }}</h2>
+      <img src="{{ user.image.url }}" alt="{{ username }}" />
+      <p id="result" class="score-positive" data-base="{{ score|cut:'+' }}">
         Score: everybody is a winner :D
-      </h2>
+      </p>
+      <p class="nation_flag">
+        <img src="https://flagicons.lipis.dev/flags/4x3/{{ user.nation|lower }}.svg" alt="{{ user.nation }}" class="flag-icon">
+      <p>
     </div>
   </div>
 
