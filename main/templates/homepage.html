@@ -3,33 +3,33 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/homepage_style.css' %}" />
 <div class="homeimage">
-  <h3 style="color:aliceblue">Ai-Quiz under construction...</h3>
+  
 </div>
 {%if not user.is_authenticated %}
 <div>
   <img
     class="home-image"
-    src="{% static 'assets/home_logged_out.webp'%}"
+    src="{% static 'assets/home_background.webp'%}"
     alt="static item"
-    width="600"
-    height="600"
+    width="480"
+    height="480"
   />
 </div>
 {% else %}
 <div>
   <img
     class="home-image"
-    src="{% static 'assets/home.webp'%}"
+    src="{% static 'assets/home_background.webp'%}"
     alt="static item"
-    width="600"
-    height="600"
+    width="480"
+    height="480"
   />
 </div>
 <button id="play-button" 
         hx-post="{% url 'join_matchmaking' %}" 
         hx-trigger="click" 
         hx-swap="none">
-  Play
+  Enter 1v1 Matchmaking
 </button>
 
 <div id="matchmaking-status"></div>
