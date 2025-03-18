@@ -125,17 +125,44 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 
             # Get the questions for the game and save them in the cache!!
-
-            if game_room.get("questions") == None:
+            print(game_room)
+            # Only generate questions if they don't exist yet and all players are ready.
+            if game_room.get("questions") is None and game_room.get("ready") == len(game_room.get("players", [])):
                 questions = []
-                for _ in range(2):
-                    not_questions = []
-                    if questions != []:
-                        for question in questions:
-                            not_questions.append(question["question"])
-                    question = get_question(not_questions=not_questions)
+                players = game_room.get("players", [])  # e.g. ['6', '4']
+                player_data = game_room.get("player_data", [])
+                
+                # Generate 2 rounds of questions, alternating between players.
+                for i in range(2):
+                    # Build list of already-used question texts to avoid duplicates
+                    not_questions = [q["question"] for q in questions] if questions else []
+                    
+                    topic = None
+                    difficulty = None
+                    if players:
+                        current_player_id = players[i % len(players)]
+                        # Look up the corresponding username without changing case (assuming it was saved that way)
+                        player_username = None
+                        for pdata in player_data:
+                            if str(pdata.get("id")) == current_player_id:
+                                player_username = pdata.get("username").strip()
+                                break
+                        if player_username:
+                            key = f"{player_username}_choices"
+                            player_choices = game_room.get(key, {})
+                            topic = player_choices.get("topic")
+                            difficulty = player_choices.get("difficulty")
+                            print("Using choices for player", player_username, ":", topic, difficulty)
+                        else:
+                            print("No matching username for player id:", current_player_id)
+                    else:
+                        print("No players found in game_room")
+                    
+                    # Call get_question with the alternating player's topic and difficulty.
+                    question = get_question(not_questions=not_questions, topic=topic, difficulty=difficulty)
                     questions.append(question)
-
+                    print(question)
+                
                 game_room["questions"] = questions
                 cache.set(f"game_room:{self.room_name}", game_room)
             game_room = cache.get(f"game_room:{self.room_name}")

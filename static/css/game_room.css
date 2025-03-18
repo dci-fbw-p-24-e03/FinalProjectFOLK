@@ -17,12 +17,12 @@ select {
     background-size: cover;
 }
 
-.space_arena {
+.space-theme {
     background: url("../assets/space_arena.webp");
     background-size: cover;
 }
 
-.elder_arena {
+.elder-world-theme {
     background: url("../assets/elder_world.webp");
     background-size: cover;
 }
@@ -94,7 +94,7 @@ select {
     flex-direction: column;
     border-radius: 16px;
     overflow-y: auto;
-    height: 140px; /* Increased height for a larger chat box */
+    height: 130px; /* Increased height for a larger chat box */
     width: 600px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;

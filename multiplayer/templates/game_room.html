@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +31,8 @@
       });
     });
   </script>
+
+
   
 </head>
   <!-- Create websocket, chat with your opponent and get ready for the game. -->
@@ -61,7 +64,7 @@
             <!-- Button for getting ready for the game only -->
             {% if player == request.user %}
             <form id="play_choices" name="play_choices" ws-send>
-            <select name="topic" id="topic" onchange="toggleFields()">
+            <select name="topic" id="topic" >
               <option value="">---Choose a Topic---</option>
               <option value="anything">Anything</option>
               <option value="sport">Sport</option>
@@ -70,17 +73,17 @@
               <option value="geography">Geography</option>
             </select>
             
-            <select name="theme">
-                <option value="">---Choose  Theme---</option>
-                <option value="AI-Quiz">AI-Quiz (Default)</option>
-                {% for theme in theme_options %}
-                    {% if theme in purchased_themes %}
-                        <option value="{{ theme }}">{{ theme }}</option>
-                    {% else %}
-                        <option value="{{ theme }}" disabled>{{ theme }} (not owned)</option>
-                    {% endif %}
-                {% endfor %}
-            </select>
+            <select name="theme" id="theme-select" onchange="document.body.className = this.value;">
+              <option value="">---Choose Theme---</option>
+              <option value="standard_arena">AI-Quiz (Default)</option>
+              {% for theme in theme_options %}
+                  {% if theme in purchased_themes %}
+                      <option value="{{ theme|slugify }}">{{ theme }}</option>
+                  {% else %}
+                      <option value="{{ theme }}" disabled>{{ theme }} (not owned)</option>
+                  {% endif %}
+              {% endfor %}
+          </select>
             <select name="difficulty">
                 <option value="">--Choose Difficulty--</option>
                 <option value="easy">Easy</option>
