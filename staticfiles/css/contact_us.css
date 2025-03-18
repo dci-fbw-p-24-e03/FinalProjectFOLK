@@ -1,54 +1,114 @@
 h1 {
-    text-align: center;
-    color: white;
-    font-family: "Pixelify Sans", sans-serif;
-    margin-bottom: 20px;
-    font-size: 3em;
-    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #00ffff,
-      0 0 40px #00ffff, 0 0 50px #ffff00, 0 0 60px #ffff00;
-    animation: rainbow-glow 3s ease-in-out infinite;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 3em;
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+  animation: rainbow-glow 3s ease-in-out infinite;
+  margin-bottom: 20px;
+  color: white;
+  text-align: center;
+}
+
+@keyframes rainbow-glow {
+  0% {
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+  }
+  50% {
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #ffff00;
+  }
+  100% {
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+  }
 }
 
 .form-container {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 4%;
-    padding-top: 1.5%;
-    border-radius: 16px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+  text-align: center;
+  width: 90vw;
+  max-width: 800px;
+  margin: 0 auto;
+  color: white;
+  font-family: "Space Mono", serif;
 }
 
 .form-group {
-    width: 100%;
-    margin-bottom: 15px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-size: 1.2em;
+  color: white;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Style input fields and textarea elements inside the form-group */
+.form-group input,
+.form-group textarea {
+  width: 60%;
+  padding: 10px;
+  margin: 10px auto 5px;
+  display: block;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #333;
+  color: white;
+  font-size: 1em;
+  font-family: "Space Mono", serif;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border: 1px solid #00ffff;
 }
 
 .button-group {
-    display: flex;
-    justify-content: center; 
-    gap: 5px; 
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-.btn-primary {
-    background-color: #28a745; 
-    border-color: #28a745;
-}
-
+.btn-primary,
 .btn-danger {
-    background-color: red; 
-    border-color: red;
+  flex: 1;
+  max-width: 140px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-family: "Space Mono", serif;
+  text-align: center;
+  text-decoration: none;
 }
 
-/* Prevent hover effect on Cancel button */
+/* Submit button style (green) */
+.btn-primary {
+  background-color: #4caf50;
+  border-color: #4caf50;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+/* Cancel button style (red) */
+.btn-danger {
+  background-color: #f44336;
+  border-color: #f44336;
+  color: white;
+}
+
 .btn-danger:hover {
-    background-color: red; 
-    border-color: red; 
-    opacity: 1; 
+  background-color: #e53935;
+  transform: translateY(-2px);
+  opacity: 1;
 }
