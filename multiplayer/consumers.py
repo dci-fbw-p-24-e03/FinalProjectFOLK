@@ -302,8 +302,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         current_question=data.get("results")
         user = self.scope["user"]
         user = str(user)
-        game_room_name = get_game_room(user)
-        game_room = cache.get(f"game_room:{game_room_name}")
+        cache.get(f"game_room:{game_room_name}")
         questions = game_room.get("questions")
         remaining_questions=delete_question_from_questions(current_question, questions)
         #print(f"This is the remaining question: {remaining_questions}")
@@ -338,9 +337,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 await asyncio.sleep(10)  
 
                 # Make sure the game room is not needed any longer
-                game_room = cache.get(f"game_room:{game_room_name}")
+                game_room = cache.get(f"game_room:{self.room_name}")
                 if game_room and len(game_room.get("players")) == game_room.get("game_over"):
-                    cache.delete(f"game_room:{game_room_name}")
+                    cache.delete(f"game_room:{self.room_name}")
 
     async def chat_message(self, event):
         # This method will be called when a message is received from the group
