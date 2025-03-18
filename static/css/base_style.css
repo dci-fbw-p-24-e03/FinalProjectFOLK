@@ -292,7 +292,7 @@ nav a:hover span::after {
   Usually for page content, given a higher z-index if needed above other elements.
 */
 main {
-  position: absolute;
+  /* position: absolute; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -330,14 +330,20 @@ main::-webkit-scrollbar-thumb {
 }
 
 footer {
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
   display: flex;
-  justify-content:space-between;
+  align-items: center;
+  /* justify-content:space-between; */
   z-index: 100;
   gap: 20rem; 
 }
 
+footer div p{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
 footer span {
   font-family: "Space Mono", serif;

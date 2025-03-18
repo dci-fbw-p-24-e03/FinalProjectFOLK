@@ -14,6 +14,10 @@
     transform: translateY(-2px);
 }
 
+.profile {
+    box-sizing: content-box;
+}
+
 .profile img {
     margin-top: 20px;
     border-radius: 10px;
