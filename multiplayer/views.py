@@ -269,18 +269,19 @@ def results(request):
             else:
                 game_room[f"{username}_score"] = 10
                 cache.set(f"game_room:{game_room_name}", game_room)
-        if last_answer_opponent.get("correct") == True:
-            if  game_room.get(f"{opponent_name}_score") != None:
-                game_room[f"{opponent_name}_score"] += 10
-                cache.set(f"game_room:{game_room_name}", game_room)
-            else:
-                game_room[f"{opponent_name}_score"] = 10
-                cache.set(f"game_room:{game_room_name}", game_room)
-        
-    user_time = last_answer["time"]
-    oppnent_time = last_answer_opponent["time"]
-    print("user time: ", user_time)
-    print("opponent time: ", oppnent_time)
+        if last_answer_opponent:
+            if last_answer_opponent.get("correct") == True:
+                if  game_room.get(f"{opponent_name}_score") != None:
+                    game_room[f"{opponent_name}_score"] += 10
+                    cache.set(f"game_room:{game_room_name}", game_room)
+                else:
+                    game_room[f"{opponent_name}_score"] = 10
+                    cache.set(f"game_room:{game_room_name}", game_room)
+    if last_answer:   
+        user_time = last_answer["time"]
+    if last_answer_opponent:
+        opponent_time = last_answer_opponent["time"]
+
     if questions != []:
         question = questions[-1]
         context = {
