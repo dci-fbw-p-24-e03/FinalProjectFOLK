@@ -11,6 +11,7 @@ hx-trigger="every 5s"></div>
     <!-- Linke Spalte: Aktueller User -->
     <div class="player_div_multi_play">
       <h1>{{ user.username }}</h1>
+      <h2>Score: {{player_score}}</h2>
       <img class="profile_image_multi_play" src="{{ user.image.url }}" alt="{{ user.username }}">
       <h2>Average Stars: {{ user.average_stars_per_game }}</h2>
       <h3>
@@ -88,6 +89,7 @@ hx-trigger="every 5s"></div>
     <!-- Rechte Spalte: Gegner -->
     <div class="opponent_div_multi_play">
       <h1>{{ opponent.username }}</h1>
+      <h2>Score: {{opponent_score}}</h2>
       <img class="profile_image_multi_play" src="{{ opponent.image.url }}" alt="{{ opponent.username }}">
       <h2>Average Stars: {{ opponent.average_stars_per_game }}</h2>
       <h3>
