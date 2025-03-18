@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,11 +33,15 @@
       });
     });
   </script>
+
+
   
 </head>
-<body class="standard_arena">
   <!-- Create websocket, chat with your opponent and get ready for the game. -->
   <div hx-ext="ws" ws-connect="ws://127.0.0.1:8000/game-room/">
+<body id="theme" name="theme" class="standard_arena">
+
+   
     <header>
     </header>
     <main id="swap-multi_play">
@@ -56,9 +61,39 @@
             <h3>
               <img src="https://flagicons.lipis.dev/flags/4x3/{{ player.nation|lower }}.svg" alt="{{ player.nation }}" class="flag-icon">
             </h3>
+            
+
             <!-- Button for getting ready for the game only -->
             {% if player == request.user %}
-            <button class="futuristic-button" id="play" name="play" ws-send> Let's Play</button>
+            <form id="play_choices" name="play_choices" ws-send>
+            <select name="topic" id="topic" >
+              <option value="">---Choose a Topic---</option>
+              <option value="anything">Anything</option>
+              <option value="sport">Sport</option>
+              <option value="history">History</option>
+              <option value="art">Art</option>
+              <option value="geography">Geography</option>
+            </select>
+            
+            <select name="theme" id="theme-select" onchange="document.body.className = this.value;">
+              <option value="">---Choose Theme---</option>
+              <option value="standard_arena">AI-Quiz (Default)</option>
+              {% for theme in theme_options %}
+                  {% if theme in purchased_themes %}
+                      <option value="{{ theme|slugify }}">{{ theme }}</option>
+                  {% else %}
+                      <option value="{{ theme }}" disabled>{{ theme }} (not owned)</option>
+                  {% endif %}
+              {% endfor %}
+          </select>
+            <select name="difficulty">
+                <option value="">--Choose Difficulty--</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+            <button id="play" name="play" class="futuristic-button" > Let's Play</button>
+        </form>
             {% endif %}
           </div>
           {% if not forloop.last %}
@@ -83,7 +118,8 @@
     </main>
     <footer>
     </footer>
-    <!-- Do not delete this div. It is necessary for having the websocket work. -->
-  </div>
+   
 </body>
+ <!-- Do not delete this div. It is necessary for having the websocket work. -->
+</div>
 </html>
