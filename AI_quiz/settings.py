@@ -193,5 +193,10 @@ LOGGING = {
     },
 }
 CSRF_TRUSTED_ORIGINS = [
-    "https://ai-quiz-app-a8p6g.ondigitalocean.app"
+    "https://206.189.56.249"
 ]
+
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

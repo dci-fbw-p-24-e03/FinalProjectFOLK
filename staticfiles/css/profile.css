@@ -2,7 +2,7 @@
     display: inline-block;
     margin-top: 15px;
     padding: 10px 15px;
-    background-color: rgb(175, 16, 16);
+    background-color: #4caf50;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -10,7 +10,12 @@
 }
 
 .update-button:hover {
-    background-color: green;
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.profile {
+    box-sizing: content-box;
 }
 
 .profile img {
@@ -20,4 +25,20 @@
     width: 250px;
     height: 250px;
     object-fit: cover;
+}
+
+h4 {
+    margin: 4px;
+}
+
+.base-container {
+    width: 60%;
+}
+
+.content-container-shadow.profile {
+    width: 60%;
+}
+
+h1 {
+    padding-top: 3%;
 }
