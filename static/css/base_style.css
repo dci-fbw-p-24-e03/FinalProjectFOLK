@@ -301,7 +301,9 @@ main {
   width: 80vmax;
   padding: 2vmin;
   bottom: 0;
-  overflow-y: auto; /* Enables vertical scrolling within <main> */
+  overflow-y: auto;
+  gap : 40px /* Enables vertical scrolling within <main> */
+  
 }
 
 /* WebKit scrollbar styling (for Chrome, Edge, Safari, Opera) */

@@ -46,6 +46,14 @@
         Only 'QUIZ' redirects to a new page, the rest are AJAX requests meaning,
         the content is fetched and swapped into <main> without refreshing the page.
         -->
+
+        <a
+        href="{% url 'home_view' %}"
+
+      >
+        <span>HOME</span></a
+      >
+
         <a
           href="{% url 'game_view' %}"
           hx-get="{% url 'game_settings_swap' %}"
@@ -53,7 +61,7 @@
           hx-swap="innerHTML"
           hx-push-url="{% url 'game_view' %}"
         >
-          <span>QUIZ</span></a
+          <span>SOLO</span></a
         >
         <a
           href="{% url 'leaderboard' %}"
@@ -79,7 +87,7 @@
           hx-target="#content-area"
           hx-swap="innerHTML"
           hx-push-url="{% url 'user_details' request.user.username %}"
-          ><span>{{ request.user.username }}'s PROFILE</span></a
+          ><span>{{ request.user.username|upper }}</span></a
         >
         <a href="{% url 'logout_view' %}"><span>LOGOUT</span></a>
         {% else %}
