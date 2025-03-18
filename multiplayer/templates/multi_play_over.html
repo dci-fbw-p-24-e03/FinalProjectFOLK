@@ -14,13 +14,14 @@
   <h1>Summary</h1>
 
   <div class="results_summary">
-    <div class="player_div_resultscreen" id="opponent">
-      <h2>{{ opponent.username }}</h2>
-      <img src="{{ opponent.image.url }}" alt="{{ opponent.username }}">
+    <div class="player_div_resultscreen" id="player_1">
+      <h2>{{ username }}</h2>
+      <img src="{{ user.image.url }}" alt="{{ username }}" />
       <p id="result" class="score-positive" data-base="{{ score|cut:'+' }}">
-        Score: everybody is a winner :D</p>
+        Score: everybody is a winner :D
+      </p>
       <p class="nation_flag">
-        <img src="https://flagicons.lipis.dev/flags/4x3/{{ opponent.nation|lower }}.svg" alt="{{ opponent.nation }}" class="flag-icon">
+        <img src="https://flagicons.lipis.dev/flags/4x3/{{ user.nation|lower }}.svg" alt="{{ user.nation }}" class="flag-icon">
       <p>
     </div>
     <div class=" summary">
@@ -30,14 +31,13 @@
       <h2>Stars earned : Show earned stars here </h2>
       <h2>Coins earned : Show earned coins here</h2>
     </div>
-    <div class="player_div_resultscreen" id="player_1">
-      <h2>{{ username }}</h2>
-      <img src="{{ user.image.url }}" alt="{{ username }}" />
+    <div class="player_div_resultscreen" id="opponent">
+      <h2>{{ opponent.username }}</h2>
+      <img src="{{ opponent.image.url }}" alt="{{ opponent.username }}">
       <p id="result" class="score-positive" data-base="{{ score|cut:'+' }}">
-        Score: everybody is a winner :D
-      </p>
+        Score: everybody is a winner :D</p>
       <p class="nation_flag">
-        <img src="https://flagicons.lipis.dev/flags/4x3/{{ user.nation|lower }}.svg" alt="{{ user.nation }}" class="flag-icon">
+        <img src="https://flagicons.lipis.dev/flags/4x3/{{ opponent.nation|lower }}.svg" alt="{{ opponent.nation }}" class="flag-icon">
       <p>
     </div>
   </div>

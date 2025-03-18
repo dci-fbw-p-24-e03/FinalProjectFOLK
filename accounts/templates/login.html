@@ -1,41 +1,48 @@
-{% extends 'base.html' %} {% block title %} The AI-Quiz - Login {% endblock %}
+{% extends 'base.html' %}
+{% block title %} The AI-Quiz - Login {% endblock %}
 {% block content %}
 
-<div class="base-container">
-  <div class="content-container-shadow login">
-    <h1>Login</h1>
+<div class="update-container">
+  <div class="update-form">
+    <h2>Login</h2>
     <form method="post">
       {% csrf_token %}
-      <label for="id_username">Username:</label>
-      <input 
-        type="text" 
-        name="username" 
-        id="id_username" 
-        required 
-      />
-      {% if field.errors %}
-      <div class="error">{{ form.username.error }}</div>
-      {% endif %}
-      <label for="id_password">Password:</label>
-      <input 
-        type="password" 
-        name="password" 
-        id="id_password" 
-        required 
-      />
-      <p>
-        <input
-          class="w3-check"
-          type="checkbox"
-          id="toggle-input"
-          onclick="PasswordVisibility()"
+      <div class="form-group">
+        <label for="id_username">Username:</label>
+        <input 
+          type="text" 
+          name="username" 
+          id="id_username" 
+          required 
         />
-        Show Password
-      </p>
-      {% if field.errors %}
-      <div class="error">{{ form.password.error }}</div>
-      {% endif %}
-      <div class="row-buttons"> 
+        {% if field.errors %}
+          <div class="error">{{ form.username.error }}</div>
+        {% endif %}
+      </div>
+      <div class="form-group">
+        <label for="id_password">Password:</label>
+        <input 
+          type="password" 
+          name="password" 
+          id="id_password" 
+          required 
+        />
+        {% if field.errors %}
+          <div class="error">{{ form.password.error }}</div>
+        {% endif %}
+      </div>
+
+        <p class="password-toggle">
+          <input
+            class="w3-check"
+            type="checkbox"
+            id="toggle-input"
+            onclick="PasswordVisibility()"
+          />
+          Show Password
+        </p>
+
+      <div class="form-group button-group">
         <button type="submit">LOGIN</button>
         <a 
           href="{% url 'register_view' %}"
