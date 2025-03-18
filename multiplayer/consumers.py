@@ -4,6 +4,7 @@ import asyncio
 from django.core.cache import cache
 from .cache_functions import get_game_room, delete_question_from_questions
 from game.ai import get_question
+from datetime import datetime
 
 class ChatConsumer(AsyncWebsocketConsumer):
 
@@ -31,7 +32,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         # Turn received data into a python readable dictionary
         data = json.loads(text_data)
 
-        print("received data: ", data)
+        #print("received data: ", data)
 
 ################################ The Chat ###################################
 
@@ -68,6 +69,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         # If the player pressed the play button:
         play = data.get("play")
+
         if play != None:
             # Send a message to the player asking him to wait for his opponent to respond in kind
             context = f"<div id='play' name='play'> Wait for Opponent</div>"
@@ -81,18 +83,86 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 game_room["ready"] += 1
                 cache.set(f"game_room:{self.room_name}", game_room)
 
+        #received data:  {'topic': 'sport', 'theme': 'AI-Quiz', 'difficulty': 'easy',
+        # Saving Choices ( theme,topic,difficulty ) in our cache:
+
+            chooser = self.scope["user"]
+
+            chosen_topic = data.get("topic")
+            chosen_theme = data.get("theme")
+            chosen_difficulty = data.get("difficulty")
+            #print("choices:",chosen_difficulty,chosen_theme,chosen_topic)
+
+            key= f"{chooser}_choices" 
+            data = {
+                        "topic":chosen_topic,
+                        "difficulty":chosen_difficulty,
+                        "theme": chosen_theme
+                    }
+            
+            game_room = cache.get(f"game_room:{self.room_name}")
+            game_room[key] = data
+            cache.set(f"game_room:{self.room_name}", game_room)
+            # print(game_room)
+            
+            if chosen_theme == "Space - Theme":
+                chosen_theme = "space_arena"
+            
+            context = f'<body id="theme" name="theme" class={chosen_theme}>'
+            await self.send(context)
+            
+            # <body class="{% if theme == 'Space - Theme' %}space_arena{% elif theme == 'Elder - World' %}elder_arena{% else %}standard_arena{% endif %}"></body>>
+
+
+
+
+        # get the game room 
+
+            #game_room["theme"] = 
+
+
+
+
+
             # Get the questions for the game and save them in the cache!!
-
-            if game_room.get("questions") == None:
+            print(game_room)
+            # Only generate questions if they don't exist yet and all players are ready.
+            if game_room.get("questions") is None and game_room.get("ready") == len(game_room.get("players", [])):
                 questions = []
-                for _ in range(2):
-                    not_questions = []
-                    if questions != []:
-                        for question in questions:
-                            not_questions.append(question["question"])
-                    question = get_question(not_questions=not_questions)
+                players = game_room.get("players", [])  # e.g. ['6', '4']
+                player_data = game_room.get("player_data", [])
+                
+                # Generate 2 rounds of questions, alternating between players.
+                for i in range(2):
+                    # Build list of already-used question texts to avoid duplicates
+                    not_questions = [q["question"] for q in questions] if questions else []
+                    
+                    topic = None
+                    difficulty = None
+                    if players:
+                        current_player_id = players[i % len(players)]
+                        # Look up the corresponding username without changing case (assuming it was saved that way)
+                        player_username = None
+                        for pdata in player_data:
+                            if str(pdata.get("id")) == current_player_id:
+                                player_username = pdata.get("username").strip()
+                                break
+                        if player_username:
+                            key = f"{player_username}_choices"
+                            player_choices = game_room.get(key, {})
+                            topic = player_choices.get("topic")
+                            difficulty = player_choices.get("difficulty")
+                            print("Using choices for player", player_username, ":", topic, difficulty)
+                        else:
+                            print("No matching username for player id:", current_player_id)
+                    else:
+                        print("No players found in game_room")
+                    
+                    # Call get_question with the alternating player's topic and difficulty.
+                    question = get_question(not_questions=not_questions, topic=topic, difficulty=difficulty)
                     questions.append(question)
-
+                    print(question)
+                
                 game_room["questions"] = questions
                 cache.set(f"game_room:{self.room_name}", game_room)
             game_room = cache.get(f"game_room:{self.room_name}")
@@ -118,17 +188,63 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 },
             )
 
+############################### Record the beginning of a question round for each User ########################################
+
+        # Record the time that the multi_play page has been loaded
+        round = data.get("round")
+        if round != None:
+            
+            # Record time, when the game starts
+            round_start = datetime.now()
+            # Transform datetime object into string
+            pattern = "%d/%m/%Y, %H:%M:%S%f"
+            round_start = round_start.strftime(pattern)
+            # Store start time of user in the Cache
+            user = self.scope["user"]
+            user = str(user)
+            
+            print(f"{user}'s round start: ", round_start)
+            if game_room.get(f"{user}_round_start") == None:
+                game_room[f"{user}_round_start"] = round_start
+            else:
+                game_room[f"{user}_round_start"] = round_start
+            game_room_name = f"game_room:{self.room_name}"
+            cache.set(game_room_name, game_room)
+
+
         # get the answer given by the user (input name=options in multi_play.html), get it
         # from the scope (data); get the username, who has chosen the answer; get the value for
         # the game_room_name key to get the corresponding game_room from the cache.
         answer = data.get("options")
         user = str(self.scope["user"])
         game_room_name = f"game_room:{self.room_name}"
-        game_room = cache.get(game_room_name, {})
-
+        game_room = cache.get(f"game_room:{self.room_name}")
         # if a user has actually chosen an answer 
         if answer:
             
+            # Record the moment in time, in which the user chose an answer
+            choice_time = datetime.now()
+            
+            print("choice time: ", choice_time)
+            
+            # Retrieve the round start from the cache
+            round_start = game_room.get(f"{user}_round_start")
+            
+            print("cached start of the round: ", round_start)
+            
+            if round_start != None:
+                #print("round start retrieved: ", round_start)
+                # Transform the round start into a datetime object
+                pattern = "%d/%m/%Y, %H:%M:%S%f"
+                round_start = datetime.strptime(round_start, pattern)
+        
+                # Calculate the time difference in seconds
+                time_difference = choice_time - round_start
+                time_difference = time_difference.total_seconds()
+        
+            else:
+                time_difference = 5
+                
             # make sure the key "answers" exists in the game_room dict. if it doesn't exist, create 
             # it with an emtpy dict as value
         
@@ -161,10 +277,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     "correct_answer_text": current_question[f"{correct_answer}"],
                     "player_answer": answer,
                     "player_answer_text":current_question[f"{answer}"],
-                    "correct": is_correct
+                    "correct": is_correct,
+                    "time": time_difference,
                 })
+                
+                #print("game room with timing: ", game_room)
 
-                print(game_room["answers"])
+                # print(game_room["answers"])
                 
                 # save everything in the cache
                 cache.set(game_room_name, game_room)
