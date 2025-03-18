@@ -302,3 +302,5 @@ def results(request):
         }
         if questions!=[]:
             return render(request, "results.html", context)
+    else:
+        return render(request, "results.html")
