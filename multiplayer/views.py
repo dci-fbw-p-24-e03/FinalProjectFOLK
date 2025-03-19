@@ -190,7 +190,7 @@ def multi_play(request):
         game_room[f"{opponent_name}_score"] = 0
         cache.set(f"game_room:{game_room_name}", game_room)
     
-    print("multiplay view game room", game_room)
+    #print("multiplay view game room", game_room)
     
     
     questions = game_room["questions"]
@@ -238,6 +238,8 @@ def multi_play(request):
             "username": username,
             "players": players,
             "game_room_name": game_room_name,
+            "player_score": game_room[f"{username}_score"],
+            "opponent_score": game_room[f"{opponent_name}_score"]
         }
         return render(request, "multi_play_over.html", context)
 
@@ -259,14 +261,21 @@ def results(request):
     last_answer_opponent=opponent_answers[-1] if opponent_answers else None
     
     # Update the score of each player based on his results.
-    print("Game room in results view: ", game_room)
+    #print("Game room in results view: ", game_room)
     if last_answer:
         if last_answer.get("correct") == True:
             if game_room.get(f"{username}_score") != None:
                 game_room[f"{username}_score"] += 10
+                time = last_answer.get("time")
+                if time != None:
+                     game_room[f"{username}_score"] += 15- time
+                print("time in results: ", time)
                 cache.set(f"game_room:{game_room_name}", game_room)
             else:
                 game_room[f"{username}_score"] = 10
+                time = last_answer.get("time")
+                if time != None:
+                     game_room[f"{username}_score"] += 15- time
                 cache.set(f"game_room:{game_room_name}", game_room)
         if last_answer_opponent:
             if last_answer_opponent.get("correct") == True:
