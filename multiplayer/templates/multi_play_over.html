@@ -44,7 +44,7 @@
     </div>
     <div class="player_div_resultscreen" id="opponent">
       <h2>{{ opponent.username }}</h2>
-      <img src="/media/user_profile_images/profile_placeholder.jpeg" alt="{{ opponent.username }}">
+      <img src="{{ opponent.image.url }}" alt="{{ opponent.username }}">
       <p id="result" class="score-positive" data-base="{{ opponent_score|cut:'+' }}">
         Score: {{opponent_score}} :D
       </p>
