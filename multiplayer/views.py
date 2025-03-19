@@ -239,8 +239,14 @@ def multi_play(request):
             "players": players,
             "game_room_name": game_room_name,
             "player_score": game_room[f"{username}_score"],
-            "opponent_score": game_room[f"{opponent_name}_score"]
+            "opponent_score": game_room[f"{opponent_name}_score"],
+            "player_topic": game_room[f"{username}_choices"]["topic"],
+            "player_difficulty": game_room[f"{username}_choices"]["difficulty"],
+            "opponent_topic": game_room[f"{opponent_name}_choices"]["topic"],
+            "opponent_difficulty": game_room[f"{opponent_name}_choices"]["difficulty"],
         }
+
+        print(context)
         return render(request, "multi_play_over.html", context)
 
 def results(request):
@@ -359,6 +365,12 @@ def test_multi_play_over(request):
         "username": username,
         "players": ["Test_Player", "Opponent_Player"],
         "game_room_name": game_room_name,
+        "player_score": 20,
+        "opponent_score": 13,
+        "player_topic": "Sports",
+        "player_difficulty": "easy",
+        "opponent_topic": "Art",
+        "opponent_difficulty": "hard",
     }
 
     return render(request, "multi_play_over.html", context)
