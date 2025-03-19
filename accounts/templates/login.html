@@ -49,8 +49,9 @@
           hx-get="{% url 'register_swap' %}"
           hx-target="#content-area"
           hx-swap="innerHTML"
-          hx-push-url="{% url 'register_view' %}">
-          <span class="cancel-button">REGISTER</span>
+          hx-push-url="{% url 'register_view' %}"
+          class="cancel-button">
+          <span>REGISTER</span>
         </a>
       </div>
     </form>

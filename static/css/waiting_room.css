@@ -50,6 +50,7 @@ button {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   transition: all 0.3s ease; /* Smooth transition on hover */
   font-weight: bold; /* Bold text */
+  font-family: "Space Mono", serif;
 }
 
 /* Hover effect for the button */
@@ -57,10 +58,12 @@ button:hover {
   background-color: #45a049; /* Darker green when hovered */
   transform: translateY(-2px); 
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); 
+  font-family: "Space Mono", serif;
 }
 
 /*effect for the button (when clicked)*/
 button:active {
   transform: translateY(1px); 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  font-family: "Space Mono", serif;
 }

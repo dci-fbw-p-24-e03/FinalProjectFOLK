@@ -125,7 +125,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 
             # Get the questions for the game and save them in the cache!!
-            print(game_room)
+            #print(game_room)
             # Only generate questions if they don't exist yet and all players are ready.
             if game_room.get("questions") is None and game_room.get("ready") == len(game_room.get("players", [])):
                 questions = []
@@ -152,16 +152,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
                             player_choices = game_room.get(key, {})
                             topic = player_choices.get("topic")
                             difficulty = player_choices.get("difficulty")
-                            print("Using choices for player", player_username, ":", topic, difficulty)
+                            #print("Using choices for player", player_username, ":", topic, difficulty)
                         else:
                             print("No matching username for player id:", current_player_id)
                     else:
+                        #pass
                         print("No players found in game_room")
                     
                     # Call get_question with the alternating player's topic and difficulty.
                     question = get_question(not_questions=not_questions, topic=topic, difficulty=difficulty)
                     questions.append(question)
-                    print(question)
+                    #print(question)
                 
                 game_room["questions"] = questions
                 cache.set(f"game_room:{self.room_name}", game_room)
@@ -203,13 +204,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
             user = self.scope["user"]
             user = str(user)
             
-            print(f"{user}'s round start: ", round_start)
+            #print(f"{user}'s round start: ", round_start)
             if game_room.get(f"{user}_round_start") == None:
                 game_room[f"{user}_round_start"] = round_start
             else:
                 game_room[f"{user}_round_start"] = round_start
             game_room_name = f"game_room:{self.room_name}"
-            cache.set(game_room_name, game_room)
+            cache.set(f"game_room:{self.room_name}", game_room)
 
 
         # get the answer given by the user (input name=options in multi_play.html), get it
@@ -225,12 +226,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
             # Record the moment in time, in which the user chose an answer
             choice_time = datetime.now()
             
-            print("choice time: ", choice_time)
+            #print("choice time: ", choice_time)
             
             # Retrieve the round start from the cache
             round_start = game_room.get(f"{user}_round_start")
             
-            print("cached start of the round: ", round_start)
+            #print("cached start of the round: ", round_start)
             
             if round_start != None:
                 #print("round start retrieved: ", round_start)
@@ -263,7 +264,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 current_question = game_room["questions"][-1]  # if there is a question (or more) in
                 # in the list, get the last question in the list, because it is the currently asked
                 # one
-                print(f"This is the current question: {current_question}")
+                #print(f"This is the current question: {current_question}")
                 # Determine if the answer is correct or not (True or False)
                 correct_answer = current_question["correct_answer"]
                 is_correct = (answer == correct_answer)
@@ -286,7 +287,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 # print(game_room["answers"])
                 
                 # save everything in the cache
-                cache.set(game_room_name, game_room)
+                cache.set(f"game_room:{self.room_name}", game_room)
                 
                  # Display the user' choice in the html:
                  
@@ -302,7 +303,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         current_question=data.get("results")
         user = self.scope["user"]
         user = str(user)
-        cache.get(f"game_room:{game_room_name}")
+        cache.get(f"game_room:{self.room_name}")
         questions = game_room.get("questions")
         remaining_questions=delete_question_from_questions(current_question, questions)
         #print(f"This is the remaining question: {remaining_questions}")

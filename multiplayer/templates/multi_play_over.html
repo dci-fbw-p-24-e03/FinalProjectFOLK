@@ -10,6 +10,19 @@
 {% load static %} 
 {% load highlight_correct_answer %}
 
+<script src="{% static 'js/explanations_button.js' %}"></script>
+<script src="{% static 'js/carousel.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/game_room.css' %}" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+  rel="stylesheet"
+/>
+<link
+  href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap"
+  rel="stylesheet"
+/>
+
 <div class="answers">
   <h1>Summary</h1>
 
@@ -17,31 +30,62 @@
     <div class="player_div_resultscreen" id="player_1">
       <h2>{{ username }}</h2>
       <img src="{{ user.image.url }}" alt="{{ username }}" />
-      <p id="result" class="score-positive" data-base="{{ score|cut:'+' }}">
-        Score: everybody is a winner :D
+      <p id="result" class="score-positive" data-base="{{ player_score|cut:'+' }}">
+        Score: {{player_score}} :D
       </p>
-      <p class="nation_flag">
-        <img src="https://flagicons.lipis.dev/flags/4x3/{{ user.nation|lower }}.svg" alt="{{ user.nation }}" class="flag-icon">
-      <p>
+      <img
+        src="https://flagicons.lipis.dev/flags/4x3/{{ user.nation|lower }}.svg"
+        alt="{{ user.nation }}"
+        class="flag-icon"
+      />
     </div>
-    <div class=" summary">
-      <h2>Topic: Show topic here</h2>
-      <h2>Difficulty: Show difficulty here</h2>
-      <h2>Correct Answers:  Show ratio of correct answers here</h2>    
-      <h2>Stars earned : Show earned stars here </h2>
-      <h2>Coins earned : Show earned coins here</h2>
+    <div class="vs_text">
+      <p>VS</p>
     </div>
     <div class="player_div_resultscreen" id="opponent">
       <h2>{{ opponent.username }}</h2>
       <img src="{{ opponent.image.url }}" alt="{{ opponent.username }}">
-      <p id="result" class="score-positive" data-base="{{ score|cut:'+' }}">
-        Score: everybody is a winner :D</p>
-      <p class="nation_flag">
-        <img src="https://flagicons.lipis.dev/flags/4x3/{{ opponent.nation|lower }}.svg" alt="{{ opponent.nation }}" class="flag-icon">
-      <p>
+      <p id="result" class="score-positive" data-base="{{ opponent_score|cut:'+' }}">
+        Score: {{opponent_score}} :D
+      </p>
+        <img
+          src="https://flagicons.lipis.dev/flags/4x3/{{ opponent.nation|lower }}.svg"
+          alt="{{ opponent.nation }}"
+          class="flag-icon"
+        />
+
+      <p></p>
     </div>
   </div>
-
+  <div class="summary">
+    <table>
+      <tr>
+        <td class="left">{{ player_topic }}</td>
+        <td class="middle">Topic</td>
+        <td class="right">{{ opponent_topic }}</td>
+      </tr>
+      <tr>
+        <td class="left">{{ player_difficulty }}</td>
+        <td class="middle">Difficulty</td>
+        <td class="right">{{ opponent_difficulty }}</td>
+      </tr>
+      <tr>
+        <td class="left">Show ratio of correct answers here</td>
+        <td class="middle">Correct Answers</td>
+        <td class="right">Show ratio of correct answers here</td>
+      </tr>
+      <tr>
+        <td class="left">{{ player_score }}</td>
+        <td class="middle">Stars earned</td>
+        <td class="right">{{ opponent_score }}</td>
+      </tr>
+      <tr>
+        <td class="left">{{ player_score }}</td>
+        <td class="middle">Coins earned</td>
+        <td class="right">{{ opponent_score }}</td>
+      </tr>
+    </table>
+  </div>
   <!-- Slideshow container -->
   <div class="explanations" id="explanations">
     <div class="slideshow-container">
@@ -76,6 +120,12 @@
   </div>
 
   <div class="game_over_buttons">
+    <form action="/game/" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="topic" value="{{ selected_topic }}">
+      <input type="hidden" name="difficulty" value="{{ difficulty }}">
+      <button class = "futuristic-button" type="submit">Play again</button>
+    </form>
     <button
       id="toggleButton"
       class="futuristic-button explanations-button"
@@ -83,12 +133,12 @@
     >
       Explain Wrong Answers
     </button>
-    <button 
-      class = "futuristic-button" 
-      type="button" 
+    <button
+      class="futuristic-button"
+      type="button"
       onclick="window.location.href='/'"
     >
-        Back
+      Back
     </button>
   </div>
   <!-- Back Button -->
