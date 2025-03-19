@@ -2,7 +2,7 @@ name: AI Quiz (Django) Testing and Deployment to DigitalOcean Droplet
 
 on:
   push:
-    branches: [ "test" ] # Only run when pushing to the "test" branch
+    branches: [ "droplet_main" ] # Only run when pushing to the "test" branch
 
 jobs:
   build:

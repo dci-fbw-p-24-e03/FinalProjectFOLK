@@ -32,23 +32,24 @@
         childList: true, // Observe additions of new children (messages)
       });
     });
-    var socket = new WebSocket("wss://206.189.56.249/game-room/");
-   socket.onopen = function() {
-     console.log("WebSocket connection established.");
-   };
-   socket.onerror = function(event) {
-     console.error("WebSocket Error:", event);
-   };
-   socket.onclose = function(event) {
-     console.warn("WebSocket closed:", event);
-   };
+    const socket = new WebSocket("ws://127.0.0.1:8001/game-room/");
+  socket.onopen = function() {
+    console.log("WebSocket connection established.");
+  };
+  socket.onerror = function(event) {
+    console.error("WebSocket Error:", event);
+  };
+  socket.onclose = function(event) {
+    console.warn("WebSocket closed:", event);
+  };
   </script>
 
 
   
 </head>
   <!-- Create websocket, chat with your opponent and get ready for the game. -->
-  <div hx-ext="ws" ws-connect="wss://206.189.56.249/game-room/">
+  <!-- <div hx-ext="ws" ws-connect="wss://206.189.56.249/game-room/"> -->
+    <div hx-ext="ws" ws-connect="ws://127.0.0.1:8001/game-room/"></div>
 <body id="theme" name="theme" class="standard_arena">
 
    

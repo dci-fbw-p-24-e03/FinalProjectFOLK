@@ -193,7 +193,7 @@ LOGGING = {
     },
 }
 CSRF_TRUSTED_ORIGINS = [
-    "https://206.189.56.249"
+    "http://127.0.0.1"
 ]
 
 SECURE_SSL_REDIRECT = True
