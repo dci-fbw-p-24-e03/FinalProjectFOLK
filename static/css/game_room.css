@@ -441,6 +441,28 @@ input:has(input:checked) {
 
 
 /*----------------- Game Over -----------------*/
+/* Font setting "Space Mono" */
+.space-mono-regular {
+    font-family: "Space Mono", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .space-mono-bold {
+    font-family: "Space Mono", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  .space-mono-regular-italic {
+    font-family: "Space Mono", serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+  .space-mono-bold-italic {
+    font-family: "Space Mono", serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+  
 .answers {
     /* This makes it 80% of the viewport width */
     width: 95vmax; 
@@ -449,20 +471,36 @@ input:has(input:checked) {
     box-sizing: border-box;  /* Includes padding in the width */
     background-color: rgba(0, 0, 0, 0.9);
     border-radius: 16px;
+    font-family: "Space Mono";
     color: white;
+}
+
+.answers .results_summary {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
 }
 
 .player_div_resultscreen {
     display: flex;
     flex-direction: column;
-    align-content: center;
+    align-items: center;
+    gap: 1vmin;
 }
 
+.player_div_resultscreen .flag-icon {
+    margin-top: 0%;
+}
 
-.answers.results_summary {
-    display: flex;
-    flex-direction: row !important;
-    justify-content: space-between;
+.vs_text {
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 800%;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #00ffff,
+    0 0 20px #00ffff, 0 0 25px #ffff00, 0 0 30px #ffff00;
+}
+
+.answers .summary td {
+    text-align: center;
 }
 
 .game_over_buttons{

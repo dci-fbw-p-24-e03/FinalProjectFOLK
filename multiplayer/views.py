@@ -313,3 +313,51 @@ def results(request):
             return render(request, "results.html", context)
     else:
         return render(request, "results.html")
+
+###############################################################################
+# temporary view to style mulit_play_over.html without the need playing over and
+# and over again
+###############################################################################
+def test_multi_play_over(request):
+    # Dummy user
+    user = request.user
+    username = str(user)
+
+    # Dummy opponent
+    opponent = {
+        "username": "Opponent_Player",
+        "image": "user_profile_images/profile_placeholder.jpeg",
+    }
+
+    # Dummy wrong answers (simulating incorrect answers the player gave)
+    wrong_answers = [
+        {
+            "question": "What is 2+2?",
+            "correct_answer": "B",
+            "correct_answer_text": "4",
+            "player_answer_text": "3",
+            "explanation": "Basic math: 2+2 equals 4.",
+        },
+        {
+            "question": "Who discovered gravity?",
+            "correct_answer": "C",
+            "correct_answer_text": "Isaac Newton",
+            "player_answer_text": "Galileo",
+            "explanation": "Isaac Newton formulated the law of universal gravitation in 1687.",
+        },
+    ]
+
+    # Simulated game room name
+    game_room_name = "test_room"
+
+    # Context for rendering the template
+    context = {
+        "user": user,
+        "wrong_answers": wrong_answers,
+        "opponent": opponent,
+        "username": username,
+        "players": ["Test_Player", "Opponent_Player"],
+        "game_room_name": game_room_name,
+    }
+
+    return render(request, "multi_play_over.html", context)
