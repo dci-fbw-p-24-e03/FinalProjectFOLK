@@ -8,13 +8,12 @@
             <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image" />
             <div class="product-details">
                 <h3>{{ product.name }}</h3>
-                <p><em>{{ product.description }}</em></p>
                 <p class="price">Price: ${{ product.price|floatformat:2 }}</p>
             </div>
         </div>
 
-        <div class="buttons">
-            <form 
+        <div class="form-group button-group">
+            <form class="buy-confirm-form"
                 action="{% url 'confirm_purchase' product.id %}" 
                 method="POST"
                 hx-post="{% url 'confirm_purchase_swap' product.id %}" 
@@ -23,17 +22,19 @@
                 hx-push-url="{% url 'shop_view' %}"
             >
                 {% csrf_token %}
-                <button type="submit" class="btn">Yes, Buy Now</button>
+                <button type="submit" class="btn">Buy Now!</button>
             </form>
 
-            <a 
+            <form class="buy-confirm-form"> 
+            <button 
                 href="{% url 'shop_view' %}" 
                 class="cancel-btn btn"
                 hx-get="{% url 'shop_swap' %}"
                 hx-target="#content-area"
                 hx-swap="innerHTML"
                 hx-push-url="{% url 'shop_view' %}"
-                >Cancel</a>
+                >Cancel</button>
+            </form>    
         </div>
     </div>
 </div>
