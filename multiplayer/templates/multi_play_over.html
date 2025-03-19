@@ -10,9 +10,6 @@
 {% load static %} 
 {% load highlight_correct_answer %}
 
-<script src="{% static 'js/explanations_button.js' %}"></script>
-<script src="{% static 'js/carousel.js' %}"></script>
-<link rel="stylesheet" href="{% static 'css/game_room.css' %}" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link
   href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
@@ -30,7 +27,7 @@
     <div class="player_div_resultscreen" id="player_1">
       <h2>{{ username }}</h2>
       <img src="{{ user.image.url }}" alt="{{ username }}" />
-      <p id="result" class="score-positive" data-base="{{ player_score|cut:'+' }}">
+      <p class="score-positive" data-base="{{ player_score|cut:'+' }}">
         Score: {{player_score}} :D
       </p>
       <img
@@ -45,7 +42,7 @@
     <div class="player_div_resultscreen" id="opponent">
       <h2>{{ opponent.username }}</h2>
       <img src="{{ opponent.image.url }}" alt="{{ opponent.username }}">
-      <p id="result" class="score-positive" data-base="{{ opponent_score|cut:'+' }}">
+      <p class="score-positive" data-base="{{ opponent_score|cut:'+' }}">
         Score: {{opponent_score}} :D
       </p>
         <img
@@ -120,12 +117,6 @@
   </div>
 
   <div class="game_over_buttons">
-    <form action="/game/" method="post">
-      {% csrf_token %}
-      <input type="hidden" name="topic" value="{{ selected_topic }}">
-      <input type="hidden" name="difficulty" value="{{ difficulty }}">
-      <button class = "futuristic-button" type="submit">Play again</button>
-    </form>
     <button
       id="toggleButton"
       class="futuristic-button explanations-button"

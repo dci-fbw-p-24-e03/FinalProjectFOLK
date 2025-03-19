@@ -133,7 +133,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 player_data = game_room.get("player_data", [])
                 
                 # Generate 2 rounds of questions, alternating between players.
-                for i in range(2):
+                for i in range(4):
                     # Build list of already-used question texts to avoid duplicates
                     not_questions = [q["question"] for q in questions] if questions else []
                     
@@ -162,7 +162,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     # Call get_question with the alternating player's topic and difficulty.
                     question = get_question(not_questions=not_questions, topic=topic, difficulty=difficulty)
                     questions.append(question)
-                    #print(question)
+                    print(question)
                 
                 game_room["questions"] = questions
                 cache.set(f"game_room:{self.room_name}", game_room)

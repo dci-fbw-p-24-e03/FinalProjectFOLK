@@ -7,7 +7,6 @@ from .views import (
     check_match,
     leave_matchmaking,
     game_room,
-    test_multi_play_over,
 )
 
 urlpatterns = [
