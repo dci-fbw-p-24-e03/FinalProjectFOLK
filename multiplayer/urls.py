@@ -18,5 +18,4 @@ urlpatterns = [
     path("game-room/<str:room_id>/", game_room, name="game_room"),
     path("multi_play/", multi_play, name="multi_play"),
     path("results/", results, name="results"),
-    path("test-multi-play-over/", test_multi_play_over, name="test_multi_play_over"),
 ]
