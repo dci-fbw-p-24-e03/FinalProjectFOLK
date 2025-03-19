@@ -4,46 +4,63 @@
   gap: 1vmin;
 }
 
+.base-container-shop {
+  width: 90%;
+}
+
 .shop {
   align-items: flex-start;
 }
 
-.content-container h2 {
+.content-container-transparent h2 {
   font-size: 2em;
   text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+  font-family: "Space Mono", serif;
+}
+
+.content-container-transparent h4 {
+  font-size: 1.5em;
+  text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+  font-family: "Space Mono", serif;
+  color:white;
 }
 
 .product-category {
   display: flex;
+  gap: 5%;
 }
 
 .product-category .product-box {
-  width: 150px;
-  height: 150px;
-  background-color: rgba(0, 0, 0, 0.7);
+  width: 300px;            /* doppelt so breit wie vorher */
+  height: 200px;           /* etwas höhere Box */
+  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: center;     /* horizontal zentriert */
+  justify-content: center; /* vertikal zentriert */
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   position: relative;
   overflow: visible;
-  margin-bottom: 20px;
   margin-right: 5%;
+  gap: 5%;
 }
 
 .product-box img {
   width: 75%;
   height: auto;
   border-radius: 5px;
+  margin-top: 20px;
 }
 
 .product-name {
   margin-top: 5px;
-  font-size: 0.9em;
+  font-size: 1.1em;
+  font-weight: bold;
   color: white;
   text-align: center;
+  font-family: "Space Mono", serif;
+  margin-bottom: -3%;
 }
 
 .hover-details {
@@ -51,7 +68,7 @@
   left: 50%;
   top: -10px; 
   transform: translateX(-50%); 
-  width: 250px;
+  width: 300px;
   min-height: 250px;
   background-color: rgba(0, 0, 0, 0.95);
   padding: 15px;
@@ -69,31 +86,38 @@
 }
 
 .hover-details .hover-img {
-  width: 75%;
+  width: 90%;
   height: auto;
   border-radius: 5px;
 }
 
 .hover-details .info {
-  width: 100%;
-  text-align: left;
+  width: 90%;
+  text-align: center;
 }
 
 .hover-details .info h3 {
   margin: 5px 0;
   font-size: 1em;
+  font-weight: bold;
+  font-family: "Space Mono", serif;
 }
 
 .hover-details .info .price {
   margin: 5px 0;
   font-weight: bold;
+  font-size: 1em;
+  font-family: "Space Mono", serif;
+  margin-bottom: -15%;
+  text-align: center;
 }
 
-.hover-details .info .description {
+/*.hover-details .info .description {
   margin: 5px 0;
   font-size: 0.85em;
   line-height: 1.2em;
-}
+  font-family: "Space Mono", serif;
+} */
 
 /* Action Section for the Buy Button */
 .hover-details .action {
@@ -109,7 +133,9 @@
   padding: 8px 12px;
   text-decoration: none;
   border-radius: 5px;
-  font-size: 0.9em;
+  font-size: 1.1em;
+  font-family: "Space Mono", serif;
+  font-weight: bold;
 }
 
 .hover-details .btn:hover {
@@ -120,3 +146,17 @@
   opacity: 1;
   visibility: visible;
 }
+
+.coming-soon {
+  font-size: 0.75em; /* Slightly smaller than h2 */
+  margin-left: 4rem; /* Provides a little space between the texts */
+  color: white;
+  text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+  font-family: "Space Mono", serif;
+}
+
+.content-container-transparent.shop {
+  gap: 30px;
+}
+
+

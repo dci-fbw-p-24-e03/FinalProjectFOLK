@@ -25,7 +25,7 @@
 }
 
 /* Style for the button */
-button {
+.success-button {
     padding: 12px 20px; /* Increase padding for the button */
     font-size: 1.2em; /* Increase button font size */
     background-color: #4caf50;
@@ -34,9 +34,10 @@ button {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: "Space Mono", serif;
 }
 
-button:hover {
+.success-button:hover {
     background-color: #45a049;
     transform: translateY(-2px);
 }

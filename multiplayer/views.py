@@ -190,7 +190,7 @@ def multi_play(request):
         game_room[f"{opponent_name}_score"] = 0
         cache.set(f"game_room:{game_room_name}", game_room)
     
-    print("multiplay view game room", game_room)
+    #print("multiplay view game room", game_room)
     
     
     questions = game_room["questions"]
@@ -238,7 +238,15 @@ def multi_play(request):
             "username": username,
             "players": players,
             "game_room_name": game_room_name,
+            "player_score": game_room[f"{username}_score"],
+            "opponent_score": game_room[f"{opponent_name}_score"],
+            "player_topic": game_room[f"{username}_choices"]["topic"],
+            "player_difficulty": game_room[f"{username}_choices"]["difficulty"],
+            "opponent_topic": game_room[f"{opponent_name}_choices"]["topic"],
+            "opponent_difficulty": game_room[f"{opponent_name}_choices"]["difficulty"],
         }
+
+        print(context)
         return render(request, "multi_play_over.html", context)
 
 def results(request):
@@ -259,14 +267,21 @@ def results(request):
     last_answer_opponent=opponent_answers[-1] if opponent_answers else None
     
     # Update the score of each player based on his results.
-    print("Game room in results view: ", game_room)
+    #print("Game room in results view: ", game_room)
     if last_answer:
         if last_answer.get("correct") == True:
             if game_room.get(f"{username}_score") != None:
                 game_room[f"{username}_score"] += 10
+                time = last_answer.get("time")
+                if time != None:
+                     game_room[f"{username}_score"] += round(15- time)
+                print("time in results: ", time)
                 cache.set(f"game_room:{game_room_name}", game_room)
             else:
                 game_room[f"{username}_score"] = 10
+                time = last_answer.get("time")
+                if time != None:
+                     game_room[f"{username}_score"] += round(15- time)
                 cache.set(f"game_room:{game_room_name}", game_room)
         if last_answer_opponent:
             if last_answer_opponent.get("correct") == True:
@@ -302,3 +317,60 @@ def results(request):
         }
         if questions!=[]:
             return render(request, "results.html", context)
+    else:
+        return render(request, "results.html")
+
+###############################################################################
+# temporary view to style mulit_play_over.html without the need playing over and
+# and over again
+###############################################################################
+def test_multi_play_over(request):
+    # Dummy user
+    user = request.user
+    username = str(user)
+
+    # Dummy opponent
+    opponent = {
+        "username": "Opponent_Player",
+        "image": "user_profile_images/profile_placeholder.jpeg",
+        "nation": "DE",
+    }
+
+    # Dummy wrong answers (simulating incorrect answers the player gave)
+    wrong_answers = [
+        {
+            "question": "What is 2+2?",
+            "correct_answer": "B",
+            "correct_answer_text": "4",
+            "player_answer_text": "3",
+            "explanation": "Basic math: 2+2 equals 4.",
+        },
+        {
+            "question": "Who discovered gravity?",
+            "correct_answer": "C",
+            "correct_answer_text": "Isaac Newton",
+            "player_answer_text": "Galileo",
+            "explanation": "Isaac Newton formulated the law of universal gravitation in 1687.",
+        },
+    ]
+
+    # Simulated game room name
+    game_room_name = "test_room"
+
+    # Context for rendering the template
+    context = {
+        "user": user,
+        "wrong_answers": wrong_answers,
+        "opponent": opponent,
+        "username": username,
+        "players": ["Test_Player", "Opponent_Player"],
+        "game_room_name": game_room_name,
+        "player_score": 20,
+        "opponent_score": 13,
+        "player_topic": "Sports",
+        "player_difficulty": "easy",
+        "opponent_topic": "Art",
+        "opponent_difficulty": "hard",
+    }
+
+    return render(request, "multi_play_over.html", context)
