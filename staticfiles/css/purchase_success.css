@@ -18,7 +18,12 @@
 }
 
 h2 {
-    color: #4CAF50;
+    color: white;
+    font-family: "Space Mono", serif;
+}
+
+p.buy_error {
+    font-family: "Space Mono", serif;
 }
 
 .btn {
@@ -29,6 +34,7 @@ h2 {
     border-radius: 5px;
     display: inline-block;
     margin: 10px;
+    font-family: "Space Mono", serif;
 }
 
 .btn:hover {
