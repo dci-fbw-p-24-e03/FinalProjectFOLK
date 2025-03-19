@@ -43,16 +43,15 @@
     </div>
     <div class="player_div_resultscreen" id="opponent">
       <h2>{{ opponent.username }}</h2>
-      <img src="{{ opponent.image.url }}" alt="{{ opponent.username }}">
+      <img src="/media/user_profile_images/profile_placeholder.jpeg" alt="{{ opponent.username }}">
       <p id="result" class="score-positive" data-base="{{ opponent_score|cut:'+' }}">
-        Score: {{opponent_score}} :D</p>
-      <p class="nation_flag">
+        Score: {{opponent_score}} :D
+      </p>
         <img
           src="https://flagicons.lipis.dev/flags/4x3/{{ opponent.nation|lower }}.svg"
           alt="{{ opponent.nation }}"
           class="flag-icon"
         />
-      </p>
 
       <p></p>
     </div>
@@ -60,29 +59,29 @@
   <div class="summary">
     <table>
       <tr>
-        <td>Schow topic here</td>
-        <td>Topic</td>
-        <td>Schow topic here</td>
+        <td class="left">Schow topic here</td>
+        <td class="middle">Topic</td>
+        <td class="right">Schow topic here</td>
       </tr>
       <tr>
-        <td>Show difficulty here</td>
-        <td>Difficulty</td>
-        <td>Show difficulty here</td>
+        <td class="left">Show difficulty here</td>
+        <td class="middle">Difficulty</td>
+        <td class="right">Show difficulty here</td>
       </tr>
       <tr>
-        <td>Show ratio of correct answers here</td>
-        <td>Correct Answers</td>
-        <td>Show ratio of correct answers here</td>
+        <td class="left">Show ratio of correct answers here</td>
+        <td class="middle">Correct Answers</td>
+        <td class="right">Show ratio of correct answers here</td>
       </tr>
       <tr>
-        <td>Show earned stars here</td>
-        <td>Stars earned</td>
-        <td>Show earned stars here</td>
+        <td class="left">Show earned stars here</td>
+        <td class="middle">Stars earned</td>
+        <td class="right">Show earned stars here</td>
       </tr>
       <tr>
-        <td>Show earned coins here</td>
-        <td>Coins earned</td>
-        <td>Show earned coins here</td>
+        <td class="left">Show earned coins here</td>
+        <td class="middle">Coins earned</td>
+        <td class="right">Show earned coins here</td>
       </tr>
     </table>
   </div>
@@ -120,6 +119,12 @@
   </div>
 
   <div class="game_over_buttons">
+    <form action="/game/" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="topic" value="{{ selected_topic }}">
+      <input type="hidden" name="difficulty" value="{{ difficulty }}">
+      <button class = "futuristic-button" type="submit">Play again</button>
+    </form>
     <button
       id="toggleButton"
       class="futuristic-button explanations-button"

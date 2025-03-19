@@ -465,7 +465,10 @@ input:has(input:checked) {
   
 .answers {
     /* This makes it 80% of the viewport width */
-    width: 95vmax; 
+    display: flex;
+    flex-direction: column;
+    gap: 1vmin;
+    width: 60vmax; 
     padding: 5%;
     margin: 2% auto;  /* 'auto' centers it horizontally */
     box-sizing: border-box;  /* Includes padding in the width */
@@ -498,9 +501,24 @@ input:has(input:checked) {
     text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #00ffff,
     0 0 20px #00ffff, 0 0 25px #ffff00, 0 0 30px #ffff00;
 }
+table {
+    width: 100%;
+    margin-top: 1vmin;
+}
 
 .answers .summary td {
+    color: white;
+}
+td.left {
+    text-align: left;
+}
+
+td.middle {
     text-align: center;
+}
+
+td.right {
+    text-align: right;
 }
 
 .game_over_buttons{
@@ -576,8 +594,6 @@ input:has(input:checked) {
     text-align: center;
     margin-top: -3%;
 }
-
-.answers {box-sizing:border-box}
 
 /* Slideshow container */
 .answers.slideshow-container {

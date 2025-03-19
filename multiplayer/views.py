@@ -327,6 +327,7 @@ def test_multi_play_over(request):
     opponent = {
         "username": "Opponent_Player",
         "image": "user_profile_images/profile_placeholder.jpeg",
+        "nation": "DE",
     }
 
     # Dummy wrong answers (simulating incorrect answers the player gave)
