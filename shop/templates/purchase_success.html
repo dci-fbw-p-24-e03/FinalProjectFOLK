@@ -4,7 +4,7 @@
     <div id="confirmation-box">
         {% if error_message %}
             <h2 style="color: #f44336;">Purchase Failed</h2>
-            <p>{{ error_message }}</p>
+            <p class="buy_error"> {{ error_message }}</p>
             <a 
                 href="{% url 'shop_view' %}" 
                 class="btn"

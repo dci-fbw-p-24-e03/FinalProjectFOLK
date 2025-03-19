@@ -3,10 +3,10 @@
 The AI-Quiz - Shop
 {% endblock %} 
 {% block content %}
-<div class="base-container shop">
+<div class="base-container-shop">
   <h1>Explore some epic items in our shop!</h1>
-  <div class="content-container-transparent">
-    <h2>Skins:</h2>
+  <div class="content-container-transparent shop">
+    <h2>Skins</h2>
     <div class="product-category">
       {% for product in products %} {% if product.category == "skins" %}
       <div class="product-box">
@@ -21,7 +21,6 @@ The AI-Quiz - Shop
           <div class="info">
             <h3>{{ product.name }}</h3>
             <p class="price">Price: {{ product.price }}</p>
-            <p class="description">{{ product.description }}</p>
           </div>
           <div class="action">
             {% if user.is_authenticated %}
@@ -32,7 +31,7 @@ The AI-Quiz - Shop
               hx-target="#content-area"
               hx-swap="innerHTML"
               hx-push-url="{% url 'buy_product' product.id %}"
-            >Buy</a>
+            >Buy / Preview</a>
             {% endif %}
           </div>
         </div>
@@ -40,7 +39,7 @@ The AI-Quiz - Shop
       {% endif %} {% endfor %}
     </div>
 
-    <h2>Joker:</h2>
+    <h2>Joker <span class="coming-soon">coming soon...</span></h2>
     <div class="product-category">
       {% for product in products %} {% if product.category == "joker" %}
       <div class="product-box">
@@ -55,7 +54,6 @@ The AI-Quiz - Shop
           <div class="info">
             <h3>{{ product.name }}</h3>
             <p class="price">Price: {{ product.price }}</p>
-            <p class="description">{{ product.description }}</p>
           </div>
           <div class="action">
             {% if user.is_authenticated %}
@@ -66,7 +64,7 @@ The AI-Quiz - Shop
               hx-target="#content-area"
               hx-swap="innerHTML"
               hx-push-url="{% url 'buy_product' product.id %}"
-            >Buy</a>
+            >Buy / Preview</a>
             {% endif %}
           </div>
         </div>
@@ -74,7 +72,7 @@ The AI-Quiz - Shop
       {% endif %} {% endfor %}
     </div>
 
-    <h2>AI Opponents:</h2>
+    <h2>AI Opponents <span class="coming-soon">coming soon...</span></h2>
     <div class="product-category">
       {% for product in products %} {% if product.category == "opponents" %}
       <div class="product-box">
@@ -89,7 +87,6 @@ The AI-Quiz - Shop
           <div class="info">
             <h3>{{ product.name }}</h3>
             <p class="price">Price: {{ product.price }}</p>
-            <p class="description">{{ product.description }}</p>
           </div>
           <div class="action">
             {% if user.is_authenticated %}
@@ -100,7 +97,7 @@ The AI-Quiz - Shop
               hx-target="#content-area"
               hx-swap="innerHTML"
               hx-push-url="{% url 'buy_product' product.id %}"
-            >Buy</a>
+            >Buy / Preview</a>
             {% endif %}
           </div>
         </div>
