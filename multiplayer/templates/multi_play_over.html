@@ -29,8 +29,8 @@
     <div class="player_div_resultscreen" id="player_1">
       <h2>{{ username }}</h2>
       <img src="{{ user.image.url }}" alt="{{ username }}" />
-      <p id="result" class="score-positive" data-base="{{ score|cut:'+' }}">
-        Score: everybody is a winner :D
+      <p id="result" class="score-positive" data-base="{{ player_score|cut:'+' }}">
+        Score: {{player_score}} :D
       </p>
       <img
         src="https://flagicons.lipis.dev/flags/4x3/{{ user.nation|lower }}.svg"
@@ -43,10 +43,9 @@
     </div>
     <div class="player_div_resultscreen" id="opponent">
       <h2>{{ opponent.username }}</h2>
-      <img src="{{ opponent.image.url }}" alt="{{ opponent.username }}" />
-      <p id="result" class="score-positive" data-base="{{ score|cut:'+' }}">
-        Score: everybody is a winner :D
-      </p>
+      <img src="{{ opponent.image.url }}" alt="{{ opponent.username }}">
+      <p id="result" class="score-positive" data-base="{{ opponent_score|cut:'+' }}">
+        Score: {{opponent_score}} :D</p>
       <p class="nation_flag">
         <img
           src="https://flagicons.lipis.dev/flags/4x3/{{ opponent.nation|lower }}.svg"
