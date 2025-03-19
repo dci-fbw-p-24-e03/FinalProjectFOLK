@@ -1,50 +1,149 @@
-.profile-update label {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.profile-update select{
-    border-radius: 5px;
-    font-size: 18px;
-    height: 45px;
-}
-#img-input {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-.profile-update .error {
-    color: red;
-    font-size: 0.9em;
-    margin-top: 5px;
-}
-
-.profile-update button,
-.cancel-button {
-    background-color: #4CAF50;
+.profile-update-container {
+    padding: 20px;
+  }
+  
+  .profile-update-box {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    text-align: center;
+    width: 70vw;
+    max-width: 600px;
     color: white;
+    margin: 0 auto;
+    font-family: "Space Mono", serif;
+  }
+  
+  .profile-update-box h1 {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 3em;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+    animation: rainbow-glow 3s ease-in-out infinite;
+    margin-bottom: 20px;
+    color: white;
+  }
+  
+  @keyframes rainbow-glow {
+    0% {
+      text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+    }
+    50% {
+      text-shadow: 0 0 10px #00ff00, 0 0 20px #ffff00;
+    }
+    100% {
+      text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+    }
+  }
+  
+  .profile-update-box label {
+    font-size: 1.2em;
+    color: white;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  /* Increase spacing above the "Upload New Profile Image" label */
+  .profile-update-box label[for="id_profile_update_image"] {
+    margin-top: 15px;
+  }
+  
+  /* Center input fields and select boxes */
+  .profile-update-box input,
+  .profile-update-box select {
+    width: 60%;
+    padding: 10px;
+    margin: 10px auto 5px;
+    display: block;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #333;
+    color: white;
+    font-size: 1em;
+  }
+  
+  .profile-update-box input:focus,
+  .profile-update-box select:focus {
+    outline: none;
+    border: 1px solid #00ffff;
+    background-color: #333 !important;
+  }
+  
+  .profile-update-error {
+    color: red;
+    font-size: 1.1em;
+    margin-top: 5px;
+  }
+  
+  /* For the file input container */
+  #profile-update-img-input {
+    width: 60%;
+    margin: 10px auto;
+  }
+  
+  /* Ensure the file input inside the container matches the styling */
+  #profile-update-img-input input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #333;
+    color: white;
+    font-size: 1em;
+  }
+  
+  /* Button group styling */
+  .profile-update-form .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .profile-update-form button,
+  .profile-update-form a {
+    flex: 1;
+    max-width: 140px;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     font-size: 1.1em;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-}
-
-.cancel-button {
-    width: 100%;
-}
-
-.profile-update button:hover {
-    background-color: #45a049;
-}
-
-.profile-update .cancel-button {
-    background-color: #f44336;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: "Space Mono", serif;
+    text-align: center;
     text-decoration: none;
-}
-
-.profile-update .cancel-button:hover {
+    font-weight: bold;
+  }
+  
+  /* UPDATE button style (green) */
+  .profile-update-form button {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .profile-update-form button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+  }
+  
+  /* CANCEL button style (red) */
+  .profile-update-form a {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .profile-update-form a:hover {
     background-color: #e53935;
-}
+    transform: translateY(-2px);
+  }
+  
+  /* Checkbox and "Show Password" text sizes as in the login page */
+  p {
+    height: 7vmin;
+    margin-bottom: 3%;
+    margin-top: 3%;
+    gap: 5px;
+    font-size: 1.1em !important;
+  }
+  

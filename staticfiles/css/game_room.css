@@ -1,5 +1,19 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 h1 {
     text-align: center;
+}
+
+select {
+
+    background-color: #999;
+    color: white;
+    margin-top: 2%;
+    width: 70%;
+    font-size: larger;
+    border-radius: 8px;
 }
 
 .standard_arena {
@@ -7,16 +21,27 @@ h1 {
     background-size: cover;
 }
 
+.space-theme {
+    background: url("../assets/space_arena.webp");
+    background-size: cover;
+}
+
+.elder-world-theme {
+    background: url("../assets/elder_world.webp");
+    background-size: cover;
+}
+
 .versus_div {
     display: flex;
+    flex-direction: row !important; 
     justify-content: space-between;
     align-items: center;
     padding-top: 2%;
 }
 
 .profile_image {
-    width: 70%;
-    height: 70%;
+    width: 60%;
+    height: 60%;
     border-radius: 8px;
 }
 
@@ -54,6 +79,7 @@ h1 {
     margin-left: 10%;
     margin-right: 10%;
     padding-bottom: 10px; /* Added spacing for the button */
+    width: 20%;
 }
 
 .flag-icon {
@@ -72,7 +98,7 @@ h1 {
     flex-direction: column;
     border-radius: 16px;
     overflow-y: auto;
-    height: 250px; /* Increased height for a larger chat box */
+    height: 130px; /* Increased height for a larger chat box */
     width: 600px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -84,11 +110,11 @@ h1 {
     color: white;
     padding: 15px;
     font-size: 1.2rem;  /* Reduced font size */
-    line-height: 1.5;
+    line-height: 0.5;
 }
 
 /* Chat form styling */
-form {
+.chat_form {
     display: flex;
     flex-direction: column;
     background: rgba(0, 0, 0, 0.9);
@@ -103,10 +129,11 @@ input {
     flex-grow: 1;
     border: 1px solid #ccc;
     padding: 10px;
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     transition: box-shadow 0.3s;
-    background-color: #fff;
-    color: #000;
+    background-color: #999;
+    color: white;
+    border-radius: 8px;
 }
 
 input:focus {
@@ -116,7 +143,7 @@ input:focus {
 
 /* Styling for the placeholder text */
 input::placeholder {
-    color: #999;
+    color: white;
     font-style: italic;
 }
 
@@ -137,6 +164,7 @@ input::placeholder {
     position: relative;
     overflow: hidden;
     margin-bottom: 5%;
+    margin-top: 5%;
 }
 
 /* Enhanced hover effect for the start-game button in green */
@@ -164,4 +192,501 @@ input::placeholder {
     background: linear-gradient(90deg, #FFB143, #FF8B2C);
     box-shadow: 0 0 20px rgb(255, 208, 202);
     transform: scale(1.05);
+}
+
+
+/* ----------------------------------------------------------------------------- */
+
+
+.play_box {
+    /* This makes it 80% of the viewport width */
+    width: 80vw; 
+
+    /* Optional: constrain the width so it doesn't get too small or too big */
+    min-width: 300px;  
+    max-width: 1000px; 
+
+    min-height: 70vh;
+    padding: 5%;
+    margin: 2% auto;  /* 'auto' centers it horizontally */
+    box-sizing: border-box;  /* Includes padding in the width */
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 16px;
+}
+
+.question_box{
+    margin-top: -2%;
+    min-height: 150px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+
+/* Question text styling */
+.question {
+    text-align: block;
+    color: #fff;
+    font-size: xx-large;
+    margin-bottom: 5%;
+    
+}
+
+.answer_box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; /* Distributes space evenly */
+    height: 50vh; /* Full height of the viewport */
+}
+
+
+.answer_pair, .center-screen {
+    flex: 1; /* Ensures all divs take equal height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content inside */
+    align-items: center;
+    height: 80%;
+}
+
+/* Hide default radio buttons */
+input[type="radio"] {
+    opacity: 0;
+    color:white;
+    display: none;
+}
+
+/* Style labels as modern buttons */
+.radio-button, .radio-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #7289da;
+    border-radius: 8px;
+    padding: 4%;
+    cursor: pointer;
+    margin: 20px;
+    transition: all 0.3s ease-in-out;
+    height: 100%;
+    width: 80%;
+    color: #fff;
+    background-color: transparent;
+    font-size: xx-large;
+}
+
+.radio-button:hover {
+
+background-color: #007bff;
+}
+
+/* Highlight style when a radio is selected */
+input:has(input:checked) {
+    border: 2px solid #0b29b1;
+    background-color: #007bff;
+    color: #eaf0ec;
+}
+
+/* Center buttons container */
+.button_div {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Timer container styling */
+.timer_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Additional answer choice button spacing */
+.answer_choice_button {
+    margin: 20px;
+}
+
+
+/* Countdown container centering */
+.countdown_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Timer SVG styling */
+.timer {
+    margin-top: 10px;
+}
+
+.timer > svg {
+    width: 200px;
+    height: 200px;
+}
+
+.timer > svg > circle {
+    fill: none;
+    stroke-opacity: 0.3;
+    stroke: #0d6efd;
+    stroke-width: 10;
+    transform-origin: center center;
+    transform: rotate(-90deg);
+}
+
+.timer > svg > circle + circle {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    stroke-linecap: round;
+    stroke-opacity: 1;
+}
+
+.timer.animatable > svg > circle + circle {
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+.timer > svg > text {
+    font-size: xx-large;
+    fill: #fff;
+}
+
+.timer > svg > text + text {
+    font-size: 1rem;
+}
+
+#player_3{
+    opacity: 0%;
+}
+
+#player_4{
+    opacity: 0%;
+}
+
+.play_form{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+    border-radius: 16px;
+}
+
+.profile_image_multi_play {
+    width: 90%;
+    height: 90%;
+    border-radius: 8px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.player_div_multi_play {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    padding-bottom: 10px; /* Added spacing for the button */
+    width: 15%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.opponent_div_multi_play {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    padding-bottom: 10px; /* Added spacing for the button */
+    width: 15%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.opponent_div_multi_play h1{
+    color: rgb(235, 11, 190);
+}
+
+.versus_div_multi_play {
+    display: flex;
+    flex-direction: row !important; 
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+
+/*---------------- Results------------------ */
+
+.correct_answer {
+    background-color: #45ce65;
+}
+
+.wrong_answer {
+    background-color: #df0f0f;
+}
+
+.opponent_answer{
+    border: 5px solid rgb(235, 11, 190);
+}
+
+
+/*----------------- Game Over -----------------*/
+/* Font setting "Space Mono" */
+.space-mono-regular {
+    font-family: "Space Mono", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .space-mono-bold {
+    font-family: "Space Mono", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  .space-mono-regular-italic {
+    font-family: "Space Mono", serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+  .space-mono-bold-italic {
+    font-family: "Space Mono", serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+.answers {
+    /* This makes it 80% of the viewport width */
+    display: flex;
+    flex-direction: column;
+    gap: 1vmin;
+    width: 60vmax; 
+    padding: 5%;
+    margin: 2% auto;  /* 'auto' centers it horizontally */
+    box-sizing: border-box;  /* Includes padding in the width */
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 16px;
+    font-family: "Space Mono";
+    color: white;
+}
+
+.answers .results_summary {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+}
+
+.player_div_resultscreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vmin;
+}
+
+.player_div_resultscreen .flag-icon {
+    margin-top: 0%;
+}
+
+.vs_text {
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 800%;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #00ffff,
+    0 0 20px #00ffff, 0 0 25px #ffff00, 0 0 30px #ffff00;
+}
+table {
+    width: 100%;
+    margin-top: 1vmin;
+}
+
+.answers .summary td {
+    color: white;
+}
+td.left {
+    text-align: left;
+}
+
+td.middle {
+    text-align: center;
+}
+
+td.right {
+    text-align: right;
+}
+
+.game_over_buttons{
+    padding-top: 5%;
+    display: flex;
+    padding-bottom: 2% ;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row !important;
+}
+
+.game_over_buttons.futuristic-button {
+    background: linear-gradient(90deg, #007bff, #0056b3); /* Blue gradient */
+    color: white; /* White text */
+    font-size: 1.2em;
+    font-family: 'Arial', sans-serif;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px; /* Rounded corners */
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.7); /* Blue glow effect */
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover effect */
+.game_over_buttons.futuristic-button:hover {
+    background: linear-gradient(90deg, #0056b3, #003f7f);
+    box-shadow: 0 0 20px rgba(0, 123, 255, 1);
+    transform: scale(1.05);
+}
+
+/* Active (click) effect */
+.game_over_buttons.futuristic-button:active {
+    transform: scale(0.95);
+}
+
+.explanations {
+    display : none
+}
+
+/* copying initial styling to just give it another color */
+
+.futuristic-button.explanations-button {
+    background: linear-gradient(90deg, #ff7d26, #fd5912);
+    box-shadow: 0 0 10px rgb(255, 193, 5);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Default hover effect */
+.futuristic-button.explanations-button:hover {
+    background: linear-gradient(90deg, #ffb143, #ff8b2c);
+    box-shadow: 0 0 20px rgb(255, 208, 202);
+    transform: scale(1.05);
+}
+
+/* Keep hover style when toggled */
+.futuristic-button.explanations-button.toggled {
+    background: linear-gradient(90deg, #ffb143, #ff8b2c);
+    box-shadow: 0 0 20px rgb(255, 208, 202);
+    transform: scale(1.05);
+}
+
+.answers.summary {
+    padding-top: 4%;
+    text-align: left;
+}
+
+.answers h1{
+    text-align: center;
+    margin-top: -3%;
+}
+
+/* Slideshow container */
+.answers.slideshow-container {
+  position: relative;
+  margin: auto;
+  padding-left: 6%;
+  padding-right: 6%;
+}
+
+/* Hide the images by default */
+.answers.mySlides {
+  display: none;
+}
+
+/* Show only the first image */
+.answers.mySlides:first-child {
+display: block;
+}
+
+.answers.correct-answer {
+    color: #45ce65;
+    font-weight: bold;
+}
+
+.answers.wrong-answer {
+    color: #df0f0f;
+    font-weight: bold;
+}
+
+/* Next & previous buttons */
+.answers.prev, .answers.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.answers.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.answers.prev {
+    left: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.answers.prev:hover, .answers.next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* The dots/bullets/indicators */
+.answers.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.answers.active, .answers.dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.answers.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+.answers.explanation-text{
+    width: 95%;
+    text-align: block;
+}
+
+.answers.dots { 
+    text-align:center
 }

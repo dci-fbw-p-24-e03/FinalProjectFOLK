@@ -1,3 +1,16 @@
 div#homepage {
     z-index: 1000;
 }
+
+#play-button {
+
+    width: 30%;
+    font-size: 25px;
+    font-family: "Space Mono";
+}
+
+.home-image {
+
+    margin-top: -3%;
+    border-radius: 8px;
+}
