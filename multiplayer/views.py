@@ -274,14 +274,14 @@ def results(request):
                 game_room[f"{username}_score"] += 10
                 time = last_answer.get("time")
                 if time != None:
-                     game_room[f"{username}_score"] += 15- time
+                     game_room[f"{username}_score"] += round(15- time)
                 print("time in results: ", time)
                 cache.set(f"game_room:{game_room_name}", game_room)
             else:
                 game_room[f"{username}_score"] = 10
                 time = last_answer.get("time")
                 if time != None:
-                     game_room[f"{username}_score"] += 15- time
+                     game_room[f"{username}_score"] += round(15- time)
                 cache.set(f"game_room:{game_room_name}", game_room)
         if last_answer_opponent:
             if last_answer_opponent.get("correct") == True:
