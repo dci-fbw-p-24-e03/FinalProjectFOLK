@@ -117,6 +117,7 @@
 
 .button-group button,
 .button-group a {
+  display: block;
   flex: 1;
   max-width: 140px;
   gap: 4px;
